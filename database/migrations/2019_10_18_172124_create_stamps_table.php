@@ -15,8 +15,14 @@ class CreateStampsTable extends Migration
     {
         Schema::create('stamps', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('issue_id');
             $table->string('title');
+            $table->text('description');
+            $table->string('image_url');
+            $table->float('price');
             $table->timestamps();
+
+            $table->foreign('issue_id')->references('id')->on('issues');
         });
     }
 
