@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('scraper/{year?}', 'ScraperController@show');
+Route::get('/scraper/{year?}', 'ScraperController@show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/issue', 'IssueController@store')->middleware('auth');
+Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
+
+Route::post('/stamp', 'StampController@store')->middleware('auth');
