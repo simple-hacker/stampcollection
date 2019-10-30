@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="flex flex-col min-h-screen">
         <nav class="flex items-center justify-between p-4 mb-1 shadow">
             <div class="text-3xl font-medium text-grey-300">
                 <a href="{{ url('/') }}">
@@ -50,7 +50,7 @@
             </div>
         </nav>
 
-        <main>
+        <main class="flex flex-1 bg-gray-200">
             @yield('content')
         </main>
     </div>
