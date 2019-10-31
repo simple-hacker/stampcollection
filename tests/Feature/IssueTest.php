@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Issue;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,10 +12,28 @@ class IssueTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /** @test */
-    public function an_issue_can_be_created_by_auth_user()
+    public function admins_can_add_an_issue()
     {
-        // $this->withoutExceptionHandling();
+        $user = factory('App\User')->create();
+        $user->assignRole('admin');
+        $this->actingAs($user);
 
+        $attributes = [
+            'cgbs_issue' => 22523,
+            'title' => 'Game of Thrones',
+            'description' => $this->faker->sentence(),
+            'year' => 2018,
+            'release_date' => '2018-01-05',
+        ];
+
+        $response = $this->post('issue', $attributes)->assertOk();
+
+        $this->assertDatabaseHas('issues', $attributes);
+    }
+
+    /** @test */
+    public function members_cannot_add_issues()
+    {
         $this->actingAs(factory('App\User')->create());
 
         $attributes = [
@@ -27,17 +44,14 @@ class IssueTest extends TestCase
             'release_date' => '2018-01-05',
         ];
 
-        $response = $this->post('issue', $attributes);
-        $response->assertOk();
+        $response = $this->post('issue', $attributes)->assertStatus(403);
 
-        $this->assertDatabaseHas('issues', $attributes);
+        $this->assertDatabaseMissing('issues', $attributes);
     }
 
     /** @test */
     public function guests_cannot_add_an_issue()
     {
-        // $this->withoutExceptionHandling();
-
         $attributes = [
             'cgbs_issue' => 22523,
             'title' => 'Game of Thrones',

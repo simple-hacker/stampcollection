@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/issue', 'IssueController@store')->middleware('auth');
+Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin');
 Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
 
-Route::post('/stamp', 'StampController@store')->middleware('auth');
+Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin');
