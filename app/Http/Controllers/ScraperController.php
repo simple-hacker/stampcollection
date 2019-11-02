@@ -21,11 +21,11 @@ class ScraperController extends Controller
     }
 
     /**
-     * Scrapes the issue for data.
+     * Scrapes the issue for data.  Creates the Issue and its Stamps.
      *
      * @param integer cgbs_issue
      *
-     * @return void
+     * @return redirect
      */
     public function issue($cgbs_issue)
     {
@@ -93,6 +93,36 @@ class ScraperController extends Controller
         });
 
         return redirect('/');
+    }
+
+    /**
+     * Grab and save basic Issue information for each year.
+     *  
+     * @param integer year
+     * 
+     * @return void
+     */
+    public function issuesByYear($year = 2019)
+    {
+        // Default to 2019 if no year is given.
+        if ($year > 1830 && $year < 3000) {
+            $url = $this->baseURI . '/explore/years/?year=' . $year;
+            // Iterate over each stampset div and create Issue with basic information (cgbs_issue number and title)
+            $this->client->request('GET', $url)->filter('.stampset h3 a')->each(function (Crawler $issue) use ($year) {
+                $data = $issue->extract(['href', '_text']);
+                $cgbs_issue = substr(strrchr($data[0][0], "="), 1);
+                $title = trim($data[0][1]);
+                $attributes = [
+                    'cgbs_issue' => $cgbs_issue,
+                    'title' => $title,
+                    'year' => $year,
+                ];
+                Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
+            });
+        } else {
+            // Invalid year so abort 400 Bad Request.
+            abort(404);
+        }
     }
 
     /**

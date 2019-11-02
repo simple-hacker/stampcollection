@@ -29,3 +29,4 @@ Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('au
 Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth');
 
 Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin');
+Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin');

@@ -17,10 +17,12 @@ class ScraperTest extends TestCase
     {
         // Guests get redirected.
         $this->get('scraper/issue/22780')->assertRedirect('login');
+        $this->get('scraper/issuesByYear/2019')->assertRedirect('login');
 
         // Non admin member signs in, expect Forbidden 403 as they don't have the permissions.
         $this->actingAs(factory('App\User')->create());
         $this->get('scraper/issue/22780')->assertStatus(403);
+        $this->get('scraper/issuesByYear/2019')->assertStatus(403);
     }
 
     /** @test */
@@ -45,5 +47,19 @@ class ScraperTest extends TestCase
 
         // Assert that 15 stamps were created.  (15 stamps in Game of Thrones issue 22780)
         $this->assertCount(15, Stamp::where('issue_id', $issue->id)->get());
+    }
+
+    /** @test */
+    public function scraping_a_year()
+    {
+        $user = factory('App\User')->create();
+        $user->assignRole('admin');
+        $this->actingAs($user);
+
+        // Visit the Game of Thrones
+        $this->get('scraper/issuesByYear/2018')->assertOk();
+
+        // Assert that 22 issues were created.  (22 issues in year 2018)
+        $this->assertCount(22, Issue::where('year', 2018)->get());
     }
 }
