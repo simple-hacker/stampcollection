@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Stamp;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -37,4 +38,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Description
+     *  
+     * @param string name
+     * 
+     * @return void
+     */
+    public function stamps()
+    {
+        return $this->belongsToMany(Stamp::class, 'collections')->withTimestamps();
+    }
 }

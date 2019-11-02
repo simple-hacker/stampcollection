@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/scraper/{year?}', 'ScraperController@show');
 
 Auth::routes();
 
@@ -25,3 +24,8 @@ Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin')
 Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
 
 Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin');
+
+Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth');
+Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth');
+
+Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin');

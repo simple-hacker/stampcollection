@@ -19,4 +19,16 @@ class Stamp extends Model
     {
         return $this->belongsTo('App\Issue');
     }
+
+    /**
+     * Description
+     *  
+     * @param string name
+     * 
+     * @return void
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'collections')->withTimestamps();
+    }
 }

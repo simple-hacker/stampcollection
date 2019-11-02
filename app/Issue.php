@@ -8,10 +8,13 @@ class Issue extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'cgbs_issue' => 'integer',
+        'year' => 'integer',
+    ];
+
     /**
-     * Description
-     *  
-     * @param string name
+     * An issue has many stamps;
      * 
      * @return void
      */

@@ -15,7 +15,7 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cgbs_issue');
+            $table->unsignedBigInteger('cgbs_issue')->unique();
             $table->string('title');
             $table->year('year');
             $table->date('release_date')->nullable();

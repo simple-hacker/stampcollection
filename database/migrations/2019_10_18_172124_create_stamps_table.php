@@ -17,12 +17,12 @@ class CreateStampsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('issue_id');
             $table->string('title');
-            $table->text('description');
-            $table->string('image_url');
-            $table->float('price');
+            $table->text('description')->nullable();
+            $table->string('image_url')->nullable();
+            $table->float('price')->nullable();
             $table->timestamps();
 
-            $table->foreign('issue_id')->references('id')->on('issues');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
         });
     }
 

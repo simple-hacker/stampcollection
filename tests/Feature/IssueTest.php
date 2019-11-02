@@ -26,7 +26,7 @@ class IssueTest extends TestCase
             'release_date' => '2018-01-05',
         ];
 
-        $response = $this->post('issue', $attributes)->assertOk();
+        $this->post('issue', $attributes)->assertOk();
 
         $this->assertDatabaseHas('issues', $attributes);
     }
@@ -44,7 +44,7 @@ class IssueTest extends TestCase
             'release_date' => '2018-01-05',
         ];
 
-        $response = $this->post('issue', $attributes)->assertStatus(403);
+        $this->post('issue', $attributes)->assertStatus(403);
 
         $this->assertDatabaseMissing('issues', $attributes);
     }
