@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Issue;
 use App\Stamp;
 use Goutte\Client;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ScraperController extends Controller
@@ -74,22 +77,35 @@ class ScraperController extends Controller
         ];
 
         $issue = Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
+        $issue_hash = substr(md5($issue->id . $issue->title), -5); // Need a consistent UUID to for folder image saving in case there are multiple issues with the same title.
 
         // Now save the stamps
-        $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue) {
-            $image_url = $this->baseURI . $stamp->filter('a')->first()->extract('href')[0];
+        $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash) {
+            $remote_image_url = $this->baseURI . $stamp->filter('a')->first()->extract('href')[0];
             $title = $stamp->filter('h3')->text();
             $description = trim(str_replace($title, '', $stamp->text()));
             $description = str_replace('<br>', '', $description);
+
+            // This is not ideal because as there could be clashes but is unlikely.
+            $stamp_hash = substr(md5($remote_image_url), -5); // Need a consistent UUID to for image saving in case there are multiple stamps with the same title.
 
             $attributes = [
                 'issue_id' => $issue->id,
                 'title' => $title,
                 'description' => $description,
-                'image_url' => $image_url,
+                'remote_image_url' => $remote_image_url,
+                'image_url' => $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg',
             ];
 
+            // Create the stamp or update if it already exists.
             Stamp::updateOrCreate(['issue_id' => $issue->id, 'title' => $title], $attributes);
+
+            // Save the image to the storage/app/public/stamps/issue/stamp
+            $exists = Storage::disk('public')->exists('stamps/' . $attributes['image_url']);
+            if (! $exists) {
+                $image = file_get_contents($attributes['remote_image_url']);
+                Storage::disk('public')->put('stamps/' . $attributes['image_url'], $image);
+            }
         });
 
         return redirect('/');
@@ -123,60 +139,5 @@ class ScraperController extends Controller
             // Invalid year so abort 400 Bad Request.
             abort(404);
         }
-    }
-
-    /**
-     * Show the profile for the given user.
-     * @return View
-     */
-    public function show($year = 2019)
-    {
-        $year = (int)$year;
-        if (is_int($year) && $year > 1830 && $year < 3000) {
-            $url = $this->baseURI . '/explore/years/?year=' . $year;
-            $stampset = $this->getStampSet($url);
-            dd($stampset);
-        } else {
-            dd('Please provide a valid year.');
-        }
-    }
-
-    /**
-     * Returns a list of years from the stamp collection website.
-     *
-     * @return array
-     */
-    public function getYears()
-    {
-        $attributes = ['_text', 'href'];
-
-        $years = $this->client->request('GET', $this->baseURI)
-                            ->filter('.nav_section')->eq(2)->filter('a')
-                            ->extract($attributes);
-
-        return $years;
-    }
-
-    /**
-     * Get each StampSet for the year
-     *
-     * @param string url
-     *
-     * @return array
-     */
-    public function getStampSet($url)
-    {
-        $attributes = ['_text', 'href'];
-
-        $data = $this->client->request('GET', $url)->filter('h3 a')
-                            ->extract($attributes);
-
-        foreach ($data as $i => $stampset) {
-            $strpos = strrchr($stampset[1], '=');
-            $data[$i][] = substr($strpos, 1);
-            $data[$i][1] = $this->baseURI . $stampset[1];
-        }
-
-        return $data;
     }
 }

@@ -8,6 +8,8 @@ class Stamp extends Model
 {
     protected $guarded = [];
 
+    // protected $hidden = ['image_url'];
+
     /**
      * Description
      *  

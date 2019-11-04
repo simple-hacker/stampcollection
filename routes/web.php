@@ -1,5 +1,10 @@
 <?php
 
+use Faker\Provider\Image;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +35,15 @@ Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware
 
 Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin');
 Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin');
+
+
+Route::get('/image', function () {
+    // $url = 'https://www.collectgbstamps.co.uk/images/contributors/royalmail/2018_8997_l.jpg';
+    
+    // $image = file_get_contents($url);
+    
+    // Storage::disk('public')->put('Sansa.jpg', $image);
+
+    // return redirect('/');
+    dd(Str::slug('22780' . 'Game of Thrones'));
+});
