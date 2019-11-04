@@ -18,6 +18,7 @@ class CreateStampsTable extends Migration
             $table->unsignedBigInteger('issue_id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->string('remote_image_url')->nullable();
             $table->string('image_url')->nullable();
             $table->float('price')->nullable();
             $table->timestamps();
