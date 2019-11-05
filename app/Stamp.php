@@ -10,6 +10,8 @@ class Stamp extends Model
 
     // protected $hidden = ['image_url'];
 
+    protected $with = ['issue'];
+
     /**
      * Description
      *  

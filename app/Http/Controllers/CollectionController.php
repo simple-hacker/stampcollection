@@ -18,8 +18,8 @@ class CollectionController extends Controller
      */
     public function show()
     {
-        $stamps = auth()->user()->stamps;
-        return view('collection.index', compact('stamps'));
+        $collection = auth()->user()->stamps->groupBy('issue.id');
+        return view('collection.index', compact('collection'));
     }
 
     /**
