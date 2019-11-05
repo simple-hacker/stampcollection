@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class CollectionController extends Controller
 {
     /**
+     * Description
+     *  
+     * @param string name
+     * 
+     * @return void
+     */
+    public function show()
+    {
+        $stamps = auth()->user()->stamps;
+        return view('collection.index', compact('stamps'));
+    }
+
+    /**
      * Adds a stamp to the auth user's collection.
      *  
      * @param Stamp $stamp

@@ -30,6 +30,7 @@ Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
 
 Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin');
 
+Route::get('/collection', 'CollectionController@show')->middleware('auth');
 Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth');
 Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth');
 

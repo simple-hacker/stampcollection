@@ -40,9 +40,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Description
-     *  
-     * @param string name
+     * Returns a collection of the user's stamps.
      * 
      * @return void
      */

@@ -33,7 +33,7 @@ class ScraperTest extends TestCase
         $this->actingAs($user);
 
         // Visit the Game of Thrones
-        $this->get('scraper/issue/22780')->assertOk();
+        $this->get('scraper/issue/22780')->assertRedirect('/');
 
         $this->assertDatabaseHas('issues', [
             'cgbs_issue' => 22780,
