@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //NEW: Import Schema
 
@@ -25,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191); //NEW: Increase StringLength
+
+        $years = \DB::table('years')->orderBy('year', 'desc')->get()->pluck('year');
+        View::share('years', $years);
     }
 }
