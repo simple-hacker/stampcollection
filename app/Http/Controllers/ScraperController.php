@@ -98,6 +98,7 @@ class ScraperController extends Controller
             ];
 
             // Create the stamp or update if it already exists.
+            // Unable to do a mass updateOrCreate to help with performance.  This should be okay as there aren't many stamps in each issue normally.
             Stamp::updateOrCreate(['issue_id' => $issue->id, 'title' => $title], $attributes);
 
             // Save the image to the storage/app/public/stamps/issue/stamp

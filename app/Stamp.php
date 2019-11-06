@@ -13,11 +13,7 @@ class Stamp extends Model
     protected $with = ['issue'];
 
     /**
-     * Description
-     *  
-     * @param string name
-     * 
-     * @return void
+     * Issue
      */
     public function issue()
     {
@@ -25,14 +21,27 @@ class Stamp extends Model
     }
 
     /**
-     * Description
+     * Users
      *  
-     * @param string name
-     * 
-     * @return void
      */
     public function users()
     {
         return $this->belongsToMany(User::class, 'collections')->withTimestamps();
+    }
+
+    /**
+     * Generate the whole url for displaying an image for a given stamp
+     */
+    public function getImageSrcAttribute()
+    {
+        return ($this->image_url) ? 'storage/stamps/' . $this->image_url : 'storage/stamps/no_image.jpg';
+    }
+
+    /**
+     * Returns the url path to view the stamp.
+     */
+    public function path()
+    {
+        return 'issue/' . $this->issue->id . '/stamp/git status' . $this->id;
     }
 }
