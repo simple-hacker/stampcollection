@@ -50,8 +50,27 @@
             </div>
         </nav>
 
-        <main class="flex flex-1 bg-gray-200">
-            @yield('content')
+        <main class="flex flex-1 bg-gray-100">
+            <div class="flex flex-col w-full">
+                <section id="search" class="flex justify-center w-full">
+                    <input type="text" class="p-4 m-4 w-3/4 bg-white shadow rounded" placeholder="Search for stamps or issues">
+                </section>
+                <div class="flex items-start justify-between">
+                    <section id="collection" class="w-3/4 mx-auto p-4 bg-white rounded shadow">
+                        @yield('content')
+                    </section>
+                    <aside id="browse" class="w-1/5 mx-auto p-4 bg-white rounded shadow">
+                        <h2 class="text-2xl border-b p-1 mb-2">Browse stamps by year</h2>
+                        <div class="flex flex-wrap mx-auto">
+                            @forelse ($years as $year)
+                                <a href="/browse/{{ $year }}" class="hover:underline p-1">{{ $year }}</a>
+                            @empty
+                                <p>The application has not generated any years.</p>
+                            @endforelse
+                        </div>
+                    </aside>
+                </div>
+            </div>
         </main>
     </div>
 </body>
