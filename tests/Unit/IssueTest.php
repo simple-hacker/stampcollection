@@ -24,4 +24,20 @@ class IssueTest extends TestCase
         $this->assertInstanceOf(Collection::class, $issue->stamps);
         $this->assertCount(5, $issue->stamps);
     }
+
+    /** @test */
+    public function an_issue_has_a_slug_of_a_title()
+    {
+        $issue = factory('App\Issue')->create(['title' => 'Game of Thrones']);
+
+        $this->assertEquals('game-of-thrones', $issue->slug);
+    }
+
+    /** @test */
+    public function an_issue_has_a_path()
+    {
+        $issue = factory('App\Issue')->create(['id' => 1, 'title' => 'Game of Thrones']);
+
+        $this->assertEquals('1/game-of-thrones', $issue->path());
+    }
 }

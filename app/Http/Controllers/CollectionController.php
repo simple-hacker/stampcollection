@@ -31,7 +31,9 @@ class CollectionController extends Controller
      */
     public function store(Stamp $stamp)
     {
-        return auth()->user()->stamps()->attach($stamp);
+        auth()->user()->stamps()->attach($stamp);
+
+        return redirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 
     /**

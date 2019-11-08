@@ -38,6 +38,9 @@
                         </div>
                     @endif
                 @else
+                    <div class="mr-6">
+                        <a href="/collection">My Collection</a>
+                    </div>
                     <div>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}

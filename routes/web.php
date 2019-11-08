@@ -1,10 +1,5 @@
 <?php
 
-use Faker\Provider\Image;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/browse/{year}', 'BrowseController@index');
+Route::get('/browse/{issue}/{slug}', 'BrowseController@issue')->name('browse.issue');
+// Route::get('/browse/issue/{issue}/stamp/{stamp}', 'BrowseController@stamp');
 
 Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin');
 Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
@@ -31,7 +29,7 @@ Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
 Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin');
 
 Route::get('/collection', 'CollectionController@show')->middleware('auth');
-Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth');
+Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth')->name('collection.add');
 Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth');
 
 Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin');

@@ -39,7 +39,6 @@ class ScraperTest extends TestCase
             'cgbs_issue' => 22780,
             'title' => 'Game of Thrones',
             'year' => 2018,
-            'release_date' => '2018-01-23'
         ]);
 
         // Retrieve the issue because we need to id to find the stamps.

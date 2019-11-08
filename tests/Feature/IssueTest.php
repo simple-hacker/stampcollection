@@ -23,7 +23,6 @@ class IssueTest extends TestCase
             'title' => 'Game of Thrones',
             'description' => $this->faker->sentence(),
             'year' => 2018,
-            'release_date' => '2018-01-05',
         ];
 
         $this->post('issue', $attributes)->assertOk();

@@ -22,7 +22,7 @@ class Stamp extends Model
 
     /**
      * Users
-     *  
+     *
      */
     public function users()
     {
@@ -37,11 +37,12 @@ class Stamp extends Model
         return ($this->image_url) ? 'storage/stamps/' . $this->image_url : 'storage/stamps/no_image.jpg';
     }
 
+
     /**
      * Returns the url path to view the stamp.
      */
-    public function path()
+    public function addToCollectionPath()
     {
-        return 'issue/' . $this->issue->id . '/stamp/git status' . $this->id;
+        return route('collection.add', ['stamp' => $this]);
     }
 }
