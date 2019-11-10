@@ -24,7 +24,7 @@ class CollectionController extends Controller
         $collection = Issue::whereHas('stamps')
                         ->with([
                             'stamps' => function ($query) {
-                                $query->whereIn('stamp_id', DB::table('collections')
+                                $query->whereIn('id', DB::table('collections')
                                     ->select(DB::raw('stamp_id'))
                                     ->where('user_id', '=', auth()->user()->id)
                                     ->get());
