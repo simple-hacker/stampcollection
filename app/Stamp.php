@@ -45,4 +45,12 @@ class Stamp extends Model
     {
         return route('collection.add', ['stamp' => $this]);
     }
+
+    /**
+     * Returns the url path to view the stamp.
+     */
+    public function deleteFromCollectionPath()
+    {
+        return route('collection.delete', ['stamp' => $this]);
+    }
 }

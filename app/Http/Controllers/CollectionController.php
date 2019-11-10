@@ -45,6 +45,8 @@ class CollectionController extends Controller
      */
     public function destroy(Stamp $stamp)
     {
-        return auth()->user()->stamps()->detach($stamp);
+        auth()->user()->stamps()->detach($stamp);
+
+        return redirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 }

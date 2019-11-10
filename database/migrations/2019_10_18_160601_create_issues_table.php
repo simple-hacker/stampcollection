@@ -17,7 +17,7 @@ class CreateIssuesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('cgbs_issue')->unique();
             $table->string('title');
-            $table->year('year');
+            $table->integer('year');
             $table->date('release_date')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

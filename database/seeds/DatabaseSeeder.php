@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             YearsSeeder::class,
             RolesAndPermissionsSeeder::class,
+            TemporarySetUpSeeder::class,
         ]);
     }
 }

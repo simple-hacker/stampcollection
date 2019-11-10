@@ -6,6 +6,7 @@ use App\Issue;
 use App\Stamp;
 use Goutte\Client;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\Crawler;
@@ -72,7 +73,7 @@ class ScraperController extends Controller
             'cgbs_issue' => $cgbs_issue,
             'title' => $title,
             'year' => $year,
-            'release_date' => date('Y-m-d', strtotime($release_date)),
+            'release_date' => Carbon::createFromFormat('F j Y', $release_date),
             'description' => $description,
         ];
 
@@ -81,35 +82,42 @@ class ScraperController extends Controller
 
         // Now save the stamps
         $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash) {
-            $remote_image_url = $this->baseURI . $stamp->filter('a')->first()->extract('href')[0];
+            $img_url = $stamp->filter('img')->first()->extract('src')[0];
             $title = $stamp->filter('h3')->text();
             $description = trim(str_replace($title, '', $stamp->text()));
             $description = str_replace('<br>', '', $description);
-
+            
+            // If scraper has no image then set both remote_image_url and image_url to null
+            $remote_image_url = ($img_url !== '/images/noimage.jpg') ? $this->baseURI . $img_url : null;
+            
             // This is not ideal because as there could be clashes but is unlikely.
             $stamp_hash = substr(md5($remote_image_url), -5); // Need a consistent UUID to for image saving in case there are multiple stamps with the same title.
-
+            
             $attributes = [
                 'issue_id' => $issue->id,
                 'title' => $title,
                 'description' => $description,
                 'remote_image_url' => $remote_image_url,
-                'image_url' => $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg',
+                'image_url' => ($remote_image_url !== null) ? $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg' : null,
             ];
 
             // Create the stamp or update if it already exists.
             // Unable to do a mass updateOrCreate to help with performance.  This should be okay as there aren't many stamps in each issue normally.
             Stamp::updateOrCreate(['issue_id' => $issue->id, 'title' => $title], $attributes);
 
-            // Save the image to the storage/app/public/stamps/issue/stamp
-            $exists = Storage::disk('public')->exists('stamps/' . $attributes['image_url']);
-            if (! $exists) {
-                $image = file_get_contents($attributes['remote_image_url']);
-                Storage::disk('public')->put('stamps/' . $attributes['image_url'], $image);
+            // If not null then download the image.
+            if ($attributes['remote_image_url'] !== null && $attributes['image_url'] !== null) {
+                // Save the image to the storage/app/public/stamps/issue/stamp
+                $exists = Storage::disk('public')->exists('stamps/' . $attributes['image_url']);
+                if (! $exists) {
+                    $image = file_get_contents($attributes['remote_image_url']);
+                    Storage::disk('public')->put('stamps/' . $attributes['image_url'], $image);
+                } 
             }
+            
         });
 
-        return redirect('/');
+        return back();
     }
 
     /**
@@ -136,6 +144,9 @@ class ScraperController extends Controller
                 ];
                 Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
             });
+
+            return redirect(route('browse.year', ['year' => $year]));
+
         } else {
             // Invalid year so abort 400 Bad Request.
             abort(404);

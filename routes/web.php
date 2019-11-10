@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/browse/{year}', 'BrowseController@index');
+Route::get('/browse/{year}', 'BrowseController@index')->name('browse.year');
 Route::get('/browse/{issue}/{slug}', 'BrowseController@issue')->name('browse.issue');
 // Route::get('/browse/issue/{issue}/stamp/{stamp}', 'BrowseController@stamp');
 
@@ -30,7 +30,7 @@ Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin')
 
 Route::get('/collection', 'CollectionController@show')->middleware('auth');
 Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth')->name('collection.add');
-Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth');
+Route::delete('/collection/{stamp}', 'CollectionController@destroy')->middleware('auth')->name('collection.delete');
 
-Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin');
-Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin');
+Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin')->name('scraper.issue');
+Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin')->name('scraper.year');

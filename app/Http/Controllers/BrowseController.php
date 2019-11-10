@@ -11,18 +11,18 @@ class BrowseController extends Controller
      */
     public function index($year)
     {
-        if (! \DB::table('years')->where('year', $year)->exists()) {
+        if (!\DB::table('years')->where('year', $year)->exists()) {
             abort(404);
         }
 
-        $issues = Issue::where('year', $year)->with('stamps')->get();
+        $issues = Issue::where('year', $year)->orderBy('release_date', 'desc')->with('stamps')->get();
 
         return view('browse.index', compact('year', 'issues'));
     }
 
     /**
      * Displays the given issue.
-     *  
+     *
      * @param \App\Issue id
      * @param string slug
      */
@@ -31,7 +31,9 @@ class BrowseController extends Controller
         if ($issue->slug !== $slug) {
             abort(404);
         }
-        
-        return view('browse.issue', compact('issue'));
+
+        $collection = auth()->check() ? auth()->user()->stamps : [];
+
+        return view('browse.issue', compact('issue', 'collection'));
     }
 }
