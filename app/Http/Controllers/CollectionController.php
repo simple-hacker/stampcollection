@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Issue;
 use App\Stamp;
+use DebugBar\DebugBar;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,17 +20,18 @@ class CollectionController extends Controller
      */
     public function show()
     {
-        // $collection = auth()->user()->stamps->groupBy('issue.id');
+        // 
+        $stampsInCollection = auth()->user()->stamps()->pluck('id')->toArray();
 
-        $collection = Issue::whereHas('stamps')
+        $collection = Issue::whereHas('stamps', function ($query) use ($stampsInCollection) {
+                            $query->whereIn('id', $stampsInCollection);
+                        })
                         ->with([
-                            'stamps' => function ($query) {
-                                $query->whereIn('id', DB::table('collections')
-                                    ->select(DB::raw('stamp_id'))
-                                    ->where('user_id', '=', auth()->user()->id)
-                                    ->get());
+                            'stamps' => function ($query) use ($stampsInCollection) {
+                                $query->whereIn('id', $stampsInCollection);
                             }
                         ])
+                        ->latest('release_date')
                         ->get();
 
         return view('collection.index', compact('collection'));
