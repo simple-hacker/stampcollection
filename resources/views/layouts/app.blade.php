@@ -59,7 +59,7 @@
                     <input type="text" class="p-4 m-4 w-3/4 bg-white shadow rounded" placeholder="Search for stamps or issues">
                 </section>
                 <div class="flex items-start justify-between">
-                    <section id="collection" class="w-3/4 mx-auto p-4 bg-white rounded shadow">
+                    <section id="content" class="w-3/4 mx-auto p-4 bg-white rounded shadow">
                         @yield('content')
                     </section>
                     <aside id="browse" class="w-1/5 mx-auto p-4 bg-white rounded shadow">

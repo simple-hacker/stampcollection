@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Year;
 use App\Issue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class IssueController extends Controller
 {
@@ -12,9 +14,15 @@ class IssueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($year = null)
     {
-        //
+        if (isset($year) && ($year > 1800) && ($year < 3000)) {
+            $set_release_date = tap(Carbon::now())->setYear($year)->format('Y-m-d');
+        } else {
+            $set_release_date = Carbon::now()->toDateString();
+        }
+
+        return view('issue.create', compact('year', 'set_release_date'));
     }
 
     /**
@@ -35,7 +43,27 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        Issue::create($request->all());
+        $attributes = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'cgbs_issue' => 'sometimes|nullable',
+            'release_date' => 'required',
+            'description' => 'nullable|min:3',
+        ]); 
+        
+        $release_date = Carbon::parse($attributes['release_date']);
+        
+        $attributes['year'] = $release_date->year;
+
+        // If an issue with the same title and release date exists then update, else create
+        $issue = Issue::updateOrCreate([
+            'title' => $attributes['title'],
+            'release_date' => $attributes['release_date'],
+        ], $attributes);
+
+        // Add the year to list of years in case it doesn't exist.
+        Year::firstOrCreate(['year' => $attributes['year']]);
+
+        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]));
     }
 
     /**
@@ -57,7 +85,7 @@ class IssueController extends Controller
      */
     public function edit(Issue $issue)
     {
-        //
+        return view('issue.edit', compact('issue'));
     }
 
     /**
@@ -69,7 +97,22 @@ class IssueController extends Controller
      */
     public function update(Request $request, Issue $issue)
     {
-        $issue->update($request->all());
+        $attributes = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'release_date' => 'required',
+            'description' => 'nullable|min:3',
+        ]);
+
+        // Update the year depending on release_date
+        $release_date = Carbon::parse($attributes['release_date']);
+        $attributes['year'] = $release_date->year;
+
+        $issue->update($attributes);
+
+        return redirect(route('browse.issue', [
+            'issue' => $issue,
+            'slug' => $issue->slug,
+        ]));
     }
 
     /**
@@ -80,6 +123,10 @@ class IssueController extends Controller
      */
     public function destroy(Issue $issue)
     {
-        //
+        $year = $issue->year;  //Grab the year before deleting so we can redirect to the correct year.
+        
+        $issue->delete();
+
+        return redirect(route('browse.year', compact('year')));
     }
 }

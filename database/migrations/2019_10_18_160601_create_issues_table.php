@@ -15,12 +15,14 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cgbs_issue')->unique();
+            $table->unsignedBigInteger('cgbs_issue')->nullable();
             $table->string('title');
             $table->integer('year');
-            $table->date('release_date')->nullable();
+            $table->date('release_date');
             $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->unique(['title', 'cgbs_issue', 'release_date']);
         });
     }
 

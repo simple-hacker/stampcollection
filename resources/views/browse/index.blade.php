@@ -8,7 +8,7 @@
                 <a href="{{ route('scraper.year', ['year' => $year]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">Import Issues</a>
             @endcan
             @can('create issue')
-                <a href="" class="bg-green-500 text-white border rounded px-4 py-2">Add Issue</a>
+                <a href="{{ route('create.issue', $year) }}" class="bg-green-500 text-white border rounded px-4 py-2">Add Issue</a>
             @endcan
         </div>
         
@@ -16,7 +16,7 @@
             <div class="flex flex-col mb-8">
                 <a href="{{ $issue->path() }}"><h2 class="text-2xl border-b mb-2">{{ $issue->title }}</h2></a>
                 @isset ($issue->release_date)
-                    <small class="mb-3">Released {{ $issue->release_date->format('j F, Y') }}</small>
+                    <small class="mb-3">Released {{ $issue->release_date }}</small>
                 @endisset
                 <div class="flex">
                     @forelse ($issue->stamps as $stamp)
@@ -33,9 +33,11 @@
                     @empty
                         <div class="flex flex-1 justify-between">
                             <p>No Stamps for this issue.</p>
-                            @can('scrape issue')
-                                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-400 text-white border rounded px-4 py-2">Import Issue</a>
-                            @endcan
+                            @isset($issue->cgbs_issue)
+                                @can('scrape issue')
+                                    <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-400 text-white border rounded px-4 py-2">Import Issue</a>
+                                @endcan
+                            @endisset
                         </div>
                     @endforelse
                 </div>

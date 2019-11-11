@@ -56,9 +56,21 @@ class ScraperTest extends TestCase
         $this->actingAs($user);
 
         // Visit the Game of Thrones
-        $this->get('scraper/issuesByYear/2018')->assertOk();
+        $this->get('scraper/issuesByYear/2018')->assertRedirect('/browse/2018');
 
         // Assert that 22 issues were created.  (22 issues in year 2018)
         $this->assertCount(22, Issue::where('year', 2018)->get());
+    }
+
+    /** @test */
+    public function scraping_an_invalid_year_expects_404()
+    {
+        $user = factory('App\User')->create();
+        $user->assignRole('admin');
+        $this->actingAs($user);
+
+        // Available years are between 1800 and 3000
+        $this->get('scraper/issuesByYear/1799')->assertNotFound();
+        $this->get('scraper/issuesByYear/3000')->assertNotFound();
     }
 }

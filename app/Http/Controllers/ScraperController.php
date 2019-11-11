@@ -92,6 +92,13 @@ class ScraperController extends Controller
             
             // This is not ideal because as there could be clashes but is unlikely.
             $stamp_hash = substr(md5($remote_image_url), -5); // Need a consistent UUID to for image saving in case there are multiple stamps with the same title.
+
+            // There couple be multiple stamps with the same title in an issue.  Check if there is one in the database and add number after.
+            // Otherwise only one of those stamps will be added to the stamps table.  Images remain unaffected because it's a hash of the image source which is unique.
+            // TODO: this is performing an extra call to the database for each stamp.  Need to find something more efficient.
+            if (Stamp::where(['issue_id' => $issue->id, 'title' => $title])->exists()) {
+                $title = $title . " (" . ($i+1) . ")";
+            }
             
             $attributes = [
                 'issue_id' => $issue->id,
@@ -117,7 +124,7 @@ class ScraperController extends Controller
             
         });
 
-        return back();
+        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]));
     }
 
     /**
@@ -130,7 +137,7 @@ class ScraperController extends Controller
     public function issuesByYear($year = 2019)
     {
         // Default to 2019 if no year is given.
-        if ($year > 1830 && $year < 3000) {
+        if ($year > 1800 && $year < 3000) {
             $url = $this->baseURI . '/explore/years/?year=' . $year;
             // Iterate over each stampset div and create Issue with basic information (cgbs_issue number and title)
             $this->client->request('GET', $url)->filter('.stampset h3 a')->each(function (Crawler $issue) use ($year) {

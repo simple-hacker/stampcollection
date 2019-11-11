@@ -23,8 +23,11 @@ Route::get('/browse/{year}', 'BrowseController@index')->name('browse.year');
 Route::get('/browse/{issue}/{slug}', 'BrowseController@issue')->name('browse.issue');
 // Route::get('/browse/issue/{issue}/stamp/{stamp}', 'BrowseController@stamp');
 
-Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin');
-Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth');
+Route::get('/issue/create/{year?}', 'IssueController@index')->middleware('auth', 'role:admin')->name('create.issue');
+Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin')->name('add.issue');
+Route::get('/issue/{issue}', 'IssueController@edit')->middleware('auth', 'role:admin')->name('edit.issue');
+Route::post('/issue/{issue}', 'IssueController@update')->middleware('auth', 'role:admin')->name('update.issue');
+Route::delete('/issue/{issue}', 'IssueController@destroy')->middleware('auth')->name('delete.issue');
 
 Route::post('/stamp', 'StampController@store')->middleware('auth', 'role:admin');
 

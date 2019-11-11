@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Issue extends Model
@@ -12,7 +13,7 @@ class Issue extends Model
     protected $casts = [
         'cgbs_issue' => 'integer',
         'year' => 'integer',
-        'release_date' => 'date',
+        'release_date' => 'date:Y-m-d',
     ];
 
     /**
@@ -43,5 +44,14 @@ class Issue extends Model
     public function path()
     {
         return $this->id . '/' . $this->slug;
+    }
+
+    /**
+     * Always convert the date to Y-m-d
+     * @return string 
+     */
+    public function getReleaseDateAttribute($date)
+    {
+        return ($date !== '0000-00-00') ? (new Carbon($date))->format('Y-m-d') : null;
     }
 }
