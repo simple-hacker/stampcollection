@@ -33,7 +33,8 @@ class ScraperTest extends TestCase
         $this->actingAs($user);
 
         // Visit the Game of Thrones
-        $this->get('scraper/issue/22780')->assertRedirect('/');
+        $this->get('scraper/issue/22780')
+            ->assertRedirect(route('browse.issue', ['issue' => 1, 'slug' => 'game-of-thrones']));
 
         $this->assertDatabaseHas('issues', [
             'cgbs_issue' => 22780,
@@ -51,12 +52,14 @@ class ScraperTest extends TestCase
     /** @test */
     public function scraping_a_year()
     {
-        $user = factory('App\User')->create();
-        $user->assignRole('admin');
+        $this->withoutExceptionHandling();
+
+        $user = tap(factory('App\User')->create())->assignRole('admin');
         $this->actingAs($user);
 
         // Visit the Game of Thrones
-        $this->get('scraper/issuesByYear/2018')->assertRedirect('/browse/2018');
+        $this->get(route('scraper.year', ['year' => 2018]))
+            ->assertRedirect(route('browse.year', ['year' => 2018]));
 
         // Assert that 22 issues were created.  (22 issues in year 2018)
         $this->assertCount(22, Issue::where('year', 2018)->get());

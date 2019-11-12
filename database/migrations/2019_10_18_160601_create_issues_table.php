@@ -18,7 +18,7 @@ class CreateIssuesTable extends Migration
             $table->unsignedBigInteger('cgbs_issue')->nullable();
             $table->string('title');
             $table->integer('year');
-            $table->date('release_date');
+            $table->date('release_date')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
 

@@ -47,7 +47,7 @@ class IssueTest extends TestCase
 
         // Registered members should receive an Unauthenticated because only admins can do this.
         $this->actingAs(factory('App\User')->create());
-        $this->post('issue', $attributes)->assertStatus(403);
+        $this->post('issue', $attributes)->assertForbidden();
 
         $this->assertDatabaseMissing('issues', $attributes);
     }
@@ -57,12 +57,12 @@ class IssueTest extends TestCase
     {
         // Guests get redirected.
         $this->get(route('create.issue'))->assertRedirect('login');
-        
+
         //Members receive a 403 Unauthenticated.
         $user = factory('App\User')->create();
         $this->actingAs($user);
-        $this->get(route('create.issue'))->assertStatus(403);
-        
+        $this->get(route('create.issue'))->assertForbidden();
+
         //Admins receive Ok.
         $user->assignRole('admin');
         $this->get(route('create.issue'))->assertOk();
@@ -83,7 +83,7 @@ class IssueTest extends TestCase
 
         // Registered members should receive an Unauthenticated because only admins can do this.
         $this->actingAs(factory('App\User')->create());
-        $this->post(route('update.issue', $issue), $attributes)->assertStatus(403);
+        $this->post(route('update.issue', $issue), $attributes)->assertForbidden();
     }
 
     /** @test */
@@ -100,7 +100,7 @@ class IssueTest extends TestCase
             'description' => 'New Description',
         ];
 
-        $this->post(route('update.issue', $issue), $attributes)->assertRedirect($issue->fresh()->path());
+        $this->post(route('update.issue', $issue), $attributes)->assertRedirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->fresh()->slug]));
 
         $this->assertDatabaseHas('issues', $attributes);
     }
@@ -119,13 +119,13 @@ class IssueTest extends TestCase
         $this->assertCount(1, Issue::all());
 
         $this->assertDatabaseHas('issues', $issue);
-        
+
         // If I make another post request I should still only have one.
         // Same title and release date but different other attributes should result in updating the old issue but with new attributes
         // So we don't get a duplicated title+release_date
         $issue['cgbs_issue'] = 2222;
         $issue['description'] = 'New Description';
-        
+
         $this->post(route('add.issue'), $issue);
         $this->assertCount(1, Issue::all());
 

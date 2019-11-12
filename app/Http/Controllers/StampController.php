@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Issue;
 use App\Stamp;
 use Illuminate\Http\Request;
 
@@ -14,28 +15,40 @@ class StampController extends Controller
      */
     public function index()
     {
-        //
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Issue $issue)
     {
-        //
+        return view('stamp.create', compact('issue'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Issue $issue)
     {
-        Stamp::create($request->all());
+        $attributes = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'nullable|min:3',
+            'price' => 'nullable|numeric',
+        ]);
+
+        $issue->stamps()->create($attributes);
+
+        return redirect(route('browse.issue', [
+            'issue' => $issue,
+            'slug' => $issue->slug,
+        ]));
     }
 
     /**
@@ -55,9 +68,9 @@ class StampController extends Controller
      * @param  \App\Stamp  $stamp
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stamp $stamp)
+    public function edit(Issue $issue, Stamp $stamp)
     {
-        //
+        return view('stamp.edit', compact('stamp'));
     }
 
     /**
@@ -69,7 +82,18 @@ class StampController extends Controller
      */
     public function update(Request $request, Stamp $stamp)
     {
-        //
+        $attributes = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'nullable|min:3',
+            'price' => 'nullable|numeric|min:0'
+        ]);
+
+        $stamp->update($attributes);
+
+        return redirect(route('browse.issue', [
+            'issue' => $stamp->issue,
+            'slug' => $stamp->issue->slug
+        ]));
     }
 
     /**
@@ -80,6 +104,10 @@ class StampController extends Controller
      */
     public function destroy(Stamp $stamp)
     {
-        //
+        $year = $stamp->issue->year ?? Carbon::now()->year;  //Grab the year before deleting so we can redirect to the correct year.
+
+        $stamp->delete();
+
+        return redirect(route('browse.year', compact('year')));
     }
 }
