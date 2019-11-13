@@ -80,8 +80,10 @@ class ScraperController extends Controller
         $issue = Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
         $issue_hash = substr(md5($issue->id . $issue->title), -5); // Need a consistent UUID to for folder image saving in case there are multiple issues with the same title.
 
+        $stamp_titles = [];
+
         // Now save the stamps
-        $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash) {
+        $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash, &$stamp_titles) {
             $img_url = $stamp->filter('img')->first()->extract('src')[0];
             $title = $stamp->filter('h3')->text();
             $description = trim(str_replace($title, '', $stamp->text()));
@@ -93,11 +95,14 @@ class ScraperController extends Controller
             // This is not ideal because as there could be clashes but is unlikely.
             $stamp_hash = substr(md5($remote_image_url), -5); // Need a consistent UUID to for image saving in case there are multiple stamps with the same title.
 
-            // There couple be multiple stamps with the same title in an issue.  Check if there is one in the database and add number after.
+            // Put the add one to the stamp_titles array with key of title.
+            $stamp_titles[$title][] = $title;
+
+            // There couple be multiple stamps with the same title in an issue.
             // Otherwise only one of those stamps will be added to the stamps table.  Images remain unaffected because it's a hash of the image source which is unique.
-            // TODO: this is performing an extra call to the database for each stamp.  Need to find something more efficient.
-            if (Stamp::where(['issue_id' => $issue->id, 'title' => $title])->exists()) {
-                $title = $title . " (" . ($i+1) . ")";
+            if (count($stamp_titles[$title]) > 1) {
+                $count = count($stamp_titles[$title]);
+                $title = "{$title} ({$count})";
             }
             
             $attributes = [
@@ -120,11 +125,11 @@ class ScraperController extends Controller
                     $image = file_get_contents($attributes['remote_image_url']);
                     Storage::disk('public')->put('stamps/' . $attributes['image_url'], $image);
                 } 
-            }
-            
+            }    
         });
 
-        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]));
+        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]))
+                ->withToastSuccess("Successfully imported {$issue->title}");
     }
 
     /**
@@ -152,7 +157,8 @@ class ScraperController extends Controller
                 Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
             });
 
-            return redirect(route('browse.year', ['year' => $year]));
+            return redirect(route('browse.year', ['year' => $year]))
+                    ->withToastSuccess("Successfully imported issues for {$year}");
 
         } else {
             // Invalid year so abort 400 Bad Request.

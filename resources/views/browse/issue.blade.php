@@ -5,7 +5,13 @@
         <h1 class="text-4xl border-b p-1 mb-5 mr-2 flex-1">{{ $issue->title }}</h1>
         @isset($issue->cgbs_issue)
             @can('scrape issue')
-                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">Reimport Issue</a>
+                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">
+                    @if ($issue->stamps->count() > 0)
+                        Reimport Issue
+                    @else
+                        Import Issue
+                    @endif
+                </a>
             @endcan
         @endisset
         @can('update issue')
@@ -32,7 +38,7 @@
         @endisset
         <p class="mb-5">{!! nl2br(e($issue->description)) !!}</p>
         <div class="flex justify-between items-center">
-            <h2 class="text-2xl border-b flex-1 mb-5">Stamps</h2>
+            <h2 class="text-2xl border-b flex-1 mb-5">Stamps ({{ $issue->stamps->count() }})</h2>
             @can('create stamp')
                 <a href="{{ route('create.stamp', ['issue' => $issue]) }}" class="flex bg-green-500 text-white border rounded px-4 py-2">
                     <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">

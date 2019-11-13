@@ -48,7 +48,8 @@ class StampController extends Controller
         return redirect(route('browse.issue', [
             'issue' => $issue,
             'slug' => $issue->slug,
-        ]));
+        ]))
+        ->withToastSuccess('Added stamp ' . $attributes['title']);
     }
 
     /**
@@ -93,7 +94,8 @@ class StampController extends Controller
         return redirect(route('browse.issue', [
             'issue' => $stamp->issue,
             'slug' => $stamp->issue->slug
-        ]));
+        ]))
+        ->withToastSuccess('Updated ' . $stamp->fresh()->title);
     }
 
     /**
@@ -104,10 +106,15 @@ class StampController extends Controller
      */
     public function destroy(Stamp $stamp)
     {
-        $year = $stamp->issue->year ?? Carbon::now()->year;  //Grab the year before deleting so we can redirect to the correct year.
+        $issue = $stamp->issue;  //Grab the issue details before deleting the stamp so we can redirect to the issue.
+        $title = $stamp->title;
 
         $stamp->delete();
 
-        return redirect(route('browse.year', compact('year')));
+        return redirect(route('browse.issue', [
+                    'issue' => $issue,
+                    'slug' => $issue->slug,
+                ]))
+                ->withToastWarning("Successfully deleted {$title}");
     }
 }
