@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-4xl border-b mb-4">Add Stamp to {{ $issue->title }}</h1>
 
-    <form method="POST" action="{{ route('add.stamp', ['issue' => $issue]) }}">
+    <form method="POST" action="{{ route('add.stamp', ['issue' => $issue]) }}" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center mb-6">
             <div class="w-1/3">
@@ -12,6 +12,17 @@
             <div class="flex flex-col w-2/3">
                 <input id="title" name="title" type="text" value="{{ old('title') }}" placeholder="Title" class="w-full p-2 rounded border shadow @error('title') border-red-500 @enderror" required>
                 @error('title')
+                    @component('components.error') {{ $message }} @endcomponent
+                @enderror
+            </div>
+        </div>
+        <div class="flex items-center mb-6">
+            <div class="w-1/3">
+                <label for="sg_number" class="text-gray-500 font-bold p-4">Stanley Gibbons Number</label>
+            </div>
+            <div class="flex flex-col w-2/3">
+                <input id="sg_number" name="sg_number" type="number" step="1" value="{{ old('sg_number') }}" placeholder="Stanley Gibbons Number" class="w-full p-2 rounded border shadow @error('sg_number') border-red-500 @enderror">
+                @error('sg_number')
                     @component('components.error') {{ $message }} @endcomponent
                 @enderror
             </div>
@@ -34,6 +45,17 @@
             <div class="flex flex-col w-2/3">
                 <textarea id="description" name="description" placeholder="Description" class="w-full p-2 rounded border shadow @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                 @error('description')
+                    @component('components.error') {{ $message }} @endcomponent
+                @enderror
+            </div>
+        </div>
+        <div class="flex items-center mb-6">
+            <div class="w-1/3">
+                <label for="image" class="text-gray-500 font-bold p-4">Upload Image</label>
+            </div>
+            <div class="flex flex-col w-2/3">
+                <input type="file" name="image" class="w-full p-2 rounded border shadow @error('image') border-red-500 @enderror">
+                @error('image')
                     @component('components.error') {{ $message }} @endcomponent
                 @enderror
             </div>

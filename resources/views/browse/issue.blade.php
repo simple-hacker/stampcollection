@@ -53,6 +53,7 @@
                 <div class="flex flex-col w-1/4 items-center justify-center p-1 mr-2">
                     <a href="{{ asset($stamp->image_src) }}"><img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20"></a>
                     <p class="mb-3 text-center">{{ $stamp->title }}</p>
+                    <p class="mb-3 text-center italic">{{ $stamp->sg_number }}</p>
                     @auth
                         @if (!$collection->contains($stamp))
                             <form method="POST" action="{{ $stamp->addToCollectionPath() }}">

@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Stamp::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(4),
+        'sg_number' => $faker->randomNumber(4),
         'description' => $faker->paragraph(),
         'price' => $faker->randomFloat(2, 0, 5),
         'issue_id' => function () {

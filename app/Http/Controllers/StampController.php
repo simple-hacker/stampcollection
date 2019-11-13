@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use App\Stamp;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StampController extends Controller
 {
@@ -39,17 +41,24 @@ class StampController extends Controller
     {
         $attributes = $request->validate([
             'title' => 'required|min:3|max:255',
+            'sg_number' => 'nullable|integer|min:1',
             'description' => 'nullable|min:3',
             'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
+
+        // This sends the file to be uploaded, and returns the string to the file path to be saved in the stamp model.
+        if ($request->has('image')) {
+            $attributes['image'] = $this->upload_image($attributes['image'], $issue, null, $attributes['title']);
+        }
 
         $issue->stamps()->create($attributes);
 
         return redirect(route('browse.issue', [
-            'issue' => $issue,
-            'slug' => $issue->slug,
-        ]))
-        ->withToastSuccess('Added stamp ' . $attributes['title']);
+                    'issue' => $issue,
+                    'slug' => $issue->slug,
+                ]))
+                ->withToastSuccess('Added stamp ' . $attributes['title']);
     }
 
     /**
@@ -85,9 +94,16 @@ class StampController extends Controller
     {
         $attributes = $request->validate([
             'title' => 'required|min:3|max:255',
+            'sg_number' => 'nullable|integer|min:1',
             'description' => 'nullable|min:3',
-            'price' => 'nullable|numeric|min:0'
+            'price' => 'nullable|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
+
+        // This sends the file to be uploaded, and returns the string to the file path to be saved in the stamp model.
+        if ($request->has('image')) {
+            $attributes['image'] = $this->upload_image($attributes['image'], $stamp->issue, $stamp, $attributes['title']);
+        }
 
         $stamp->update($attributes);
 
@@ -109,6 +125,13 @@ class StampController extends Controller
         $issue = $stamp->issue;  //Grab the issue details before deleting the stamp so we can redirect to the issue.
         $title = $stamp->title;
 
+        // Delete the image if it exists.
+        if ($stamp->image) {
+            if (Storage::disk('public')->exists('stamps/' . $stamp->image)) {
+                Storage::disk('public')->delete('stamps/' . $stamp->image);
+            }
+        }
+
         $stamp->delete();
 
         return redirect(route('browse.issue', [
@@ -116,5 +139,35 @@ class StampController extends Controller
                     'slug' => $issue->slug,
                 ]))
                 ->withToastWarning("Successfully deleted {$title}");
+    }
+
+    /**
+     * Save the uploaded image to storage and return a string of the path.
+     *  
+     * @param UploadedFile $image
+     * @param App\Issue $issue
+     * @param string $title
+     * 
+     * @return string
+     */
+    public function upload_image($image, $issue, $stamp = null, $title)
+    {
+        // If $stamp != null then
+        // if file $stamp->image exists then delete
+        if ($stamp) {
+            if ($stamp->image) {
+                if (Storage::disk('public')->exists('stamps/' . $stamp->image)) {
+                    Storage::disk('public')->delete('stamps/' . $stamp->image);
+                }
+            }
+        }
+
+        $folder = substr(md5($issue->id . $issue->title), -5) . "_" . Str::slug($issue->title);
+        $filename = substr(md5($image->getClientOriginalName()), -5) . "_" . Str::slug($title) . "." . $image->getClientOriginalExtension();
+        $path = "{$folder}/{$filename}";
+
+        // Save the image.
+        $image->storeAs('stamps/' . $folder, $filename, 'public');
+        return $path;
     }
 }

@@ -16,10 +16,11 @@ class CreateStampsTable extends Migration
         Schema::create('stamps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('issue_id');
+            $table->unsignedBigInteger('sg_number')->nullable();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('remote_image_url')->nullable();
-            $table->string('image_url')->nullable();
+            $table->string('image')->nullable();
             $table->float('price')->nullable();
             $table->timestamps();
 

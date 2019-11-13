@@ -34,7 +34,7 @@ class Stamp extends Model
      */
     public function getImageSrcAttribute()
     {
-        return ($this->image_url) ? 'storage/stamps/' . $this->image_url : 'storage/stamps/no_image.jpg';
+        return ($this->image) ? 'storage/stamps/' . $this->image : 'storage/stamps/no_image.jpg';
     }
 
 
