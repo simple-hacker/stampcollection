@@ -55,10 +55,10 @@
 
         <main class="flex flex-1 bg-gray-100">
             <div class="flex flex-col w-full">
-                <section id="search" class="flex justify-center w-full">
+                {{-- <section id="search" class="flex justify-center w-full">
                     <input type="text" class="p-4 m-4 w-3/4 bg-white shadow rounded" placeholder="Search for stamps or issues">
-                </section>
-                <div class="flex items-start justify-between">
+                </section> --}}
+                <div class="flex items-start justify-between mt-3">
                     <section id="content" class="w-3/4 mx-auto p-4 bg-white rounded shadow">
                         @yield('content')
                     </section>

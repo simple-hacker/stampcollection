@@ -88,10 +88,10 @@ class ScraperController extends Controller
             $title = $stamp->filter('h3')->text();
             $description = trim(str_replace($title, '', $stamp->text()));
             $description = str_replace('<br>', '', $description);
-            
+
             // If scraper has no image then set both remote_image_url and image_url to null
             $remote_image_url = ($img_url !== '/images/noimage.jpg') ? $this->baseURI . $img_url : null;
-            
+
             // This is not ideal because as there could be clashes but is unlikely.
             $stamp_hash = substr(md5($remote_image_url), -5); // Need a consistent UUID to for image saving in case there are multiple stamps with the same title.
 
@@ -104,13 +104,13 @@ class ScraperController extends Controller
                 $count = count($stamp_titles[$title]);
                 $title = "{$title} ({$count})";
             }
-            
+
             $attributes = [
                 'issue_id' => $issue->id,
                 'title' => $title,
                 'description' => $description,
                 'remote_image_url' => $remote_image_url,
-                'image_url' => ($remote_image_url !== null) ? $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg' : null,
+                'image' => ($remote_image_url !== null) ? $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg' : null,
             ];
 
             // Create the stamp or update if it already exists.
@@ -118,14 +118,14 @@ class ScraperController extends Controller
             Stamp::updateOrCreate(['issue_id' => $issue->id, 'title' => $title], $attributes);
 
             // If not null then download the image.
-            if ($attributes['remote_image_url'] !== null && $attributes['image_url'] !== null) {
+            if ($attributes['remote_image_url'] !== null && $attributes['image'] !== null) {
                 // Save the image to the storage/app/public/stamps/issue/stamp
-                $exists = Storage::disk('public')->exists('stamps/' . $attributes['image_url']);
-                if (! $exists) {
+                $exists = Storage::disk('public')->exists('stamps/' . $attributes['image']);
+                if (!$exists) {
                     $image = file_get_contents($attributes['remote_image_url']);
-                    Storage::disk('public')->put('stamps/' . $attributes['image_url'], $image);
-                } 
-            }    
+                    Storage::disk('public')->put('stamps/' . $attributes['image'], $image);
+                }
+            }
         });
 
         return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]))
@@ -134,9 +134,9 @@ class ScraperController extends Controller
 
     /**
      * Grab and save basic Issue information for each year.
-     *  
+     *
      * @param integer year
-     * 
+     *
      * @return void
      */
     public function issuesByYear($year = 2019)
@@ -147,7 +147,7 @@ class ScraperController extends Controller
             // Iterate over each stampset div and create Issue with basic information (cgbs_issue number and title)
             $this->client->request('GET', $url)->filter('.stampset h3 a')->each(function (Crawler $issue) use ($year) {
                 $data = $issue->extract(['href', '_text']);
-                $cgbs_issue = substr(strrchr($data[0][0], "="), 1);
+                $cgbs_issue = substr(strrchr($data[0][0], '='), 1);
                 $title = trim($data[0][1]);
                 $attributes = [
                     'cgbs_issue' => $cgbs_issue,
@@ -159,7 +159,6 @@ class ScraperController extends Controller
 
             return redirect(route('browse.year', ['year' => $year]))
                     ->withToastSuccess("Successfully imported issues for {$year}");
-
         } else {
             // Invalid year so abort 400 Bad Request.
             abort(404);

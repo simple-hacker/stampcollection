@@ -5,13 +5,11 @@
         <h1 class="text-4xl border-b p-1 mb-5 mr-2 flex-1">{{ $issue->title }}</h1>
         @isset($issue->cgbs_issue)
             @can('scrape issue')
-                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">
-                    @if ($issue->stamps->count() > 0)
-                        Reimport Issue
-                    @else
-                        Import Issue
-                    @endif
-                </a>
+                @if ($issue->stamps->count() > 0)
+                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-500 text-white border rounded px-4 py-2" onClick="return confirm('Are you sure you want to reimport this issue?  This will overwrite any changes you\'ve made.')">Reimport Issue</a>
+                @else
+                <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">Import Issue</a>
+                @endif
             @endcan
         @endisset
         @can('update issue')
@@ -20,7 +18,7 @@
                     <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"></path>
                 </svg>
             </a>
-            <form method="POST" action="{{ route('delete.issue', ['issue' => $issue]) }}">
+            <form method="POST" action="{{ route('delete.issue', ['issue' => $issue]) }}" onsubmit="return confirm('Are you sure you want to delete this issue?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="bg-red-500 text-white border rounded px-4 py-2">
@@ -74,7 +72,7 @@
                                         <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"></path>
                                     </svg>
                                 </a>
-                                <form method="POST" action="{{ route('delete.stamp', ['stamp' => $stamp]) }}">
+                                <form method="POST" action="{{ route('delete.stamp', ['stamp' => $stamp]) }}" onsubmit="return confirm('Are you sure you want to delete this stamp?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="bg-red-500 text-white border rounded px-4 py-2">
