@@ -14,15 +14,9 @@ class IssueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($year = null)
+    public function index()
     {
-        if (isset($year) && ($year > 1800) && ($year < 3000)) {
-            $set_release_date = tap(Carbon::now())->setYear($year)->format('Y-m-d');
-        } else {
-            $set_release_date = Carbon::now()->toDateString();
-        }
 
-        return view('issue.create', compact('year', 'set_release_date'));
     }
 
     /**
@@ -30,9 +24,17 @@ class IssueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($year = null)
     {
-        //
+        if (isset($year) && ($year > 1800) && ($year < 3000)) {
+            $set_release_date = tap(Carbon::now())->setYear($year)->format('Y-m-d');
+        } else {
+            $set_release_date = Carbon::now()->toDateString();
+        }
+
+        $issue = new Issue;
+
+        return view('issue.create', compact('year', 'set_release_date', 'issue'));
     }
 
     /**

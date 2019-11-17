@@ -27,7 +27,8 @@ class StampController extends Controller
      */
     public function create(Issue $issue)
     {
-        return view('stamp.create', compact('issue'));
+        $stamp = new Stamp;
+        return view('stamp.create', compact('issue', 'stamp'));
     }
 
     /**
