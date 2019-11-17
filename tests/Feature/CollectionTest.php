@@ -26,10 +26,23 @@ class CollectionTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_add_a_stamo_to_their_collection_via_json()
+    {
+        $user = factory('App\User')->create();
+        $this->actingAs($user);
+
+        $stamp = factory('App\Stamp')->create();
+
+        $this->json('POST', '/collection/' . $stamp->id);
+
+        $this->assertDatabaseHas('collections', [
+                'user_id' => $user->id, 'stamp_id' => $stamp->id
+                ]);
+    }
+
+    /** @test */
     public function a_user_can_remove_a_stamp_from_their_collection()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory('App\User')->create();
         $this->actingAs($user);
 

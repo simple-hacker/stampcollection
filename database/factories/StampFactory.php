@@ -4,6 +4,7 @@
 
 use App\Stamp;
 use Faker\Generator as Faker;
+use Illuminate\Http\UploadedFile;
 
 $factory->define(Stamp::class, function (Faker $faker) {
     return [
@@ -13,6 +14,7 @@ $factory->define(Stamp::class, function (Faker $faker) {
         'price' => $faker->randomFloat(2, 0, 5),
         'issue_id' => function () {
             return factory('App\Issue')->create()->id;
-        }
+        },
+        'image' => UploadedFile::fake()->image('stamp.jpg'),
     ];
 });

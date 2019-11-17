@@ -4,8 +4,11 @@ namespace Tests\Feature;
 
 use App\Stamp;
 use Tests\TestCase;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 
 class StampTest extends TestCase
 {
@@ -22,7 +25,7 @@ class StampTest extends TestCase
         $user = factory('App\User')->create();
         $this->actingAs($user);
         $this->get(route('create.stamp', ['issue' => $issue]))->assertForbidden();
-        
+
         //Admins receive Ok 200.
         $user->assignRole('admin');
         $this->get(route('create.stamp', ['issue' => $issue]))->assertOk();
@@ -50,7 +53,7 @@ class StampTest extends TestCase
         $this->actingAs($user);
 
         $issue = factory('App\Issue')->create();
-        
+
         $attributes = [
             'title' => 'New Stamp',
             'description' => 'The latest stamp in this issue',
@@ -111,8 +114,6 @@ class StampTest extends TestCase
     /** @test */
     public function admins_can_delete_a_stamp()
     {
-        $this->withoutExceptionHandling();
-
         $user = tap(factory('App\User')->create())->assignRole('admin');
         $this->actingAs($user);
 
@@ -121,6 +122,61 @@ class StampTest extends TestCase
         $this->assertDatabaseHas('stamps', $stamp->toArray());
 
         $this->delete(route('delete.stamp', ['stamp' => $stamp]))
-            ->assertRedirect(route('browse.year', ['year' => $stamp->issue->year]));
+            ->assertRedirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+    }
+
+    /** @test */
+    public function an_admin_can_add_an_image_to_a_stamp()
+    {
+        $user = tap(factory('App\User')->create())->assignRole('admin');
+        $this->actingAs($user);
+
+        Storage::fake('public');
+
+        $issue = factory('App\Issue')->create();
+        $stamp = factory('App\Stamp')->raw([
+            'issue_id' => $issue->id
+        ]);
+
+        $this->post(route('add.stamp', ['issue' => $issue]), $stamp);
+
+        $folder = substr(md5($issue->id . $issue->title), -5) . "_" . Str::slug($issue->title);
+        $filename = substr(md5($stamp['image']->getClientOriginalName()), -5) . "_" . Str::slug($stamp['title']) . "." . $stamp['image']->getClientOriginalExtension();
+        $path = "{$folder}/{$filename}";
+
+        Storage::disk('public')->assertExists('stamps/' . $path);
+    }
+
+    /** @test */
+    public function an_admin_cannot_add_an_invalid_image_type()
+    {
+        $user = tap(factory('App\User')->create())->assignRole('admin');
+        $this->actingAs($user);
+
+        Storage::fake('public');
+
+        $issue = factory('App\Issue')->create();
+        $stamp = factory('App\Stamp')->raw([
+            'issue_id' => $issue->id,
+            'image' => UploadedFile::fake('invalid.pdf')
+        ]);
+
+        // Assert cannot upload invalid file to new Stamp
+        $this->post(route('add.stamp', ['issue' => $issue]), $stamp)
+            ->assertSessionHasErrors('image');
+
+        // Persist a stamp to the database to be updated.
+        $stamp = factory('App\Stamp')->create([
+            'issue_id' => $issue->id
+        ]);
+
+        // Assert cannot upload invalud file when updating a stamp.
+        $invalid_image = UploadedFile::fake('invalid.pdf');
+
+        $this->post(route('update.stamp', ['stamp' => $stamp]), [
+                'title' => $stamp->title,
+                'image' => $invalid_image,
+            ])
+            ->assertSessionHasErrors('image');
     }
 }
