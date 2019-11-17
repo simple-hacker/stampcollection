@@ -18,7 +18,7 @@ class Issue extends Model
 
     /**
      * An issue has many stamps;
-     * 
+     *
      * @return void
      */
     public function stamps()
@@ -38,7 +38,7 @@ class Issue extends Model
 
     /**
      * Returns the path url for the issue.
-     *  
+     *
      * @return string
      */
     public function path()
@@ -48,10 +48,12 @@ class Issue extends Model
 
     /**
      * Always convert the date to Y-m-d
-     * @return string 
+     * @return string
      */
     public function getReleaseDateAttribute($date)
     {
-        return ($date !== '0000-00-00') ? (new Carbon($date))->format('Y-m-d') : null;
+        if ($date !== null) {
+            return ($date !== '0000-00-00') ? (new Carbon($date))->format('Y-m-d') : null;
+        }
     }
 }
