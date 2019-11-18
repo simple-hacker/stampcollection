@@ -66,7 +66,7 @@
                         <h2 class="text-2xl border-b p-1 mb-2">Browse stamps by year</h2>
                         <div class="flex flex-wrap mx-auto">
                             @forelse ($years as $year)
-                                <a href="/browse/{{ $year }}" class="hover:underline p-1">{{ $year }}</a>
+                                <a href="{{ route('catalogue.year', ['year' => $year]) }}" class="hover:underline p-1">{{ $year }}</a>
                             @empty
                                 <p>The application has not generated any years.</p>
                             @endforelse

@@ -17,7 +17,7 @@ class CatalogueController extends Controller
 
         $issues = Issue::where('year', $year)->orderBy('release_date', 'desc')->with('stamps')->get();
 
-        return view('browse.index', compact('year', 'issues'));
+        return view('catalogue.index', compact('year', 'issues'));
     }
 
     /**
