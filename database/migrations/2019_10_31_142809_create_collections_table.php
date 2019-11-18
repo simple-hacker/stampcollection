@@ -18,8 +18,9 @@ class CreateCollectionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('stamp_id');
 
-            $table->string('condition');
-            $table->float('price');
+            $table->unsignedBigInteger('condition')->nullable();
+
+            $table->float('price')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('stamp_id')->references('id')->on('stamps')->onDelete('cascade');
