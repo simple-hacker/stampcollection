@@ -100,7 +100,7 @@ class IssueTest extends TestCase
             'description' => 'New Description',
         ];
 
-        $this->post(route('update.issue', $issue), $attributes)->assertRedirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->fresh()->slug]));
+        $this->post(route('update.issue', $issue), $attributes)->assertRedirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->fresh()->slug]));
 
         $this->assertDatabaseHas('issues', $attributes);
     }

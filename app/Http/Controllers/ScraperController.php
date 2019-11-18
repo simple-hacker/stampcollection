@@ -128,7 +128,7 @@ class ScraperController extends Controller
             }
         });
 
-        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]))
+        return redirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]))
                 ->withToastSuccess("Successfully imported {$issue->title}");
     }
 
@@ -157,7 +157,7 @@ class ScraperController extends Controller
                 Issue::updateOrCreate(['cgbs_issue' => $attributes['cgbs_issue']], $attributes);
             });
 
-            return redirect(route('browse.year', ['year' => $year]))
+            return redirect(route('catalogue.year', ['year' => $year]))
                     ->withToastSuccess("Successfully imported issues for {$year}");
         } else {
             // Invalid year so abort 400 Bad Request.

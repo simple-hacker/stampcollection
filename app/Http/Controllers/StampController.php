@@ -55,7 +55,7 @@ class StampController extends Controller
 
         $issue->stamps()->create($attributes);
 
-        return redirect(route('browse.issue', [
+        return redirect(route('catalogue.issue', [
                     'issue' => $issue,
                     'slug' => $issue->slug,
                 ]))
@@ -108,7 +108,7 @@ class StampController extends Controller
 
         $stamp->update($attributes);
 
-        return redirect(route('browse.issue', [
+        return redirect(route('catalogue.issue', [
             'issue' => $stamp->issue,
             'slug' => $stamp->issue->slug
         ]))
@@ -135,7 +135,7 @@ class StampController extends Controller
 
         $stamp->delete();
 
-        return redirect(route('browse.issue', [
+        return redirect(route('catalogue.issue', [
                     'issue' => $issue,
                     'slug' => $issue->slug,
                 ]))

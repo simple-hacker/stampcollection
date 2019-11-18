@@ -19,9 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/browse/{year}', 'BrowseController@index')->name('browse.year');
-Route::get('/browse/{issue}/{slug}', 'BrowseController@issue')->name('browse.issue');
-// Route::get('/browse/issue/{issue}/stamp/{stamp}', 'BrowseController@stamp');
+Route::get('/catalogue/{year}', 'CatalogueController@index')->name('catalogue.year');
+Route::get('/catalogue/{issue}/{slug}', 'CatalogueController@issue')->name('catalogue.issue');
+// Route::get('/browse/issue/{issue}/stamp/{stamp}', 'CatalogueController@stamp');
 
 Route::get('/issue/create/{year?}', 'IssueController@create')->middleware('auth', 'role:admin')->name('create.issue');
 Route::post('/issue', 'IssueController@store')->middleware('auth', 'role:admin')->name('add.issue');

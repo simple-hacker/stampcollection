@@ -60,7 +60,7 @@ class StampTest extends TestCase
         ];
 
         $this->post(route('add.stamp', ['issue' => $issue]), $attributes)
-            ->assertRedirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]));
+            ->assertRedirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]));
 
         $this->assertDatabaseHas('stamps', $attributes);
 
@@ -101,7 +101,7 @@ class StampTest extends TestCase
         ];
 
         $this->post(route('update.stamp', ['stamp' => $stamp]), $attributes)
-                ->assertRedirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+                ->assertRedirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
 
         $this->assertDatabaseHas('stamps', $attributes);
 
@@ -122,7 +122,7 @@ class StampTest extends TestCase
         $this->assertDatabaseHas('stamps', $stamp->toArray());
 
         $this->delete(route('delete.stamp', ['stamp' => $stamp]))
-            ->assertRedirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+            ->assertRedirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 
     /** @test */

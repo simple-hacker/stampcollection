@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Issue;
 use App\Stamp;
-use DebugBar\DebugBar;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class CollectionController extends Controller
@@ -20,12 +18,12 @@ class CollectionController extends Controller
      */
     public function show()
     {
-        // 
+        //
         $stampsInCollection = auth()->user()->stamps()->pluck('id')->toArray();
 
         $collection = Issue::whereHas('stamps', function ($query) use ($stampsInCollection) {
-                            $query->whereIn('id', $stampsInCollection);
-                        })
+            $query->whereIn('id', $stampsInCollection);
+        })
                         ->with([
                             'stamps' => function ($query) use ($stampsInCollection) {
                                 $query->whereIn('id', $stampsInCollection);
@@ -48,7 +46,7 @@ class CollectionController extends Controller
     {
         auth()->user()->stamps()->attach($stamp);
 
-        return redirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 
     /**
@@ -62,6 +60,6 @@ class CollectionController extends Controller
     {
         auth()->user()->stamps()->detach($stamp);
 
-        return redirect(route('browse.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 }

@@ -65,7 +65,7 @@ class IssueController extends Controller
         // Add the year to list of years in case it doesn't exist.
         Year::firstOrCreate(['year' => $attributes['year']]);
 
-        return redirect(route('browse.issue', ['issue' => $issue, 'slug' => $issue->slug]))
+        return redirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]))
                 ->withToastSuccess('Added issue ' . $issue->title);
     }
 
@@ -112,7 +112,7 @@ class IssueController extends Controller
 
         $issue->update($attributes);
 
-        return redirect(route('browse.issue', [
+        return redirect(route('catalogue.issue', [
                     'issue' => $issue,
                     'slug' => $issue->slug,
                 ]))
@@ -132,7 +132,7 @@ class IssueController extends Controller
         
         $issue->delete();
 
-        return redirect(route('browse.year', compact('year')))
+        return redirect(route('catalogue.year', compact('year')))
                 ->withToastWarning("Successfully deleted {$title}");
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 
-class BrowseController extends Controller
+class CatalogueController extends Controller
 {
     /**
      * Index view shows all the issues for the given year.
@@ -34,6 +34,6 @@ class BrowseController extends Controller
 
         $collection = auth()->check() ? auth()->user()->stamps : [];
 
-        return view('browse.issue', compact('issue', 'collection'));
+        return view('catalogue.issue', compact('issue', 'collection'));
     }
 }
