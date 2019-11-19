@@ -46,6 +46,6 @@ class User extends Authenticatable
      */
     public function stamps()
     {
-        return $this->belongsToMany(Stamp::class, 'collections')->withTimestamps();
+        return $this->belongsToMany('App\Stamp', 'collections')->withTimestamps();
     }
 }

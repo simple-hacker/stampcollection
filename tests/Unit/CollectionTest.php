@@ -2,37 +2,35 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Grading;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CollectionTest extends TestCase
 {
-    Use RefreshDatabase;
-   
+    Use RefreshDatabase, WithFaker;
+
     /** @test */
-    public function a_stamp_can_be_added_to_collection_via_user()
+    public function add_to_collection_via_users_stamps()
     {
         $user = factory('App\User')->create();
         $stamp = factory('App\Stamp')->create();
 
         $this->assertDatabaseMissing('collections', ['user_id' => $user->id, 'stamp_id' => $stamp->id]);
 
-        $stamp->users()->attach($user);
+        $price = $this->faker->randomFloat(2, 0, 10);
 
-        $this->assertDatabaseHas('collections', ['user_id' => $user->id, 'stamp_id' => $stamp->id]);
-    }
+        $user->stamps()->attach($stamp, [
+            'grading_id' => 1,
+            'price' => $price
+        ]);
 
-    /** @test */
-    public function a_user_can_add_a_stamp_to_a_collection()
-    {
-        $user = factory('App\User')->create();
-        $stamp = factory('App\Stamp')->create();
-
-        $this->assertDatabaseMissing('collections', ['user_id' => $user->id, 'stamp_id' => $stamp->id]);
-
-        $user->stamps()->attach($stamp);
-
-        $this->assertDatabaseHas('collections', ['user_id' => $user->id, 'stamp_id' => $stamp->id]);
+        $this->assertDatabaseHas('collections', [
+            'user_id' => $user->id,
+            'stamp_id' => $stamp->id,
+            'grading_id' => 1,
+            'price' => $price
+        ]);
     }
 }

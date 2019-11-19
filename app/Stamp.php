@@ -26,7 +26,7 @@ class Stamp extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'collections')->withTimestamps();
+        return $this->belongsToMany('App\Stamp', 'collections')->withTimestamps();
     }
 
     /**

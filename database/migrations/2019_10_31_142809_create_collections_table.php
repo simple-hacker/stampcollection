@@ -18,12 +18,12 @@ class CreateCollectionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('stamp_id');
 
-            $table->unsignedBigInteger('condition')->nullable();
-
+            $table->unsignedBigInteger('grading_id')->nullable();
             $table->float('price')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('stamp_id')->references('id')->on('stamps')->onDelete('cascade');
+            $table->foreign('grading_id')->references('id')->on('gradings')->onDelete('cascade');
             $table->timestamps();
         });
     }
