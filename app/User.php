@@ -41,6 +41,19 @@ class User extends Authenticatable
 
     /**
      * Returns a collection of the user's stamps.
+     *  
+     * @param string name
+     * 
+     * @return void
+     */
+    public function collection()
+    {
+        // I think this just needs to be a raw
+        return $this->hasMany('App\Collection')->with(['stamp', 'grading']);
+    }
+
+    /**
+     * Returns a collection of the user's stamps.
      * 
      * @return void
      */

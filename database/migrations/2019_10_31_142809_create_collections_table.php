@@ -17,9 +17,8 @@ class CreateCollectionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('stamp_id');
-
-            $table->unsignedBigInteger('grading_id')->nullable();
-            $table->float('price')->nullable();
+            $table->unsignedBigInteger('grading_id');
+            $table->float('value');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('stamp_id')->references('id')->on('stamps')->onDelete('cascade');

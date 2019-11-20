@@ -19,18 +19,18 @@ class CollectionTest extends TestCase
 
         $this->assertDatabaseMissing('collections', ['user_id' => $user->id, 'stamp_id' => $stamp->id]);
 
-        $price = $this->faker->randomFloat(2, 0, 10);
+        $value = $this->faker->randomFloat(2, 0, 10);
 
         $user->stamps()->attach($stamp, [
             'grading_id' => 1,
-            'price' => $price
+            'value' => $value
         ]);
 
         $this->assertDatabaseHas('collections', [
             'user_id' => $user->id,
             'stamp_id' => $stamp->id,
             'grading_id' => 1,
-            'price' => $price
+            'value' => $value
         ]);
     }
 }

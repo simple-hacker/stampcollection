@@ -12,16 +12,27 @@
         </div>
     </div>
     <div class="flex items-center mb-6">
-            <div class="w-1/3">
-                <label for="sg_number" class="text-gray-500 font-bold p-4">Stanley Gibbons Number</label>
-            </div>
-            <div class="flex flex-col w-2/3">
-                <input id="sg_number" name="sg_number" type="number" step="1" value="{{ old('sg_number', $stamp->sg_number) }}" placeholder="Stanley Gibbons Number" class="w-full p-2 rounded border shadow @error('sg_number') border-red-500 @enderror">
-                @error('sg_number')
-                    @component('components.error') {{ $message }} @endcomponent
-                @enderror
-            </div>
+        <div class="w-1/3">
+            <label for="sg_number" class="text-gray-500 font-bold p-4">Stanley Gibbons Number</label>
         </div>
+        <div class="flex flex-col w-2/3">
+            <input id="sg_number" name="sg_number" type="text" value="{{ old('sg_number', $stamp->sg_number) }}" placeholder="Stanley Gibbons Number" class="w-full p-2 rounded border shadow @error('sg_number') border-red-500 @enderror">
+            @error('sg_number')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="sg_illustration" class="text-gray-500 font-bold p-4">Stanley Gibbons Illustration</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="sg_illustration" name="sg_illustration" type="number" step="1" value="{{ old('sg_illustration', $stamp->sg_illustration) }}" placeholder="Stanley Gibbons Illustration" class="w-full p-2 rounded border shadow @error('sg_illustration') border-red-500 @enderror">
+            @error('sg_illustration')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
     <div class="flex items-center mb-6">
         <div class="w-1/3">
             <label for="price" class="text-gray-500 font-bold p-4">Price</label>

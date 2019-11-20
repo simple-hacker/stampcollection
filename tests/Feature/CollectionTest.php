@@ -2,42 +2,40 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Grading;
+use App\Collection;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CollectionTest extends TestCase
 {
-    Use RefreshDatabase;
+    Use RefreshDatabase, WithFaker;
 
     /** @test */
     public function a_user_can_add_a_stamp_to_their_collection()
     {
+        $this->withExceptionHandling();
+
         $user = factory('App\User')->create();
         $this->actingAs($user);
 
         $stamp = factory('App\Stamp')->create();
+        $grading = Grading::find(1);
+        $value = $this->faker->randomFloat(2, 0, 10);
 
-        $this->post('/collection/' . $stamp->id);
-
-        $this->assertDatabaseHas('collections', [
-                'user_id' => $user->id, 'stamp_id' => $stamp->id
-                ]);
-    }
-
-    /** @test */
-    public function a_user_can_add_a_stamo_to_their_collection_via_json()
-    {
-        $user = factory('App\User')->create();
-        $this->actingAs($user);
-
-        $stamp = factory('App\Stamp')->create();
-
-        $this->json('POST', '/collection/' . $stamp->id);
+        $this->post('/collection/' . $stamp->id, [
+            'grading_id' => $grading->id,
+            'value' => $value,
+            'quantity' => 1 // TODO:  Need to remove this from validation
+        ]);
 
         $this->assertDatabaseHas('collections', [
-                'user_id' => $user->id, 'stamp_id' => $stamp->id
-                ]);
+                'user_id' => $user->id,
+                'stamp_id' => $stamp->id,
+                'grading_id' => $grading->id,
+                'value' => $value,
+            ]);
     }
 
     /** @test */
@@ -47,20 +45,34 @@ class CollectionTest extends TestCase
         $this->actingAs($user);
 
         $stamp = factory('App\Stamp')->create();
+        $grading = Grading::find(1);
+        $value = $this->faker->randomFloat(2, 0, 10);
 
         // Add a stamp to the collection
-        $this->post('/collection/' . $stamp->id);
+        $this->post('/collection/' . $stamp->id, [
+            'grading_id' => $grading->id,
+            'value' => $value,
+            'quantity' => 1, // TODO:  Need to remove from here as well
+        ]);
 
         $this->assertDatabaseHas('collections', [
-                'user_id' => $user->id, 'stamp_id' => $stamp->id
-                ]);
+                'user_id' => $user->id,
+                'stamp_id' => $stamp->id,
+                'grading_id' => $grading->id,
+                'value' => $value,
+            ]);
+
+        $stampInCollection = Collection::latest()->first();
 
         // Visit the same end point and remove stamp from collection.
-        $this->delete('/collection/' . $stamp->id);
+        $this->delete(route('collection.delete', ['collection' => $stampInCollection]));
 
         $this->assertDatabaseMissing('collections', [
-            'user_id' => $user->id, 'stamp_id' => $stamp->id
-        ]);
+                'user_id' => $user->id,
+                'stamp_id' => $stamp->id,
+                'grading_id' => $grading->id,
+                'value' => $value,
+            ]);
     }
 
     /** @test */

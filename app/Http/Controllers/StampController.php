@@ -42,7 +42,8 @@ class StampController extends Controller
     {
         $attributes = $request->validate([
             'title' => 'required|min:3|max:255',
-            'sg_number' => 'nullable|integer|min:1',
+            'sg_number' => 'nullable|alpha_num|min:1',
+            'sg_illustration' => 'nullable|numeric|min:1',
             'description' => 'nullable|min:3',
             'price' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg'
@@ -95,7 +96,8 @@ class StampController extends Controller
     {
         $attributes = $request->validate([
             'title' => 'required|min:3|max:255',
-            'sg_number' => 'nullable|integer|min:1',
+            'sg_number' => 'nullable|alpha_num|min:1',
+            'sg_illustration' => 'nullable|numeric|min:1',
             'description' => 'nullable|min:3',
             'price' => 'nullable|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg'

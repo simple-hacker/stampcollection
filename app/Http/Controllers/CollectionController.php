@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Issue;
 use App\Stamp;
-use Illuminate\Support\Facades\Auth;
+use App\Grading;
+use App\Collection;
+use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
     /**
      * Description
      *
-     * @param string name
-     *
-     * @return void
+     * @return \Illuminate\View\View
      */
-    public function show()
+    public function index()
     {
-        //
-        $stampsInCollection = auth()->user()->stamps()->pluck('id')->toArray();
+        // NOTE:: I could keep this, and have a separate array where the key is the stamp_id, and the data is the grading information and quantity,
+        // Only have one DB call for this info at the start, and then reference it in blade.
+
+        $usersCollection = auth()->user()->collection;
+
+        $stampsInCollection = $usersCollection->pluck('stamp_id')->unique()->toArray();
 
         $collection = Issue::whereHas('stamps', function ($query) use ($stampsInCollection) {
-            $query->whereIn('id', $stampsInCollection);
-        })
+                            $query->whereIn('id', $stampsInCollection);
+                        })
                         ->with([
                             'stamps' => function ($query) use ($stampsInCollection) {
                                 $query->whereIn('id', $stampsInCollection);
@@ -32,34 +35,76 @@ class CollectionController extends Controller
                         ->latest('release_date')
                         ->get();
 
-        return view('collection.index', compact('collection'));
+        $collectionData = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
+        $collectionValue = $usersCollection->sum('value');
+
+        return view('collection.index', compact('collection', 'collectionData', 'collectionValue'));
+    }
+
+    /**
+     * Shows details about the stamp, as well as what's in your collection.
+     *  
+     * @param \App\Stamp stamp
+     * @param string slug
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function show(Stamp $stamp, $slug)
+    {
+        if ($stamp->slug != $slug) {
+            abort(404);
+        }
+
+        $stampsInCollection = auth()->user()->collection()->where('stamp_id', $stamp->id)->get();
+        $gradings = Grading::pluck('type', 'id');
+
+        return view('collection.show', compact('stamp', 'stampsInCollection', 'gradings'));
     }
 
     /**
      * Adds a stamp to the auth user's collection.
      *
-     * @param Stamp $stamp
+     * @param \App\Stamp $stamp
      *
-     * @return null
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Stamp $stamp)
+    public function store(Request $request, Stamp $stamp)
     {
-        auth()->user()->stamps()->attach($stamp);
+        // TODO: Need to validate grading_id is valid
 
-        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+        $attributes = $request->validate([
+            'grading_id' => 'required|integer',
+            'value' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'quantity' => 'sometimes|integer|min:0'
+        ]);
+
+        $quantity = $attributes['quantity'];
+        unset($attributes['quantity']);
+
+        for ($i=1; $i <= $quantity; $i++) {
+            auth()->user()->stamps()->attach($stamp, $attributes);
+        }
+
+        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]))
+                ->withToastSuccess('Added ' . $stamp->title . ' to your collection.');;
     }
 
     /**
      * Removes a stamp from the auth user's collection.
      *
-     * @param Stamp $stamp
+     * @param \App\Stamp $stamp
      *
-     * @return null
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Stamp $stamp)
+    public function destroy(Collection $collection)
     {
-        auth()->user()->stamps()->detach($stamp);
+        if ($collection->user_id != auth()->user()->id) {
+            abort(404);
+        }
 
-        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
+        $collection->delete();
+
+        return redirect(route('catalogue.issue', ['issue' => $collection->stamp->issue, 'slug' => $collection->stamp->issue->slug]))
+                ->withToastWarning('Removed ' . $collection->stamp->title . ' from your collection.');
     }
 }

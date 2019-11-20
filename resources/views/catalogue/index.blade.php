@@ -8,7 +8,7 @@
                 <a href="{{ route('scraper.year', ['year' => $year]) }}" class="bg-blue-500 text-white border rounded px-4 py-2">Import Issues</a>
             @endcan
             @can('create issue')
-                <a href="{{ route('create.issue', $year) }}" class="bg-green-500 text-white border rounded px-4 py-2">Add Issue</a>
+                <a href="{{ route('issue.create', $year) }}" class="bg-green-500 text-white border rounded px-4 py-2">Add Issue</a>
             @endcan
         </div>
         

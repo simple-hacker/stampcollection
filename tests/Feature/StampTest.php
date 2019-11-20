@@ -19,16 +19,16 @@ class StampTest extends TestCase
     {
         $issue = factory('App\Issue')->create();
         // Guests get redirected.
-        $this->get(route('create.stamp', ['issue' => $issue]))->assertRedirect('login');
+        $this->get(route('stamp.create', ['issue' => $issue]))->assertRedirect('login');
 
         //Members receive 403.
         $user = factory('App\User')->create();
         $this->actingAs($user);
-        $this->get(route('create.stamp', ['issue' => $issue]))->assertForbidden();
+        $this->get(route('stamp.create', ['issue' => $issue]))->assertForbidden();
 
         //Admins receive Ok 200.
         $user->assignRole('admin');
-        $this->get(route('create.stamp', ['issue' => $issue]))->assertOk();
+        $this->get(route('stamp.create', ['issue' => $issue]))->assertOk();
     }
 
     /** @test */
@@ -38,12 +38,12 @@ class StampTest extends TestCase
         $stamp = factory('App\Stamp')->raw(['issue_id' => $issue->id]);
 
         // Guests get redirected.
-        $this->post(route('add.stamp', ['issue' => $issue]), $stamp)->assertRedirect('login');
+        $this->post(route('stamp.add', ['issue' => $issue]), $stamp)->assertRedirect('login');
 
         //Members receive 403.
         $user = factory('App\User')->create();
         $this->actingAs($user);
-        $this->post(route('add.stamp', ['issue' => $issue]), $stamp)->assertForbidden();
+        $this->post(route('stamp.add', ['issue' => $issue]), $stamp)->assertForbidden();
     }
 
     /** @test */
@@ -59,7 +59,7 @@ class StampTest extends TestCase
             'description' => 'The latest stamp in this issue',
         ];
 
-        $this->post(route('add.stamp', ['issue' => $issue]), $attributes)
+        $this->post(route('stamp.add', ['issue' => $issue]), $attributes)
             ->assertRedirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]));
 
         $this->assertDatabaseHas('stamps', $attributes);
@@ -76,11 +76,11 @@ class StampTest extends TestCase
         $this->actingAs($user);
 
         // Issue with id 999 doesn't exist.  So if we visit /issue/999/create or post data to we should receive a 404.
-        $this->get(route('create.stamp', ['issue' => 999]))->assertNotFound();
+        $this->get(route('stamp.create', ['issue' => 999]))->assertNotFound();
 
         // If we send data to add a stamp to an issue which doesn't exist we should receive a 404.
         $stamp = factory('App\Stamp')->raw(['issue_id' => 999]);
-        $this->post(route('add.stamp', ['issue' => 999]), $stamp)->assertNotFound();
+        $this->post(route('stamp.add', ['issue' => 999]), $stamp)->assertNotFound();
     }
 
     /** @test */
@@ -93,14 +93,14 @@ class StampTest extends TestCase
         $stamp = factory('App\Stamp')->create(['issue_id' => $issue->id]);
 
         // Assert the edit Stamp form page loads.
-        $this->get(route('edit.stamp', ['stamp' => $stamp]))->assertOk();
+        $this->get(route('stamp.edit', ['stamp' => $stamp]))->assertOk();
 
         $attributes = [
             'title' => 'New Stamp Title',
             'description' => 'New Stamp Description',
         ];
 
-        $this->post(route('update.stamp', ['stamp' => $stamp]), $attributes)
+        $this->post(route('stamp.update', ['stamp' => $stamp]), $attributes)
                 ->assertRedirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
 
         $this->assertDatabaseHas('stamps', $attributes);
@@ -121,7 +121,7 @@ class StampTest extends TestCase
         $this->assertCount(1, Stamp::all());
         $this->assertDatabaseHas('stamps', $stamp->toArray());
 
-        $this->delete(route('delete.stamp', ['stamp' => $stamp]))
+        $this->delete(route('stamp.delete', ['stamp' => $stamp]))
             ->assertRedirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));
     }
 
@@ -138,7 +138,7 @@ class StampTest extends TestCase
             'issue_id' => $issue->id
         ]);
 
-        $this->post(route('add.stamp', ['issue' => $issue]), $stamp);
+        $this->post(route('stamp.add', ['issue' => $issue]), $stamp);
 
         $folder = substr(md5($issue->id . $issue->title), -5) . "_" . Str::slug($issue->title);
         $filename = substr(md5($stamp['image']->getClientOriginalName()), -5) . "_" . Str::slug($stamp['title']) . "." . $stamp['image']->getClientOriginalExtension();
@@ -162,7 +162,7 @@ class StampTest extends TestCase
         ]);
 
         // Assert cannot upload invalid file to new Stamp
-        $this->post(route('add.stamp', ['issue' => $issue]), $stamp)
+        $this->post(route('stamp.add', ['issue' => $issue]), $stamp)
             ->assertSessionHasErrors('image');
 
         // Persist a stamp to the database to be updated.
@@ -173,7 +173,7 @@ class StampTest extends TestCase
         // Assert cannot upload invalud file when updating a stamp.
         $invalid_image = UploadedFile::fake('invalid.pdf');
 
-        $this->post(route('update.stamp', ['stamp' => $stamp]), [
+        $this->post(route('stamp.update', ['stamp' => $stamp]), [
                 'title' => $stamp->title,
                 'image' => $invalid_image,
             ])

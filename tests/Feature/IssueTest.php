@@ -56,16 +56,16 @@ class IssueTest extends TestCase
     public function create_an_issue_page_loads_for_authorized_users()
     {
         // Guests get redirected.
-        $this->get(route('create.issue'))->assertRedirect('login');
+        $this->get(route('issue.create'))->assertRedirect('login');
 
         //Members receive a 403 Unauthenticated.
         $user = factory('App\User')->create();
         $this->actingAs($user);
-        $this->get(route('create.issue'))->assertForbidden();
+        $this->get(route('issue.create'))->assertForbidden();
 
         //Admins receive Ok.
         $user->assignRole('admin');
-        $this->get(route('create.issue'))->assertOk();
+        $this->get(route('issue.create'))->assertOk();
     }
 
     /** @test */
@@ -79,11 +79,11 @@ class IssueTest extends TestCase
         ];
 
         // Guests should be redirected
-        $this->post(route('update.issue', $issue), $attributes)->assertRedirect('login');
+        $this->post(route('issue.update', $issue), $attributes)->assertRedirect('login');
 
         // Registered members should receive an Unauthenticated because only admins can do this.
         $this->actingAs(factory('App\User')->create());
-        $this->post(route('update.issue', $issue), $attributes)->assertForbidden();
+        $this->post(route('issue.update', $issue), $attributes)->assertForbidden();
     }
 
     /** @test */
@@ -100,7 +100,7 @@ class IssueTest extends TestCase
             'description' => 'New Description',
         ];
 
-        $this->post(route('update.issue', $issue), $attributes)->assertRedirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->fresh()->slug]));
+        $this->post(route('issue.update', $issue), $attributes)->assertRedirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->fresh()->slug]));
 
         $this->assertDatabaseHas('issues', $attributes);
     }
@@ -115,7 +115,7 @@ class IssueTest extends TestCase
 
         $issue = factory('App\Issue')->raw(['cgbs_issue' => null]); // Make one without a cgbs_issue
 
-        $this->post(route('add.issue'), $issue);
+        $this->post(route('issue.add'), $issue);
         $this->assertCount(1, Issue::all());
 
         $this->assertDatabaseHas('issues', $issue);
@@ -126,7 +126,7 @@ class IssueTest extends TestCase
         $issue['cgbs_issue'] = 2222;
         $issue['description'] = 'New Description';
 
-        $this->post(route('add.issue'), $issue);
+        $this->post(route('issue.add'), $issue);
         $this->assertCount(1, Issue::all());
 
         $this->assertDatabaseHas('issues', $issue);

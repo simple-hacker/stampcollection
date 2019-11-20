@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Stamp extends Model
@@ -35,6 +36,14 @@ class Stamp extends Model
     public function getImageSrcAttribute()
     {
         return ($this->image) ? 'storage/stamps/' . $this->image : 'storage/stamps/no_image.jpg';
+    }
+
+    /**
+     * Returns a slug of the stamp's title.
+     */
+    public function getSlugAttribute()
+    {
+        return Str::slug($this->title);
     }
 
 

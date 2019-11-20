@@ -53,9 +53,6 @@ class ScraperController extends Controller
             } //Skip the first one which is the title.
             if ($tc === "\r") {
                 continue;
-            } //Ignore blank lines.
-            if ($tc == $year . "\r") {
-                continue;
             } //Ignore the year which is the strong tag.
 
             if (substr($tc, 0, 2) == ' (') {
