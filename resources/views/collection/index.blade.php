@@ -2,11 +2,13 @@
 
 @section('content')
 
-    <h1 class="text-4xl border-b mb-6">My Collection</h1>
-    <p>Your collection is worth £{{ number_format($collectionValue, 2) }}</p>
+    <div class="mb-8 p-4 bg-white rounded shadow">
+        <h1 class="text-4xl border-b mb-6">My Collection</h1>
+        <p>Your collection is worth £{{ number_format($collectionValue, 2) }}</p>
+    </div>
 
     @forelse ($collection as $issue)
-        <div class="issue mb-5">
+        <div class="mb-4 p-4 bg-white rounded shadow">
             <h2 class="text-2xl border-b p-1 mb-2">{{ $issue->title}}</h2>
             <div class="flex flex-wrap">
                 @forelse ($issue->stamps as $stamp)

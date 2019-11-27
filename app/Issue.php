@@ -19,7 +19,7 @@ class Issue extends Model
     /**
      * An issue has many stamps;
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function stamps()
     {
@@ -48,7 +48,9 @@ class Issue extends Model
 
     /**
      * Always convert the date to Y-m-d
-     * @return string
+     * 
+     * @param string $date
+     * @return mixed
      */
     public function getReleaseDateAttribute($date)
     {

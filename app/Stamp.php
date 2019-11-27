@@ -15,6 +15,8 @@ class Stamp extends Model
 
     /**
      * Issue
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function issue()
     {
@@ -24,6 +26,7 @@ class Stamp extends Model
     /**
      * Users
      *
+     * * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
@@ -32,6 +35,8 @@ class Stamp extends Model
 
     /**
      * Generate the whole url for displaying an image for a given stamp
+     * 
+     * @return string
      */
     public function getImageSrcAttribute()
     {
@@ -40,6 +45,8 @@ class Stamp extends Model
 
     /**
      * Returns a slug of the stamp's title.
+     * 
+     * @return string
      */
     public function getSlugAttribute()
     {
@@ -49,6 +56,8 @@ class Stamp extends Model
 
     /**
      * Returns the url path to view the stamp.
+     * 
+     * @return \Illuminate\Routing\Redirector
      */
     public function addToCollectionPath()
     {
@@ -57,6 +66,8 @@ class Stamp extends Model
 
     /**
      * Returns the url path to view the stamp.
+     * 
+     * @return \Illuminate\Routing\Redirector
      */
     public function deleteFromCollectionPath()
     {

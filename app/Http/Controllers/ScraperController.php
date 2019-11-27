@@ -18,6 +18,8 @@ class ScraperController extends Controller
 
     /**
      * Instantiates Gouette/Client scraper.
+     * 
+     * @return void
      */
     public function __construct()
     {
@@ -27,9 +29,9 @@ class ScraperController extends Controller
     /**
      * Scrapes the issue for data.  Creates the Issue and its Stamps.
      *
-     * @param integer cgbs_issue
+     * @param integer $cgbs_issue
      *
-     * @return redirect
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function issue($cgbs_issue)
     {
@@ -134,7 +136,7 @@ class ScraperController extends Controller
      *
      * @param integer year
      *
-     * @return void
+     * @return mixed
      */
     public function issuesByYear($year = 2019)
     {

@@ -41,10 +41,8 @@ class User extends Authenticatable
 
     /**
      * Returns a collection of the user's stamps.
-     *  
-     * @param string name
      * 
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function collection()
     {
@@ -55,7 +53,7 @@ class User extends Authenticatable
     /**
      * Returns a collection of the user's stamps.
      * 
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function stamps()
     {

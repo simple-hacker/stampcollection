@@ -11,15 +11,12 @@ use Illuminate\Http\Request;
 class CollectionController extends Controller
 {
     /**
-     * Description
+     * Load the user's Stamp Collection view.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // NOTE:: I could keep this, and have a separate array where the key is the stamp_id, and the data is the grading information and quantity,
-        // Only have one DB call for this info at the start, and then reference it in blade.
-
         $usersCollection = auth()->user()->collection;
 
         $stampsInCollection = $usersCollection->pluck('stamp_id')->unique()->toArray();
@@ -44,8 +41,8 @@ class CollectionController extends Controller
     /**
      * Shows details about the stamp, as well as what's in your collection.
      *  
-     * @param \App\Stamp stamp
-     * @param string slug
+     * @param \App\Stamp $stamp
+     * @param string $slug
      * 
      * @return \Illuminate\View\View
      */
@@ -64,6 +61,7 @@ class CollectionController extends Controller
     /**
      * Adds a stamp to the auth user's collection.
      *
+     * @param \Illuminate\Http\Request $request
      * @param \App\Stamp $stamp
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -92,7 +90,7 @@ class CollectionController extends Controller
     /**
      * Removes a stamp from the auth user's collection.
      *
-     * @param \App\Stamp $stamp
+     * @param \App\Collection $collection
      *
      * @return \Illuminate\Http\RedirectResponse
      */

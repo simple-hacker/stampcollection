@@ -30,7 +30,7 @@ class CatalogueTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        // I want URl to be /catalogue/id/slug
+        // I want URL to be /catalogue/id/slug
         // e.g /catalogue/29/game-of-thrones/
         $issue = factory('App\Issue')->create(['title' => 'Game of Thrones']);
 

@@ -23,8 +23,8 @@
     <div id="app" class="flex flex-col min-h-screen">
         <nav class="flex items-center justify-between p-4 mb-1 shadow">
             <div class="text-3xl font-medium text-grey-300">
-                <a href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a href="{{ url('/collection') }}">
+                    {{ config('app.name', 'Stamp Collection') }}
                 </a>
             </div>
             <div class="flex">
@@ -59,7 +59,7 @@
                     <input type="text" class="p-4 m-4 w-3/4 bg-white shadow rounded" placeholder="Search for stamps or issues">
                 </section> --}}
                 <div class="flex items-start justify-between mt-3">
-                    <section id="content" class="w-3/4 mx-auto p-4 bg-white rounded shadow">
+                    <section id="content" class="w-3/4 mx-auto">
                         @yield('content')
                     </section>
                     <aside id="browse" class="w-1/5 mx-auto p-4 bg-white rounded shadow">

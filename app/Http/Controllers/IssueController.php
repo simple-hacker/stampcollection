@@ -22,7 +22,9 @@ class IssueController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param integer $year
+     * 
+     * @return \Illuminate\View\View
      */
     public function create($year = null)
     {
@@ -41,7 +43,8 @@ class IssueController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\View\View
      */
     public function store(Request $request)
     {
@@ -73,6 +76,7 @@ class IssueController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Issue  $issue
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show(Issue $issue)
@@ -84,7 +88,8 @@ class IssueController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\View\View
      */
     public function edit(Issue $issue)
     {
@@ -96,7 +101,8 @@ class IssueController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Issue $issue)
     {
@@ -123,7 +129,8 @@ class IssueController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Issue $issue)
     {

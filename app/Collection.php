@@ -9,7 +9,7 @@ class Collection extends Model
     /**
      * Returns the stamp of the collection row's stamp_id
      *  
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function stamp()
     {
@@ -19,7 +19,7 @@ class Collection extends Model
     /**
      * Returns the grading of the collection row's grading_id
      *  
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function grading()
     {
@@ -29,7 +29,7 @@ class Collection extends Model
     /**
      * Returns the issue of the collection row through the stamp_id
      *  
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
      */
     public function issue()
     {

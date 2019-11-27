@@ -23,7 +23,8 @@ class StampController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  \App\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\View\View
      */
     public function create(Issue $issue)
     {
@@ -36,6 +37,7 @@ class StampController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Issue  $issue
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Issue $issue)
@@ -78,7 +80,8 @@ class StampController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Stamp  $stamp
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\View\View
      */
     public function edit(Issue $issue, Stamp $stamp)
     {
@@ -90,7 +93,8 @@ class StampController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Stamp  $stamp
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Stamp $stamp)
     {
@@ -111,17 +115,18 @@ class StampController extends Controller
         $stamp->update($attributes);
 
         return redirect(route('catalogue.issue', [
-            'issue' => $stamp->issue,
-            'slug' => $stamp->issue->slug
-        ]))
-        ->withToastSuccess('Updated ' . $stamp->fresh()->title);
+                    'issue' => $stamp->issue,
+                    'slug' => $stamp->issue->slug
+                ]))
+                ->withToastSuccess('Updated ' . $stamp->fresh()->title);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Stamp  $stamp
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Stamp $stamp)
     {
@@ -148,7 +153,8 @@ class StampController extends Controller
      * Save the uploaded image to storage and return a string of the path.
      *  
      * @param UploadedFile $image
-     * @param App\Issue $issue
+     * @param \App\Issue $issue
+     * @param \App\Stamp $stamp
      * @param string $title
      * 
      * @return string
