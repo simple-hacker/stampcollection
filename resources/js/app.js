@@ -19,7 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('dropdown-menu', require('./components/DropdownMenu.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,25 +34,25 @@ const app = new Vue({
 
 // CountUp the Stats ont he welcome page.
 
-import { CountUp } from 'countup.js';
+// import { CountUp } from 'countup.js';
 
-window.onload = function () {
-    const usersCount = parseInt(document.getElementById('usersCount').innerHTML);
-    const collectionsCount = parseInt(document.getElementById('collectionsCount').innerHTML);
-    const stampsCount = parseInt(document.getElementById('stampsCount').innerHTML);
-    let countUpUsers = new CountUp('usersCount', usersCount, {
-        startVal: 0,
-        duration: 4
-    });
-    let countUpCollections = new CountUp('collectionsCount', collectionsCount, {
-        startVal: 0,
-        duration: 4
-    });
-    let countUpStamps = new CountUp('stampsCount', stampsCount, {
-        startVal: 0,
-        duration: 4
-    });
-    countUpUsers.start();
-    countUpCollections.start();
-    countUpStamps.start();
-}
+// window.onload = function () {
+//     const usersCount = parseInt(document.getElementById('usersCount').innerHTML);
+//     const collectionsCount = parseInt(document.getElementById('collectionsCount').innerHTML);
+//     const stampsCount = parseInt(document.getElementById('stampsCount').innerHTML);
+//     let countUpUsers = new CountUp('usersCount', usersCount, {
+//         startVal: 0,
+//         duration: 4
+//     });
+//     let countUpCollections = new CountUp('collectionsCount', collectionsCount, {
+//         startVal: 0,
+//         duration: 4
+//     });
+//     let countUpStamps = new CountUp('stampsCount', stampsCount, {
+//         startVal: 0,
+//         duration: 4
+//     });
+//     countUpUsers.start();
+//     countUpCollections.start();
+//     countUpStamps.start();
+// }

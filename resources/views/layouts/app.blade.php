@@ -78,6 +78,4 @@
     </div>
     @include('sweetalert::alert')
 </body>
-
-    <script src="/js/app.js"></script>
 </html>
