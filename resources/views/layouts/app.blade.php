@@ -21,8 +21,8 @@
 </head>
 <body>
     <div id="app" class="flex flex-col min-h-screen">
-        <nav class="flex items-center justify-between p-4 mb-1 shadow">
-            <div class="text-3xl font-medium text-grey-300">
+        <nav class="flex items-center justify-between p-4 mb-1 bg-blue-800 text-white shadow">
+            <div class="text-3xl font-medium">
                 <a href="{{ url('/collection') }}">
                     {{ config('app.name', 'Stamp Collection') }}
                 </a>
@@ -78,4 +78,6 @@
     </div>
     @include('sweetalert::alert')
 </body>
+
+    <script src="/js/app.js"></script>
 </html>

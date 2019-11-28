@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('welcome');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/catalogue/{year}', 'CatalogueController@index')->name('catalogue.year');
 Route::get('/catalogue/{issue}/{slug}', 'CatalogueController@issue')->name('catalogue.issue');
