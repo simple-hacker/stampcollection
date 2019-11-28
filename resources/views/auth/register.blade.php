@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
+@section('hero')
 
 <div class="container mt-6 mx-auto">
         <div class="text-center shadow-md rounded">
-            <h1 class="text-xl text-white font-bold bg-blue-500 px-8 py-3">{{ __('Register') }}</h1>
+                <h1 class="text-xl text-white font-bold bg-blue-800 px-8 py-3">{{ __('Register') }}</h1>
         </div>
         <form method="POST" action="{{ route('register') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
@@ -43,7 +43,7 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirm Password" required>
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         {{ __('Register') }}
                 </button>
             </div>

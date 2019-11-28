@@ -8,9 +8,11 @@
     </div>
 
     @forelse ($collection as $issue)
-        <div class="mb-4 p-4 bg-white rounded shadow">
-            <h2 class="text-2xl border-b p-1 mb-2">{{ $issue->title}}</h2>
-            <div class="flex flex-wrap">
+        <div class="mb-4 bg-white rounded shadow">
+            <a href="{{ route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]) }}">
+                <h2 class="text-2xl px-4 py-2 bg-blue-800 text-white mb-2">{{ $issue->title}}</h2>
+            </a>
+            <div class="flex flex-wrap px-4 py-2">
                 @forelse ($issue->stamps as $stamp)
                     <a href="{{ route('collection.show', ['stamp' => $stamp, 'slug' => $stamp->slug]) }}">
                         <div class="flex flex-col items-center mr-1 p-1 border w-1/8">

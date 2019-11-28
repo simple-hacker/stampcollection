@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
+@section('hero')
 
 <div class="container mt-6 mx-auto">
-    <div class="text-center shadow-md rounded">
-        <h1 class="text-xl text-white font-bold bg-blue-500 px-8 py-3">{{ __('Login') }}</h1>
+    <div class="text-center rounded-t-lg">
+        <h1 class="text-xl text-white font-bold bg-blue-800 px-8 py-3">{{ __('Login') }}</h1>
     </div>
-    <form method="POST" action="{{ route('login') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form method="POST" action="{{ route('login') }}" class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8 mb-4">
         @csrf
 
         <div class="mb-4">
@@ -28,11 +28,11 @@
             @enderror
         </div>
         <div class="flex items-center justify-between">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     {{ __('Sign In') }}
             </button>
             @if (Route::has('password.request'))
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('password.request') }}">
+                <a class="inline-block align-baseline font-bold text-sm text-blue-800 hover:text-blue-900" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>
             @endif

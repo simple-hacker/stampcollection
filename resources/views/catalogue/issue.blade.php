@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mb-8 p-4 bg-white rounded shadow">
-        <div class="flex justify-between items-center relative">
-            <h1 class="text-4xl border-b p-1 mb-5 mr-2 flex-1 text-center">{{ $issue->title }}</h1>
+    <div class="mb-4 bg-white rounded shadow">
+        <div class="flex flex-col relative bg-blue-800 px-4 py-2">
+            <h1 class="text-4xl p-1 mb-2 text-center text-white">{{ $issue->title }}</h1>
+            @isset ($issue->release_date)
+                <small class="mb-4 text-white text-center">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>
+            @endisset           
+            @role('admin')
             {{-- Begin dropdown component --}}
-            <div class="absolute top-0 right-0 flex flex-col items-end">
+            <div class="absolute top-5 right-5 flex flex-col items-end">
                 <dropdown-menu>
                     {{-- Dropdown menu button --}}
                     <template v-slot:dropdown-toggle>
@@ -77,17 +81,20 @@
                 </dropdown-menu>
             </div>
             {{-- End dropdown component --}}
+            @endrole
         </div>
-        @isset ($issue->release_date)
-            <small class="mb-4">Released {{ $issue->release_date }}</small>
-        @endisset
-        <p class="mb-5">{!! nl2br(e($issue->description)) !!}</p>
-        <p>Stamps in this issue: {{ $issue->stamps->count() }}</p>
+        <div class="py-2 px-4">
+            <p class="mb-5">{!! nl2br(e($issue->description)) !!}</p>
+        </div>
+    </div>
+    <div class="bg-blue-800 mb-3 px-4 py-2 rounded">
+        <h2 class="text-white text-3xl">Stamps ({{ $issue->stamps->count() }})</h2>
     </div>
     <div class="flex flex-col">
         @foreach ($issue->stamps as $stamp)
-            <div class="flex flex-col mb-8 p-4 bg-white rounded shadow">
+            <div class="flex flex-col mb-3 p-4 bg-white rounded shadow">
                 <div class="flex justify-between relative">
+                    @role('admin')
                     {{-- Begin Stamp dropdown --}}
                     <div class="absolute top-0 right-0 flex flex-col items-end">
                         <dropdown-menu>
@@ -127,6 +134,7 @@
                         </dropdown-menu>
                     </div>
                     {{-- End Stamp dropdown --}}
+                    @endrole
                     <div class="flex flex-col w-1/4 items-center justify-center p-1 mr-2">
                         <a href="{{ asset($stamp->image_src) }}"><img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20"></a>
                         <p class="mb-3 text-center">{{ $stamp->title }}</p>
