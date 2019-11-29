@@ -2,11 +2,11 @@
 
 @section('hero')
 
-<div class="container mt-6 mx-auto">
-        <div class="text-center shadow-md rounded">
-                <h1 class="text-xl text-white font-bold bg-blue-800 px-8 py-3">{{ __('Register') }}</h1>
+<div class="container mx-auto py-4">
+        <div class="text-center shadow-md bg-blue-800 rounded-t-lg">
+                <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Register') }}</h1>
         </div>
-        <form method="POST" action="{{ route('register') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form method="POST" action="{{ route('register') }}" class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
             @csrf
     
             <div class="mb-4">
