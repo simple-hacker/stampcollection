@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name', 'Stamp Collection') }}</title>
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -26,7 +30,11 @@
                     </a>
                 </div>
                 <div>
-                    <a href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">Login</a>
+                    @guest
+                        <a @click.prevent="$modal.show('login')" href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">Login</a>
+                    @else
+                        <a href="{{ route('collection') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">My Collection</a>    
+                    @endguest
                 </div>
             </div>
         </nav>
@@ -60,6 +68,9 @@
                 Copyright &copy; 2019 Michael Perks
             </div>
         </footer>
+
+        <login-modal></login-modal>
+        <register-modal></register-modal>
     </div>
 
     <script src="{{ asset('js/countUp.js') }}" type="module"></script>

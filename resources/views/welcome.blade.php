@@ -5,10 +5,12 @@
     <div class="flex flex-col items-center justify-center text-white" style="height:25vh">
         <h1 class="text-4xl font-bold tracking-wide capitalize">Your online stamp collection.</h1>
         <h2 class="text-2al mt-4">Browse our catalogue of Great Britain stamps.</h2>
-        <div class="flex justify-between mt-8">
-            <a href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">Try Demo</a>
-            <a href="{{ route('register') }}" class="py-2 px-4 rounded-lg border-2 border-white bg-blue-800 hover:bg-blue-900 text-xl font-bold ml-2">Register</a>
-        </div>
+        @guest
+            <div class="flex justify-between mt-8">
+                <a @click.prevent="$modal.show('login', {email: 'demo@example.co.uk', password:'password'})" href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">Try Demo</a>
+                <a @click.prevent="$modal.show('register')" href="{{ route('register') }}" class="py-2 px-4 rounded-lg border-2 border-white bg-blue-800 hover:bg-blue-900 text-xl font-bold ml-2">Register</a>
+            </div>
+        @endguest
     </div>
 @endsection
 

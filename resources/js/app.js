@@ -6,7 +6,12 @@
 
 require('./bootstrap');
 
+// Vue-js-modal
+import VModal from 'vue-js-modal'
+
 window.Vue = require('vue');
+
+Vue.use(VModal);
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +25,11 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('dropdown-menu', require('./components/DropdownMenu.vue').default);
+Vue.component('login-modal', require('./components/LoginModal.vue').default);
+Vue.component('register-modal', require('./components/RegisterModal.vue').default);
+
+// countUp for stats on teh welcome page.
+import { CountUp } from 'countup.js';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,5 +40,3 @@ Vue.component('dropdown-menu', require('./components/DropdownMenu.vue').default)
 const app = new Vue({
     el: '#app',
 });
-
-import { CountUp } from 'countup.js';
