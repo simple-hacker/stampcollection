@@ -27,6 +27,7 @@ Vue.use(VModal);
 Vue.component('dropdown-menu', require('./components/DropdownMenu.vue').default);
 Vue.component('login-modal', require('./components/LoginModal.vue').default);
 Vue.component('register-modal', require('./components/RegisterModal.vue').default);
+Vue.component('forgotten-password-modal', require('./components/ForgottenPasswordModal.vue').default);
 
 // countUp for stats on teh welcome page.
 import { CountUp } from 'countup.js';

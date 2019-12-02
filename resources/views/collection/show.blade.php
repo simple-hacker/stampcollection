@@ -11,8 +11,8 @@
                 <div class="mb-3">
                     Part of <a href="{{ route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]) }}" class="hover:underline">{{ $stamp->issue->title }}</a>
                 </div>
-                @isset($stamp->sg_number)
-                    <p class="mb-2">{{ $stamp->sg_number }}</p>
+                @isset($stamp->prefixedSgNumber)
+                    <p class="mb-2">{{ $stamp->prefixedSgNumber }}</p>
                 @endisset
                 @isset($stamp->description)
                     <p>{{ $stamp->description }}</p>

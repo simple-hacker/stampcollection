@@ -23,7 +23,7 @@
                 <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Sign In
                 </button>
-                <a v-show="passwordReset" class="inline-block align-baseline font-bold text-sm text-blue-800 hover:text-blue-900" href="/password/reset">
+                <a v-show="passwordReset" @click.prevent="showForgottenPasswordModal()" class="inline-block align-baseline font-bold text-sm text-blue-800 hover:text-blue-900" href="/password/reset">
                     Forgot your password?
                 </a>
             </div>
@@ -59,6 +59,11 @@ export default {
                 this.email = '';
                 this.password = '';
             }
+        },
+        showForgottenPasswordModal() {
+            this.$modal.hide('login');
+            this.$modal.show('forgotten-password');
+
         }
     },
     created () {

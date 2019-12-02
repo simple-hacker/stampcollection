@@ -138,7 +138,9 @@
                     <div class="flex flex-col w-1/4 items-center justify-center p-1 mr-2">
                         <a href="{{ asset($stamp->image_src) }}"><img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20"></a>
                         <p class="mb-3 text-center">{{ $stamp->title }}</p>
-                        <p class="mb-3 text-center italic">{{ $stamp->sg_number }}</p>
+                        @isset($stamp->prefixedSgNumber)
+                            <p class="mb-3 text-center italic">{{ $stamp->prefixedSgNumber }}</p>
+                        @endisset
                         @auth
                             <a href="{{ route('collection.show', ['stamp' => $stamp, 'slug' => $stamp->slug]) }}" class="border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</a>
                         @endauth

@@ -18,8 +18,8 @@
                         <div class="flex flex-col items-center mr-1 p-1 border w-1/8">
                             <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-30">
                             <p>{{ $stamp->title }}</p>
-                            @isset($stamp->sg_number)
-                                <p class="italic">{{ $stamp->sg_number }}</p>
+                            @isset($stamp->prefixedSgNumber)
+                                <p class="italic">{{ $stamp->prefixedSgNumber }}</p>
                             @endisset
                             @isset($stamp->sg_illustration)
                                 <p class="italic">{{ $stamp->sg_illustration }}</p>

@@ -73,4 +73,17 @@ class Stamp extends Model
     {
         return route('collection.delete', ['stamp' => $this]);
     }
+
+    /**
+     * Prefixed SG to the Stanley Gibbons number.
+     * 
+     * @return string|null
+     */
+    public function getPrefixedSgNumberAttribute() {
+        if ($this->sg_number) {
+            return 'SG' . $this->sg_number;
+        }
+
+        return null;
+    }
 }
