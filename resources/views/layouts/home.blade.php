@@ -72,6 +72,7 @@
         <login-modal></login-modal>
         <register-modal></register-modal>
         <forgotten-password-modal></forgotten-password-modal>
+        <v-dialog></v-dialog>
     </div>
 
     <script src="{{ asset('js/countUp.js') }}" type="module"></script>

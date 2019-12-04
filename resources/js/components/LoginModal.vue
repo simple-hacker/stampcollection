@@ -3,10 +3,7 @@
         <div class="text-center bg-blue-800">
             <h1 class="text-xl text-white font-bold px-8 py-3">{{title}}</h1>
         </div>
-        <form method="POST" action="login" class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
-            
-            <input type="hidden" name="_token" :value="form._token">
-
+        <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
@@ -61,7 +58,6 @@ export default {
             form: {
                 email: '',
                 password: '',
-                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
             errors: {},
             title: 'Login',
