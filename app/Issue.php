@@ -43,7 +43,7 @@ class Issue extends Model
      */
     public function path()
     {
-        return $this->id . '/' . $this->slug;
+        return '/catalogue/' . $this->id . '/' . $this->slug;
     }
 
     /**

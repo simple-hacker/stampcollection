@@ -5,22 +5,42 @@
         </div>
         <form method="POST" action="login" class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
             
-            <input type="hidden" name="_token" :value="csrf">
+            <input type="hidden" name="_token" :value="form._token">
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" placeholder="Email" :value="email" required>
+                <input
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    :class="errors.email ? 'border-red-500 border-2' : 'border'"
+                    v-model="form.email"
+                    required />
+                <div class="flex flex-col">
+                    <span class="mt-2 text-xs text-red-500 italic font-bold" v-for="emailError in errors.email" v-bind:key="emailError" v-text="emailError"></span>
+                </div>
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                     Password
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="Password" :value="password" required>
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    :class="errors.password ? 'border-red-500 border-2' : 'border'"
+                    v-model="form.password"
+                    required />
+                <div class="flex flex-col">
+                    <span class="mt-2 text-xs text-red-500 italic font-bold" v-for="passwordError in errors.password" v-bind:key="passwordError" v-text="passwordError"></span>
+                </div>
             </div>
             <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button @click.prevent="submitForm()" type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Sign In
                 </button>
                 <a v-show="passwordReset" @click.prevent="showForgottenPasswordModal()" class="inline-block align-baseline font-bold text-sm text-blue-800 hover:text-blue-900" href="/password/reset">
@@ -38,26 +58,38 @@ export default {
     name: 'LoginModal',
     data () {
         return {
-            email: '',
-            password: '',
+            form: {
+                email: '',
+                password: '',
+                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            errors: {},
             title: 'Login',
             passwordReset: true,
             modalWidth: MODAL_WIDTH,
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
     methods: {
+        submitForm() {
+            axios.post('login', this.form)
+                .then(response => {
+                    location = 'collection';
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                });
+        },
         beforeOpen (event) {
             if (event.params) {
                 this.title = "Demo Login";
                 this.passwordReset = false;
-                this.email = event.params.email;
-                this.password = event.params.password;
+                this.form.email = event.params.email;
+                this.form.password = event.params.password;
             } else {
                 this.title = "Login";
                 this.passwordReset = true;
-                this.email = '';
-                this.password = '';
+                this.form.email = '';
+                this.form.password = '';
             }
         },
         showForgottenPasswordModal() {

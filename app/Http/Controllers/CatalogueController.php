@@ -13,8 +13,12 @@ class CatalogueController extends Controller
      * 
      * @return Illuminate\View\View
      */
-    public function index($year)
+    public function index($year = null)
     {
+        if (!isset($year)) {
+            $year = date("Y");
+        }
+
         // If the user changes the year in the URL to one that doesn't exist, abort.
         if (!\DB::table('years')->where('year', $year)->exists()) {
             abort(404);

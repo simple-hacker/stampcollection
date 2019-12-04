@@ -130,9 +130,6 @@ class StampController extends Controller
      */
     public function destroy(Stamp $stamp)
     {
-        $issue = $stamp->issue;  //Grab the issue details before deleting the stamp so we can redirect to the issue.
-        $title = $stamp->title;
-
         // Delete the image if it exists.
         if ($stamp->image) {
             if (Storage::disk('public')->exists('stamps/' . $stamp->image)) {
@@ -143,10 +140,10 @@ class StampController extends Controller
         $stamp->delete();
 
         return redirect(route('catalogue.issue', [
-                    'issue' => $issue,
-                    'slug' => $issue->slug,
+                    'issue' => $stamp->issue,
+                    'slug' => $stamp->issue->slug,
                 ]))
-                ->withToastWarning("Successfully deleted {$title}");
+                ->withToastWarning("Successfully deleted {$stamp->title}");
     }
 
     /**

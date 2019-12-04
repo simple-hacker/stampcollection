@@ -11,7 +11,10 @@ import VModal from 'vue-js-modal'
 
 window.Vue = require('vue');
 
-Vue.use(VModal);
+Vue.use(VModal, {
+    dialog: true,
+    injectModalsContainer: true
+  })
 
 /**
  * The following block of code may be used to automatically register your
@@ -40,4 +43,122 @@ import { CountUp } from 'countup.js';
 
 const app = new Vue({
     el: '#app',
+    methods: {
+        confirmDeleteStamp(stamp) {
+            this.$modal.show('dialog', {
+                title: 'Delete Stamp?',
+                text: `Are you sure you want to delete the stamp <strong>${stamp.title}</strong>?`,
+                buttons: [
+                  {
+                    title: 'Cancel',
+                    class: 'py-3 hover:bg-gray-200',
+                    handler: () => {
+                        this.$modal.hide('dialog');
+                    }
+                  },
+                  {
+                    title: 'Yes, delete.',
+                    class: 'py-3 bg-red-500 hover:bg-red-600 text-white font-bold',
+                    handler: () => {
+                        axios.post('/stamp/'+stamp.id,{_method: 'delete'})
+                            .then(response => {
+                                console.log(response);
+                                this.$modal.hide('dialog');
+                                location.reload();
+                                // this.showMessage('Success', `Deleted stamp ${stamp.title}.`, true);
+                            })
+                            .catch(error => {
+                                this.$modal.hide('dialog');
+                                this.showMessage('Whoops, something went wrong!', error);
+                            });
+                    }
+                  }
+                ]
+              })
+        },
+        confirmDeleteIssue(issue) {
+          this.$modal.show('dialog', {
+              title: 'Delete Issue?',
+              text: `Are you sure you want to delete the issue <strong>${issue.title}</strong>?`,
+              buttons: [
+                {
+                  title: 'Cancel',
+                  class: 'py-3 hover:bg-gray-200',
+                  handler: () => {
+                      this.$modal.hide('dialog');
+                  }
+                },
+                {
+                  title: 'Yes, delete.',
+                  class: 'py-3 bg-red-500 hover:bg-red-600 text-white font-bold',
+                  handler: () => {
+                      axios.post('/issue/'+issue.id,{_method: 'delete'})
+                          .then(response => {
+                              this.$modal.hide('dialog');
+                              location.replace('/catalogue');
+                              // this.showMessage('Success', `Deleted issue ${issue.title}.`, true, '/catalogue');
+                          })
+                          .catch(error => {
+                              this.$modal.hide('dialog');
+                              this.showMessage('Whoops, something went wrong!', error);
+                          });
+                  }
+                }
+              ]
+            })
+        },
+        confirmImportIssue(issue) {
+          this.$modal.show('dialog', {
+            title: 'Reimport Issue?',
+            text: `Are you sure you want to reimport this <strong>${issue.title}</strong>?  This will overwrite any changes you\'ve made.`,
+            buttons: [
+              {
+                title: 'Cancel',
+                class: 'py-3 hover:bg-gray-200',
+                handler: () => {
+                    this.$modal.hide('dialog');
+                }
+              },
+              {
+                title: 'Yes, Reimport issue.',
+                class: 'py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold',
+                handler: () => {
+                    axios.get(`/scraper/issue/${issue.cgbs_issue}`)
+                        .then(response => {
+                            this.$modal.hide('dialog');
+                            location.reload();
+                        })
+                        .catch(error => {
+                            this.$modal.hide('dialog');
+                            this.showMessage('Whoops, something went wrong!', error);
+                        });
+                }
+              }
+            ]
+          });
+        },
+        showMessage(title, message, reload = false, redirect_location = null) {
+          this.$modal.show('dialog', {
+              title: title,
+              text: message,
+              buttons: [
+                {
+                  title: 'Okay',
+                  class: 'py-3 hover:bg-gray-200',
+                  handler: () => {
+                      this.$modal.hide('dialog');
+                      if (reload && redirect_location) {
+                        console.log('Redirecting...');
+                        return location.replace(redirect_location);
+                      }
+                      if (reload) {
+                        console.log('Reloading')
+                        return location.reload();
+                      }
+                  }
+                }
+              ]
+            });
+        }
+    }
 });

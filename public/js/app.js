@@ -1963,31 +1963,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LoginModal',
   data: function data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: '',
+        password: '',
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      errors: {},
       title: 'Login',
       passwordReset: true,
-      modalWidth: MODAL_WIDTH,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      modalWidth: MODAL_WIDTH
     };
   },
   methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post('login', this.form).then(function (response) {
+        location = 'collection';
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    },
     beforeOpen: function beforeOpen(event) {
       if (event.params) {
         this.title = "Demo Login";
         this.passwordReset = false;
-        this.email = event.params.email;
-        this.password = event.params.password;
+        this.form.email = event.params.email;
+        this.form.password = event.params.password;
       } else {
         this.title = "Login";
         this.passwordReset = true;
-        this.email = '';
-        this.password = '';
+        this.form.email = '';
+        this.form.password = '';
       }
     },
     showForgottenPasswordModal: function showForgottenPasswordModal() {
@@ -2053,16 +2085,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'RegisterModal',
   data: function data() {
     return {
-      name: '',
-      email: '',
-      modalWidth: MODAL_WIDTH,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      errors: {},
+      modalWidth: MODAL_WIDTH
     };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post('register', this.form).then(function (response) {
+        location = 'collection';
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+        _this.form.password = '';
+        _this.form.password_confirmation = '';
+      });
+    }
   },
   created: function created() {
     this.modalWidth = window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH;
@@ -33933,7 +34023,7 @@ var render = function() {
         [
           _c("input", {
             attrs: { type: "hidden", name: "_token" },
-            domProps: { value: _vm.csrf }
+            domProps: { value: _vm.form._token }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "mb-4" }, [
@@ -33947,17 +34037,46 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.email,
+                  expression: "form.email"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.email ? "border-red-500 border-2" : "border",
               attrs: {
-                id: "email",
                 name: "email",
                 type: "email",
                 placeholder: "Email",
                 required: ""
               },
-              domProps: { value: _vm.email }
-            })
+              domProps: { value: _vm.form.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "email", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.email, function(emailError) {
+                return _c("span", {
+                  key: emailError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(emailError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-6" }, [
@@ -33971,17 +34090,46 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.password,
+                  expression: "form.password"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.password ? "border-red-500 border-2" : "border",
               attrs: {
-                id: "password",
-                type: "password",
                 name: "password",
+                type: "password",
                 placeholder: "Password",
                 required: ""
               },
-              domProps: { value: _vm.password }
-            })
+              domProps: { value: _vm.form.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "password", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.password, function(passwordError) {
+                return _c("span", {
+                  key: passwordError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(passwordError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex items-center justify-between" }, [
@@ -33990,7 +34138,13 @@ var render = function() {
               {
                 staticClass:
                   "bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
-                attrs: { type: "submit" }
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitForm()
+                  }
+                }
               },
               [_vm._v("\n                    Sign In\n            ")]
             ),
@@ -34072,7 +34226,7 @@ var render = function() {
         [
           _c("input", {
             attrs: { type: "hidden", name: "_token" },
-            domProps: { value: _vm.csrf }
+            domProps: { value: _vm._token }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "mb-4" }, [
@@ -34086,17 +34240,46 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.name ? "border-red-500 border-2" : "border",
               attrs: {
-                id: "name",
                 name: "name",
                 type: "text",
                 placeholder: "Name",
                 required: ""
               },
-              domProps: { value: _vm.name }
-            })
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.name, function(nameError) {
+                return _c("span", {
+                  key: nameError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(nameError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-4" }, [
@@ -34110,17 +34293,46 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.email,
+                  expression: "form.email"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.email ? "border-red-500 border-2" : "border",
               attrs: {
-                id: "email",
                 name: "email",
                 type: "email",
                 placeholder: "Email",
                 required: ""
               },
-              domProps: { value: _vm.email }
-            })
+              domProps: { value: _vm.form.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "email", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.email, function(emailError) {
+                return _c("span", {
+                  key: emailError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(emailError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-4" }, [
@@ -34134,16 +34346,46 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.password,
+                  expression: "form.password"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.password ? "border-red-500 border-2" : "border",
               attrs: {
-                id: "password",
                 name: "password",
                 type: "password",
                 placeholder: "Password",
                 required: ""
+              },
+              domProps: { value: _vm.form.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "password", $event.target.value)
+                }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.password, function(passwordError) {
+                return _c("span", {
+                  key: passwordError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(passwordError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-6" }, [
@@ -34157,16 +34399,54 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.password_confirmation,
+                  expression: "form.password_confirmation"
+                }
+              ],
               staticClass:
-                "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+              class: _vm.errors.password_confirmation
+                ? "border-red-500 border-2"
+                : "border",
               attrs: {
-                id: "password_confirmation",
                 name: "password_confirmation",
                 type: "password",
                 placeholder: "Confirm Password",
                 required: ""
+              },
+              domProps: { value: _vm.form.password_confirmation },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.form,
+                    "password_confirmation",
+                    $event.target.value
+                  )
+                }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex flex-col" },
+              _vm._l(_vm.errors.password_confirmation, function(
+                confirmPasswordError
+              ) {
+                return _c("span", {
+                  key: confirmPasswordError,
+                  staticClass: "mt-2 text-xs text-red-500 italic font-bold",
+                  domProps: { textContent: _vm._s(confirmPasswordError) }
+                })
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex items-center justify-between" }, [
@@ -34175,7 +34455,13 @@ var render = function() {
               {
                 staticClass:
                   "bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
-                attrs: { type: "submit" }
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitForm()
+                  }
+                }
               },
               [_vm._v("\n                Register\n            ")]
             )
@@ -46350,7 +46636,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Vue-js
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
+Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  dialog: true,
+  injectModalsContainer: true
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -46374,7 +46663,129 @@ Vue.component('forgotten-password-modal', __webpack_require__(/*! ./components/F
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  methods: {
+    confirmDeleteStamp: function confirmDeleteStamp(stamp) {
+      var _this = this;
+
+      this.$modal.show('dialog', {
+        title: 'Delete Stamp?',
+        text: "Are you sure you want to delete the stamp <strong>".concat(stamp.title, "</strong>?"),
+        buttons: [{
+          title: 'Cancel',
+          "class": 'py-3 hover:bg-gray-200',
+          handler: function handler() {
+            _this.$modal.hide('dialog');
+          }
+        }, {
+          title: 'Yes, delete.',
+          "class": 'py-3 bg-red-500 hover:bg-red-600 text-white font-bold',
+          handler: function handler() {
+            axios.post('/stamp/' + stamp.id, {
+              _method: 'delete'
+            }).then(function (response) {
+              console.log(response);
+
+              _this.$modal.hide('dialog');
+
+              location.reload(); // this.showMessage('Success', `Deleted stamp ${stamp.title}.`, true);
+            })["catch"](function (error) {
+              _this.$modal.hide('dialog');
+
+              _this.showMessage('Whoops, something went wrong!', error);
+            });
+          }
+        }]
+      });
+    },
+    confirmDeleteIssue: function confirmDeleteIssue(issue) {
+      var _this2 = this;
+
+      this.$modal.show('dialog', {
+        title: 'Delete Issue?',
+        text: "Are you sure you want to delete the issue <strong>".concat(issue.title, "</strong>?"),
+        buttons: [{
+          title: 'Cancel',
+          "class": 'py-3 hover:bg-gray-200',
+          handler: function handler() {
+            _this2.$modal.hide('dialog');
+          }
+        }, {
+          title: 'Yes, delete.',
+          "class": 'py-3 bg-red-500 hover:bg-red-600 text-white font-bold',
+          handler: function handler() {
+            axios.post('/issue/' + issue.id, {
+              _method: 'delete'
+            }).then(function (response) {
+              _this2.$modal.hide('dialog');
+
+              location.replace('/catalogue'); // this.showMessage('Success', `Deleted issue ${issue.title}.`, true, '/catalogue');
+            })["catch"](function (error) {
+              _this2.$modal.hide('dialog');
+
+              _this2.showMessage('Whoops, something went wrong!', error);
+            });
+          }
+        }]
+      });
+    },
+    confirmImportIssue: function confirmImportIssue(issue) {
+      var _this3 = this;
+
+      this.$modal.show('dialog', {
+        title: 'Reimport Issue?',
+        text: "Are you sure you want to reimport this <strong>".concat(issue.title, "</strong>?  This will overwrite any changes you've made."),
+        buttons: [{
+          title: 'Cancel',
+          "class": 'py-3 hover:bg-gray-200',
+          handler: function handler() {
+            _this3.$modal.hide('dialog');
+          }
+        }, {
+          title: 'Yes, Reimport issue.',
+          "class": 'py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold',
+          handler: function handler() {
+            axios.get("/scraper/issue/".concat(issue.cgbs_issue)).then(function (response) {
+              _this3.$modal.hide('dialog');
+
+              location.reload();
+            })["catch"](function (error) {
+              _this3.$modal.hide('dialog');
+
+              _this3.showMessage('Whoops, something went wrong!', error);
+            });
+          }
+        }]
+      });
+    },
+    showMessage: function showMessage(title, message) {
+      var _this4 = this;
+
+      var reload = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var redirect_location = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      this.$modal.show('dialog', {
+        title: title,
+        text: message,
+        buttons: [{
+          title: 'Okay',
+          "class": 'py-3 hover:bg-gray-200',
+          handler: function handler() {
+            _this4.$modal.hide('dialog');
+
+            if (reload && redirect_location) {
+              console.log('Redirecting...');
+              return location.replace(redirect_location);
+            }
+
+            if (reload) {
+              console.log('Reloading');
+              return location.reload();
+            }
+          }
+        }]
+      });
+    }
+  }
 });
 
 /***/ }),
