@@ -13,18 +13,18 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                 {{ __('Email') }}
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror" id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}" required>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 border-2 @enderror" id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}" required>
             @error('email')
-                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                <p class="mt-2 text-xs text-red-500 italic font-bold">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                 {{ __('Password') }}
             </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('password') border-red-500 @enderror" id="password" type="password" name="password" placeholder="Password" required>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('password') border-red-500 border-2 @enderror" id="password" type="password" name="password" placeholder="Password" required>
             @error('password')
-                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                <p class="mt-2 text-xs text-red-500 italic font-bold">{{ $message }}</p>
             @enderror
         </div>
         <div class="flex items-center justify-between">

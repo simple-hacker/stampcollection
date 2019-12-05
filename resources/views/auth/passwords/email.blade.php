@@ -20,7 +20,7 @@
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') border-red-500 @enderror" id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}" required>
             @error('email')
-                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                <p class="mt-2 text-xs text-red-500 italic font-bold">{{ $message }}</p>
             @enderror
         </div>
         <div class="flex items-center justify-between">

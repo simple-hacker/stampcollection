@@ -75,8 +75,7 @@
         <v-dialog></v-dialog>
     </div>
 
-    <script src="{{ asset('js/countUp.js') }}" type="module"></script>
-    <script src="{{ asset('js/welcome.js') }}" type="module"></script>
+    @yield('scripts')
 </body>
 
 </html>

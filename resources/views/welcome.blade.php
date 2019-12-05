@@ -54,3 +54,8 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="{{ asset('js/countUp.js') }}" type="module"></script>
+    <script src="{{ asset('js/welcome.js') }}" type="module"></script>
+@endsection
