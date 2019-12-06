@@ -76,6 +76,7 @@
             </div>
         </main>
         <v-dialog></v-dialog>
+        <collection-modal></collection-modal>
     </div>
     @include('sweetalert::alert')
 </body>

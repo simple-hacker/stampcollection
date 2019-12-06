@@ -4,10 +4,10 @@
     <div class="mb-8 p-4 bg-white rounded shadow">
         <h1 class="text-4xl border-b mb-3">{{ $stamp->title }}</h1>
         <div class="flex">
-            <div class="w-1/3">
+            <div class="w-1/3 mr-1">
                 <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-40">
             </div>
-            <div class="w-2/3">
+            <div class="w-2/3 ml-1">
                 <div class="mb-3">
                     Part of <a href="{{ route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]) }}" class="hover:underline">{{ $stamp->issue->title }}</a>
                 </div>

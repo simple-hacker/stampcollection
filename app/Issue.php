@@ -16,6 +16,8 @@ class Issue extends Model
         'release_date' => 'date:Y-m-d',
     ];
 
+    protected $appends = ['slug'];
+
     /**
      * An issue has many stamps;
      *

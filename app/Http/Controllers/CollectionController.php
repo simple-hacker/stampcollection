@@ -46,16 +46,15 @@ class CollectionController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function show(Stamp $stamp, $slug)
+    public function show(Stamp $stamp)
     {
-        if ($stamp->slug != $slug) {
-            abort(404);
-        }
-
         $stampsInCollection = auth()->user()->collection()->where('stamp_id', $stamp->id)->get();
         $gradings = Grading::pluck('type', 'id');
 
-        return view('collection.show', compact('stamp', 'stampsInCollection', 'gradings'));
+        return [
+            'stampsInCollection' => $stampsInCollection,
+            'gradings' => $gradings,
+        ];
     }
 
     /**

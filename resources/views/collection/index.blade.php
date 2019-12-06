@@ -14,7 +14,7 @@
             </a>
             <div class="flex flex-wrap px-4 py-2">
                 @forelse ($issue->stamps as $stamp)
-                    <a href="{{ route('collection.show', ['stamp' => $stamp, 'slug' => $stamp->slug]) }}">
+                    <button @click.prevent="$modal.show('collection', {stamp: {{$stamp}}})">
                         <div class="flex flex-col items-center mr-1 p-1 border w-1/8">
                             <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-30">
                             <p>{{ $stamp->title }}</p>
@@ -30,7 +30,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    </a>
+                    </button>
                 @empty
                     <p class="text-muted">No Stamps collected for this issue.</p>
                 @endforelse

@@ -31,7 +31,7 @@ Route::post('/stamp/{stamp}', 'StampController@update')->middleware('auth', 'rol
 Route::delete('/stamp/{stamp}', 'StampController@destroy')->middleware('auth', 'role:admin')->name('stamp.delete');
 
 Route::get('/collection', 'CollectionController@index')->middleware('auth')->name('collection');
-Route::get('/collection/{stamp}/{slug}', 'CollectionController@show')->middleware('auth')->name('collection.show');
+Route::get('/collection/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
 Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth')->name('collection.add');
 Route::delete('/collection/{collection}', 'CollectionController@destroy')->middleware('auth')->name('collection.delete');
 

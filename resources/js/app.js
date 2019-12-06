@@ -24,13 +24,8 @@ Vue.use(VModal, {
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('dropdown-menu', require('./components/DropdownMenu.vue').default);
-Vue.component('login-modal', require('./components/LoginModal.vue').default);
-Vue.component('register-modal', require('./components/RegisterModal.vue').default);
-Vue.component('forgotten-password-modal', require('./components/ForgottenPasswordModal.vue').default);
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // countUp for stats on teh welcome page.
 import { CountUp } from 'countup.js';

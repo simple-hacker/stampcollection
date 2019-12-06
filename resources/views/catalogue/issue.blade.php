@@ -25,16 +25,6 @@
                             @isset($issue->cgbs_issue)
                                 @can('scrape issue')
                                     @if ($issue->stamps->count() > 0)
-                                        {{-- <a href="{{ route('scraper.issue', ['cgbs_issue' => $issue->cgbs_issue]) }}" class="flex bg-blue-500 hover:bg-blue-600 text-white border rounded px-4 py-2" onClick="return confirm('Are you sure you want to reimport this issue?  This will overwrite any changes you\'ve made.')">
-                                            <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
-                                                <path d="M378.24,243.712l-96-80c-4.768-3.968-11.424-4.832-17.024-2.208C259.584,164.128,256,169.792,256,176v48H16
-                                                    c-8.832,0-16,7.168-16,16v32c0,8.832,7.168,16,16,16h240v48c0,6.208,3.584,11.84,9.216,14.496c2.144,0.992,4.48,1.504,6.784,1.504
-                                                    c3.68,0,7.328-1.248,10.24-3.712l96-80c3.68-3.04,5.76-7.552,5.76-12.288C384,251.264,381.92,246.752,378.24,243.712z"/>
-                                                <path d="M480,0H32C14.336,0,0,14.336,0,32v160h64V64h384v384H64V320H0v160c0,17.696,14.336,32,32,32h448c17.696,0,32-14.304,32-32
-                                                    V32C512,14.336,497.696,0,480,0z"/>
-                                            </svg>    
-                                            Reimport Issue
-                                        </a> --}}
                                         <button @click.prevent="confirmImportIssue({{$issue}})" class="flex bg-blue-500 hover:bg-blue-600 text-white border rounded px-4 py-2">
                                             <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
                                                 <path d="M378.24,243.712l-96-80c-4.768-3.968-11.424-4.832-17.024-2.208C259.584,164.128,256,169.792,256,176v48H16
@@ -105,7 +95,7 @@
                     <div class="absolute top-0 right-0 flex flex-col items-end">
                         <dropdown-menu>
                             <template v-slot:dropdown-toggle>
-                                {{-- Stamp dopdown menu button --}}
+                                {{-- Stamp dropdown menu button --}}
                                 <button class="flex bg-white hover:bg-gray-100 border rounded shadow px-4 py-2 mb-1">
                                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
                                             <path d="M29.181 19.070c-1.679-2.908-0.669-6.634 2.255-8.328l-3.145-5.447c-0.898 0.527-1.943 0.829-3.058 0.829-3.361 0-6.085-2.742-6.085-6.125h-6.289c0.008 1.044-0.252 2.103-0.811 3.070-1.679 2.908-5.411 3.897-8.339 2.211l-3.144 5.447c0.905 0.515 1.689 1.268 2.246 2.234 1.676 2.903 0.672 6.623-2.241 8.319l3.145 5.447c0.895-0.522 1.935-0.82 3.044-0.82 3.35 0 6.067 2.725 6.084 6.092h6.289c-0.003-1.034 0.259-2.080 0.811-3.038 1.676-2.903 5.399-3.894 8.325-2.219l3.145-5.447c-0.899-0.515-1.678-1.266-2.232-2.226zM16 22.479c-3.578 0-6.479-2.901-6.479-6.479s2.901-6.479 6.479-6.479c3.578 0 6.479 2.901 6.479 6.479s-2.901 6.479-6.479 6.479z"></path>
@@ -144,7 +134,7 @@
                             <p class="mb-3 text-center italic">{{ $stamp->prefixedSgNumber }}</p>
                         @endisset
                         @auth
-                            <a href="{{ route('collection.show', ['stamp' => $stamp, 'slug' => $stamp->slug]) }}" class="border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</a>
+                            <button @click.prevent="$modal.show('collection', {stamp: {{ $stamp}}})" class="border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</button>
                         @endauth
                     </div>
                     <p class="w-3/4">{!! nl2br(e($stamp->description)) !!}</p>

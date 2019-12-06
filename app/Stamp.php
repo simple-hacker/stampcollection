@@ -9,9 +9,9 @@ class Stamp extends Model
 {
     protected $guarded = [];
 
-    // protected $hidden = ['image_url'];
-
     protected $with = ['issue'];
+
+    protected $appends = ['image_src', 'prefixedSgNumber'];
 
     /**
      * Issue
