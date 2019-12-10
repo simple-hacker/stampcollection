@@ -1908,8 +1908,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionModel',
@@ -1917,8 +1915,8 @@ var MODAL_WIDTH = 656;
     return {
       stamp: {},
       issue: {},
-      addToCollection: [{
-        gradingId: null,
+      stampsToAdd: [{
+        grading_id: null,
         value: ''
       }],
       gradings: [],
@@ -1940,13 +1938,46 @@ var MODAL_WIDTH = 656;
       });
     },
     addRow: function addRow() {
-      this.addToCollection.push({
-        gradingId: null,
+      this.stampsToAdd.push({
+        grading_id: null,
         value: ''
       });
     },
     removeRow: function removeRow(index) {
-      this.addToCollection.splice(index, 1);
+      this.stampsToAdd.splice(index, 1);
+    },
+    saveToCollection: function saveToCollection() {
+      var _this2 = this;
+
+      axios.post('/collection', {
+        stamp: this.stamp,
+        stampsToAdd: this.stampsToAdd
+      }).then(function (response) {
+        _this2.collection = response.data;
+        _this2.stampsToAdd = [{
+          grading_id: null,
+          value: ''
+        }]; // Maybe emit a updatedCollection to update the collection data behind the modal.
+        // Especially on the /collection page.
+        // Couldnupdate the total value of collection in background too.
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    removeFromCollection: function removeFromCollection(collection, index) {
+      var _this3 = this;
+
+      // TODO: Add nicer confirmation dialog.
+      if (confirm('Are you sure you want to remove this stamp from your collection?')) {
+        axios.post('/collection/' + collection, {
+          _method: 'delete',
+          collection: collection
+        }).then(function (response) {
+          _this3.collection.splice(index, 1);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -20751,7 +20782,8 @@ var render = function() {
         name: "collection",
         transition: "pop-out",
         width: _vm.modalWidth,
-        height: "auto"
+        height: "auto",
+        scrollable: true
       },
       on: { "before-open": _vm.beforeOpen }
     },
@@ -20803,7 +20835,7 @@ var render = function() {
               _vm._v("Add To Collection")
             ]),
             _vm._v(" "),
-            _vm._l(_vm.addToCollection, function(collection, index) {
+            _vm._l(_vm.stampsToAdd, function(collection, index) {
               return _c(
                 "div",
                 { key: index, staticClass: "flex flex-1 mb-1 items-center" },
@@ -20815,8 +20847,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: collection.gradingId,
-                          expression: "collection.gradingId"
+                          value: collection.grading_id,
+                          expression: "collection.grading_id"
                         }
                       ],
                       staticClass: "p-2 border rounded flex-1 bg-white",
@@ -20837,7 +20869,7 @@ var render = function() {
                             })
                           _vm.$set(
                             collection,
-                            "gradingId",
+                            "grading_id",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -20845,10 +20877,10 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.gradings, function(grading, gradingId) {
+                    _vm._l(_vm.gradings, function(grading, grading_id) {
                       return _c(
                         "option",
-                        { key: gradingId, domProps: { value: gradingId } },
+                        { key: grading_id, domProps: { value: grading_id } },
                         [_vm._v(_vm._s(grading))]
                       )
                     }),
@@ -20964,7 +20996,13 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white"
+                    "flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.saveToCollection()
+                    }
+                  }
                 },
                 [
                   _c(
@@ -21029,45 +21067,51 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex justify-end ml-4" }, [
-                    _c("form", { attrs: { method: "POST", action: "" } }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "border rounded p-2 text-center w-full bg-red-500 hover:bg-red-600 text-white",
-                          attrs: { type: "submit" }
-                        },
-                        [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "fill-current",
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "border rounded p-2 text-center w-full bg-red-500 hover:bg-red-700 text-white",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.removeFromCollection(
+                              collectedStamp.id,
+                              index
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24"
+                            }
+                          },
+                          [
+                            _c("path", {
                               attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "24",
-                                height: "24",
-                                viewBox: "0 0 24 24"
+                                d:
+                                  "M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"
                               }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"
-                                }
-                              })
-                            ]
-                          )
-                        ]
-                      )
-                    ])
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
                   ])
                 ]
               )

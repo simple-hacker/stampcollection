@@ -32,7 +32,7 @@ Route::delete('/stamp/{stamp}', 'StampController@destroy')->middleware('auth', '
 
 Route::get('/collection', 'CollectionController@index')->middleware('auth')->name('collection');
 Route::get('/collection/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
-Route::post('/collection/{stamp}', 'CollectionController@store')->middleware('auth')->name('collection.add');
+Route::post('/collection', 'CollectionController@store')->middleware('auth')->name('collection.add');
 Route::delete('/collection/{collection}', 'CollectionController@destroy')->middleware('auth')->name('collection.delete');
 
 Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin')->name('scraper.issue');

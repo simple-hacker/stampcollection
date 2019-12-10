@@ -65,25 +65,22 @@ class CollectionController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Stamp $stamp)
+    public function store(Request $request)
     {
-        // TODO: Need to validate grading_id is valid
-
-        $attributes = $request->validate([
-            'grading_id' => 'required|integer',
-            'value' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
-            'quantity' => 'sometimes|integer|min:0'
-        ]);
-
-        $quantity = $attributes['quantity'];
-        unset($attributes['quantity']);
-
-        for ($i=1; $i <= $quantity; $i++) {
-            auth()->user()->stamps()->attach($stamp, $attributes);
+        // TODO: Need to validate grading_id
+        // Need to validate all data, especially if empty.
+        
+        foreach($request->stampsToAdd as $attributes) {
+            auth()->user()->stamps()->attach($request->stamp['id'], $attributes);
         }
 
-        return redirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]))
-                ->withToastSuccess('Added ' . $stamp->title . ' to your collection.');;
+        // Got an extra DB call here.  Ideally after adding we return the data that was posted and push to the collection
+        // array in the modal instead of overwriting it completely with the DB call data.
+        // Haven't done it yet because the data keys aren't matching.
+        // This return returns id, user_id, stamp_id, grading_id, value etc WITH gradings and stamp data.
+        // Posted data was only grading_id and value.  Missing grading_type to display.
+        
+        return auth()->user()->collection()->where('stamp_id', $request->stamp['id'])->get();
     }
 
     /**
@@ -99,9 +96,13 @@ class CollectionController extends Controller
             abort(404);
         }
 
-        $collection->delete();
+        if ($collection->delete()) {
+            return "Success";
+        }
 
-        return redirect(route('catalogue.issue', ['issue' => $collection->stamp->issue, 'slug' => $collection->stamp->issue->slug]))
-                ->withToastWarning('Removed ' . $collection->stamp->title . ' from your collection.');
+        return abort(401);
+        
+        // return redirect(route('catalogue.issue', ['issue' => $collection->stamp->issue, 'slug' => $collection->stamp->issue->slug]))
+        //         ->withToastWarning('Removed ' . $collection->stamp->title . ' from your collection.');
     }
 }

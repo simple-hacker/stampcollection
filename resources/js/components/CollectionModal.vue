@@ -1,5 +1,5 @@
 <template>
-    <modal name="collection" @before-open="beforeOpen" transition="pop-out" :width="modalWidth" height="auto">
+    <modal name="collection" @before-open="beforeOpen" transition="pop-out" :width="modalWidth" height="auto" :scrollable="true">
         <div class="bg-blue-800 p-2">
             <!-- Stamp Details -->
             <div class="mb-2 p-4 bg-white rounded shadow">
@@ -20,9 +20,9 @@
             <!-- Add To Collection -->
             <div class="p-4 bg-white rounded shadow">
                 <h2 class="text-3xl border-b mb-4">Add To Collection</h2>
-                <div class="flex flex-1 mb-1 items-center" v-for="(collection, index) in addToCollection" v-bind:key="index">
-                    <select name="grading_id" v-model="collection.gradingId" class="p-2 border rounded flex-1 bg-white" placeholder="Grading Type" required>
-                            <option v-for="(grading, gradingId) in gradings" v-bind:key="gradingId" :value="gradingId">{{grading}}</option>
+                <div class="flex flex-1 mb-1 items-center" v-for="(collection, index) in stampsToAdd" v-bind:key="index">
+                    <select name="grading_id" v-model="collection.grading_id" class="p-2 border rounded flex-1 bg-white" placeholder="Grading Type" required>
+                            <option v-for="(grading, grading_id) in gradings" v-bind:key="grading_id" :value="grading_id">{{grading}}</option>
                     </select>
                     <input type="number" name="value" class="p-2 border rounded ml-2" step="0.01" min="0" placeholder="Value" v-model="collection.value" required>
                     <button @click.prevent="removeRow(index)" class="ml-2">
@@ -38,7 +38,7 @@
                         </svg>
                         Another Row
                     </button>
-                    <button class="flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white">
+                    <button @click.prevent="saveToCollection()" class="flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
                             <path d="M28 0h-28v32h32v-28l-4-4zM16 4h4v8h-4v-8zM28 28h-24v-24h2v10h18v-10h2.343l1.657 1.657v22.343z"></path>
                         </svg>
@@ -55,14 +55,12 @@
                         <p>£{{ collectedStamp.value.toFixed(2) }}</p>
                     </div>
                     <div class="flex justify-end ml-4">
-                        <form method="POST" action="">
-                            <button type="submit" class="border rounded p-2 text-center w-full bg-red-500 hover:bg-red-600 text-white">
-                                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"></path>
-                                    <path d="M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"></path>
-                                </svg>
-                            </button>
-                        </form>
+                        <button @click.prevent="removeFromCollection(collectedStamp.id, index)" class="border rounded p-2 text-center w-full bg-red-500 hover:bg-red-700 text-white">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"></path>
+                                <path d="M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -79,8 +77,8 @@
             return {
                 stamp: {},
                 issue: {},
-                addToCollection: [{
-                    gradingId: null,
+                stampsToAdd: [{
+                    grading_id: null,
                     value: ''
                 }],
                 gradings: [],
@@ -103,10 +101,46 @@
                     });
             },
             addRow() {
-                this.addToCollection.push({ gradingId: null, value: '' });
+                this.stampsToAdd.push({ grading_id: null, value: '' });
             },
             removeRow(index) {
-                this.addToCollection.splice(index, 1);
+                this.stampsToAdd.splice(index, 1);
+            },
+            saveToCollection() {
+                axios.post('/collection', {
+                        stamp: this.stamp,
+                        stampsToAdd: this.stampsToAdd
+                    })
+                    .then(response => {
+                        this.collection = response.data;
+                        this.stampsToAdd = [{
+                            grading_id: null,
+                            value: ''
+                        }];
+                        // Maybe emit a updatedCollection to update the collection data behind the modal.
+                        // Especially on the /collection page.
+                        // Couldnupdate the total value of collection in background too.
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            },
+            removeFromCollection(collection, index) {
+
+                // TODO: Add nicer confirmation dialog.
+                if (confirm('Are you sure you want to remove this stamp from your collection?')) {
+                    axios.post('/collection/'+collection, {
+                            _method: 'delete',
+                            collection: collection
+                        })
+                        .then(response => {
+                            this.collection.splice(index, 1);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+
             }
         },
     }
