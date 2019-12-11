@@ -9,6 +9,10 @@ class Stamp extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'sg_number' => 'integer',
+    ];
+
     protected $with = ['issue'];
 
     protected $appends = ['image_src', 'prefixedSgNumber'];

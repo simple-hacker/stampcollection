@@ -9,7 +9,7 @@ class CatalogueTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /** @test */ 
     public function can_view_issues_for_a_given_year()
     {
         $issue = factory('App\Issue')->create(['year' => 2019]);
@@ -34,7 +34,7 @@ class CatalogueTest extends TestCase
         // e.g /catalogue/29/game-of-thrones/
         $issue = factory('App\Issue')->create(['title' => 'Game of Thrones']);
 
-        $this->get('/catalogue/' . $issue->path())
+        $this->get($issue->path())
             ->assertOk()
             ->assertSee($issue->title)
             ->assertSee($issue->description);

@@ -38,6 +38,6 @@ class IssueTest extends TestCase
     {
         $issue = factory('App\Issue')->create(['id' => 1, 'title' => 'Game of Thrones']);
 
-        $this->assertEquals('1/game-of-thrones', $issue->path());
+        $this->assertEquals('/catalogue/1/game-of-thrones', $issue->path());
     }
 }

@@ -119,7 +119,6 @@ class StampTest extends TestCase
 
         $stamp = factory('App\Stamp')->create();
         $this->assertCount(1, Stamp::all());
-        $this->assertDatabaseHas('stamps', $stamp->toArray());
 
         $this->delete(route('stamp.delete', ['stamp' => $stamp]))
             ->assertRedirect(route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]));

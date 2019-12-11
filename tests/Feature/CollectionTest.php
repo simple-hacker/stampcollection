@@ -24,10 +24,14 @@ class CollectionTest extends TestCase
         $grading = Grading::find(1);
         $value = $this->faker->randomFloat(2, 0, 10);
 
-        $this->post('/collection/' . $stamp->id, [
-            'grading_id' => $grading->id,
-            'value' => $value,
-            'quantity' => 1 // TODO:  Need to remove this from validation
+        $this->post(route('collection.add'), [
+            'stamp' => $stamp,
+            'stampsToAdd' => [
+                [
+                    'grading_id' => $grading->id,
+                    'value' => $value,
+                ],
+            ]
         ]);
 
         $this->assertDatabaseHas('collections', [
@@ -49,10 +53,14 @@ class CollectionTest extends TestCase
         $value = $this->faker->randomFloat(2, 0, 10);
 
         // Add a stamp to the collection
-        $this->post('/collection/' . $stamp->id, [
-            'grading_id' => $grading->id,
-            'value' => $value,
-            'quantity' => 1, // TODO:  Need to remove from here as well
+        $this->post(route('collection.add'), [
+            'stamp' => $stamp,
+            'stampsToAdd' => [
+                [
+                    'grading_id' => $grading->id,
+                    'value' => $value,
+                ],
+            ]
         ]);
 
         $this->assertDatabaseHas('collections', [
@@ -80,6 +88,6 @@ class CollectionTest extends TestCase
     {
         $stamp = factory('App\Stamp')->create();
 
-        $this->post('/collection/' . $stamp->id)->assertRedirect('login');
+        $this->post(route('collection.add'))->assertRedirect('login');
     }
 }
