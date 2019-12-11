@@ -1908,6 +1908,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionModel',
@@ -1919,6 +1953,7 @@ var MODAL_WIDTH = 656;
         grading_id: null,
         value: ''
       }],
+      stampsToAddErrors: {},
       gradings: [],
       collection: [],
       modalWidth: MODAL_WIDTH
@@ -1936,6 +1971,17 @@ var MODAL_WIDTH = 656;
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    closed: function closed() {
+      // Clear out all data so we don't see it briefly when opening up another collection modal.
+      this.stamp = {};
+      this.issue = {};
+      this.stampsToAdd = [{
+        grading_id: null,
+        value: ''
+      }];
+      this.stampsToAddErrors = {};
+      this.collection = [];
     },
     addRow: function addRow() {
       this.stampsToAdd.push({
@@ -1957,11 +2003,12 @@ var MODAL_WIDTH = 656;
         _this2.stampsToAdd = [{
           grading_id: null,
           value: ''
-        }]; // Maybe emit a updatedCollection to update the collection data behind the modal.
+        }];
+        _this2.stampsToAddErrors = {}; // Maybe emit a updatedCollection to update the collection data behind the modal.
         // Especially on the /collection page.
-        // Couldnupdate the total value of collection in background too.
+        // Could update the total value of collection in background too.
       })["catch"](function (error) {
-        console.log(error);
+        _this2.stampsToAddErrors = error.response.data.errors;
       });
     },
     removeFromCollection: function removeFromCollection(collection, index) {
@@ -2348,6 +2395,25 @@ var MODAL_WIDTH = 656;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CountUp", function() { return CountUp; });
 var __assign=undefined&&undefined.__assign||function(){return(__assign=Object.assign||function(t){for(var i,a=1,s=arguments.length;a<s;a++)for(var n in i=arguments[a])Object.prototype.hasOwnProperty.call(i,n)&&(t[n]=i[n]);return t}).apply(this,arguments)},CountUp=function(){function t(t,i,a){var s=this;this.target=t,this.endVal=i,this.options=a,this.version="2.0.4",this.defaults={startVal:0,decimalPlaces:0,duration:2,useEasing:!0,useGrouping:!0,smartEasingThreshold:999,smartEasingAmount:333,separator:",",decimal:".",prefix:"",suffix:""},this.finalEndVal=null,this.useEasing=!0,this.countDown=!1,this.error="",this.startVal=0,this.paused=!0,this.count=function(t){s.startTime||(s.startTime=t);var i=t-s.startTime;s.remaining=s.duration-i,s.useEasing?s.countDown?s.frameVal=s.startVal-s.easingFn(i,0,s.startVal-s.endVal,s.duration):s.frameVal=s.easingFn(i,s.startVal,s.endVal-s.startVal,s.duration):s.countDown?s.frameVal=s.startVal-(s.startVal-s.endVal)*(i/s.duration):s.frameVal=s.startVal+(s.endVal-s.startVal)*(i/s.duration),s.countDown?s.frameVal=s.frameVal<s.endVal?s.endVal:s.frameVal:s.frameVal=s.frameVal>s.endVal?s.endVal:s.frameVal,s.frameVal=Math.round(s.frameVal*s.decimalMult)/s.decimalMult,s.printValue(s.frameVal),i<s.duration?s.rAF=requestAnimationFrame(s.count):null!==s.finalEndVal?s.update(s.finalEndVal):s.callback&&s.callback()},this.formatNumber=function(t){var i,a,n,e,r,o=t<0?"-":"";if(i=Math.abs(t).toFixed(s.options.decimalPlaces),n=(a=(i+="").split("."))[0],e=a.length>1?s.options.decimal+a[1]:"",s.options.useGrouping){r="";for(var l=0,h=n.length;l<h;++l)0!==l&&l%3==0&&(r=s.options.separator+r),r=n[h-l-1]+r;n=r}return s.options.numerals&&s.options.numerals.length&&(n=n.replace(/[0-9]/g,function(t){return s.options.numerals[+t]}),e=e.replace(/[0-9]/g,function(t){return s.options.numerals[+t]})),o+s.options.prefix+n+e+s.options.suffix},this.easeOutExpo=function(t,i,a,s){return a*(1-Math.pow(2,-10*t/s))*1024/1023+i},this.options=__assign({},this.defaults,a),this.formattingFn=this.options.formattingFn?this.options.formattingFn:this.formatNumber,this.easingFn=this.options.easingFn?this.options.easingFn:this.easeOutExpo,this.startVal=this.validateValue(this.options.startVal),this.frameVal=this.startVal,this.endVal=this.validateValue(i),this.options.decimalPlaces=Math.max(this.options.decimalPlaces),this.decimalMult=Math.pow(10,this.options.decimalPlaces),this.resetDuration(),this.options.separator=String(this.options.separator),this.useEasing=this.options.useEasing,""===this.options.separator&&(this.options.useGrouping=!1),this.el="string"==typeof t?document.getElementById(t):t,this.el?this.printValue(this.startVal):this.error="[CountUp] target is null or undefined"}return t.prototype.determineDirectionAndSmartEasing=function(){var t=this.finalEndVal?this.finalEndVal:this.endVal;this.countDown=this.startVal>t;var i=t-this.startVal;if(Math.abs(i)>this.options.smartEasingThreshold){this.finalEndVal=t;var a=this.countDown?1:-1;this.endVal=t+a*this.options.smartEasingAmount,this.duration=this.duration/2}else this.endVal=t,this.finalEndVal=null;this.finalEndVal?this.useEasing=!1:this.useEasing=this.options.useEasing},t.prototype.start=function(t){this.error||(this.callback=t,this.duration>0?(this.determineDirectionAndSmartEasing(),this.paused=!1,this.rAF=requestAnimationFrame(this.count)):this.printValue(this.endVal))},t.prototype.pauseResume=function(){this.paused?(this.startTime=null,this.duration=this.remaining,this.startVal=this.frameVal,this.determineDirectionAndSmartEasing(),this.rAF=requestAnimationFrame(this.count)):cancelAnimationFrame(this.rAF),this.paused=!this.paused},t.prototype.reset=function(){cancelAnimationFrame(this.rAF),this.paused=!0,this.resetDuration(),this.startVal=this.validateValue(this.options.startVal),this.frameVal=this.startVal,this.printValue(this.startVal)},t.prototype.update=function(t){cancelAnimationFrame(this.rAF),this.startTime=null,this.endVal=this.validateValue(t),this.endVal!==this.frameVal&&(this.startVal=this.frameVal,this.finalEndVal||this.resetDuration(),this.determineDirectionAndSmartEasing(),this.rAF=requestAnimationFrame(this.count))},t.prototype.printValue=function(t){var i=this.formattingFn(t);"INPUT"===this.el.tagName?this.el.value=i:"text"===this.el.tagName||"tspan"===this.el.tagName?this.el.textContent=i:this.el.innerHTML=i},t.prototype.ensureNumber=function(t){return"number"==typeof t&&!isNaN(t)},t.prototype.validateValue=function(t){var i=Number(t);return this.ensureNumber(i)?i:(this.error="[CountUp] invalid start or end value: "+t,null)},t.prototype.resetDuration=function(){this.startTime=null,this.duration=1e3*Number(this.options.duration),this.remaining=this.duration},t}();
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".fade-slide-in-enter-active,\n.fade-slide-in-leave-active {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s;\n}\n.fade-slide-in-enter,\n.fade-slide-in-leave-active {\n  opacity: 0;\n  -webkit-transform: translateY(24px);\n          transform: translateY(24px);\n}\n.collection-enter-active, .collection-leave-active {\n  -webkit-transition: all 0.5s;\n  transition: all 0.5s\n}\n.collection-enter {\n  opacity: 0;\n  -webkit-transform: translateX(-30px);\n          transform: translateX(-30px);\n}\n.collection-leave-to {\n  opacity: 0;\n  -webkit-transform: translateX(30px);\n          transform: translateX(30px);\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -20045,6 +20111,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CollectionModal.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DropdownMenu.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DropdownMenu.vue?vue&type=style&index=0&lang=css& ***!
@@ -20776,154 +20872,289 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
-    {
-      attrs: {
-        name: "collection",
-        transition: "pop-out",
-        width: _vm.modalWidth,
-        height: "auto",
-        scrollable: true
-      },
-      on: { "before-open": _vm.beforeOpen }
-    },
+    "transition",
+    { attrs: { name: "fade-slide-in" } },
     [
-      _c("div", { staticClass: "bg-blue-800 p-2" }, [
-        _c("div", { staticClass: "mb-2 p-4 bg-white rounded shadow" }, [
-          _c("h1", {
-            staticClass: "text-4xl border-b mb-3",
-            domProps: { textContent: _vm._s(_vm.stamp.title) }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex" }, [
-            _c("div", { staticClass: "w-1/3 mr-1" }, [
-              _c("img", {
-                staticClass: "h-40",
-                attrs: { src: "/" + _vm.stamp.image_src, alt: "Title" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "w-2/3 ml-1" }, [
-              _c("div", { staticClass: "mb-3" }, [
-                _vm._v("\n                        Part of "),
-                _c("a", {
-                  staticClass: "hover:underline",
-                  attrs: {
-                    href: "/catalogue/" + _vm.issue.id + "/" + _vm.issue.slug
+      _c(
+        "modal",
+        {
+          staticClass: "relative",
+          attrs: {
+            name: "collection",
+            width: _vm.modalWidth,
+            height: "auto",
+            scrollable: true
+          },
+          on: { "before-open": _vm.beforeOpen, closed: _vm.closed }
+        },
+        [
+          _c("div", { staticClass: "absolute top-0 right-0 mt-3 mr-3" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "rounded-full p-2 bg-white border-blue-900 border-4 text-blue-900 ",
+                on: {
+                  click: function($event) {
+                    return _vm.$modal.hide("collection")
+                  }
+                }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "fill-current",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "15",
+                      height: "15",
+                      viewBox: "0 0 32 32"
+                    }
                   },
-                  domProps: { textContent: _vm._s(_vm.issue.title) }
-                })
-              ]),
-              _vm._v(" "),
-              _c("p", {
-                staticClass: "mb-2",
-                domProps: { textContent: _vm._s(_vm.stamp.prefixedSgNumber) }
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"
+                      }
+                    })
+                  ]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "bg-blue-800 p-2" }, [
+            _c("div", { staticClass: "mb-2 p-4 bg-white rounded shadow" }, [
+              _c("h1", {
+                staticClass: "text-4xl border-b mb-3",
+                domProps: { textContent: _vm._s(_vm.stamp.title) }
               }),
               _vm._v(" "),
-              _c("p", {
-                domProps: { textContent: _vm._s(_vm.stamp.description) }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "p-4 bg-white rounded shadow" },
-          [
-            _c("h2", { staticClass: "text-3xl border-b mb-4" }, [
-              _vm._v("Add To Collection")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.stampsToAdd, function(collection, index) {
-              return _c(
-                "div",
-                { key: index, staticClass: "flex flex-1 mb-1 items-center" },
-                [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: collection.grading_id,
-                          expression: "collection.grading_id"
-                        }
-                      ],
-                      staticClass: "p-2 border rounded flex-1 bg-white",
+              _c("div", { staticClass: "flex" }, [
+                _c("div", { staticClass: "w-1/3 mr-1" }, [
+                  _c("img", {
+                    staticClass: "h-40",
+                    attrs: { src: "/" + _vm.stamp.image_src, alt: "Title" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-2/3 ml-1" }, [
+                  _c("div", { staticClass: "mb-3" }, [
+                    _vm._v("\n                            Part of "),
+                    _c("a", {
+                      staticClass: "hover:underline",
                       attrs: {
-                        name: "grading_id",
-                        placeholder: "Grading Type",
-                        required: ""
+                        href:
+                          "/catalogue/" + _vm.issue.id + "/" + _vm.issue.slug
                       },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            collection,
-                            "grading_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    _vm._l(_vm.gradings, function(grading, grading_id) {
-                      return _c(
-                        "option",
-                        { key: grading_id, domProps: { value: grading_id } },
-                        [_vm._v(_vm._s(grading))]
-                      )
-                    }),
-                    0
-                  ),
+                      domProps: { textContent: _vm._s(_vm.issue.title) }
+                    })
+                  ]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: collection.value,
-                        expression: "collection.value"
-                      }
-                    ],
-                    staticClass: "p-2 border rounded ml-2",
-                    attrs: {
-                      type: "number",
-                      name: "value",
-                      step: "0.01",
-                      min: "0",
-                      placeholder: "Value",
-                      required: ""
-                    },
-                    domProps: { value: collection.value },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(collection, "value", $event.target.value)
-                      }
+                  _c("p", {
+                    staticClass: "mb-2",
+                    domProps: {
+                      textContent: _vm._s(_vm.stamp.prefixedSgNumber)
                     }
                   }),
                   _vm._v(" "),
+                  _c("p", {
+                    domProps: { textContent: _vm._s(_vm.stamp.description) }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "p-4 bg-white rounded shadow" },
+              [
+                _c("h2", { staticClass: "text-3xl border-b mb-4" }, [
+                  _vm._v("Add To Collection")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.stampsToAdd, function(stampToAdd, index) {
+                  return _c(
+                    "div",
+                    { key: index, staticClass: "flex mb-1 items-start" },
+                    [
+                      _c("div", { staticClass: "flex flex-1 flex-col" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: stampToAdd.grading_id,
+                                expression: "stampToAdd.grading_id"
+                              }
+                            ],
+                            staticClass: "p-2 w-full rounded bg-white",
+                            class: _vm.stampsToAddErrors[index + ".grading_id"]
+                              ? "border-red-500 border-2"
+                              : "border",
+                            attrs: {
+                              name: "grading_id",
+                              placeholder: "Grading Type",
+                              required: ""
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  stampToAdd,
+                                  "grading_id",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.gradings, function(grading, grading_id) {
+                            return _c(
+                              "option",
+                              {
+                                key: grading_id,
+                                domProps: { value: grading_id }
+                              },
+                              [_vm._v(_vm._s(grading))]
+                            )
+                          }),
+                          0
+                        ),
+                        _vm._v(" "),
+                        _vm.stampsToAddErrors[index + ".grading_id"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.stampsToAddErrors[
+                                      index + ".grading_id"
+                                    ][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex flex-col" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stampToAdd.value,
+                              expression: "stampToAdd.value"
+                            }
+                          ],
+                          staticClass: "p-2 rounded ml-2",
+                          class: _vm.stampsToAddErrors[index + ".value"]
+                            ? "border-red-500 border-2"
+                            : "border",
+                          attrs: {
+                            type: "number",
+                            name: "value",
+                            step: "0.01",
+                            min: "0",
+                            placeholder: "Value",
+                            required: ""
+                          },
+                          domProps: { value: stampToAdd.value },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stampToAdd, "value", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.stampsToAddErrors[index + ".value"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.stampsToAddErrors[index + ".value"][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex pt-2" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "ml-2",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.removeRow(index)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "fill-current mr-2",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "20",
+                                  height: "20",
+                                  viewBox: "0 0 20 20"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex justify-between mt-5" }, [
                   _c(
                     "button",
                     {
-                      staticClass: "ml-2",
+                      staticClass:
+                        "flex border rounded p-2 text-center bg-green-500 hover:bg-green-600 text-white",
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.removeRow(index)
+                          return _vm.addRow()
                         }
                       }
                     },
@@ -20943,184 +21174,165 @@ var render = function() {
                           _c("path", {
                             attrs: {
                               d:
-                                "M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"
+                                "M11 9h4v2h-4v4h-2v-4h-4v-2h4v-4h2v4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0z"
                             }
                           })
                         ]
+                      ),
+                      _vm._v(
+                        "\n                        Another Row\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.saveToCollection()
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "20",
+                            height: "20",
+                            viewBox: "0 0 32 32"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M28 0h-28v32h32v-28l-4-4zM16 4h4v8h-4v-8zM28 28h-24v-24h2v10h18v-10h2.343l1.657 1.657v22.343z"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                        Save To Collection\n                    "
                       )
                     ]
                   )
-                ]
-              )
-            }),
+                ])
+              ],
+              2
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "flex justify-between mt-5" }, [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "flex border rounded p-2 text-center bg-green-500 hover:bg-green-600 text-white",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.addRow()
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "fill-current mr-2",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "20",
-                        height: "20",
-                        viewBox: "0 0 20 20"
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M11 9h4v2h-4v4h-2v-4h-4v-2h4v-4h2v4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0z"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v("\n                    Another Row\n                ")
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "flex border rounded p-2 text-center bg-blue-500 hover:bg-blue-600 text-white",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.saveToCollection()
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "fill-current mr-2",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "20",
-                        height: "20",
-                        viewBox: "0 0 32 32"
-                      }
-                    },
-                    [
-                      _c("path", {
-                        attrs: {
-                          d:
-                            "M28 0h-28v32h32v-28l-4-4zM16 4h4v8h-4v-8zM28 28h-24v-24h2v10h18v-10h2.343l1.657 1.657v22.343z"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(
-                    "\n                    Save To Collection\n                "
-                  )
-                ]
-              )
-            ])
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
+            _c(
+              "div",
               {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.collection.length > 0,
-                expression: "collection.length > 0"
-              }
-            ],
-            staticClass: "mt-2 p-4 bg-white rounded shadow"
-          },
-          [
-            _c("h2", { staticClass: "text-3xl border-b mb-4" }, [
-              _vm._v("Manage Collection")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.collection, function(collectedStamp, index) {
-              return _c(
-                "div",
-                { key: index, staticClass: "flex items-center" },
-                [
-                  _c("div", { staticClass: "flex flex-1 justify-between" }, [
-                    _c("p", [_vm._v(_vm._s(collectedStamp.grading.type))]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("£" + _vm._s(collectedStamp.value.toFixed(2)))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex justify-end ml-4" }, [
-                    _c(
-                      "button",
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.collection.length > 0,
+                    expression: "collection.length > 0"
+                  }
+                ],
+                staticClass: "mt-2 p-4 bg-white rounded shadow"
+              },
+              [
+                _c("h2", { staticClass: "text-3xl border-b mb-4" }, [
+                  _vm._v("Manage Collection")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "transition-group",
+                  { attrs: { name: "collection" } },
+                  _vm._l(_vm.collection, function(collectedStamp, index) {
+                    return _c(
+                      "div",
                       {
-                        staticClass:
-                          "border rounded p-2 text-center w-full bg-red-500 hover:bg-red-700 text-white",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.removeFromCollection(
-                              collectedStamp.id,
-                              index
-                            )
-                          }
-                        }
+                        key: collectedStamp.id,
+                        staticClass: "flex items-center"
                       },
                       [
                         _c(
-                          "svg",
-                          {
-                            staticClass: "fill-current",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "24",
-                              height: "24",
-                              viewBox: "0 0 24 24"
-                            }
-                          },
+                          "div",
+                          { staticClass: "flex flex-1 justify-between" },
                           [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"
-                              }
-                            }),
+                            _c("p", [
+                              _vm._v(_vm._s(collectedStamp.grading.type))
+                            ]),
                             _vm._v(" "),
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"
-                              }
-                            })
+                            _c("p", [
+                              _vm._v(
+                                "£" + _vm._s(collectedStamp.value.toFixed(2))
+                              )
+                            ])
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex justify-end ml-4" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "border rounded p-2 text-center w-full bg-red-500 hover:bg-red-700 text-white",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.removeFromCollection(
+                                    collectedStamp.id,
+                                    index
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    width: "24",
+                                    height: "24",
+                                    viewBox: "0 0 24 24"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ])
                       ]
                     )
-                  ])
-                ]
-              )
-            })
-          ],
-          2
-        )
-      ])
-    ]
+                  }),
+                  0
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -34192,7 +34404,9 @@ if (token) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CollectionModal_vue_vue_type_template_id_2bdceb94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollectionModal.vue?vue&type=template&id=2bdceb94& */ "./resources/js/components/CollectionModal.vue?vue&type=template&id=2bdceb94&");
 /* harmony import */ var _CollectionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollectionModal.vue?vue&type=script&lang=js& */ "./resources/js/components/CollectionModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CollectionModal.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -34200,7 +34414,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _CollectionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _CollectionModal_vue_vue_type_template_id_2bdceb94___WEBPACK_IMPORTED_MODULE_0__["render"],
   _CollectionModal_vue_vue_type_template_id_2bdceb94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -34229,6 +34443,22 @@ component.options.__file = "resources/js/components/CollectionModal.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CollectionModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CollectionModal.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CollectionModal.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CollectionModal.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionModal_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

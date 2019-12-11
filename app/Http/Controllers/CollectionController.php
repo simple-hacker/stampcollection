@@ -7,6 +7,7 @@ use App\Stamp;
 use App\Grading;
 use App\Collection;
 use Illuminate\Http\Request;
+use Validator;
 
 class CollectionController extends Controller
 {
@@ -67,20 +68,36 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        // TODO: Need to validate grading_id
-        // Need to validate all data, especially if empty.
+        $messages = [
+            '*.grading_id.required' => 'Please select a grading type.',
+            '*.grading_id.exists' => 'You have not selected a valid grading type.',
+            '*.value.required' => 'Please enter a value.',
+            '*.value.numeric' => 'Please enter a valid value, max two decimal places.',
+            '*.value.regex' => 'Please enter a valid value, max two decimal places.'
+        ];
+
+        $validator = Validator::make($request->stampsToAdd, [
+            '*.grading_id' => 'required|integer|exists:gradings,id',
+            '*.value' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+        ], $messages);
+
         
-        foreach($request->stampsToAdd as $attributes) {
-            auth()->user()->stamps()->attach($request->stamp['id'], $attributes);
+        if ($attributes = $validator->validate()) {
+
+            foreach($request->stampsToAdd as $attributes) {
+                auth()->user()->stamps()->attach($request->stamp['id'], $attributes);
+            }
+
+            // Got an extra DB call here.  Ideally after adding we return the data that was posted and push to the collection
+            // array in the modal instead of overwriting it completely with the DB call data.
+            // Haven't done it yet because the data keys aren't matching.
+            // This return returns id, user_id, stamp_id, grading_id, value etc WITH gradings and stamp data.
+            // Posted data was only grading_id and value.  Missing grading_type to display.
+            
+            return auth()->user()->collection()->where('stamp_id', $request->stamp['id'])->get();
         }
 
-        // Got an extra DB call here.  Ideally after adding we return the data that was posted and push to the collection
-        // array in the modal instead of overwriting it completely with the DB call data.
-        // Haven't done it yet because the data keys aren't matching.
-        // This return returns id, user_id, stamp_id, grading_id, value etc WITH gradings and stamp data.
-        // Posted data was only grading_id and value.  Missing grading_type to display.
-        
-        return auth()->user()->collection()->where('stamp_id', $request->stamp['id'])->get();
+        return "Error?";
     }
 
     /**

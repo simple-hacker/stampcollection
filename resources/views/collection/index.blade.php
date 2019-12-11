@@ -16,14 +16,14 @@
                 @forelse ($issue->stamps as $stamp)
                     <button @click.prevent="$modal.show('collection', {stamp: {{$stamp}}})">
                         <div class="flex flex-col items-center mr-1 p-1 border w-1/8">
-                            <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-30">
-                            <p>{{ $stamp->title }}</p>
+                            <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-30 mb-3">
                             @isset($stamp->prefixedSgNumber)
-                                <p class="italic">{{ $stamp->prefixedSgNumber }}</p>
+                            <p class="italic">{{ $stamp->prefixedSgNumber }}</p>
                             @endisset
                             @isset($stamp->sg_illustration)
-                                <p class="italic">{{ $stamp->sg_illustration }}</p>
+                            <p class="italic">{{ $stamp->sg_illustration }}</p>
                             @endisset
+                            <p>{{ $stamp->title }}</p>
                             <div class="mt-2 border-t">
                                 @foreach ($collectionData[$stamp->id] as $data)
                                     <p>{{ count($data) }} x {{ $data[0]['grading']['abbreviation'] }}</p>
