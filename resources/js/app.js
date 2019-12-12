@@ -7,14 +7,14 @@
 require('./bootstrap');
 
 // Vue-js-modal
-import VModal from 'vue-js-modal'
+import VModal from 'vue-js-modal';
 
 window.Vue = require('vue');
 
 Vue.use(VModal, {
     dialog: true,
     injectModalsContainer: true
-  })
+  });
 
 /**
  * The following block of code may be used to automatically register your
@@ -38,9 +38,6 @@ import { CountUp } from 'countup.js';
 
 const app = new Vue({
     el: '#app',
-    mounted: function() {
-      $('[data-toggle="tooltip"]').tooltip();
-    },
     methods: {
         confirmDeleteStamp(stamp) {
             this.$modal.show('dialog', {

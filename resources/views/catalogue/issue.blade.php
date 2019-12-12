@@ -129,13 +129,16 @@
                     {{-- End Stamp dropdown --}}
                     @endrole
                     <div class="flex flex-col w-1/4 items-center justify-center p-1 mr-2">
-                        <a href="{{ asset($stamp->image_src) }}"><img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20"></a>
-                        <p class="mb-3 text-center">{{ $stamp->title }}</p>
+                        <a href="{{ asset($stamp->image_src) }}"><img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20 mb-2"></a>
                         @isset($stamp->prefixedSgNumber)
-                            <p class="mb-3 text-center italic">{{ $stamp->prefixedSgNumber }}</p>
+                            <p class="mb-1 italic">{{ $stamp->prefixedSgNumber }}</p>
                         @endisset
+                        @isset($stamp->sg_illustration)
+                            <p class="mb-1 italic">{{ $stamp->sg_illustration }}</p>
+                        @endisset
+                        <p class="mb-1 text-center">{{ $stamp->title }}</p>
                         @auth
-                            <button @click.prevent="$modal.show('collection', {stamp: {{ $stamp}}})" class="border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</button>
+                            <button @click.prevent="$modal.show('collection', {stamp: {{ $stamp}}})" class="mt-2 border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</button>
                         @endauth
                     </div>
                     <p class="w-3/4">{!! nl2br(e($stamp->description)) !!}</p>

@@ -83,7 +83,7 @@ class ScraperController extends Controller
 
         // Now save the stamps
         $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash, &$stamp_titles) {
-            $img_url = $stamp->filter('img')->first()->extract('src')[0];
+            $img_url = $stamp->filter('img')->first()->extract(['src'])[0];
             $title = $stamp->filter('h3')->text();
             $description = trim(str_replace($title, '', $stamp->text()));
             $description = str_replace('<br>', '', $description);

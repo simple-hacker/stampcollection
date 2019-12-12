@@ -75,7 +75,9 @@
                                 <p class="text-sm flex-1">{{ $stamp->title }}</p>
                                 <div class="flex flex-wrap justify-center border-t p-2">
                                     @foreach ($collectedStamps[$stamp->id] as $data)
-                                        <div class="py-1 px-3 mx-1 mt-1 rounded-lg text-xs font-semibold text-white bg-{{ $data[0]['grading']['abbreviation'] }}">
+                                    <div title="{{ $data[0]['grading']['type'] }}&#10;&#13;{{ $data[0]['grading']['description'] }}"
+                                        class="py-1 px-3 mx-1 mt-1 rounded-lg text-xs font-semibold text-white bg-{{ $data[0]['grading']['abbreviation'] }}"
+                                    >
                                             {{ count($data) }} x {{ $data[0]['grading']['abbreviation'] }}
                                         </div>
                                     @endforeach

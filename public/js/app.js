@@ -34531,9 +34531,6 @@ files.keys().map(function (key) {
 
 var app = new Vue({
   el: '#app',
-  mounted: function mounted() {
-    $('[data-toggle="tooltip"]').tooltip();
-  },
   methods: {
     confirmDeleteStamp: function confirmDeleteStamp(stamp) {
       var _this = this;
