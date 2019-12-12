@@ -22,22 +22,32 @@ class CollectionController extends Controller
 
         $stampsInCollection = $usersCollection->pluck('stamp_id')->unique()->toArray();
 
+        // whereHas: Only grab the Issues where we have colected a stamp from.
+        // withCount: Get the total number of stamps in this issue (so we can calculate missing stamps in collection)
+        // with(['stamps']): Need to eager load the stamp data of only these collected stamps.
+        // Sort issues by release date.
+        // get() collection
+        // Group collection by issue release year, otherwise My Collection could get very long.
         $collection = Issue::whereHas('stamps', function ($query) use ($stampsInCollection) {
                             $query->whereIn('id', $stampsInCollection);
                         })
+                        ->withCount('stamps')
                         ->with([
                             'stamps' => function ($query) use ($stampsInCollection) {
                                 $query->whereIn('id', $stampsInCollection);
                             }
                         ])
                         ->latest('release_date')
-                        ->get();
-
-        // dd($collection);
+                        ->get()
+                        ->groupBy('year');
 
         $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
-
+                        
         $collectionValue = $usersCollection->sum('value');
+                        
+        // dd($collection);
+
+        // If wantsJSON then $collection->toArray();
 
         return view('collection.index', compact('collection', 'collectedStamps', 'collectionValue'));
     }

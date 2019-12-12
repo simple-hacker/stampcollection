@@ -60,4 +60,14 @@ class Issue extends Model
             return ($date !== '0000-00-00') ? (new Carbon($date))->format('Y-m-d') : null;
         }
     }
+
+    /**
+    * Returns the number of stamps in this issue.
+    *
+    * @return integer
+    */
+    public function totalStamps()
+    {
+        return 4;
+    }
 }

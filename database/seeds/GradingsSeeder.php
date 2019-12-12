@@ -40,7 +40,7 @@ class GradingsSeeder extends Seeder
             [
                 'abbreviation' => 'FU',
                 'type' => 'Fine Used',
-                'description' => 'As above but these stamps are with slightly heavier or smudged cancel.'
+                'description' => 'These stamps are with slightly heavier or smudged cancel.'
             ],
             [
                 'abbreviation' => 'GU',
