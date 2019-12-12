@@ -4,10 +4,24 @@
 
     <div class="mb-8 bg-white rounded shadow">
         <h1 class="mb-2 p-4 bg-blue-900 text-white text-4xl">My Collection</h1>
-        <p class="p-2">Your collection is worth £{{ number_format($collectionValue, 2) }}</p>
+        <div class="flex flex-col items-center py-2 px-4">
+            {{-- Total Value --}}
+            <h3 class="text-3xl font-medium mb-3">Your collection is worth a total <strong>£{{ number_format($collectionValues['total'], 2) }}</strong></h3>
+            {{-- Grading Values --}}
+            <div class="flex w-full justify-center flex-wrap">
+                @foreach($collectionValues['gradings'] as $type => $grading)
+                    <div class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $type }} text-{{ $type }}">
+                        <div class="flex flex-col items-center font-semibold">
+                            <span>£{{ number_format($grading['value'], 2) }}</span>
+                            <small>{{ $grading['type'] }}</small>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
-    @forelse ($collection as $year => $issues)
+    @foreach ($collection as $year => $issues)
         @forelse ($issues as $issue)
             <div class="mb-4 bg-white rounded shadow">
                 <a href="{{ route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]) }}"
@@ -81,7 +95,5 @@
         @empty
             <p>You don't have any stamps in your collection for the year {{ $year }}</p>
         @endforelse
-    @empty
-        <p>Your collection is empty!</p>
-    @endforelse
+    @endforeach
 @endsection

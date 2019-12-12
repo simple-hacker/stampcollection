@@ -18,16 +18,19 @@ class CollectionController extends Controller
      */
     public function index()
     {
+        // Get all of the Collection model belonging to the auth user.
         $usersCollection = auth()->user()->collection;
 
+        // Get array of stamp_ids in the user's collection.
+        // This is used below to only obtain issue and stamp data of which belong in the user's collection.
         $stampsInCollection = $usersCollection->pluck('stamp_id')->unique()->toArray();
 
-        // whereHas: Only grab the Issues where we have colected a stamp from.
+        // whereHas: Only grab the Issues where we have collected a stamp from.
         // withCount: Get the total number of stamps in this issue (so we can calculate missing stamps in collection)
         // with(['stamps']): Need to eager load the stamp data of only these collected stamps.
         // Sort issues by release date.
         // get() collection
-        // Group collection by issue release year, otherwise My Collection could get very long.
+        // Group collection by issue release year, otherwise My Collection could get very long.  Will only display one year at a time with navigation to choose year of your collection.
         $collection = Issue::whereHas('stamps', function ($query) use ($stampsInCollection) {
                             $query->whereIn('id', $stampsInCollection);
                         })
@@ -41,15 +44,34 @@ class CollectionController extends Controller
                         ->get()
                         ->groupBy('year');
 
+        // Organise the collection by stamp and grading, because you could have multiple copies of the same stamp and grading and convert to array.
+        // This is to make it easier to display data.
+        // As we loop through the user's collection by stamps, it then refers to this array for the number of gradings.
+        // I think I could somehow merge this in the the mega collection above, but it's good enough for now.
         $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
-                        
-        $collectionValue = $usersCollection->sum('value');
-                        
-        // dd($collection);
 
+        // Organise the collection models by grading_id
+        $stampsByGradings = $usersCollection->groupBy('grading_id');
+        // Obtain the Grading information.
+        $gradings = Grading::all()->keyBy('id');
+        // This will contain the total value of the collection, as well as the total value of each of the grading types.
+        $collectionValues = [];
+        $collectionValues['total'] = $usersCollection->sum('value');
+
+        // Loop through collection grouped by grading_id and calculate the sum of values for each type.
+        foreach($stampsByGradings as $grading_id => $stampsByGrading) {
+            // The key here is the abbreviation of the grading obtain referenced by the id in the Grading information.
+            // e.g.  MNH, AU, VLMM etc.
+            $collectionValues['gradings'][$gradings[$grading_id]->abbreviation] = [
+                'type' => $gradings[$grading_id]->type,
+                'description' => $gradings[$grading_id]->description,
+                'value' => $stampsByGrading->sum('value')
+            ];
+        }
+        
         // If wantsJSON then $collection->toArray();
 
-        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValue'));
+        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues'));
     }
 
     /**
