@@ -27,7 +27,10 @@
                     {{ config('app.name', 'Stamp Collection') }}
                 </a>
             </div>
-            <div class="flex">
+            <div class="flex flex-1 ml-4 justify-center items-center">
+                <search-bar />
+            </div>
+            <div class="flex ml-4">
                 @guest
                     <div class="mr-4">
                         <a href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -38,6 +41,9 @@
                         </div>
                     @endif
                 @else
+                    <div class="mr-6">
+                        <a href="/catalogue">Catalogue</a>
+                    </div>
                     <div class="mr-6">
                         <a href="/collection">My Collection</a>
                     </div>
@@ -54,25 +60,16 @@
         </nav>
 
         <main class="flex flex-1 bg-gray-100">
-            <div class="flex flex-col w-full">
-                {{-- <section id="search" class="flex justify-center w-full">
-                    <input type="text" class="p-4 m-4 w-3/4 bg-white shadow rounded" placeholder="Search for stamps or issues">
-                </section> --}}
-                <div class="flex items-start justify-between mt-3">
-                    <section id="content" class="w-4/5 mx-auto">
-                        @yield('content')
-                    </section>
-                    <aside id="browse" class="w-1/6 mx-auto p-4 bg-white rounded shadow">
-                        <h2 class="text-2xl border-b p-1 mb-2">Browse stamps by year</h2>
-                        <div class="flex flex-wrap mx-auto">
-                            @forelse ($years as $year)
-                                <a href="{{ route('catalogue.year', ['year' => $year]) }}" class="hover:underline p-1">{{ $year }}</a>
-                            @empty
-                                <p>The application has not generated any years.</p>
-                            @endforelse
-                        </div>
-                    </aside>
+            <div class="flex flex-col container mx-auto">
+                <div class="flex flex-wrap bg-white shadow rounded py-2 px-4 mt-3 mb-3">
+                    <browse-catalogue-dropdown
+                        v-bind:years="{{ $years }}"
+                        v-bind:year="{{ $year ?? date('Y') }}"
+                    />
                 </div>
+                <section id="content" class="mt-3">
+                    @yield('content')
+                </section>
             </div>
         </main>
         <v-dialog></v-dialog>

@@ -33,10 +33,13 @@ class CollectionController extends Controller
                         ->latest('release_date')
                         ->get();
 
-        $collectionData = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
+        // dd($collection);
+
+        $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
+
         $collectionValue = $usersCollection->sum('value');
 
-        return view('collection.index', compact('collection', 'collectionData', 'collectionValue'));
+        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValue'));
     }
 
     /**

@@ -38,6 +38,9 @@ import { CountUp } from 'countup.js';
 
 const app = new Vue({
     el: '#app',
+    mounted: function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    },
     methods: {
         confirmDeleteStamp(stamp) {
             this.$modal.show('dialog', {

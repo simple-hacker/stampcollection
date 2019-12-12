@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="flex flex-col">
-        <div class="mb-8 p-4 bg-white rounded shadow">
+        <div class="mb-4 p-4 bg-blue-900 text-white rounded shadow">
             <div class="flex justify-between items-center relative">
-                <h1 class="text-4xl border-b p-1 mb-5 mr-2 flex-1 text-center">Stamps for {{ $year }}</h1>
+                <h1 class="text-4xl p-2 flex-1 text-center">Stamps for {{ $year }}</h1>
                 @role('admin')
                 {{-- Begin dropdown component --}}
-                <div class="absolute top-0 right-0 flex flex-col items-end">
+                <div class="absolute top-0 right-0 flex flex-col items-end z-40">
                     <dropdown-menu>
                         {{-- Dropdown menu button --}}
                         <template v-slot:dropdown-toggle>
-                            <button class="flex border bg-white hover:bg-gray-100 rounded shadow px-4 py-2 mb-1">
+                            <button class="flex border bg-white hover:bg-gray-100 text-blue-800 rounded shadow px-4 py-2 mb-1">
                                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
                                     <path d="M11.366 22.564l1.291-1.807-1.414-1.414-1.807 1.291c-0.335-0.187-0.694-0.337-1.071-0.444l-0.365-2.19h-2l-0.365 2.19c-0.377 0.107-0.736 0.256-1.071 0.444l-1.807-1.291-1.414 1.414 1.291 1.807c-0.187 0.335-0.337 0.694-0.443 1.071l-2.19 0.365v2l2.19 0.365c0.107 0.377 0.256 0.736 0.444 1.071l-1.291 1.807 1.414 1.414 1.807-1.291c0.335 0.187 0.694 0.337 1.071 0.444l0.365 2.19h2l0.365-2.19c0.377-0.107 0.736-0.256 1.071-0.444l1.807 1.291 1.414-1.414-1.291-1.807c0.187-0.335 0.337-0.694 0.444-1.071l2.19-0.365v-2l-2.19-0.365c-0.107-0.377-0.256-0.736-0.444-1.071zM7 27c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM32 12v-2l-2.106-0.383c-0.039-0.251-0.088-0.499-0.148-0.743l1.799-1.159-0.765-1.848-2.092 0.452c-0.132-0.216-0.273-0.426-0.422-0.629l1.219-1.761-1.414-1.414-1.761 1.219c-0.203-0.149-0.413-0.29-0.629-0.422l0.452-2.092-1.848-0.765-1.159 1.799c-0.244-0.059-0.492-0.109-0.743-0.148l-0.383-2.106h-2l-0.383 2.106c-0.251 0.039-0.499 0.088-0.743 0.148l-1.159-1.799-1.848 0.765 0.452 2.092c-0.216 0.132-0.426 0.273-0.629 0.422l-1.761-1.219-1.414 1.414 1.219 1.761c-0.149 0.203-0.29 0.413-0.422 0.629l-2.092-0.452-0.765 1.848 1.799 1.159c-0.059 0.244-0.109 0.492-0.148 0.743l-2.106 0.383v2l2.106 0.383c0.039 0.251 0.088 0.499 0.148 0.743l-1.799 1.159 0.765 1.848 2.092-0.452c0.132 0.216 0.273 0.426 0.422 0.629l-1.219 1.761 1.414 1.414 1.761-1.219c0.203 0.149 0.413 0.29 0.629 0.422l-0.452 2.092 1.848 0.765 1.159-1.799c0.244 0.059 0.492 0.109 0.743 0.148l0.383 2.106h2l0.383-2.106c0.251-0.039 0.499-0.088 0.743-0.148l1.159 1.799 1.848-0.765-0.452-2.092c0.216-0.132 0.426-0.273 0.629-0.422l1.761 1.219 1.414-1.414-1.219-1.761c0.149-0.203 0.29-0.413 0.422-0.629l2.092 0.452 0.765-1.848-1.799-1.159c0.059-0.244 0.109-0.492 0.148-0.743l2.106-0.383zM21 15.35c-2.402 0-4.35-1.948-4.35-4.35s1.948-4.35 4.35-4.35 4.35 1.948 4.35 4.35c0 2.402-1.948 4.35-4.35 4.35z"></path>
                                 </svg>
@@ -103,6 +103,12 @@
                             <div class="flex flex-col items-center justify-center mr-1 p-1 border">
                             @if ($loop->index < 5)
                                 <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20">
+                                @isset($stamp->prefixedSgNumber)
+                                    <p class="italic">{{ $stamp->prefixedSgNumber }}</p>
+                                @endisset
+                                @isset($stamp->sg_illustration)
+                                    <p class="italic">{{ $stamp->sg_illustration }}</p>
+                                @endisset
                                 <p>{{ $stamp->title }}</p>
                             @elseif ($loop->index === 5)
                                 <p class="p-4 text-4xl">+{{($loop->remaining + 1)}}</p>

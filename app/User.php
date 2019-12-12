@@ -47,7 +47,10 @@ class User extends Authenticatable
     public function collection()
     {
         // I think this just needs to be a raw
-        return $this->hasMany('App\Collection')->with(['stamp', 'grading']);
+        return $this->hasMany('App\Collection')
+                    ->with(['stamp', 'grading'])
+                    ->orderBy('stamp_id', 'asc')
+                    ->orderBy('grading_id', 'asc');
     }
 
     /**
