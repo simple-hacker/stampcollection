@@ -10,7 +10,7 @@
             {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
                 @foreach($collectionValues['gradings'] as $type => $grading)
-                    <div class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $type }} text-{{ $type }}">
+                    <div data-toggle="tooltip" title="{{ $grading['description'] }}" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $type }} text-{{ $type }}">
                         <div class="flex flex-col items-center font-semibold">
                             <span>£{{ number_format($grading['value'], 2) }}</span>
                             <small>{{ $grading['type'] }}</small>
@@ -75,12 +75,7 @@
                                 <p class="text-sm flex-1">{{ $stamp->title }}</p>
                                 <div class="flex flex-wrap justify-center border-t p-2">
                                     @foreach ($collectedStamps[$stamp->id] as $data)
-                                        <div
-                                            data-toggle="tooltip"
-                                            title="{{ $data[0]['grading']['type'] }}&#10;{{ $data[0]['grading']['description'] }}"
-                                            data-placement="top"
-                                            class="py-1 px-3 mx-1 mt-1 rounded-lg text-xs font-semibold text-white bg-{{ $data[0]['grading']['abbreviation'] }}"
-                                        >
+                                        <div class="py-1 px-3 mx-1 mt-1 rounded-lg text-xs font-semibold text-white bg-{{ $data[0]['grading']['abbreviation'] }}">
                                             {{ count($data) }} x {{ $data[0]['grading']['abbreviation'] }}
                                         </div>
                                     @endforeach
