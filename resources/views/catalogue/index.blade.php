@@ -102,14 +102,14 @@
                         @forelse ($issue->stamps as $stamp)
                             <div class="flex flex-col items-center justify-center mr-1 p-1 border">
                             @if ($loop->index < 5)
-                                <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20">
+                                <img src="{{ asset($stamp->image_src) }}" alt="{{ $stamp->title }}" class="h-20 mb-1">
                                 @isset($stamp->prefixedSgNumber)
                                     <p class="italic">{{ $stamp->prefixedSgNumber }}</p>
                                 @endisset
                                 @isset($stamp->sg_illustration)
                                     <p class="italic">{{ $stamp->sg_illustration }}</p>
                                 @endisset
-                                <p>{{ $stamp->title }}</p>
+                                <p class="text-sm">{{ $stamp->title }}</p>
                             @elseif ($loop->index === 5)
                                 <p class="p-4 text-4xl">+{{($loop->remaining + 1)}}</p>
                                 </div>
