@@ -51,7 +51,7 @@ class CollectionController extends Controller
         $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
 
         // Organise the collection models by grading_id
-        $stampsByGradings = $usersCollection->groupBy('grading_id');
+        $stampsByGradings = $usersCollection->sortBy('grading_id')->groupBy('grading_id');
         // Obtain the Grading information.
         $gradings = Grading::all()->keyBy('id');
         // This will contain the total value of the collection, as well as the total value of each of the grading types.
