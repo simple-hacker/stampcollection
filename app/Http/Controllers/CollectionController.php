@@ -57,6 +57,7 @@ class CollectionController extends Controller
         // This will contain the total value of the collection, as well as the total value of each of the grading types.
         $collectionValues = [];
         $collectionValues['total'] = $usersCollection->sum('value');
+        $collectionValues['gradings'] = [];
 
         // Loop through collection grouped by grading_id and calculate the sum of values for each type.
         foreach($stampsByGradings as $grading_id => $stampsByGrading) {
@@ -68,7 +69,7 @@ class CollectionController extends Controller
                 'value' => $stampsByGrading->sum('value')
             ];
         }
-        
+
         // If wantsJSON then $collection->toArray();
 
         return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues'));
