@@ -121,8 +121,11 @@ class ScraperController extends Controller
                 // Save the image to the storage/app/public/stamps/issue/stamp
                 $exists = Storage::disk('public')->exists('stamps/' . $attributes['image']);
                 if (!$exists) {
-                    $image = file_get_contents($attributes['remote_image_url']);
-                    Storage::disk('public')->put('stamps/' . $attributes['image'], $image);
+                    // If image path is valid then carry on saving image.  To prevent 404 errors.
+                    if (strpos(get_headers($attributes['remote_image_url'])[0], '200')) {
+                        $image = file_get_contents($attributes['remote_image_url']);
+                        Storage::disk('public')->put('stamps/' . $attributes['image'], $image);
+                    }
                 }
             }
         });
@@ -162,5 +165,17 @@ class ScraperController extends Controller
             // Invalid year so abort 400 Bad Request.
             abort(404);
         }
+    }
+
+
+    /**
+    * Test function
+    * 
+    * @param $year
+    * @return integer
+    */
+    public function testing($year)
+    {
+        return $year;
     }
 }
