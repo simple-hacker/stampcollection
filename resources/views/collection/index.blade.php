@@ -9,6 +9,12 @@
             <h3 class="text-3xl font-medium mb-3">Your collection is worth a total <strong>£{{ number_format($collectionValues['total'], 2) }}</strong></h3>
             {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
+                <div data-toggle="tooltip" title="Face Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
+                    <div class="flex flex-col items-center font-semibold">
+                        <span>£{{ number_format($collectionValues['face'], 2) }}</span>
+                        <small>Face Value</small>
+                    </div>
+                </div>
                 @foreach($collectionValues['gradings'] as $type => $grading)
                     <div data-toggle="tooltip" title="{{ $grading['description'] }}" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $type }} text-{{ $type }}">
                         <div class="flex flex-col items-center font-semibold">

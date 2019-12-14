@@ -2,6 +2,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'face' : '#303030',
         'MNH' : '#084C61',
         'VLMM' : '#1C7387',
         'LMM' : '#56A3A6',

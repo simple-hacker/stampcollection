@@ -54,9 +54,10 @@ class CollectionController extends Controller
         $stampsByGradings = $usersCollection->sortBy('grading_id')->groupBy('grading_id');
         // Obtain the Grading information.
         $gradings = Grading::all()->keyBy('id');
-        // This will contain the total value of the collection, as well as the total value of each of the grading types.
+        // This will contain the total value of the collection, the face value of the collection, and the total value of each of the grading types.
         $collectionValues = [];
         $collectionValues['total'] = $usersCollection->sum('value');
+        $collectionValues['face'] = $usersCollection->sum('stamp.price');
         $collectionValues['gradings'] = [];
 
         // Loop through collection grouped by grading_id and calculate the sum of values for each type.
