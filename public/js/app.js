@@ -2478,10 +2478,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showResults: false,
+      query: null,
+      issues: [],
+      stamps: []
+    };
+  },
+  created: function created() {
+    var self = this;
+    window.addEventListener('click', function (e) {
+      // close dropdown when clicked outside
+      if (!self.$el.contains(e.target)) {
+        self.showResults = false;
+      }
+    });
+  },
+  watch: {
+    query: function query() {
+      if (this.query.length > 2) {
+        this.showResults = true;
+        this.search();
+      }
+    }
+  },
   methods: {
     search: function search() {
-      alert("Search is not available yet.");
+      var _this = this;
+
+      axios.get('/search/' + this.query).then(function (response) {
+        _this.stamps = response.data.stamps || [];
+        _this.issues = response.data.issues || [];
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    submit: function submit() {
+      location = '/search/' + this.query;
     }
   }
 });
@@ -21166,7 +21256,10 @@ var render = function() {
                 _c("div", { staticClass: "w-1/3 mr-1" }, [
                   _c("img", {
                     staticClass: "h-40",
-                    attrs: { src: "/" + _vm.stamp.image_src, alt: "Title" }
+                    attrs: {
+                      src: "/" + _vm.stamp.image_src,
+                      alt: _vm.stamp.title
+                    }
                   })
                 ]),
                 _vm._v(" "),
@@ -22251,54 +22344,197 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: "flex items-center justify-center w-full",
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.search()
+  return _c("div", { staticClass: "w-5/6" }, [
+    _c(
+      "form",
+      {
+        staticClass: "flex items-center justify-center w-full",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit()
+          }
         }
-      }
-    },
-    [
-      _c("input", {
-        staticClass: "p-3 w-5/6 bg-blue-900 text-white shadow rounded-l",
-        attrs: { type: "text", placeholder: "Search for stamps or issues" }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "bg-blue-700 text-white p-3 rounded-r",
-          attrs: { type: "submit" }
-        },
-        [
-          _c(
-            "svg",
+      },
+      [
+        _c("input", {
+          directives: [
             {
-              staticClass: "fill-current",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                width: "20",
-                height: "20",
-                viewBox: "0 0 32 32"
-              }
+              name: "model",
+              rawName: "v-model",
+              value: _vm.query,
+              expression: "query"
+            }
+          ],
+          staticClass: "p-3 w-full bg-blue-900 text-white shadow rounded-l",
+          attrs: { type: "text", placeholder: "Search for stamps or issues" },
+          domProps: { value: _vm.query },
+          on: {
+            focus: function($event) {
+              _vm.showResults = true
             },
-            [
-              _c("path", {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.query = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "bg-blue-700 text-white p-3 rounded-r",
+            attrs: { type: "submit" }
+          },
+          [
+            _c(
+              "svg",
+              {
+                staticClass: "fill-current",
                 attrs: {
-                  d:
-                    "M31.008 27.231l-7.58-6.447c-0.784-0.705-1.622-1.029-2.299-0.998 1.789-2.096 2.87-4.815 2.87-7.787 0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972 0 5.691-1.081 7.787-2.87-0.031 0.677 0.293 1.515 0.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007 0.23s0.997-2.903-0.23-4.007zM12 20c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "20",
+                  height: "20",
+                  viewBox: "0 0 32 32"
                 }
-              })
-            ]
-          )
-        ]
-      )
-    ]
-  )
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M31.008 27.231l-7.58-6.447c-0.784-0.705-1.622-1.029-2.299-0.998 1.789-2.096 2.87-4.815 2.87-7.787 0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972 0 5.691-1.081 7.787-2.87-0.031 0.677 0.293 1.515 0.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007 0.23s0.997-2.903-0.23-4.007zM12 20c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"
+                  }
+                })
+              ]
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    (_vm.stamps.length > 0 || _vm.issues.length > 0) &&
+    _vm.query.length > 2 &&
+    _vm.showResults == true
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "flex w-full absolute left-0 mt-2 shadow bg-gray-300 text-blue-800 border-2 border-blue-800 z-50"
+          },
+          [
+            _vm.stamps.length > 0
+              ? _c("div", { staticClass: "flex flex-col flex-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "bg-blue-900 text-white text-center text-2xl font-bold p-2"
+                    },
+                    [_vm._v("\n                Stamps\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex flex-col p-2" },
+                    _vm._l(_vm.stamps.slice(0, 10), function(stamp) {
+                      return _c(
+                        "a",
+                        {
+                          key: stamp.id,
+                          staticClass:
+                            "flex hover:bg-blue-800 hover:text-white p-1 items-center",
+                          attrs: { href: stamp.url }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "w-1/4 flex justify-center" },
+                            [
+                              _c("img", {
+                                staticClass: "h-16",
+                                attrs: {
+                                  src: "/" + stamp.searchable.image_src,
+                                  alt: stamp.title
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "flex flex-col w-3/4 px-1" },
+                            [
+                              _c("div", {
+                                staticClass: "font-semibold",
+                                domProps: { textContent: _vm._s(stamp.title) }
+                              }),
+                              _vm._v(" "),
+                              _c("small", [
+                                _vm._v(
+                                  "Part of " +
+                                    _vm._s(stamp.searchable.issue.title) +
+                                    " (" +
+                                    _vm._s(stamp.searchable.issue.year) +
+                                    ")"
+                                )
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.issues.length > 0
+              ? _c("div", { staticClass: "flex flex-col flex-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "bg-blue-900 text-white text-center text-2xl font-bold p-2"
+                    },
+                    [_vm._v("\n                Issues\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex flex-col p-2" },
+                    _vm._l(_vm.issues.slice(0, 10), function(issue) {
+                      return _c(
+                        "a",
+                        {
+                          key: issue.id,
+                          staticClass:
+                            "flex hover:bg-blue-800 hover:text-white p-2 items-center",
+                          attrs: { href: issue.url }
+                        },
+                        [
+                          _c("div", { staticClass: "flex flex-col" }, [
+                            _c("span", { staticClass: "font-semibold" }, [
+                              _vm._v(_vm._s(issue.title))
+                            ]),
+                            _vm._v(
+                              " (" +
+                                _vm._s(issue.searchable.year) +
+                                ")\n                    "
+                            )
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e()
+          ]
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -37,3 +37,5 @@ Route::delete('/collection/{collection}', 'CollectionController@destroy')->middl
 
 Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware('auth', 'role:admin')->name('scraper.issue');
 Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin')->name('scraper.year');
+
+Route::get('/search/{query}', 'SearchController@index');

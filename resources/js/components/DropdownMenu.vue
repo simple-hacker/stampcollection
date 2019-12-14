@@ -27,7 +27,7 @@
             window.addEventListener('click', function(e){
                 // close dropdown when clicked outside
                 if (!self.$el.contains(e.target)){
-                self.showDropdownContents = false
+                    self.showDropdownContents = false
                 } 
             })
         }

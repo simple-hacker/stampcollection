@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Stamp extends Model
+class Stamp extends Model implements Searchable
 {
     protected $guarded = [];
 
@@ -89,5 +91,21 @@ class Stamp extends Model
         }
 
         return null;
+    }
+
+    /**
+    * Returns the search result for this model.
+    *
+    * @return \Spatie\Searchable\SearchResult
+    */
+    public function getSearchResult(): SearchResult
+    {          
+        $url = route('catalogue.issue', ['issue' => $this->issue, 'slug' => $this->issue->slug]);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url,
+        );
     }
 }

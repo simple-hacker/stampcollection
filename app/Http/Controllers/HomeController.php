@@ -12,7 +12,7 @@ class HomeController extends Controller
     /**
      * Shows the public front welcome page.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
     public function index()
     {

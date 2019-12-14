@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Issue extends Model
+class Issue extends Model implements Searchable
 {
     protected $guarded = [];
 
@@ -69,5 +71,21 @@ class Issue extends Model
     public function totalStamps()
     {
         return 4;
+    }
+
+    /**
+    * Returns the search result for this model.
+    *
+    * @return \Spatie\Searchable\SearchResult
+    */
+    public function getSearchResult(): SearchResult
+    {          
+        $url = route('catalogue.issue', ['issue' => $this, 'slug' => $this->slug]);
+
+        return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url,
+        );
     }
 }

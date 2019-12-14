@@ -14,7 +14,7 @@
                     <h1 class="text-4xl border-b mb-3" v-text="stamp.title"></h1>
                     <div class="flex">
                         <div class="w-1/3 mr-1">
-                            <img :src="'/'+stamp.image_src" alt="Title" class="h-40">
+                            <img :src="'/'+stamp.image_src" :alt="stamp.title" class="h-40">
                         </div>
                         <div class="w-2/3 ml-1">
                             <div class="mb-3">
