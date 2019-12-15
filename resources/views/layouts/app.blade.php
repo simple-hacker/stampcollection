@@ -20,8 +20,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" class="flex flex-col min-h-screen">
-        <nav class="flex items-center justify-between p-4 mb-1 bg-blue-800 text-white shadow">
+    <div id="app" class="flex flex-col min-h-screen {{ $theme }}">
+        <nav class="flex items-center justify-between p-4 mb-1 bg-darker text-white shadow">
             <div class="text-3xl font-medium">
                 <a href="{{ url('/collection') }}">
                     {{ config('app.name', 'Stamp Collection') }}

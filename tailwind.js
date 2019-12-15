@@ -11,6 +11,9 @@ module.exports = {
         'FU' : '#E3B505',
         'GU' : '#BB6B00',
         'AU' : '#F46036',
+        'dark': 'var(--dark-color)',
+        'darker': 'var(--darker-color)',
+        'highlight': 'var(--highlight-color)',
       },
       minWidth: {
         '1/8' : '12.5%',

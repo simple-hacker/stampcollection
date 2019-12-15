@@ -21079,7 +21079,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "py-2 px-4 rounded-lg border-blue-800 border-2 text-blue-800 hover:bg-blue-100 text-lg font-semibold",
+            "py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold",
           attrs: { href: "" },
           on: {
             click: function($event) {
@@ -21111,7 +21111,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "bg-white border-lg border-blue-800 border-2 rounded py-3 px-6",
+            "bg-white border-lg border-dark border-2 rounded py-3 px-6",
           on: {
             change: [
               function($event) {
@@ -21155,7 +21155,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "py-2 px-4 rounded-lg border-blue-800 border-2 text-blue-800 hover:bg-blue-100 text-lg font-semibold justify-end",
+            "py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold justify-end",
           attrs: { href: "" },
           on: {
             click: function($event) {
@@ -21213,7 +21213,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "rounded-full p-2 bg-white border-blue-900 border-4 text-blue-900 hover:bg-blue-900 hover:text-white",
+                  "rounded-full p-2 bg-white border-darker border-4 text-darker hover:bg-darker hover:text-white",
                 on: {
                   click: function($event) {
                     return _vm.$modal.hide("collection")
@@ -21245,7 +21245,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "bg-blue-800 p-2" }, [
+          _c("div", { staticClass: "bg-dark p-2" }, [
             _c("div", { staticClass: "mb-2 p-4 bg-white rounded shadow" }, [
               _c("h1", {
                 staticClass: "text-4xl border-b mb-3",
@@ -21754,7 +21754,7 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "text-center bg-blue-800" }, [
+      _c("div", { staticClass: "text-center bg-dark" }, [
         _c("h1", { staticClass: "text-xl text-white font-bold px-8 py-3" }, [
           _vm._v("Reset Password")
         ])
@@ -21821,7 +21821,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+                  "bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -21875,7 +21875,7 @@ var render = function() {
       on: { "before-open": _vm.beforeOpen }
     },
     [
-      _c("div", { staticClass: "text-center bg-blue-800" }, [
+      _c("div", { staticClass: "text-center bg-dark" }, [
         _c("h1", { staticClass: "text-xl text-white font-bold px-8 py-3" }, [
           _vm._v(_vm._s(_vm.title))
         ])
@@ -21996,7 +21996,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+                  "bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
                 attrs: { type: "submit" },
                 on: {
                   click: function($event) {
@@ -22020,7 +22020,7 @@ var render = function() {
                   }
                 ],
                 staticClass:
-                  "inline-block align-baseline font-bold text-sm text-blue-800 hover:text-blue-900",
+                  "inline-block align-baseline font-bold text-sm text-dark hover:text-darker",
                 attrs: { href: "/password/reset" },
                 on: {
                   click: function($event) {
@@ -22070,7 +22070,7 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "text-center shadow-md bg-blue-800" }, [
+      _c("div", { staticClass: "text-center shadow-md bg-dark" }, [
         _c("h1", { staticClass: "text-xl text-white font-bold px-8 py-3" }, [
           _vm._v("Register")
         ])
@@ -22305,7 +22305,7 @@ var render = function() {
               "button",
               {
                 staticClass:
-                  "bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+                  "bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
                 attrs: { type: "submit" },
                 on: {
                   click: function($event) {
@@ -22366,7 +22366,7 @@ var render = function() {
               expression: "query"
             }
           ],
-          staticClass: "p-3 w-full bg-blue-900 text-white shadow rounded-l",
+          staticClass: "p-3 w-full bg-darker text-white shadow rounded-l",
           attrs: { type: "text", placeholder: "Search for stamps or issues" },
           domProps: { value: _vm.query },
           on: {
@@ -22385,7 +22385,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "bg-blue-700 text-white p-3 rounded-r",
+            staticClass: "bg-highlight text-white p-3 rounded-r",
             attrs: { type: "submit" }
           },
           [
@@ -22421,7 +22421,7 @@ var render = function() {
           "div",
           {
             staticClass:
-              "flex w-full absolute left-0 mt-2 shadow bg-gray-300 text-blue-800 border-2 border-blue-800 z-50"
+              "flex w-full absolute left-0 mt-2 shadow bg-gray-300 text-dark border-2 border-dark z-50"
           },
           [
             _vm.stamps.length > 0
@@ -22430,7 +22430,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "bg-blue-900 text-white text-center text-2xl font-bold p-2"
+                        "bg-darker text-white text-center text-2xl font-bold p-2"
                     },
                     [_vm._v("\n                Stamps\n            ")]
                   ),
@@ -22444,7 +22444,7 @@ var render = function() {
                         {
                           key: stamp.id,
                           staticClass:
-                            "flex hover:bg-blue-800 hover:text-white p-1 items-center",
+                            "flex hover:bg-dark hover:text-white p-1 items-center",
                           attrs: { href: stamp.url }
                         },
                         [
@@ -22496,7 +22496,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "bg-blue-900 text-white text-center text-2xl font-bold p-2"
+                        "bg-darker text-white text-center text-2xl font-bold p-2"
                     },
                     [_vm._v("\n                Issues\n            ")]
                   ),
@@ -22510,7 +22510,7 @@ var render = function() {
                         {
                           key: issue.id,
                           staticClass:
-                            "flex hover:bg-blue-800 hover:text-white p-2 items-center",
+                            "flex hover:bg-dark hover:text-white p-2 items-center",
                           attrs: { href: issue.url }
                         },
                         [

@@ -3,7 +3,7 @@
 @section('hero')
 
 <div class="container mx-auto py-4">
-        <div class="text-center shadow-md bg-blue-800 rounded-t-lg">
+        <div class="text-center shadow-md bg-dark rounded-t-lg">
                 <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Register') }}</h1>
         </div>
         <form method="POST" action="{{ route('register') }}" class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
@@ -43,7 +43,7 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirm Password" required>
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button class="bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         {{ __('Register') }}
                 </button>
             </div>

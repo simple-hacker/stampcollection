@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="mb-8 bg-white rounded shadow">
-        <h1 class="mb-2 p-4 bg-blue-900 text-white text-4xl">My Collection</h1>
+        <h1 class="mb-2 p-4 bg-darker text-white text-4xl">My Collection</h1>
         <div class="flex flex-col items-center py-2 px-4">
             {{-- Total Value --}}
             <h3 class="text-3xl font-medium mb-3">Your collection is worth a total <strong>£{{ number_format($collectionValues['total'], 2) }}</strong></h3>
@@ -31,7 +31,7 @@
         @forelse ($issues as $issue)
             <div class="mb-4 bg-white rounded shadow">
                 <a href="{{ route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]) }}"
-                    class="flex justify-between items-center px-4 py-2 bg-blue-800 text-white mb-1"
+                    class="flex justify-between items-center px-4 py-2 bg-dark text-white mb-1"
                 >
                     {{-- Issue Title and Date --}}
                     <div class="flex flex-col">

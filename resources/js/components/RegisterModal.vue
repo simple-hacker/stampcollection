@@ -1,6 +1,6 @@
 <template>
     <modal name="register" transition="pop-out" :width="modalWidth" height="auto">
-        <div class="text-center shadow-md bg-blue-800">
+        <div class="text-center shadow-md bg-dark">
             <h1 class="text-xl text-white font-bold px-8 py-3">Register</h1>
         </div>
         <form class="bg-white shadow-md rounded-b-lg px-8 pt-6 pb-8">
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-between">
-                <button @click.prevent="submitForm()" type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button @click.prevent="submitForm()" type="submit" class="bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Register
                 </button>
             </div>

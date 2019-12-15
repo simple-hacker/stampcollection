@@ -15,6 +15,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('App\Http\View\Composers\YearComposer');
+        $this->app->singleton('App\Http\View\Composers\ThemeComposer');
     }
 
     /**
@@ -26,6 +27,10 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composer(
             'layouts.app', 'App\Http\View\Composers\YearComposer'
+        );
+
+        View::composer(
+            'layouts.app', 'App\Http\View\Composers\ThemeComposer'
         );
     }
 }

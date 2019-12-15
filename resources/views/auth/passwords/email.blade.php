@@ -3,7 +3,7 @@
 @section('hero')
 
 <div class="container mx-auto py-4">
-    <div class="text-center bg-blue-800 rounded-t-lg">
+    <div class="text-center bg-dark rounded-t-lg">
         <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Reset Password') }}</h1>
     </div>
     @if (session('status'))
@@ -24,7 +24,7 @@
             @enderror
         </div>
         <div class="flex items-center justify-between">
-            <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <button type="submit" class="bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 {{ __('Send Password Reset Link') }}
             </button>
         </div>

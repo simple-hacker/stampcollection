@@ -20,9 +20,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="flex flex-col">
-    <div id="app" class="flex flex-col h-screen">
+    <div id="app" class="flex flex-col h-screen theme-blue">
         {{-- Navbar --}}
-        <nav class="flex p-4 bg-blue-900 text-white">
+        <nav class="flex p-4 bg-darker text-white">
             <div class="container mx-auto flex justify-between">
                 <div class="text-3xl font-medium">
                     <a href="{{ url('/') }}">
@@ -31,9 +31,9 @@
                 </div>
                 <div>
                     @guest
-                        <a @click.prevent="$modal.show('login')" href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">Login</a>
+                        <a @click.prevent="$modal.show('login')" href="{{ route('login') }}" class="py-2 px-4 rounded-lg border-2 border-highlight bg-white hover:bg-gray-400 text-highlight text-xl font-bold mr-2">Login</a>
                     @else
-                        <a href="{{ route('collection') }}" class="py-2 px-4 rounded-lg border-2 border-blue-700 bg-white hover:bg-gray-400 text-blue-700 text-xl font-bold mr-2">My Collection</a>    
+                        <a href="{{ route('collection') }}" class="py-2 px-4 rounded-lg border-2 border-highlight bg-white hover:bg-gray-400 text-highlight text-xl font-bold mr-2">My Collection</a>    
                     @endguest
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
         <div class="flex-1">
             {{-- Hero section --}}
-            <div class="bg-blue-900">
+            <div class="bg-darker">
                 @yield('hero')
             </div>
 
@@ -63,7 +63,7 @@
         
         
         {{-- Footer --}}
-        <footer class="flex mt-4 bg-blue-800 h-24 items-center">
+        <footer class="flex mt-4 bg-dark h-24 items-center">
             <div class="container mx-auto p-3 text-center text-white">
                 Copyright &copy; 2019 Michael Perks
             </div>

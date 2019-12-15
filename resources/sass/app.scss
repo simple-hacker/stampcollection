@@ -3,3 +3,15 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.theme-green {
+    --dark-color: #276749;
+    --darker-color: #22543d;
+    --highlight-color: #2f855a;
+}
+
+.theme-blue {
+    --dark-color: #2c5282;
+    --darker-color: #2a4365;
+    --highlight-color: #2b6cb0;
+}
