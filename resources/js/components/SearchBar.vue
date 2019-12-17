@@ -22,7 +22,7 @@
                 v-if="stamps.length > 0"
                 class="flex flex-col flex-1"
             >
-                <div class="bg-darker text-white text-center text-2xl font-bold p-2">
+                <div class="bg-highlight text-white text-center text-2xl font-bold p-2">
                     Stamps
                 </div>
                 <div class="flex flex-col p-2">
@@ -45,7 +45,7 @@
                 v-if="issues.length > 0"
                 class="flex flex-col flex-1"
             >
-                <div class="bg-darker text-white text-center text-2xl font-bold p-2">
+                <div class="bg-highlight text-white text-center text-2xl font-bold p-2">
                     Issues
                 </div>
                 <div class="flex flex-col p-2">

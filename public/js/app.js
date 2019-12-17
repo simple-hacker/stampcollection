@@ -22430,7 +22430,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "bg-darker text-white text-center text-2xl font-bold p-2"
+                        "bg-highlight text-white text-center text-2xl font-bold p-2"
                     },
                     [_vm._v("\n                Stamps\n            ")]
                   ),
@@ -22496,7 +22496,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "bg-darker text-white text-center text-2xl font-bold p-2"
+                        "bg-highlight text-white text-center text-2xl font-bold p-2"
                     },
                     [_vm._v("\n                Issues\n            ")]
                   ),
