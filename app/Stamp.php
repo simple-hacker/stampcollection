@@ -98,14 +98,14 @@ class Stamp extends Model implements Searchable
     *
     * @return \Spatie\Searchable\SearchResult
     */
-    public function getSearchResult(): SearchResult
-    {          
+    public function getSearchResult() : SearchResult
+    {
         $url = route('catalogue.issue', ['issue' => $this->issue, 'slug' => $this->issue->slug]);
 
         return new \Spatie\Searchable\SearchResult(
             $this,
             $this->title,
-            $url,
+            $url
         );
     }
 }
