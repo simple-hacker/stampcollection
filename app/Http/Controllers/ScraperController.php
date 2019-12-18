@@ -167,15 +167,29 @@ class ScraperController extends Controller
         }
     }
 
-
     /**
-    * Test function
+    * Returns a list of cgbs_issues from CollectGBStamps for today's year.
     * 
     * @param $year
-    * @return integer
+    * @return 
     */
-    public function testing($year)
+    public function cgbsIssuesByYear($year = null)
     {
-        return $year;
+        if (is_null($year)) {
+            $year = date('Y');
+        }
+
+        $url = $this->baseURI . '/explore/years/?year=' . $year;
+
+        $cgbs_issues = [];
+
+        $cgbs_issues[] = $this->client->request('GET', $url)->filter('.stampset h3 a')->each(function (Crawler $issue) {
+            $data = $issue->extract(['href']);
+            return (int) substr(strrchr($data[0], '='), 1);
+            //This call back is pushing all values in to index 0 of cgbs_issues.
+        });
+
+        // Return 0 index of array which is actually the array we need.
+        return $cgbs_issues[0];
     }
 }

@@ -7,9 +7,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Issue extends Model implements Searchable
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     protected $casts = [
