@@ -11,10 +11,6 @@ class Stamp extends Model implements Searchable
 {
     protected $guarded = [];
 
-    protected $casts = [
-        'sg_number' => 'integer',
-    ];
-
     protected $with = ['issue'];
 
     protected $appends = ['image_src', 'prefixedSgNumber'];
