@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             YearsSeeder::class,
             RolesAndPermissionsSeeder::class,
             GradingsSeeder::class,
+            MonarchsSeeder::class,
         ]);
     }
 }

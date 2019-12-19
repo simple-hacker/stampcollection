@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Year;
 use App\Issue;
+use App\Monarch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -36,7 +37,9 @@ class IssueController extends Controller
 
         $issue = new Issue;
 
-        return view('issue.create', compact('year', 'set_release_date', 'issue'));
+        $monarchs = Monarch::all();
+
+        return view('issue.create', compact('year', 'set_release_date', 'issue', 'monarchs'));
     }
 
     /**
@@ -48,12 +51,7 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'cgbs_issue' => 'sometimes|nullable',
-            'release_date' => 'required',
-            'description' => 'nullable|min:3',
-        ]); 
+        $attributes = $this->validateRequest($request);
         
         $release_date = Carbon::parse($attributes['release_date']);
         
@@ -93,7 +91,9 @@ class IssueController extends Controller
      */
     public function edit(Issue $issue)
     {
-        return view('issue.edit', compact('issue'));
+        $monarchs = Monarch::all();
+        
+        return view('issue.edit', compact('issue', 'monarchs'));
     }
 
     /**
@@ -106,11 +106,7 @@ class IssueController extends Controller
      */
     public function update(Request $request, Issue $issue)
     {
-        $attributes = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'release_date' => 'required',
-            'description' => 'nullable|min:3',
-        ]);
+        $attributes = $this->validateRequest($request);
 
         // Update the year depending on release_date
         $release_date = Carbon::parse($attributes['release_date']);
@@ -141,5 +137,26 @@ class IssueController extends Controller
 
         return redirect(route('catalogue.year', compact('year')))
                 ->withToastWarning("Successfully deleted {$title}");
+    }
+
+
+    /**
+    * Validate the request for store and update.
+    * 
+    * @param  \Illuminate\Http\Request  $request
+    * @return array
+    */
+    public function validateRequest($request)
+    {
+        return $request->validate([
+            'title' => 'required|min:3|max:255',
+            'cgbs_issue' => 'sometimes|nullable',
+            'release_date' => 'required',
+            'monarch_id' => 'nullable|integer|exists:monarchs,id',
+            'category' => 'nullable|min:2',
+            'designer' => 'nullable|min:2',
+            'printer' => 'nullable|min:2',
+            'description' => 'nullable|min:3',
+        ]);
     }
 }

@@ -24,6 +24,55 @@
     </div>
     <div class="flex items-center mb-6">
         <div class="w-1/3">
+            <label for="monarch_id" class="text-gray-500 font-bold p-4">Monarch</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <select name="monarch_id" class="w-full p-2 bg-white rounded border shadow @error('monarch_id') border-red-500 @enderror">
+                <option hidden selected value=""> Select a Monarch </option>
+                @foreach ($monarchs as $monarch)
+                    <option value="{{ $monarch->id }}" @if($monarch->id === $issue->monarch_id) selected @endif>{{ $monarch->monarch }}</option>
+                @endforeach
+            </select>
+            @error('monarch_id')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="category" class="text-gray-500 font-bold p-4">Category</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="category" name="category" type="text" value="{{ old('category', $issue->category) }}" placeholder="Category e.g. Commemorative, Definitive" class="w-full p-2 rounded border shadow @error('category') border-red-500 @enderror">
+            @error('category')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="designer" class="text-gray-500 font-bold p-4">Designer</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="designer" name="designer" type="text" value="{{ old('designer', $issue->designer) }}" placeholder="Designer" class="w-full p-2 rounded border shadow @error('designer') border-red-500 @enderror">
+            @error('designer')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="printer" class="text-gray-500 font-bold p-4">Printer</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="printer" name="printer" type="text" value="{{ old('printer', $issue->printer) }}" placeholder="Printer" class="w-full p-2 rounded border shadow @error('printer') border-red-500 @enderror">
+            @error('printer')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
             <label for="description" class="text-gray-500 font-bold p-4">Description</label>
         </div>
         <div class="flex flex-col w-2/3">

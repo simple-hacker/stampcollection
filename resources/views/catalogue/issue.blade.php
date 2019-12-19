@@ -4,9 +4,9 @@
     <div class="mb-4 bg-white rounded shadow">
         <div class="flex flex-col relative bg-darker px-4 py-2">
             <a href="{{ route('catalogue.year', ['year' => $issue->year]) }}" class="absolute top-5 left-5 py-2 px-6 rounded-lg bg-white border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold">Back</a>
-            <h1 class="text-4xl p-1 mb-2 text-center text-white">{{ $issue->title }}</h1>
+            <h1 class="text-4xl p-1 mb-1 text-center text-white">{{ $issue->title }}</h1>
             @isset ($issue->release_date)
-                <small class="mb-4 text-white text-center">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>
+                <small class="mb-2 text-white text-center">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>
             @endisset           
             @role('admin')
             {{-- Begin dropdown component --}}
@@ -80,8 +80,22 @@
             {{-- End dropdown component --}}
             @endrole
         </div>
+        <div class="flex flex-col items-center mt-1">
+            @if($issue->monarch_id)
+                <p class="text-gray-800 text-sm">{{ $issue->monarch->monarch }}</p>
+            @endif
+            @if($issue->category)
+                <p class="text-gray-800 text-sm">Category: {{ $issue->category }}</p>
+            @endif
+            @if($issue->designer)
+                <p class="text-gray-800 text-sm">Designed by: {{ $issue->designer }}</p>
+            @endif
+            @if($issue->printer)
+                <p class="text-gray-800 text-sm">Printed by: {{ $issue->printer }}</p>
+            @endif
+        </div>
         <div class="py-2 px-4">
-            <p class="mb-5">{!! nl2br(e($issue->description)) !!}</p>
+            <p>{!! nl2br(e($issue->description)) !!}</p>
         </div>
     </div>
     <div class="bg-dark mb-3 px-4 py-2 rounded">
