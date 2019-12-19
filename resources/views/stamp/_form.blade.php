@@ -27,7 +27,7 @@
             <label for="sg_illustration" class="text-gray-500 font-bold p-4">Stanley Gibbons Illustration</label>
         </div>
         <div class="flex flex-col w-2/3">
-            <input id="sg_illustration" name="sg_illustration" type="number" step="1" value="{{ old('sg_illustration', $stamp->sg_illustration) }}" placeholder="Stanley Gibbons Illustration" class="w-full p-2 rounded border shadow @error('sg_illustration') border-red-500 @enderror">
+            <input id="sg_illustration" name="sg_illustration" type="text" value="{{ old('sg_illustration', $stamp->sg_illustration) }}" placeholder="Stanley Gibbons Illustration" class="w-full p-2 rounded border shadow @error('sg_illustration') border-red-500 @enderror">
             @error('sg_illustration')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror

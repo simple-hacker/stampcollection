@@ -42,14 +42,7 @@ class StampController extends Controller
      */
     public function store(Request $request, Issue $issue)
     {
-        $attributes = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'sg_number' => 'nullable|alpha_num|min:1',
-            'sg_illustration' => 'nullable|numeric|min:1',
-            'description' => 'nullable|min:3',
-            'price' => 'nullable|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg'
-        ]);
+        $attributes = $this->validateRequest($request);
 
         // This sends the file to be uploaded, and returns the string to the file path to be saved in the stamp model.
         if ($request->has('image')) {
@@ -98,14 +91,7 @@ class StampController extends Controller
      */
     public function update(Request $request, Stamp $stamp)
     {
-        $attributes = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'sg_number' => 'nullable|alpha_num|min:1',
-            'sg_illustration' => 'nullable|numeric|min:1',
-            'description' => 'nullable|min:3',
-            'price' => 'nullable|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg'
-        ]);
+        $attributes = $this->validateRequest($request);
 
         // This sends the file to be uploaded, and returns the string to the file path to be saved in the stamp model.
         if ($request->has('image')) {
@@ -175,5 +161,23 @@ class StampController extends Controller
         // Save the image.
         $image->storeAs('stamps/' . $folder, $filename, 'public');
         return $path;
+    }
+
+    /**
+    * Validate the request for store and update.
+    * 
+    * @param  \Illuminate\Http\Request  $request
+    * @return array
+    */
+    public function validateRequest($request)
+    {
+        return $request->validate([
+            'title' => 'required|min:3|max:255',
+            'sg_number' => 'nullable|alpha_num|min:1',
+            'sg_illustration' => 'nullable|string|min:1',
+            'description' => 'nullable|min:3',
+            'price' => 'nullable|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg'
+        ]);
     }
 }
