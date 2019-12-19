@@ -14,6 +14,7 @@ module.exports = {
         'dark': 'var(--dark-color)',
         'darker': 'var(--darker-color)',
         'highlight': 'var(--highlight-color)',
+        'light' : 'var(--light-color)'
       },
       minWidth: {
         '1/8' : '12.5%',

@@ -2553,7 +2553,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     query: function query() {
-      if (this.query.length > 2) {
+      if (this.query.length > 1) {
         this.showResults = true;
         this.search();
       }
@@ -22415,7 +22415,7 @@ var render = function() {
     ),
     _vm._v(" "),
     (_vm.stamps.length > 0 || _vm.issues.length > 0) &&
-    _vm.query.length > 2 &&
+    _vm.query.length > 1 &&
     _vm.showResults == true
       ? _c(
           "div",
@@ -35523,8 +35523,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/stampcollection/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/stampcollection/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/mystamps/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/mystamps/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

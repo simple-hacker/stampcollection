@@ -20,8 +20,8 @@ class SearchController extends Controller
     public function index($query)
     {
         $results = (new Search())
-                    ->registerModel(Stamp::class, ['title'])
-                    ->registerModel(Issue::class, ['title'])
+                    ->registerModel(Stamp::class, ['title', 'sg_number', 'sg_illustration'])
+                    ->registerModel(Issue::class, ['title', 'designer'])
                     ->search($query)
                     ->groupByType();
 
@@ -29,6 +29,6 @@ class SearchController extends Controller
             return response()->json($results);
         }
 
-        return view('search.index', compact('results'));
+        return view('search.index', compact('query', 'results'));
     }
 }

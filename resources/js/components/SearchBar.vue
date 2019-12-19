@@ -15,7 +15,7 @@
             </button>
         </form>
         <div
-            v-if="(stamps.length > 0 || issues.length > 0) && query.length > 2 && showResults == true"
+            v-if="(stamps.length > 0 || issues.length > 0) && query.length > 1 && showResults == true"
             class="flex w-full absolute left-0 mt-2 shadow bg-gray-300 text-dark border-2 border-dark z-50"
         >
             <div
@@ -86,7 +86,7 @@
         },
         watch: {
             query() {
-                if (this.query.length > 2) {
+                if (this.query.length > 1) {
                     this.showResults = true;
                     this.search();
                 }
