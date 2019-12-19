@@ -53,11 +53,6 @@ class ImportIssueDaily extends Command
         parent::__construct();
 
         $this->year = date('Y');
-        $this->issues = Issue::withTrashed()
-                            ->where('year', $this->year)
-                            ->whereNotNull('cgbs_issue')
-                            ->pluck('cgbs_issue')
-                            ->toArray();
         $this->scraper = new ScraperController();
     }
 
@@ -68,6 +63,12 @@ class ImportIssueDaily extends Command
      */
     public function handle()
     {
+        $this->issues = Issue::withTrashed()
+                            ->where('year', $this->year)
+                            ->whereNotNull('cgbs_issue')
+                            ->pluck('cgbs_issue')
+                            ->toArray();
+
         $this->info('Checking for any new issues that we have not imported...');
         \Log::info('Daily issue import is running.');
 

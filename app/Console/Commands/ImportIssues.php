@@ -45,10 +45,9 @@ class ImportIssues extends Command
     {
         parent::__construct();
 
-        $this->years = Year::all();
         $this->scraper = new ScraperController();
     }
-
+    
     /**
      * Execute the console command.
      *
@@ -56,6 +55,8 @@ class ImportIssues extends Command
      */
     public function handle()
     {
+        $this->years = Year::all();
+        
         if ($this->argument('year')) {
             $this->import($this->argument('year'));
         } else {
