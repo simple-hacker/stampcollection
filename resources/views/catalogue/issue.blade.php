@@ -82,7 +82,7 @@
         </div>
 
         <div class="flex flex-col items-center text-center p-2 text-sm font-gray-800">
-            @if($issue->subject)<p>{{ $issue->subject }}</p>@endif
+            @if($issue->subject)<p class="mt-1 mb-3">{{ $issue->subject }}</p>@endif
             @if($issue->monarch){{ $issue->monarch->abbreviation }} @endif
             @if($issue->category){{ $issue->category }}<br/>@endif
             @if($issue->designer)Designed by {{ $issue->designer }}<br/>@endif
