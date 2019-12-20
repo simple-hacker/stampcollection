@@ -10,7 +10,9 @@ class ThemeComposer
      */
     public function compose(View $view)
     {
-        if (request()->segment(1) !== "collection") {
+        if (request()->segment(1) === "settings") {
+            $theme = 'theme-teal';
+        } elseif(request()->segment(1) !== "collection") {
             $theme = 'theme-green';
         } else {
             $theme = 'theme-blue';

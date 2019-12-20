@@ -39,3 +39,6 @@ Route::get('/scraper/issue/{cgbs_issue}', 'ScraperController@issue')->middleware
 Route::get('/scraper/issuesByYear/{year}', 'ScraperController@issuesByYear')->middleware('auth', 'role:admin')->name('scraper.year');
 
 Route::get('/search/{query}', 'SearchController@index');
+
+Route::get('/settings/change-password', 'ChangePasswordController@index')->middleware('auth')->name('password.change');
+Route::post('/settings/change-password', 'ChangePasswordController@store')->middleware('auth')->name('password.update');

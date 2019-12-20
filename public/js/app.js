@@ -21719,8 +21719,8 @@ var render = function() {
                 expression: "showDropdownContents"
               }
             ],
-            staticClass: "absolute bg-white shadow rounded top-40 right-0",
-            staticStyle: { "min-width": "180px" }
+            staticClass: "absolute shadow rounded top-40 right-0 z-40 border-2",
+            staticStyle: { "min-width": "200px" }
           },
           [_vm._t("dropdown-contents")],
           2

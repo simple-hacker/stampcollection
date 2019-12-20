@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['showBrowse' => true])
 
 @section('content')
     <div class="flex flex-col">
@@ -7,7 +7,7 @@
                 <h1 class="text-4xl p-2 flex-1 text-center">Stamps for {{ $year }}</h1>
                 @role('admin')
                 {{-- Begin dropdown component --}}
-                <div class="absolute top-0 right-0 flex flex-col items-end z-40">
+                <div class="absolute top-0 right-0 flex flex-col items-end">
                     <dropdown-menu>
                         {{-- Dropdown menu button --}}
                         <template v-slot:dropdown-toggle>
@@ -60,6 +60,7 @@
                             @endisset
                         </div>
                         @role('admin')
+                        @if($issue->cgbs_issue)
                         {{-- Begin dropdown component --}}
                         <div class="flex flex-col items-end">
                             <dropdown-menu>
@@ -93,6 +94,7 @@
                             </dropdown-menu>
                         </div>
                         {{-- End dropdown component --}}
+                        @endif
                         @endrole
                     </div>
                     {{-- End issue header --}}

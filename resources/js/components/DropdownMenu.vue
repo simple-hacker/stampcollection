@@ -6,7 +6,7 @@
 
         <!-- Dropdown contents -->
         <transition name="slide-fade">
-            <div v-show="showDropdownContents" class="absolute bg-white shadow rounded top-40 right-0" style="min-width: 180px;">
+            <div v-show="showDropdownContents" class="absolute shadow rounded top-40 right-0 z-40 border-2" style="min-width: 200px;">
                 <slot name="dropdown-contents"></slot>
             </div>
         </transition>

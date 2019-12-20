@@ -5,15 +5,22 @@
 @tailwind utilities;
 
 .theme-green {
-    --dark-color: #276749;
     --darker-color: #22543d;
+    --dark-color: #276749;
     --highlight-color: #2f855a;
     --light-color: #f0fff4;
 }
 
 .theme-blue {
-    --dark-color: #2c5282;
     --darker-color: #2a4365;
+    --dark-color: #2c5282;
     --highlight-color: #2b6cb0;
     --light-color: #ebf8ff;
+}
+
+.theme-teal {
+    --darker-color: #234e52;
+    --dark-color: #285e61;
+    --highlight-color: #2c7a7b;
+    --light-color: #e6fffa;
 }
