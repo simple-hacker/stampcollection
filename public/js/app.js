@@ -21253,35 +21253,43 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "flex" }, [
-                _c("div", { staticClass: "w-1/3 mr-1" }, [
-                  _c("img", {
-                    staticClass: "h-40",
-                    attrs: {
-                      src: "/" + _vm.stamp.image_src,
-                      alt: _vm.stamp.title
-                    }
-                  })
-                ]),
+                _c(
+                  "div",
+                  { staticClass: "flex flex-col items-center w-1/3 mr-1" },
+                  [
+                    _c("img", {
+                      staticClass: "object-contain",
+                      attrs: {
+                        src: "/" + _vm.stamp.image_src,
+                        alt: _vm.stamp.title
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "my-2",
+                      domProps: {
+                        textContent: _vm._s(_vm.stamp.prefixedSgNumber)
+                      }
+                    })
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "w-2/3 ml-1" }, [
                   _c("div", { staticClass: "mb-3" }, [
                     _vm._v("\n                            Part of "),
                     _c("a", {
-                      staticClass: "hover:underline",
+                      staticClass: "text-highlight font-bold hover:underline",
                       attrs: {
                         href:
                           "/catalogue/" + _vm.issue.id + "/" + _vm.issue.slug
                       },
-                      domProps: { textContent: _vm._s(_vm.issue.title) }
+                      domProps: {
+                        textContent: _vm._s(
+                          _vm.issue.title + " (" + _vm.issue.year + ")"
+                        )
+                      }
                     })
                   ]),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "mb-2",
-                    domProps: {
-                      textContent: _vm._s(_vm.stamp.prefixedSgNumber)
-                    }
-                  }),
                   _vm._v(" "),
                   _c("p", {
                     domProps: { textContent: _vm._s(_vm.stamp.description) }
@@ -21344,14 +21352,15 @@ var render = function() {
                               }
                             }
                           },
-                          _vm._l(_vm.gradings, function(grading, grading_id) {
+                          _vm._l(_vm.gradings, function(grading) {
                             return _c(
                               "option",
                               {
-                                key: grading_id,
-                                domProps: { value: grading_id }
+                                key: grading.id,
+                                attrs: { title: grading.description },
+                                domProps: { value: grading.id }
                               },
-                              [_vm._v(_vm._s(grading))]
+                              [_vm._v(_vm._s(grading.type))]
                             )
                           }),
                           0

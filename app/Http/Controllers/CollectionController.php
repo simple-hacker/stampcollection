@@ -87,7 +87,7 @@ class CollectionController extends Controller
     public function show(Stamp $stamp)
     {
         $stampsInCollection = auth()->user()->collection()->where('stamp_id', $stamp->id)->get();
-        $gradings = Grading::pluck('type', 'id');
+        $gradings = Grading::all();
 
         return [
             'stampsInCollection' => $stampsInCollection,

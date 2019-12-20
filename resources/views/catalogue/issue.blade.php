@@ -80,21 +80,19 @@
             {{-- End dropdown component --}}
             @endrole
         </div>
-        <div class="flex flex-col items-center mt-1">
-            @if($issue->monarch_id)
-                <p class="text-gray-800 text-sm">{{ $issue->monarch->monarch }}</p>
-            @endif
-            @if($issue->category)
-                <p class="text-gray-800 text-sm">Category: {{ $issue->category }}</p>
-            @endif
-            @if($issue->designer)
-                <p class="text-gray-800 text-sm">Designed by: {{ $issue->designer }}</p>
-            @endif
-            @if($issue->printer)
-                <p class="text-gray-800 text-sm">Printed by: {{ $issue->printer }}</p>
-            @endif
+
+        <div class="mt-1 py-2 px-4">
+            @if($issue->subject){{ $issue->subject }}<br/>@endif
+            @if($issue->monarch){{ $issue->monarch->abbreviation }} @endif
+            @if($issue->category){{ $issue->category }}<br/>@endif
+            @if($issue->designer)Designed by {{ $issue->designer }}<br/>@endif
+            @if($issue->printer)Printed by {{ $issue->printer }}<br/>@endif
+            @if($issue->print_process)Print Process {{ $issue->print_process }}<br/>@endif
+            @if($issue->size)Size {{ $issue->size }}<br/>@endif
+            @if($issue->perforations)Perforations {{ $issue->perforations }}<br/>@endif
+            @if($issue->gum)Gum {{ $issue->gum }}<br/>@endif
         </div>
-        <div class="py-2 px-4">
+        <div class="mt-1 py-2 px-4">
             <p>{!! nl2br(e($issue->description)) !!}</p>
         </div>
     </div>

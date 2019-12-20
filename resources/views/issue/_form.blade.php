@@ -24,13 +24,24 @@
     </div>
     <div class="flex items-center mb-6">
         <div class="w-1/3">
+            <label for="subject" class="text-gray-500 font-bold p-4">Subject</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="subject" name="subject" type="text" value="{{ old('subject', $issue->subject) }}" placeholder="Subject" class="w-full p-2 rounded border shadow @error('subject') border-red-500 @enderror">
+            @error('subject')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
             <label for="monarch_id" class="text-gray-500 font-bold p-4">Monarch</label>
         </div>
         <div class="flex flex-col w-2/3">
             <select name="monarch_id" class="w-full p-2 bg-white rounded border shadow @error('monarch_id') border-red-500 @enderror">
                 <option hidden selected value=""> Select a Monarch </option>
                 @foreach ($monarchs as $monarch)
-                    <option value="{{ $monarch->id }}" @if($monarch->id === $issue->monarch_id) selected @endif>{{ $monarch->monarch }}</option>
+                    <option value="{{ $monarch->id }}" @if($monarch->id === $issue->monarch_id) selected @endif>{{ $monarch->abbreviation}} - {{ $monarch->monarch }}</option>
                 @endforeach
             </select>
             @error('monarch_id')
@@ -67,6 +78,50 @@
         <div class="flex flex-col w-2/3">
             <input id="printer" name="printer" type="text" value="{{ old('printer', $issue->printer) }}" placeholder="Printer" class="w-full p-2 rounded border shadow @error('printer') border-red-500 @enderror">
             @error('printer')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="print_process" class="text-gray-500 font-bold p-4">Print Process</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="print_process" name="print_process" type="text" value="{{ old('print_process', $issue->print_process) }}" placeholder="Print Process" class="w-full p-2 rounded border shadow @error('print_process') border-red-500 @enderror">
+            @error('print_process')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="size" class="text-gray-500 font-bold p-4">Size</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="size" name="size" type="text" value="{{ old('size', $issue->size) }}" placeholder="Size" class="w-full p-2 rounded border shadow @error('size') border-red-500 @enderror">
+            @error('size')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="perforations" class="text-gray-500 font-bold p-4">Perforations</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="perforations" name="perforations" type="text" value="{{ old('perforations', $issue->perforations) }}" placeholder="Perforations" class="w-full p-2 rounded border shadow @error('perforations') border-red-500 @enderror">
+            @error('perforations')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="gum" class="text-gray-500 font-bold p-4">Gum</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="gum" name="gum" type="text" value="{{ old('gum', $issue->gum) }}" placeholder="Gum" class="w-full p-2 rounded border shadow @error('gum') border-red-500 @enderror">
+            @error('gum')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror
         </div>

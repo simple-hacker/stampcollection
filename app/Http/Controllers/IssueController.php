@@ -152,10 +152,15 @@ class IssueController extends Controller
             'title' => 'required|min:3|max:255',
             'cgbs_issue' => 'sometimes|nullable',
             'release_date' => 'required',
+            'subject' => 'nullable|min:2',
             'monarch_id' => 'nullable|integer|exists:monarchs,id',
             'category' => 'nullable|min:2',
             'designer' => 'nullable|min:2',
             'printer' => 'nullable|min:2',
+            'print_process' => 'nullable|min:1',
+            'size' => 'nullable|min:1',
+            'perforations' => 'nullable|min:1',
+            'gum' => 'nullable|min:1',
             'description' => 'nullable|min:3',
         ]);
     }

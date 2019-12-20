@@ -13,15 +13,15 @@
                 <div class="mb-2 p-4 bg-white rounded shadow">
                     <h1 class="text-4xl border-b mb-3" v-text="stamp.title"></h1>
                     <div class="flex">
-                        <div class="w-1/3 mr-1">
-                            <img :src="'/'+stamp.image_src" :alt="stamp.title" class="h-40">
+                        <div class="flex flex-col items-center w-1/3 mr-1">
+                            <img :src="'/'+stamp.image_src" :alt="stamp.title" class="object-contain">
+                            <p class="my-2" v-text="stamp.prefixedSgNumber"></p>
                         </div>
                         <div class="w-2/3 ml-1">
                             <div class="mb-3">
-                                Part of <a :href="'/catalogue/'+issue.id+'/'+issue.slug" class="hover:underline" v-text="issue.title"></a>
+                                Part of <a :href="'/catalogue/'+issue.id+'/'+issue.slug" class="text-highlight font-bold hover:underline" v-text="`${issue.title} (${issue.year})`"></a>
                             </div>
-                                <p class="mb-2" v-text="stamp.prefixedSgNumber"></p>
-                                <p v-text="stamp.description"></p>
+                            <p v-text="stamp.description"></p>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                 :class="stampsToAddErrors[`${index}.grading_id`] ? 'border-red-500 border-2' : 'border'"
                                 placeholder="Grading Type"
                                 required>
-                                    <option v-for="(grading, grading_id) in gradings" :key="grading_id" :value="grading_id">{{grading}}</option>
+                                    <option v-for="grading in gradings" :key="grading.id" :value="grading.id" :title="grading.description">{{grading.type}}</option>
                             </select>
                             <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="stampsToAddErrors[`${index}.grading_id`]">{{ stampsToAddErrors[`${index}.grading_id`][0] }}</span>
                         </div>
