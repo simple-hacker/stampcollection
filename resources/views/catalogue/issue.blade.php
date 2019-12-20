@@ -81,8 +81,8 @@
             @endrole
         </div>
 
-        <div class="mt-1 py-2 px-4">
-            @if($issue->subject){{ $issue->subject }}<br/>@endif
+        <div class="flex flex-col items-center text-center p-2 text-sm font-gray-800">
+            @if($issue->subject)<p>{{ $issue->subject }}</p>@endif
             @if($issue->monarch){{ $issue->monarch->abbreviation }} @endif
             @if($issue->category){{ $issue->category }}<br/>@endif
             @if($issue->designer)Designed by {{ $issue->designer }}<br/>@endif
