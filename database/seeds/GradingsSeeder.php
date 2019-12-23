@@ -14,42 +14,50 @@ class GradingsSeeder extends Seeder
         $gradings = [
             [
                 'abbreviation' => 'MNH',
-                'type' => 'Mint Never Hinged',
+                'grading' => 'Mint Never Hinged',
+                'type' => 'mint',
                 'description' => 'Stamps as issued with full original gum and never mounted.'
             ],
             [
                 'abbreviation' => 'VLMM',
-                'type' => 'Very Lightly Mounted Mint',
+                'grading' => 'Very Lightly Mounted Mint',
+                'type' => 'mint',
                 'description' => 'Stamps with a small trace of being hinged with near full original gum.'
             ],
             [
                 'abbreviation' => 'LMM',
-                'type' => 'Lightly Mounted Mint',
+                'grading' => 'Lightly Mounted Mint',
+                'type' => 'mint',
                 'description' => 'As above but the stamps have slightly more evidence of being hinged.'
             ],
             [
                 'abbreviation' => 'MM',
-                'type' => 'Mounted Mint',
+                'grading' => 'Mounted Mint',
+                'type' => 'mint',
                 'description' => 'Stamps which have been more heavily hinged with possible hinge remnants.'
             ],
             [
                 'abbreviation' => 'VFU',
-                'type' => 'Very Fine Used',
+                'grading' => 'Very Fine Used',
+                'type' => 'used',
                 'description' => 'Used Stamps with a light cancel or Circular Date Stamp (CDS) or equivalent.'
             ],
             [
                 'abbreviation' => 'FU',
-                'type' => 'Fine Used',
+                'grading' => 'Fine Used',
+                'type' => 'used',
                 'description' => 'These stamps are with slightly heavier or smudged cancel.'
             ],
             [
                 'abbreviation' => 'GU',
-                'type' => 'Good Used',
+                'grading' => 'Good Used',
+                'type' => 'used',
                 'description' => 'Nice collectable stamps with perhaps heavier cancel and minor faults, crease, short perfs etc.'
             ],
             [
                 'abbreviation' => 'AU',
-                'type' => 'Average Used',
+                'grading' => 'Average Used',
+                'type' => 'used',
                 'description' => 'Nice collectable stamps with perhaps heavier cancel and minor faults, crease, short perfs etc.'
             ]
         ];

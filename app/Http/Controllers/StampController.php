@@ -176,7 +176,9 @@ class StampController extends Controller
             'sg_number' => 'nullable|alpha_num|min:1',
             'sg_illustration' => 'nullable|string|min:1',
             'description' => 'nullable|min:3',
-            'price' => 'nullable|numeric|min:0',
+            'face_value' => 'nullable|numeric|min:0',
+            'mint_value' => 'nullable|numeric|min:0',
+            'used_value' => 'nullable|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
     }

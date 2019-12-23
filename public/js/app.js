@@ -2016,6 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionModel',
@@ -21386,57 +21387,6 @@ var render = function() {
                           : _vm._e()
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex flex-col" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: stampToAdd.value,
-                              expression: "stampToAdd.value"
-                            }
-                          ],
-                          staticClass: "p-2 rounded ml-2",
-                          class: _vm.stampsToAddErrors[index + ".value"]
-                            ? "border-red-500 border-2"
-                            : "border",
-                          attrs: {
-                            type: "number",
-                            name: "value",
-                            step: "0.01",
-                            min: "0",
-                            placeholder: "Value",
-                            required: ""
-                          },
-                          domProps: { value: stampToAdd.value },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(stampToAdd, "value", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.stampsToAddErrors[index + ".value"]
-                          ? _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "p-2 italic text-xs font-bold text-red-500"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.stampsToAddErrors[index + ".value"][0]
-                                  )
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
                       _c("div", { staticClass: "flex pt-2" }, [
                         _c(
                           "button",
@@ -21594,14 +21544,34 @@ var render = function() {
                           { staticClass: "flex flex-1 justify-between" },
                           [
                             _c("p", [
-                              _vm._v(_vm._s(collectedStamp.grading.type))
+                              _vm._v(_vm._s(collectedStamp.grading.grading))
                             ]),
                             _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "£" + _vm._s(collectedStamp.value.toFixed(2))
-                              )
-                            ])
+                            collectedStamp.grading.type === "mint"
+                              ? _c("p", [
+                                  _vm._v(
+                                    "£" +
+                                      _vm._s(
+                                        collectedStamp.stamp.mint_value.toFixed(
+                                          2
+                                        )
+                                      )
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            collectedStamp.grading.type === "used"
+                              ? _c("p", [
+                                  _vm._v(
+                                    "£" +
+                                      _vm._s(
+                                        collectedStamp.stamp.used_value.toFixed(
+                                          2
+                                        )
+                                      )
+                                  )
+                                ])
+                              : _vm._e()
                           ]
                         ),
                         _vm._v(" "),

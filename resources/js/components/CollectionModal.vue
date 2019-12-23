@@ -41,7 +41,7 @@
                             </select>
                             <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="stampsToAddErrors[`${index}.grading_id`]">{{ stampsToAddErrors[`${index}.grading_id`][0] }}</span>
                         </div>
-                        <div class="flex flex-col">
+                        <!-- <div class="flex flex-col">
                             <input
                                 type="number"
                                 name="value"
@@ -53,7 +53,7 @@
                                 v-model="stampToAdd.value"
                                 required>
                             <span class="p-2 italic text-xs font-bold text-red-500" v-if="stampsToAddErrors[`${index}.value`]">{{ stampsToAddErrors[`${index}.value`][0] }}</span>
-                        </div>
+                        </div> -->
                         <div class="flex pt-2">
                             <button @click.prevent="removeRow(index)" class="ml-2">
                                 <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -83,8 +83,9 @@
                     <transition-group name="collection">
                         <div class="flex items-center" v-for="(collectedStamp, index) in collection" :key="collectedStamp.id">
                             <div class="flex flex-1 justify-between">
-                                <p>{{ collectedStamp.grading.type }}</p>
-                                <p>£{{ collectedStamp.value.toFixed(2) }}</p>
+                                <p>{{ collectedStamp.grading.grading }}</p>
+                                <p v-if="collectedStamp.grading.type === 'mint'">£{{ collectedStamp.stamp.mint_value.toFixed(2) }}</p>
+                                <p v-if="collectedStamp.grading.type === 'used'">£{{ collectedStamp.stamp.used_value.toFixed(2) }}</p>
                             </div>
                             <div class="flex justify-end ml-4">
                                 <button @click.prevent="removeFromCollection(collectedStamp.id, index)" class="border rounded p-2 text-center w-full bg-red-500 hover:bg-red-700 text-white">

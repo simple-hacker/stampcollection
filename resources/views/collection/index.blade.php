@@ -6,20 +6,34 @@
         <h1 class="mb-2 p-4 bg-darker text-white text-4xl">My Collection</h1>
         <div class="flex flex-col items-center py-2 px-4">
             {{-- Total Value --}}
-            <h3 class="text-3xl font-medium mb-3">Your collection is worth a total <strong>£{{ number_format($collectionValues['total'], 2) }}</strong></h3>
+            <h3 class="text-3xl font-medium mb-3">Your collection is worth</h3>
             {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
-                <div data-toggle="tooltip" title="Face Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
+                <div data-toggle="tooltip" title="Face Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
                     <div class="flex flex-col items-center font-semibold">
-                        <span>£{{ number_format($collectionValues['face'], 2) }}</span>
-                        <small>Face Value</small>
+                        <span>£{{ number_format($collectionValues['face_total'], 2) }}</span>
+                        <small>Face Total Value</small>
                     </div>
                 </div>
-                @foreach($collectionValues['gradings'] as $type => $grading)
-                    <div data-toggle="tooltip" title="{{ $grading['description'] }}" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $type }} text-{{ $type }}">
+                <div data-toggle="tooltip" title="Mint Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
+                    <div class="flex flex-col items-center font-semibold">
+                        <span>£{{ number_format($collectionValues['mint_total'], 2) }}</span>
+                        <small>Mint Total Value</small>
+                    </div>
+                </div>
+                <div data-toggle="tooltip" title="Used Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
+                    <div class="flex flex-col items-center font-semibold">
+                        <span>£{{ number_format($collectionValues['used_total'], 2) }}</span>
+                        <small>Used Total Value</small>
+                    </div>
+                </div>
+            </div>
+            <div class="flex w-full justify-center flex-wrap">
+                @foreach($collectionValues['gradings'] as $abbreviation => $value)
+                    <div data-toggle="tooltip" title="{{ $gradings[$abbreviation]['description'] }}" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-{{ $abbreviation }} text-{{ $abbreviation }}">
                         <div class="flex flex-col items-center font-semibold">
-                            <span>£{{ number_format($grading['value'], 2) }}</span>
-                            <small>{{ $grading['type'] }}</small>
+                            <span>£{{ number_format($value, 2) }}</span>
+                            <small>{{ $gradings[$abbreviation]['grading'] }}</small>
                         </div>
                     </div>
                 @endforeach
