@@ -3,10 +3,18 @@
 @section('content')
 
     <div class="mb-8 bg-white rounded shadow">
-        <h1 class="mb-2 p-4 bg-darker text-white text-4xl">My Collection</h1>
+        <div class="flex justify-between items-center mb-2 p-4 bg-darker text-white">
+            <h1 class="text-4xl">My Collection</h1>
+            <a href="{{ route('collection.print')}}" class="p-4 hover:text-highlight" target="_blank">
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 32 32">
+                    <path d="M8 2h16v4h-16v-4z"></path>
+                    <path d="M30 8h-28c-1.1 0-2 0.9-2 2v10c0 1.1 0.9 2 2 2h6v8h16v-8h6c1.1 0 2-0.9 2-2v-10c0-1.1-0.9-2-2-2zM4 14c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM22 28h-12v-10h12v10z"></path>
+                </svg>
+            </a>
+        </div>
         <div class="flex flex-col items-center py-2 px-4">
             {{-- Total Value --}}
-        <h3 class="text-3xl font-medium mb-3">Your collection is worth £{{ number_format($collectionValues['mint_total'] + $collectionValues['used_total'], 2)}}</h3>
+            <h3 class="text-3xl font-medium mb-3">Your collection is worth £{{ number_format($collectionValues['mint_total'] + $collectionValues['used_total'], 2)}}</h3>
             {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
                 <div data-toggle="tooltip" title="Face Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">

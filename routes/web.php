@@ -31,6 +31,7 @@ Route::post('/stamp/{stamp}', 'StampController@update')->middleware('auth', 'rol
 Route::delete('/stamp/{stamp}', 'StampController@destroy')->middleware('auth', 'role:admin')->name('stamp.delete');
 
 Route::get('/collection', 'CollectionController@index')->middleware('auth')->name('collection');
+Route::get('/collection/print', 'CollectionController@print')->middleware('auth')->name('collection.print');
 Route::get('/collection/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
 Route::post('/collection', 'CollectionController@store')->middleware('auth')->name('collection.add');
 Route::delete('/collection/{collection}', 'CollectionController@destroy')->middleware('auth')->name('collection.delete');
@@ -44,5 +45,3 @@ Route::get('/settings/change-password', 'ChangePasswordController@index')->middl
 Route::post('/settings/change-password', 'ChangePasswordController@store')->middleware('auth')->name('password.update');
 
 
-
-Route::get('/table', 'CollectionController@table')->middleware('auth');
