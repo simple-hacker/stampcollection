@@ -42,3 +42,7 @@ Route::get('/search/{query}', 'SearchController@index');
 
 Route::get('/settings/change-password', 'ChangePasswordController@index')->middleware('auth')->name('password.change');
 Route::post('/settings/change-password', 'ChangePasswordController@store')->middleware('auth')->name('password.update');
+
+
+
+Route::get('/table', 'CollectionController@table')->middleware('auth');

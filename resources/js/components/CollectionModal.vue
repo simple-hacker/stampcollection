@@ -37,23 +37,10 @@
                                 :class="stampsToAddErrors[`${index}.grading_id`] ? 'border-red-500 border-2' : 'border'"
                                 placeholder="Grading Type"
                                 required>
-                                    <option v-for="grading in gradings" :key="grading.id" :value="grading.id" :title="grading.description">{{grading.type}}</option>
+                                    <option v-for="grading in gradings" :key="grading.id" :value="grading.id" :title="grading.description">{{grading.grading}}</option>
                             </select>
                             <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="stampsToAddErrors[`${index}.grading_id`]">{{ stampsToAddErrors[`${index}.grading_id`][0] }}</span>
                         </div>
-                        <!-- <div class="flex flex-col">
-                            <input
-                                type="number"
-                                name="value"
-                                class="p-2 rounded ml-2"
-                                :class="stampsToAddErrors[`${index}.value`] ? 'border-red-500 border-2' : 'border'"
-                                step="0.01"
-                                min="0"
-                                placeholder="Value"
-                                v-model="stampToAdd.value"
-                                required>
-                            <span class="p-2 italic text-xs font-bold text-red-500" v-if="stampsToAddErrors[`${index}.value`]">{{ stampsToAddErrors[`${index}.value`][0] }}</span>
-                        </div> -->
                         <div class="flex pt-2">
                             <button @click.prevent="removeRow(index)" class="ml-2">
                                 <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -114,7 +101,6 @@
                 issue: {},
                 stampsToAdd: [{
                     grading_id: null,
-                    value: ''
                 }],
                 stampsToAddErrors: {},
                 gradings: [],
@@ -142,7 +128,6 @@
                 this.issue = {};
                 this.stampsToAdd = [{
                     grading_id: null,
-                    value: ''
                 }];
                 this.stampsToAddErrors = {};
                 this.collection = [];
@@ -150,7 +135,6 @@
             addRow() {
                 this.stampsToAdd.push({
                     grading_id: null,
-                    value: ''
                 });
             },
             removeRow(index) {
@@ -166,7 +150,6 @@
 
                         this.stampsToAdd = [{
                             grading_id: null,
-                            value: ''
                         }];
 
                         this.stampsToAddErrors = {};

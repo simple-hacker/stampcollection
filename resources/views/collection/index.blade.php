@@ -6,7 +6,7 @@
         <h1 class="mb-2 p-4 bg-darker text-white text-4xl">My Collection</h1>
         <div class="flex flex-col items-center py-2 px-4">
             {{-- Total Value --}}
-            <h3 class="text-3xl font-medium mb-3">Your collection is worth</h3>
+        <h3 class="text-3xl font-medium mb-3">Your collection is worth £{{ number_format($collectionValues['mint_total'] + $collectionValues['used_total'], 2)}}</h3>
             {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
                 <div data-toggle="tooltip" title="Face Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
@@ -95,7 +95,7 @@
                                 <p class="text-sm flex-1">{{ $stamp->title }}</p>
                                 <div class="flex flex-wrap justify-center border-t p-2">
                                     @foreach ($collectedStamps[$stamp->id] as $data)
-                                    <div title="{{ $data[0]['grading']['type'] }}&#10;&#13;{{ $data[0]['grading']['description'] }}"
+                                    <div title="{{ $data[0]['grading']['grading'] }}&#10;&#13;{{ $data[0]['grading']['description'] }}"
                                         class="py-1 px-3 mx-1 mt-1 rounded-lg text-xs font-semibold text-white bg-{{ $data[0]['grading']['abbreviation'] }}"
                                     >
                                             {{ count($data) }} x {{ $data[0]['grading']['abbreviation'] }}

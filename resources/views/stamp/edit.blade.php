@@ -6,7 +6,7 @@
 
         @include('stamp._form', [
             'action' => route('stamp.update', ['stamp' => $stamp]),
-            'button_text' => 'Edit Stamp'
+            'button_text' => 'Save Changes'
         ])
     </div>
 @endsection

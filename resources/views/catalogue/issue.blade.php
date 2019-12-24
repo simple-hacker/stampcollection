@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-4 bg-white rounded shadow">
         <div class="flex flex-col relative bg-darker px-4 py-2">
-            <a href="{{ route('catalogue.year', ['year' => $issue->year]) }}" class="absolute top-5 left-5 py-2 px-6 rounded-lg bg-white border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold">Back</a>
+            <a href="{{ url()->previous() }}" class="absolute top-5 left-5 py-2 px-6 rounded-lg bg-white border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold">Back</a>
             <h1 class="text-4xl p-1 mb-1 text-center text-white">{{ $issue->title }}</h1>
             @isset ($issue->release_date)
                 <small class="mb-2 text-white text-center">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>

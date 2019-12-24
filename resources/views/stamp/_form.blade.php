@@ -101,6 +101,7 @@
         </div>
     </div>
     <div class="flex items-center justify-center mb-6">
-        <button type="submit" class="shadow bg-darker hover:bg-dark focus:shadow-outline focus:outline-none text-white font-bold py-3 px-5 rounded">{{ $button_text }}</button>
+        <button type="submit" class="mr-2 border-2 border-dark shadow bg-darker hover:bg-dark focus:shadow-outline focus:outline-none text-white font-bold py-3 px-5 rounded">{{ $button_text }}</button>
+        <a href="{{ route('catalogue.issue', ['issue' => $stamp->issue, 'slug' => $stamp->issue->slug]) }}" class="ml-2 border-2 border-dark bg-white hover:bg-light focus:shadow-outline focus:outline-none text-dark font-bold py-3 px-5 rounded">Cancel</a>
     </div>
 </form>

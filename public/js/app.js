@@ -2004,19 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionModel',
@@ -2025,8 +2012,7 @@ var MODAL_WIDTH = 656;
       stamp: {},
       issue: {},
       stampsToAdd: [{
-        grading_id: null,
-        value: ''
+        grading_id: null
       }],
       stampsToAddErrors: {},
       gradings: [],
@@ -2052,16 +2038,14 @@ var MODAL_WIDTH = 656;
       this.stamp = {};
       this.issue = {};
       this.stampsToAdd = [{
-        grading_id: null,
-        value: ''
+        grading_id: null
       }];
       this.stampsToAddErrors = {};
       this.collection = [];
     },
     addRow: function addRow() {
       this.stampsToAdd.push({
-        grading_id: null,
-        value: ''
+        grading_id: null
       });
     },
     removeRow: function removeRow(index) {
@@ -2076,8 +2060,7 @@ var MODAL_WIDTH = 656;
       }).then(function (response) {
         _this2.collection = response.data;
         _this2.stampsToAdd = [{
-          grading_id: null,
-          value: ''
+          grading_id: null
         }];
         _this2.stampsToAddErrors = {}; // Maybe emit a updatedCollection to update the collection data behind the modal.
         // Especially on the /collection page.
@@ -21361,7 +21344,7 @@ var render = function() {
                                 attrs: { title: grading.description },
                                 domProps: { value: grading.id }
                               },
-                              [_vm._v(_vm._s(grading.type))]
+                              [_vm._v(_vm._s(grading.grading))]
                             )
                           }),
                           0
