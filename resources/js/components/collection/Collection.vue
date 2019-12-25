@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            v-for="issue in this.collection[this.showYear]"
+            v-for="issue in this.issues"
             :key="issue.id"
             class="mb-4 bg-white rounded shadow">
             <!-- Header and link -->
@@ -62,39 +62,8 @@
 
 <script>
 export default {
-    data() {
-        return {
-            showYear: 2019,
-        }
-    },
-    props: {
-        collection: {
-            default() {
-                return {}
-            }
-        },
-        collectedStamps: {
-            default() {
-                return {}
-            }
-        },
-        gradings: {
-            default() {
-                return {}
-            }
-        },
-        year: {
-            default() {
-                return new Date().getFullYear();
-            }
-        }
-    },
-    created() {
-        console.log(this.collection[this.year]);
-        console.log(this.collectedStamps);
-        console.log(this.gradings);
-        this.showYear = this.year;
-    },
+
+    props: ['issues', 'collectedStamps', 'gradings'],
     methods: {
         convertDate(date) {
             date = new Date(date);

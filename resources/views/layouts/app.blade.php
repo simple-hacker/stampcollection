@@ -83,18 +83,15 @@
             </div>
         </nav>
 
-        <main class="flex flex-1 bg-gray-100">
-            <div class="flex flex-col container mx-auto">
+        <main class="flex flex-1 flex-col bg-gray-100 p-3">
                 
                 @includeWhen($showBrowse == true, 'components.browse')
 
                 <section id="content" class="mt-3">
                     @yield('content')
                 </section>
-            </div>
         </main>
         <v-dialog></v-dialog>
-        <collection-modal></collection-modal>
     </div>
     @include('sweetalert::alert')
 </body>

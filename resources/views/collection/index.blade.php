@@ -1,11 +1,15 @@
-@extends('layouts.app', ['showBrowse' => true])
+@extends('layouts.app', ['showBrowse' => false])
 
 @section('content')
 
-    <collection-values
+    <collection-page
+        :collection="{{ $collection }}"
+        :collected-stamps="{{ $collectedStamps }}"
         :collection-values="{{ json_encode($collectionValues)}}"
         :gradings="{{ $gradings }}"
-    ></collection-values>
+        :year="{{ $year }}"
+    >
+    </collection-page>
 
     {{-- <div class="mb-8 bg-white rounded shadow">
         <div class="flex justify-between items-center mb-2 p-4 bg-darker text-white">
@@ -52,13 +56,6 @@
         </div>
     </div> --}}
 
-    <collection
-        :collection="{{ $collection }}"
-        :collected-stamps="{{ $collectedStamps }}"
-        :gradings="{{ $gradings }}"
-        :year="{{ $year }}"
-    ></collection>
-
     {{-- @foreach ($collection as $year => $issues)
         @forelse ($issues as $issue)
             <div class="mb-4 bg-white rounded shadow">
@@ -95,7 +92,7 @@
                                 <span>{{ $missing }}</span>
                             </div>
                         @endif
-                    </div>
+                    </div>  
                 </a>
                 <div class="flex flex-wrap items-start px-4 py-2">
                     @forelse ($issue->stamps as $stamp)

@@ -18,16 +18,19 @@ class CollectionController extends Controller
      */
     public function index($year = null)
     {
-        if ($year == null) {
-            $year = date("Y");
-        }
-
+        
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
         
         // Obtain the Grading information.
         $gradings = Grading::all()->keyBy('abbreviation');
+        
+        if ($year == null) {
+            $year = $collection->keys()->first() ?? date("Y");
+        }
 
-        // If wantsJSON then $collection->toArray();
+        if (request()->wantsJson()) {
+            return compact('collection', 'collectedStamps', 'collectionValues', 'gradings', 'year');
+        }
 
         return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues', 'gradings', 'year'));
     }

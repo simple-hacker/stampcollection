@@ -50,7 +50,7 @@
         </div>
         @foreach ($issues as $issue)
             <div class="flex flex-col mb-8 bg-white rounded shadow">
-                <a href="{{ $issue->path() }}">
+                <a href="{{ $issue->path }}">
                     {{-- Issue header --}}
                     <div class="flex justify-between items-center relative px-4 py-2 bg-dark">
                         <div>

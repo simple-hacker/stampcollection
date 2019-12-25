@@ -1,9 +1,6 @@
 <template>
     <transition name="fade-slide-in">
         <modal name="collection" @before-open="beforeOpen" @closed="closed" :width="modalWidth" height="auto" :scrollable="true" class="relative">
-            <button @click.prevent="test">
-                TEST
-            </button>
             <div class="absolute top-0 right-0 mt-3 mr-3">
                 <button @click="$modal.hide('collection')" class="rounded-full p-2 bg-white border-darker border-4 text-darker hover:bg-darker hover:text-white">
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 32 32">
@@ -17,7 +14,7 @@
                     <h1 class="text-4xl border-b mb-3" v-text="stamp.title"></h1>
                     <div class="flex">
                         <div class="flex flex-col items-center w-1/3 mr-1">
-                            <img :src="'/'+stamp.image_src" :alt="stamp.title" class="object-contain">
+                            <img :src="stamp.image_src" :alt="stamp.title" class="object-contain">
                             <p class="my-2" v-text="stamp.prefixedSgNumber"></p>
                         </div>
                         <div class="w-2/3 ml-1">
@@ -97,7 +94,7 @@
     const MODAL_WIDTH = 656
 
     export default {
-        name: 'CollectionModel',
+        name: 'CollectionModal',
         data() {
             return {
                 stamp: {},
@@ -106,19 +103,18 @@
                     grading_id: null,
                 }],
                 stampsToAddErrors: {},
-                gradings: [],
                 collection: [],
                 modalWidth: MODAL_WIDTH,
             }
-        } ,
+        },
+        props: ['gradings'],
         methods: {
             beforeOpen (event) {
                 this.stamp = event.params.stamp;
                 this.issue = event.params.stamp.issue;
 
-                axios.get('/collection/'+event.params.stamp.id)
+                axios.get('/collection/stamp/'+event.params.stamp.id)
                     .then(response => {
-                        this.gradings = response.data.gradings;
                         this.collection = response.data.stampsInCollection;
                     })
                     .catch(error => {
@@ -160,6 +156,7 @@
                         // Maybe emit a updatedCollection to update the collection data behind the modal.
                         // Especially on the /collection page.
                         // Could update the total value of collection in background too.
+                        this.$emit('updated-collection');
                     })
                     .catch(error => {
                         this.stampsToAddErrors = error.response.data.errors;
@@ -175,6 +172,7 @@
                         })
                         .then(response => {
                             this.collection.splice(index, 1);
+                            this.$emit('updated-collection');
                         })
                         .catch(error => {
                             console.log(error);
