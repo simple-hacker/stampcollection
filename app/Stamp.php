@@ -42,7 +42,7 @@ class Stamp extends Model implements Searchable
      */
     public function getImageSrcAttribute()
     {
-        return ($this->image) ? 'storage/stamps/' . $this->image : 'storage/stamps/no_image.png';
+        return ($this->image) ? '/storage/stamps/' . $this->image : 'storage/stamps/no_image.png';
     }
 
     /**

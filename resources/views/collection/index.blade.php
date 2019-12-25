@@ -2,10 +2,15 @@
 
 @section('content')
 
-    <div class="mb-8 bg-white rounded shadow">
+    <collection-values
+        :collection-values="{{ json_encode($collectionValues)}}"
+        :gradings="{{ $gradings }}"
+    ></collection-values>
+
+    {{-- <div class="mb-8 bg-white rounded shadow">
         <div class="flex justify-between items-center mb-2 p-4 bg-darker text-white">
             <h1 class="text-4xl">My Collection</h1>
-            <a href="{{ route('collection.print')}}" class="p-4 hover:text-highlight" target="_blank">
+            <a href="{{ route('collection.print')}}" class="p-4 hover:text-highlight">
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 32 32">
                     <path d="M8 2h16v4h-16v-4z"></path>
                     <path d="M30 8h-28c-1.1 0-2 0.9-2 2v10c0 1.1 0.9 2 2 2h6v8h16v-8h6c1.1 0 2-0.9 2-2v-10c0-1.1-0.9-2-2-2zM4 14c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM22 28h-12v-10h12v10z"></path>
@@ -13,9 +18,7 @@
             </a>
         </div>
         <div class="flex flex-col items-center py-2 px-4">
-            {{-- Total Value --}}
             <h3 class="text-3xl font-medium mb-3">Your collection is worth £{{ number_format($collectionValues['mint_total'] + $collectionValues['used_total'], 2)}}</h3>
-            {{-- Grading Values --}}
             <div class="flex w-full justify-center flex-wrap">
                 <div data-toggle="tooltip" title="Face Total Value" class="ml-1 mr-1 mb-2 py-2 px-4 rounded-lg border-4 border-face text-face">
                     <div class="flex flex-col items-center font-semibold">
@@ -47,22 +50,27 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    @foreach ($collection as $year => $issues)
+    <collection
+        :collection="{{ $collection }}"
+        :collected-stamps="{{ $collectedStamps }}"
+        :gradings="{{ $gradings }}"
+        :year="{{ $year }}"
+    ></collection>
+
+    {{-- @foreach ($collection as $year => $issues)
         @forelse ($issues as $issue)
             <div class="mb-4 bg-white rounded shadow">
                 <a href="{{ route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]) }}"
                     class="flex justify-between items-center px-4 py-2 bg-dark text-white mb-1"
                 >
-                    {{-- Issue Title and Date --}}
                     <div class="flex flex-col">
                         <h2 class="text-2xl">{{ $issue->title}}</h2>
                         @isset ($issue->release_date)
                             <small class="mt-1">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>
                         @endisset
                     </div>
-                    {{-- Issue Stamp Data --}}
                     <div class="flex text-xl items-center">
                         <div data-toggle="tooltip" title="{{ $issue->stamps_count }} stamps in this issue" class="flex items-center mr-5">
                             <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -120,5 +128,5 @@
         @empty
             <p>You don't have any stamps in your collection for the year {{ $year }}</p>
         @endforelse
-    @endforeach
+    @endforeach --}}
 @endsection

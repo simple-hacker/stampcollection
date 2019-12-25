@@ -23,7 +23,7 @@ class Issue extends Model implements Searchable
 
     protected $with = ['monarch'];
 
-    protected $appends = ['slug'];
+    protected $appends = ['slug', 'path'];
 
     /**
      * An issue has many stamps;
@@ -50,7 +50,7 @@ class Issue extends Model implements Searchable
      *
      * @return string
      */
-    public function path()
+    public function getPathAttribute()
     {
         return '/catalogue/' . $this->id . '/' . $this->slug;
     }

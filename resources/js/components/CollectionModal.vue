@@ -1,6 +1,9 @@
 <template>
     <transition name="fade-slide-in">
         <modal name="collection" @before-open="beforeOpen" @closed="closed" :width="modalWidth" height="auto" :scrollable="true" class="relative">
+            <button @click.prevent="test">
+                TEST
+            </button>
             <div class="absolute top-0 right-0 mt-3 mr-3">
                 <button @click="$modal.hide('collection')" class="rounded-full p-2 bg-white border-darker border-4 text-darker hover:bg-darker hover:text-white">
                     <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 32 32">
@@ -178,7 +181,7 @@
                         });
                 }
 
-            }
+            },
         },
     }
 </script>

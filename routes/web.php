@@ -30,9 +30,9 @@ Route::get('/stamp/{stamp}/edit', 'StampController@edit')->middleware('auth', 'r
 Route::post('/stamp/{stamp}', 'StampController@update')->middleware('auth', 'role:admin')->name('stamp.update');
 Route::delete('/stamp/{stamp}', 'StampController@destroy')->middleware('auth', 'role:admin')->name('stamp.delete');
 
-Route::get('/collection', 'CollectionController@index')->middleware('auth')->name('collection');
 Route::get('/collection/print', 'CollectionController@print')->middleware('auth')->name('collection.print');
-Route::get('/collection/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
+Route::get('/collection/{year?}', 'CollectionController@index')->middleware('auth')->name('collection');
+Route::get('/collection/stamp/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
 Route::post('/collection', 'CollectionController@store')->middleware('auth')->name('collection.add');
 Route::delete('/collection/{collection}', 'CollectionController@destroy')->middleware('auth')->name('collection.delete');
 

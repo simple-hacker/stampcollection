@@ -16,16 +16,20 @@ class CollectionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index($year = null)
     {
+        if ($year == null) {
+            $year = date("Y");
+        }
+
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
         
         // Obtain the Grading information.
-        $gradings = Grading::all()->keyBy('abbreviation')->toArray();
+        $gradings = Grading::all()->keyBy('abbreviation');
 
         // If wantsJSON then $collection->toArray();
 
-        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues', 'gradings'));
+        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues', 'gradings', 'year'));
     }
 
     /**
@@ -146,7 +150,7 @@ class CollectionController extends Controller
         // This is to make it easier to display data.
         // As we loop through the user's collection by stamps, it then refers to this array for the number of gradings.
         // I think I could somehow merge this in the the mega collection above, but it's good enough for now.
-        $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id'])->toArray();
+        $collectedStamps = $usersCollection->groupBy(['stamp_id', 'grading_id']);
 
         // Organise the collection models by grading_id, then group by type (e.g. mint or used) and then further group by
         // abbreviation.  So we can get a total for all "mint" stamps which can they be further broken down values for each grading.
