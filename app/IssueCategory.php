@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Grading extends Model
+class IssueCategory extends Model
 {
     protected $guarded = [];
 }

@@ -2305,6 +2305,231 @@ var MODAL_WIDTH = 656;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Gradings.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Gradings.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      gradings: this.gradingsProp,
+      addGradings: [{
+        abbreviation: '',
+        grading: '',
+        description: ''
+      }],
+      showUpdatedMessage: false,
+      showAddedMessage: false,
+      updateStampsErrors: {},
+      addStampsErrors: {}
+    };
+  },
+  props: ['gradingsProp'],
+  methods: {
+    addRow: function addRow() {
+      this.addGradings.push({
+        abbreviation: '',
+        grading: '',
+        description: ''
+      });
+    },
+    storeGradings: function storeGradings() {
+      var _this = this;
+
+      axios.post('/admin/gradings', {
+        gradings: this.addGradings
+      }).then(function (response) {
+        _this.gradings = response.data;
+        _this.addGradings = [{
+          abbreviation: '',
+          grading: '',
+          description: ''
+        }];
+        _this.addStampsErrors = {};
+        _this.showAddedMessage = true;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.addStampsErrors = error.response.data.errors;
+      });
+    },
+    updateGradings: function updateGradings() {
+      var _this2 = this;
+
+      axios.post('/admin/gradings', {
+        _method: 'patch',
+        gradings: this.gradings
+      }).then(function (response) {
+        _this2.updateStampsErrors = {};
+        _this2.showUpdatedMessage = true;
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.updateStampsErrors = error.response.data.errors;
+      });
+    },
+    removeGrading: function removeGrading(grading, index) {
+      var _this3 = this;
+
+      if (confirm("Are you sure you want to remove ".concat(grading.grading, "?"))) {
+        axios.post('/admin/gradings/' + grading.id, {
+          _method: 'delete',
+          grading: grading
+        }).then(function (response) {
+          Vue["delete"](_this3.gradings, index);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoginModal.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoginModal.vue?vue&type=script&lang=js& ***!
@@ -21359,7 +21584,7 @@ var render = function() {
               }
             ],
             staticClass:
-              "flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight",
+              "flex-1 border-2 border-dark bg-highlight text-white font-semibold p-2 text-center hover:bg-highlight",
             class: _vm.nextYear ? "mr-1" : "",
             attrs: { href: "" },
             on: {
@@ -21384,7 +21609,7 @@ var render = function() {
               }
             ],
             staticClass:
-              "flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight",
+              "flex-1 border-2 border-dark bg-highlight text-white font-semibold p-2 text-center hover:bg-highlight",
             class: _vm.previousYear ? "ml-1" : "",
             attrs: { href: "" },
             on: {
@@ -22148,6 +22373,546 @@ var render = function() {
       )
     ]
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Gradings.vue?vue&type=template&id=0798060a&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Gradings.vue?vue&type=template&id=0798060a& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h1", { staticClass: "text-4xl w-full border-b mb-2" }, [
+      _vm._v("Edit Gradings")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "mb-4" },
+      [
+        _vm._l(_vm.gradings, function(grading) {
+          return _c(
+            "div",
+            { key: grading.id, staticClass: "flex mb-1 items-start" },
+            [
+              _c("div", { staticClass: "flex flex-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.abbreviation,
+                      expression: "grading.abbreviation"
+                    }
+                  ],
+                  staticClass: "p-2 m-1",
+                  class: _vm.updateStampsErrors[grading.id + ".abbreviation"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Abbreviation" },
+                  domProps: {
+                    value: grading.abbreviation,
+                    textContent: _vm._s(grading.abbreviation)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "abbreviation", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.updateStampsErrors[grading.id + ".abbreviation"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.updateStampsErrors[
+                              grading.id + ".abbreviation"
+                            ][0]
+                          )
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.grading,
+                      expression: "grading.grading"
+                    }
+                  ],
+                  staticClass: "p-2 m-1",
+                  class: _vm.updateStampsErrors[grading.id + ".grading"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Grading" },
+                  domProps: {
+                    value: grading.grading,
+                    textContent: _vm._s(grading.grading)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "grading", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.updateStampsErrors[grading.id + ".grading"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.updateStampsErrors[grading.id + ".grading"][0]
+                          )
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col w-full" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.description,
+                      expression: "grading.description"
+                    }
+                  ],
+                  staticClass: "p-2 m-1 w-full",
+                  class: _vm.updateStampsErrors[grading.id + ".description"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Description" },
+                  domProps: {
+                    value: grading.description,
+                    textContent: _vm._s(grading.description)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "description", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.updateStampsErrors[grading.id + ".description"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.updateStampsErrors[
+                              grading.id + ".description"
+                            ][0]
+                          )
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex items-start p-1 ml-1" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "border rounded p-2 text-center bg-red-500 hover:bg-red-700 text-white",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.removeGrading(grading, grading.id)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "fill-current",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "24",
+                          height: "24",
+                          viewBox: "0 0 24 24"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center" }, [
+          _c("button", {
+            staticClass:
+              "mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight",
+            domProps: { textContent: _vm._s("Save Changes") },
+            on: { click: _vm.updateGradings }
+          }),
+          _vm._v(" "),
+          _vm.showUpdatedMessage
+            ? _c(
+                "span",
+                { staticClass: "flex tems-center ml-3 italic text-green-700" },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "fill-current mr-2",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "20",
+                        height: "20",
+                        viewBox: "0 0 32 32"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: { d: "M27 4l-15 15-7-7-5 5 12 12 20-20z" }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n                Saved Changes\n            ")
+                ]
+              )
+            : _vm._e()
+        ])
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("h1", { staticClass: "text-4xl w-full border-b mt-5 mb-2" }, [
+      _vm._v("Add Gradings")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _vm._l(_vm.addGradings, function(grading, index) {
+          return _c(
+            "div",
+            { key: index, staticClass: "flex mb-1 items-start" },
+            [
+              _c("div", { staticClass: "flex flex-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.abbreviation,
+                      expression: "grading.abbreviation"
+                    }
+                  ],
+                  staticClass: "p-2 m-1",
+                  class: _vm.addStampsErrors[index + ".abbreviation"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Abbreviation" },
+                  domProps: {
+                    value: grading.abbreviation,
+                    textContent: _vm._s(grading.abbreviation)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "abbreviation", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addStampsErrors[index + ".abbreviation"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.addStampsErrors[index + ".abbreviation"][0]
+                          )
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.grading,
+                      expression: "grading.grading"
+                    }
+                  ],
+                  staticClass: "p-2 m-1",
+                  class: _vm.addStampsErrors[index + ".grading"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Grading" },
+                  domProps: {
+                    value: grading.grading,
+                    textContent: _vm._s(grading.grading)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "grading", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addStampsErrors[index + ".grading"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.addStampsErrors[index + ".grading"][0])
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col w-full" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: grading.description,
+                      expression: "grading.description"
+                    }
+                  ],
+                  staticClass: "p-2 m-1 w-full",
+                  class: _vm.addStampsErrors[index + ".description"]
+                    ? "border-red-500 border-2"
+                    : "border border-highlight",
+                  attrs: { type: "text", placeholder: "Description" },
+                  domProps: {
+                    value: grading.description,
+                    textContent: _vm._s(grading.description)
+                  },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(grading, "description", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addStampsErrors[index + ".description"]
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "flex-1 p-2 italic text-xs font-bold text-red-500"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.addStampsErrors[index + ".description"][0])
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex items-start p-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "ml-2",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.addGradings.splice(index, 1)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "fill-current mr-2",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "20",
+                          height: "20",
+                          viewBox: "0 0 20 20"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex justify-between items-center" }, [
+          _c("div", { staticClass: "flex items-center" }, [
+            _c("button", {
+              staticClass:
+                "mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight",
+              domProps: { textContent: _vm._s("Add Gradings") },
+              on: { click: _vm.storeGradings }
+            }),
+            _vm._v(" "),
+            _vm.showAddedMessage
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "flex tems-center ml-3 italic text-green-700"
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "fill-current mr-2",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "20",
+                          height: "20",
+                          viewBox: "0 0 32 32"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: { d: "M27 4l-15 15-7-7-5 5 12 12 20-20z" }
+                        })
+                      ]
+                    ),
+                    _vm._v(
+                      "\n                    Added Gradings\n                "
+                    )
+                  ]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "flex border rounded p-2 text-center bg-green-500 hover:bg-green-600 text-white",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addRow()
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current mr-2",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "20",
+                    height: "20",
+                    viewBox: "0 0 20 20"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M11 9h4v2h-4v4h-2v-4h-4v-2h4v-4h2v4zM10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v("\n                Another Row\n            ")
+            ]
+          )
+        ])
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -35553,6 +36318,7 @@ Vue.component('register-modal', __webpack_require__(/*! ./components/RegisterMod
 Vue.component('search-bar', __webpack_require__(/*! ./components/SearchBar.vue */ "./resources/js/components/SearchBar.vue")["default"]);
 Vue.component('forgotten-password-modal', __webpack_require__(/*! ./components/ForgottenPasswordModal.vue */ "./resources/js/components/ForgottenPasswordModal.vue")["default"]);
 Vue.component('collection-page', __webpack_require__(/*! ./components/CollectionPage.vue */ "./resources/js/components/CollectionPage.vue")["default"]);
+Vue.component('gradings', __webpack_require__(/*! ./components/Gradings.vue */ "./resources/js/components/Gradings.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -36120,6 +36886,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgottenPasswordModal_vue_vue_type_template_id_5c353903___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgottenPasswordModal_vue_vue_type_template_id_5c353903___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Gradings.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Gradings.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Gradings.vue?vue&type=template&id=0798060a& */ "./resources/js/components/Gradings.vue?vue&type=template&id=0798060a&");
+/* harmony import */ var _Gradings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Gradings.vue?vue&type=script&lang=js& */ "./resources/js/components/Gradings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Gradings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Gradings.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Gradings.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Gradings.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Gradings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Gradings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Gradings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Gradings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Gradings.vue?vue&type=template&id=0798060a&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Gradings.vue?vue&type=template&id=0798060a& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Gradings.vue?vue&type=template&id=0798060a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Gradings.vue?vue&type=template&id=0798060a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gradings_vue_vue_type_template_id_0798060a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

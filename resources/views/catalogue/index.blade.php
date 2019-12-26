@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="flex">
-    <div class="mr-1 w-1/4">
+    <div class="mr-1 w-1/6">
         <browse-catalogue-dropdown
             v-bind:years="{{ $years }}"
             v-bind:year="{{ $year ?? date('Y') }}"

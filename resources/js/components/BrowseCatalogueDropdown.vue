@@ -5,7 +5,7 @@
             <a  href=""
                 @click.prevent="browseCatalogue(previousYear)"
                 v-show="previousYear"
-                class="flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight"
+                class="flex-1 border-2 border-dark bg-highlight text-white font-semibold p-2 text-center hover:bg-highlight"
                 :class="nextYear ? 'mr-1' : ''"
             >
                 Previous Year
@@ -13,7 +13,7 @@
             <a  href=""
                 @click.prevent="browseCatalogue(nextYear)"
                 v-show="nextYear"
-                class="flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight"
+                class="flex-1 border-2 border-dark bg-highlight text-white font-semibold p-2 text-center hover:bg-highlight"
                 :class="previousYear ? 'ml-1' : ''"
             >
                 Next Year

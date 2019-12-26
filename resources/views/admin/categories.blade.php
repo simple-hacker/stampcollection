@@ -8,7 +8,7 @@
         </div>
     
         <div class="flex-1 ml-1 bg-white rounded shadow">
-            Main content here.
+            Categories
     
         </div>
     </div>

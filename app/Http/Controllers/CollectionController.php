@@ -71,7 +71,7 @@ class CollectionController extends Controller
         ], $messages);
 
         
-        if ($attributes = $validator->validate()) {
+        if ($validator->validate()) {
 
             foreach($request->stampsToAdd as $attributes) {
                 auth()->user()->stamps()->attach($request->stamp['id'], $attributes);

@@ -45,4 +45,10 @@ Route::get('/settings/change-password', 'ChangePasswordController@index')->middl
 Route::post('/settings/change-password', 'ChangePasswordController@store')->middleware('auth')->name('password.update');
 
 Route::get('/admin', 'AdminController@index')->middleware('auth', 'role:admin')->name('admin.index');
+Route::get('/admin/gradings', 'GradingController@index')->middleware('auth', 'role:admin')->name('admin.gradings.index');
+Route::post('/admin/gradings', 'GradingController@store')->middleware('auth', 'role:admin')->name('admin.gradings.add');
+Route::patch('/admin/gradings', 'GradingController@update')->middleware('auth', 'role:admin')->name('admin.gradings.update');
+Route::delete('/admin/gradings/{grading}', 'GradingController@destroy')->middleware('auth', 'role:admin')->name('admin.gradings.delete');
+Route::get('/admin/categories', 'CategoryController@index')->middleware('auth', 'role:admin')->name('admin.categories.index');
+Route::get('/admin/monarchs', 'MonarchController@index')->middleware('auth', 'role:admin')->name('admin.monarchs.index');
 
