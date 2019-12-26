@@ -1860,21 +1860,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      browseYear: 0
+      showYear: this.year
     };
   },
-  props: {
-    years: {
-      type: Array,
-      required: true
-    },
-    year: {
-      type: Number
-    }
-  },
+  props: ['year', 'years'],
   methods: {
     browseCatalogue: function browseCatalogue(year) {
       location = '/catalogue/' + year;
@@ -2746,6 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -21326,109 +21333,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex w-full items-center" }, [
-    _c("div", { staticClass: "flex w-1/5 justify-center" }, [
-      _c(
-        "a",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.previousYear,
-              expression: "previousYear"
-            }
-          ],
-          staticClass:
-            "py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold",
-          attrs: { href: "" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.browseCatalogue(_vm.previousYear)
-            }
-          }
-        },
-        [_vm._v("\n            Previous Year\n        ")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex-1 flex justify-center items-center" }, [
+  return _c(
+    "div",
+    { staticClass: "flex flex-col bg-white shadow rounded sticky" },
+    [
       _c(
         "span",
-        { staticClass: "mr-4 p-2 text-xl font-semibold text-gray-700" },
-        [_vm._v("Browse Catalogue By Year")]
+        {
+          staticClass:
+            "mb-1 p-2 bg-darker text-xl font-bold text-white text-center p-4"
+        },
+        [_vm._v("Browse Catalogue")]
       ),
       _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.browseYear,
-              expression: "browseYear"
-            }
-          ],
-          staticClass:
-            "bg-white border-lg border-dark border-2 rounded py-3 px-6",
-          on: {
-            change: [
-              function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.browseYear = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              function($event) {
-                return _vm.browseCatalogue(_vm.browseYear)
+      _c("div", { staticClass: "flex mb-2" }, [
+        _c(
+          "a",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.previousYear,
+                expression: "previousYear"
               }
-            ]
-          }
-        },
+            ],
+            staticClass:
+              "flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight",
+            class: _vm.nextYear ? "mr-1" : "",
+            attrs: { href: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.browseCatalogue(_vm.previousYear)
+              }
+            }
+          },
+          [_vm._v("\n            Previous Year\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.nextYear,
+                expression: "nextYear"
+              }
+            ],
+            staticClass:
+              "flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight",
+            class: _vm.previousYear ? "ml-1" : "",
+            attrs: { href: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.browseCatalogue(_vm.nextYear)
+              }
+            }
+          },
+          [_vm._v("\n            Next Year\n        ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex flex-col max-h-screen overflow-y-scroll" },
         _vm._l(_vm.years, function(year) {
-          return _c("option", { key: year, domProps: { value: year } }, [
-            _vm._v(_vm._s(year))
-          ])
+          return _c("a", {
+            key: year,
+            staticClass:
+              "text-center py-2 px-4 border border-dark hover:text-highlight hover:border-highlight hover:bg-light mb-1",
+            class:
+              _vm.showYear == year ? "bg-highlight text-white" : "text-dark",
+            attrs: { href: "/collection/" + year },
+            domProps: { textContent: _vm._s(year) },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.browseCatalogue(year)
+              }
+            }
+          })
         }),
         0
       )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex w-1/5 justify-center" }, [
-      _c(
-        "a",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.nextYear,
-              expression: "nextYear"
-            }
-          ],
-          staticClass:
-            "py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold justify-end",
-          attrs: { href: "" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.browseCatalogue(_vm.nextYear)
-            }
-          }
-        },
-        [_vm._v("\n            Next Year\n        ")]
-      )
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -22770,7 +22763,7 @@ var render = function() {
                               _c("img", {
                                 staticClass: "h-16",
                                 attrs: {
-                                  src: "/" + stamp.searchable.image_src,
+                                  src: stamp.searchable.image_src,
                                   alt: stamp.title
                                 }
                               })
@@ -23153,23 +23146,31 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "flex flex-col bg-white rounded shadow" },
-    _vm._l(_vm.years, function(year) {
-      return _c("a", {
-        key: year,
+    [
+      _c("h3", {
         staticClass:
-          "text-center py-2 px-4 border border-dark hover:text-highlight hover:border-highlight hover:bg-light mb-1",
-        class: _vm.showYear == year ? "bg-highlight text-white" : "text-dark",
-        attrs: { href: "/collection/" + year },
-        domProps: { textContent: _vm._s(year) },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.$emit("change-year", year)
+          "mb-2 p-4 bg-darker text-white text-2xl font-bold text-center",
+        domProps: { textContent: _vm._s(_vm.showYear) }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.years, function(year) {
+        return _c("a", {
+          key: year,
+          staticClass:
+            "text-center py-2 px-4 border border-dark hover:text-highlight hover:border-highlight hover:bg-light mb-1",
+          class: _vm.showYear == year ? "bg-highlight text-white" : "text-dark",
+          attrs: { href: "/collection/" + year },
+          domProps: { textContent: _vm._s(year) },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.$emit("change-year", year)
+            }
           }
-        }
+        })
       })
-    }),
-    0
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -35885,15 +35886,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/CollectionPage.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CollectionPage_vue_vue_type_template_id_12ccfa10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollectionPage.vue?vue&type=template&id=12ccfa10& */ "./resources/js/components/CollectionPage.vue?vue&type=template&id=12ccfa10&");
 /* harmony import */ var _CollectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollectionPage.vue?vue&type=script&lang=js& */ "./resources/js/components/CollectionPage.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CollectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CollectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -35923,7 +35923,7 @@ component.options.__file = "resources/js/components/CollectionPage.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/CollectionPage.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['showBrowse' => true])
+@extends('layouts.app')
 
 @section('content')
     <div class="mb-4 bg-white rounded shadow">

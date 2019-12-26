@@ -1,22 +1,36 @@
 <template>
-    <div class="flex w-full items-center">
-        <div class="flex w-1/5 justify-center">
-            <a href="" @click.prevent="browseCatalogue(previousYear)" class="py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold" v-show="previousYear">
+    <div class="flex flex-col bg-white shadow rounded sticky">
+        <span class="mb-1 p-2 bg-darker text-xl font-bold text-white text-center p-4">Browse Catalogue</span>
+        <div class="flex mb-2">
+            <a  href=""
+                @click.prevent="browseCatalogue(previousYear)"
+                v-show="previousYear"
+                class="flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight"
+                :class="nextYear ? 'mr-1' : ''"
+            >
                 Previous Year
             </a>
-        </div>
-        <div class="flex-1 flex justify-center items-center">
-            <span class="mr-4 p-2 text-xl font-semibold text-gray-700">Browse Catalogue By Year</span>
-            <select class="bg-white border-lg border-dark border-2 rounded py-3 px-6" @change="browseCatalogue(browseYear)" v-model="browseYear">
-                <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-            </select>
-        </div>
-        <div class="flex w-1/5 justify-center">
-            <a href="" @click.prevent="browseCatalogue(nextYear)" class="py-2 px-4 rounded-lg border-dark border-2 text-dark hover:bg-blue-100 text-lg font-semibold justify-end" v-show="nextYear">
+            <a  href=""
+                @click.prevent="browseCatalogue(nextYear)"
+                v-show="nextYear"
+                class="flex-1 border-2 border-darker bg-dark text-white font-semibold p-2 text-center hover:bg-highlight"
+                :class="previousYear ? 'ml-1' : ''"
+            >
                 Next Year
             </a>
         </div>
-        
+        <div class="flex flex-col max-h-screen overflow-y-scroll">
+            <a
+                v-for="year in years"
+                :key="year"
+                :href="'/collection/'+year"
+                @click.prevent="browseCatalogue(year)"
+                class="text-center py-2 px-4 border border-dark hover:text-highlight hover:border-highlight hover:bg-light mb-1"
+                :class="(showYear == year) ? 'bg-highlight text-white' : 'text-dark'"
+                v-text="year"
+            >
+            </a>
+        </div>
     </div>
 </template>
 
@@ -24,18 +38,10 @@
     export default {
         data() {
             return {
-                browseYear: 0
+                showYear: this.year,
             }
         },
-        props: {
-            years: {
-                type: Array,
-                required: true,
-            },
-            year: {
-                type: Number,
-            }
-        },
+        props: ['year', 'years'],
         methods: {
             browseCatalogue(year) {
                 location = '/catalogue/'+year;

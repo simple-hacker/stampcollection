@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Issue;
+use App\Year;
 
 class CatalogueController extends Controller
 {
@@ -25,8 +26,9 @@ class CatalogueController extends Controller
         }
 
         $issues = Issue::where('year', $year)->orderBy('release_date', 'desc')->with('stamps')->get();
+        $years = Year::all()->sortByDesc('year')->pluck('year');
 
-        return view('catalogue.index', compact('year', 'issues'));
+        return view('catalogue.index', compact('year', 'years', 'issues'));
     }
 
     /**

@@ -1,7 +1,15 @@
-@extends('layouts.app', ['showBrowse' => true])
+@extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-col">
+
+<div class="flex">
+    <div class="mr-1 w-1/4">
+        <browse-catalogue-dropdown
+            v-bind:years="{{ $years }}"
+            v-bind:year="{{ $year ?? date('Y') }}"
+        />
+    </div>
+    <div class="flex-1 ml-1 flex-col">
         <div class="mb-4 p-4 bg-darker text-white rounded shadow">
             <div class="flex justify-between items-center relative">
                 <h1 class="text-4xl p-2 flex-1 text-center">Stamps for {{ $year }}</h1>

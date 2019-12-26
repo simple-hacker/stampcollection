@@ -32,7 +32,7 @@
                         :href="stamp.url"
                         class="flex hover:bg-dark hover:text-white p-1 items-center">
                         <div class="w-1/4 flex justify-center">
-                            <img :src="'/'+stamp.searchable.image_src" :alt="stamp.title" class="h-16">
+                            <img :src="stamp.searchable.image_src" :alt="stamp.title" class="h-16">
                         </div>
                         <div class="flex flex-col w-3/4 px-1">
                             <div v-text="stamp.title" class="font-semibold"></div>
