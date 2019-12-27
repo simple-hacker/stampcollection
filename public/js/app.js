@@ -2768,6 +2768,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var MODAL_WIDTH = 656;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LoginModal',
@@ -23911,7 +23917,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-6" }, [
+          _c("div", { staticClass: "mb-4" }, [
             _c(
               "label",
               {
@@ -23962,6 +23968,17 @@ var render = function() {
               }),
               0
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-6" }, [
+            _c("label", { staticClass: "inline-flex items-center" }, [
+              _c("input", {
+                staticClass: "p-4",
+                attrs: { type: "checkbox", name: "remember", id: "remember" }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "ml-2" }, [_vm._v("Remember me")])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "flex items-center justify-between" }, [
@@ -37673,6 +37690,7 @@ Vue.component('register-modal', __webpack_require__(/*! ./components/RegisterMod
 Vue.component('search-bar', __webpack_require__(/*! ./components/SearchBar.vue */ "./resources/js/components/SearchBar.vue")["default"]);
 Vue.component('forgotten-password-modal', __webpack_require__(/*! ./components/ForgottenPasswordModal.vue */ "./resources/js/components/ForgottenPasswordModal.vue")["default"]);
 Vue.component('collection-page', __webpack_require__(/*! ./components/CollectionPage.vue */ "./resources/js/components/CollectionPage.vue")["default"]);
+Vue.component('collection-modal', __webpack_require__(/*! ./components/CollectionModal */ "./resources/js/components/CollectionModal.vue")["default"]);
 Vue.component('gradings', __webpack_require__(/*! ./components/Gradings.vue */ "./resources/js/components/Gradings.vue")["default"]);
 Vue.component('issue-categories', __webpack_require__(/*! ./components/IssueCategories.vue */ "./resources/js/components/IssueCategories.vue")["default"]);
 Vue.component('monarchs', __webpack_require__(/*! ./components/Monarchs.vue */ "./resources/js/components/Monarchs.vue")["default"]);

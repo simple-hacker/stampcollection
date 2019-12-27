@@ -2,7 +2,7 @@
 
 @section('hero')
 
-<div class="container mx-auto py-4">
+<div class="w-1/3 mx-auto py-4">
         <div class="text-center shadow-md bg-dark rounded-t-lg">
                 <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Register') }}</h1>
         </div>

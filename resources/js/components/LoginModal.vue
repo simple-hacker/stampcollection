@@ -20,7 +20,7 @@
                     <span class="mt-2 text-xs text-red-500 italic font-bold" v-for="emailError in errors.email" v-bind:key="emailError" v-text="emailError"></span>
                 </div>
             </div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                     Password
                 </label>
@@ -35,6 +35,12 @@
                 <div class="flex flex-col">
                     <span class="mt-2 text-xs text-red-500 italic font-bold" v-for="passwordError in errors.password" v-bind:key="passwordError" v-text="passwordError"></span>
                 </div>
+            </div>
+            <div class="mb-6">
+                <label class="inline-flex items-center">
+                    <input class="p-4" type="checkbox" name="remember" id="remember">
+                    <span class="ml-2">Remember me</span>
+                </label>
             </div>
             <div class="flex items-center justify-between">
                 <button @click.prevent="submitForm()" type="submit" class="bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

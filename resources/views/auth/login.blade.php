@@ -2,7 +2,7 @@
 
 @section('hero')
 
-<div class="container mx-auto py-4">
+<div class="w-1/3 mx-auto py-4">
     <div class="text-center bg-dark rounded-t-lg">
         <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Login') }}</h1>
     </div>
@@ -18,7 +18,7 @@
                 <p class="mt-2 text-xs text-red-500 italic font-bold">{{ $message }}</p>
             @enderror
         </div>
-        <div class="mb-6">
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                 {{ __('Password') }}
             </label>
@@ -26,6 +26,12 @@
             @error('password')
                 <p class="mt-2 text-xs text-red-500 italic font-bold">{{ $message }}</p>
             @enderror
+        </div>
+        <div class="mb-6">
+            <label class="inline-flex items-center">
+                <input class="p-4" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                <span class="ml-2">Remember me</span>
+              </label>
         </div>
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-dark hover:bg-darker text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

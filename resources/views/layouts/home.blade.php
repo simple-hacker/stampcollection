@@ -42,7 +42,7 @@
         <div class="flex-1">
             {{-- Hero section --}}
             <div class="bg-darker">
-                @yield('hero')
+                    @yield('hero')
             </div>
 
             {{-- SVG waves for hero --}}

@@ -2,7 +2,7 @@
 
 @section('hero')
 
-<div class="container mx-auto py-4">
+<div class="w-1/3 mx-auto py-4">
     <div class="text-center bg-dark rounded-t-lg">
         <h1 class="text-xl text-white font-bold px-8 py-3">{{ __('Reset Password') }}</h1>
     </div>

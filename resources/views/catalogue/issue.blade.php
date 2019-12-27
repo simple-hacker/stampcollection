@@ -158,4 +158,7 @@
             </div>
         @endforeach
     </div>
+    <collection-modal
+        :gradings="{{ $gradings}} "
+    ></collection-modal>
 @endsection

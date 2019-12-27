@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use App\Year;
+use App\Grading;
 
 class CatalogueController extends Controller
 {
@@ -50,6 +51,8 @@ class CatalogueController extends Controller
         // Else just pass an empty array for guests.
         $collection = auth()->check() ? auth()->user()->stamps : [];
 
-        return view('catalogue.issue', compact('issue', 'collection'));
+        $gradings = Grading::all();     
+
+        return view('catalogue.issue', compact('issue', 'collection', 'gradings'));
     }
 }
