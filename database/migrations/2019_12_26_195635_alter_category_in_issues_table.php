@@ -17,8 +17,8 @@ class AlterCategoryInIssuesTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
         });
 
-        DB::update(`UPDATE issue SET category_id=1 WHERE category='Commemorative'`);
-        DB::update(`UPDATE issue SET category_id=2 WHERE category='Definitive'`);
+        DB::statement("UPDATE issues SET category_id=1 WHERE category='Commemorative'");
+        DB::statement("UPDATE issues SET category_id=2 WHERE category='Definitive'");
 
         Schema::table('issues', function (Blueprint $table) {
             $table->dropColumn('category');
@@ -36,8 +36,8 @@ class AlterCategoryInIssuesTable extends Migration
             $table->string('category')->nullable();
         });
 
-        DB::update(`UPDATE issue SET category='Commemorative' WHERE category_id=1`);
-        DB::update(`UPDATE issue SET category='Definitive' WHERE category_id=2`);
+        DB::statement("UPDATE issues SET category='Commemorative' WHERE category_id=1");
+        DB::statement("UPDATE issues SET category='Definitive' WHERE category_id=2");
 
         Schema::table('issues', function (Blueprint $table) {
             $table->dropColumn('category_id');

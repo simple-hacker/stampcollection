@@ -21,7 +21,7 @@ class Issue extends Model implements Searchable
         'release_date' => 'date:Y-m-d',
     ];
 
-    protected $with = ['monarch'];
+    protected $with = ['monarch', 'category'];
 
     protected $appends = ['slug', 'path'];
 
@@ -63,6 +63,16 @@ class Issue extends Model implements Searchable
     public function monarch()
     {
         return $this->belongsTo('App\Monarch');
+    }
+
+    /**
+    * A issue belongs to one issue category 
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function category()
+    {
+        return $this->belongsTo('App\IssueCategory');
     }
 
     /**

@@ -2,14 +2,15 @@
 
 @section('content')
 
-    <div class="flex">
-        <div class="w-1/6 mr-1 bg-white rounded shadow flex flex-col items-stretch">
+    <div class="flex items-start">
+        <div class="w-1/6 mr-1 bg-white rounded shadow flex flex-col p-2">
             @include('admin.navigation')
         </div>
     
-        <div class="flex-1 ml-1 bg-white rounded shadow">
-            Monarchs
-    
+        <div class="flex-1 ml-1 bg-white rounded shadow p-4">
+            <monarchs
+                :monarchs-prop="{{ $monarchs }}"
+            ></monarchs>
         </div>
     </div>
 @endsection

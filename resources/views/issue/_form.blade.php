@@ -51,11 +51,16 @@
     </div>
     <div class="flex items-center mb-6">
         <div class="w-1/3">
-            <label for="category" class="text-gray-500 font-bold p-4">Category</label>
+            <label for="category_id" class="text-gray-500 font-bold p-4">Category</label>
         </div>
         <div class="flex flex-col w-2/3">
-            <input id="category" name="category" type="text" value="{{ old('category', $issue->category) }}" placeholder="Category e.g. Commemorative, Definitive" class="w-full p-2 rounded border shadow @error('category') border-red-500 @enderror">
-            @error('category')
+            <select name="category_id" class="w-full p-2 bg-white rounded border shadow @error('category_id') border-red-500 @enderror">
+                <option hidden selected value=""> Select a category </option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if($category->id === $issue->category_id) selected @endif>{{ $category->category }}</option>
+                @endforeach
+            </select>
+            @error('category_id')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror
         </div>

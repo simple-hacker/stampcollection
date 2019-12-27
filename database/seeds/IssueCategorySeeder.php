@@ -11,6 +11,9 @@ class IssueCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('issue_categories')->insert([
+            ['category' => 'Commemorative'],
+            ['category' => 'Definitive']
+        ]);
     }
 }

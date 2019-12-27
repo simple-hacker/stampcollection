@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignFields extends Migration
+class AddMonarchForeignKeyOnIssuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,6 +14,7 @@ class AddForeignFields extends Migration
     public function up()
     {
         Schema::table('issues', function (Blueprint $table) {
+            $table->dropForeign(['monarch_id']);
             $table->foreign('monarch_id')->references('id')->on('monarchs')->onDelete('set null');
         });
     }
@@ -27,7 +28,6 @@ class AddForeignFields extends Migration
     {
         Schema::table('issues', function (Blueprint $table) {
             $table->dropForeign(['monarch_id']);
-            $table->dropColumn('monarch_id');
         });
     }
 }

@@ -35,6 +35,8 @@ Vue.component('search-bar', require('./components/SearchBar.vue').default);
 Vue.component('forgotten-password-modal', require('./components/ForgottenPasswordModal.vue').default);
 Vue.component('collection-page', require('./components/CollectionPage.vue').default);
 Vue.component('gradings', require('./components/Gradings.vue').default);
+Vue.component('issue-categories', require('./components/IssueCategories.vue').default);
+Vue.component('monarchs', require('./components/Monarchs.vue').default);
 
 
 /**

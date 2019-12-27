@@ -8,6 +8,6 @@ class Monarch extends Model
 {
     protected $guarded = [];
 
-    // This is the correct spelling rather than Larave's monarches
+    // This is the correct spelling rather than Laravel's monarches
     protected $table = 'monarchs';
 }

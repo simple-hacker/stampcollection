@@ -84,7 +84,7 @@
         <div class="flex flex-col items-center text-center p-2 text-sm font-gray-800">
             @if($issue->subject)<p class="mt-1 mb-3">{{ $issue->subject }}</p>@endif
             @if($issue->monarch){{ $issue->monarch->abbreviation }} @if(!$issue->category)<br>@endif @endif
-            @if($issue->category){{ $issue->category }}<br>@endif
+            @if($issue->category){{ $issue->category->category }}<br>@endif
             @if($issue->designer)Designed by {{ $issue->designer }}<br>@endif
             @if($issue->printer)Printed by {{ $issue->printer }}<br>@endif
             @if($issue->print_process)Print Process {{ $issue->print_process }}<br>@endif

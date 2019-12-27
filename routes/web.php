@@ -45,10 +45,19 @@ Route::get('/settings/change-password', 'ChangePasswordController@index')->middl
 Route::post('/settings/change-password', 'ChangePasswordController@store')->middleware('auth')->name('password.update');
 
 Route::get('/admin', 'AdminController@index')->middleware('auth', 'role:admin')->name('admin.index');
+
 Route::get('/admin/gradings', 'GradingController@index')->middleware('auth', 'role:admin')->name('admin.gradings.index');
 Route::post('/admin/gradings', 'GradingController@store')->middleware('auth', 'role:admin')->name('admin.gradings.add');
 Route::patch('/admin/gradings', 'GradingController@update')->middleware('auth', 'role:admin')->name('admin.gradings.update');
 Route::delete('/admin/gradings/{grading}', 'GradingController@destroy')->middleware('auth', 'role:admin')->name('admin.gradings.delete');
-Route::get('/admin/categories', 'CategoryController@index')->middleware('auth', 'role:admin')->name('admin.categories.index');
+
+Route::get('/admin/categories', 'IssueCategoryController@index')->middleware('auth', 'role:admin')->name('admin.categories.index');
+Route::post('/admin/categories', 'IssueCategoryController@store')->middleware('auth', 'role:admin')->name('admin.categories.add');
+Route::patch('/admin/categories', 'IssueCategoryController@update')->middleware('auth', 'role:admin')->name('admin.categories.update');
+Route::delete('/admin/categories/{category}', 'IssueCategoryController@destroy')->middleware('auth', 'role:admin')->name('admin.categories.delete');
+
 Route::get('/admin/monarchs', 'MonarchController@index')->middleware('auth', 'role:admin')->name('admin.monarchs.index');
+Route::post('/admin/monarchs', 'MonarchController@store')->middleware('auth', 'role:admin')->name('admin.monarchs.add');
+Route::patch('/admin/monarchs', 'MonarchController@update')->middleware('auth', 'role:admin')->name('admin.monarchs.update');
+Route::delete('/admin/monarchs/{monarch}', 'MonarchController@destroy')->middleware('auth', 'role:admin')->name('admin.monarchs.delete');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Year;
 use App\Issue;
 use App\Monarch;
+use App\IssueCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -92,8 +93,9 @@ class IssueController extends Controller
     public function edit(Issue $issue)
     {
         $monarchs = Monarch::all();
+        $categories = IssueCategory::all();
         
-        return view('issue.edit', compact('issue', 'monarchs'));
+        return view('issue.edit', compact('issue', 'monarchs', 'categories'));
     }
 
     /**
@@ -154,7 +156,7 @@ class IssueController extends Controller
             'release_date' => 'required',
             'subject' => 'nullable|min:2',
             'monarch_id' => 'nullable|integer|exists:monarchs,id',
-            'category' => 'nullable|min:2',
+            'category_id' => 'nullable|integer|exists:issue_categories,id',
             'designer' => 'nullable|min:2',
             'printer' => 'nullable|min:2',
             'print_process' => 'nullable|min:1',
