@@ -1919,6 +1919,11 @@ var VueScrollTo = __webpack_require__(/*! vue-scrollto */ "./node_modules/vue-sc
       }
     }
   },
+  watch: {
+    showYear: function showYear() {
+      this.typeYear = this.showYear;
+    }
+  },
   methods: {
     changeYear: function changeYear() {
       if (this.typeYear.toString().length === 4) {

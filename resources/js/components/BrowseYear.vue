@@ -81,6 +81,11 @@ export default {
             }
         }
     },
+    watch: {
+        showYear: function() {
+            this.typeYear = this.showYear;
+        }
+    },
     methods: {
         changeYear() {
             if (this.typeYear.toString().length === 4) {
