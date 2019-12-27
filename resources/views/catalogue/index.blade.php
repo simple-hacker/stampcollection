@@ -2,8 +2,15 @@
 
 @section('content')
 
-<div class="flex">
-    <div class="mr-1 w-1/6">
+    <catalogue-page
+        :catalogue="{{ $catalogue }}"
+        :years="{{ $years }}"
+        :year="{{ $year }}"
+        :admin="{{ $admin ? 'true' : 'false' }}"
+    >
+    </catalogue-page>
+
+    {{-- <div class="mr-1 w-1/6">
         <browse-catalogue-dropdown
             v-bind:years="{{ $years }}"
             v-bind:year="{{ $year ?? date('Y') }}"
@@ -14,10 +21,8 @@
             <div class="flex justify-between items-center relative">
                 <h1 class="text-4xl p-2 flex-1 text-center">Stamps for {{ $year }}</h1>
                 @role('admin')
-                {{-- Begin dropdown component --}}
                 <div class="absolute top-0 right-0 flex flex-col items-end">
                     <dropdown-menu>
-                        {{-- Dropdown menu button --}}
                         <template v-slot:dropdown-toggle>
                             <button class="flex border bg-white hover:bg-gray-100 text-dark rounded shadow px-4 py-2 mb-1">
                                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -25,7 +30,6 @@
                                 </svg>
                             </button>
                         </template>
-                        {{-- Dropdown menu items --}}
                         <template v-slot:dropdown-contents>
                             <div class="flex flex-col items-stretch">
                                 @can('scrape year')
@@ -52,14 +56,12 @@
                         </template>
                     </dropdown-menu>
                 </div>
-                {{-- End dropdown component --}}
                 @endrole
             </div>
         </div>
         @foreach ($issues as $issue)
             <div class="flex flex-col mb-8 bg-white rounded shadow">
                 <a href="{{ $issue->path }}">
-                    {{-- Issue header --}}
                     <div class="flex justify-between items-center relative px-4 py-2 bg-dark">
                         <div>
                             <h2 class="text-white text-2xl">{{ $issue->title }}</h2>
@@ -69,10 +71,8 @@
                         </div>
                         @role('admin')
                         @if($issue->cgbs_issue)
-                        {{-- Begin dropdown component --}}
                         <div class="flex flex-col items-end">
                             <dropdown-menu>
-                                {{-- Dropdown menu button --}}
                                 <template v-slot:dropdown-toggle>
                                     <button class="flex border bg-white hover:bg-gray-100 rounded shadow px-4 py-2 mb-1">
                                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -80,7 +80,6 @@
                                         </svg>
                                     </button>
                                 </template>
-                                {{-- Dropdown menu items --}}
                                 <template v-slot:dropdown-contents>
                                     <div class="flex flex-col items-stretch">
                                         @isset($issue->cgbs_issue)
@@ -101,11 +100,9 @@
                                 </template>
                             </dropdown-menu>
                         </div>
-                        {{-- End dropdown component --}}
                         @endif
                         @endrole
                     </div>
-                    {{-- End issue header --}}
                 </a>
                 <div class="px-4 py-2">
                     <div class="flex">
@@ -135,5 +132,5 @@
                 </div>
             </div>
         @endforeach
-    </div>
+    </div> --}}
 @endsection

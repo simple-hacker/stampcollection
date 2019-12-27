@@ -26,10 +26,18 @@ class CatalogueController extends Controller
             abort(404);
         }
 
-        $issues = Issue::where('year', $year)->orderBy('release_date', 'desc')->with('stamps')->get();
-        $years = Year::all()->sortByDesc('year')->pluck('year');
+        $catalogue = Issue::orderBy('release_date', 'desc')
+                            ->with('stamps')
+                            ->get()
+                            ->keyBy('id')
+                            ->groupBy('year', true)
+                            ->sortByDesc('year');
+        
+        $years = Year::orderBy('year', 'desc')->pluck('year');
 
-        return view('catalogue.index', compact('year', 'years', 'issues'));
+        $admin = auth()->user()->hasRole('admin');
+
+        return view('catalogue.index', compact('year', 'years', 'catalogue', 'admin'));
     }
 
     /**
@@ -51,7 +59,7 @@ class CatalogueController extends Controller
         // Else just pass an empty array for guests.
         $collection = auth()->check() ? auth()->user()->stamps : [];
 
-        $gradings = Grading::all();     
+        $gradings = Grading::all();
 
         return view('catalogue.issue', compact('issue', 'collection', 'gradings'));
     }

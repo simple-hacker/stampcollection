@@ -8,12 +8,13 @@
         </div>
 
         <div class="flex">
-            <div class="mr-1 w-1/5">
-                <collection-browse
-                    :years="Object.keys(collection).reverse()"
+            <div class="mr-1 w-1/6">
+                <browse-year
+                    :years="Object.keys(collection).reverse().map(Number)"
                     :showYear="showYear"
+                    :href="'/collection/'"
                     v-on:change-year="changeYear"
-                ></collection-browse>
+                ></browse-year>
             </div>
             <div class="flex-1 ml-1">
                 <collection
@@ -35,7 +36,7 @@
 
 import Collection from './collection/Collection.vue'
 import CollectionValues from './collection/CollectionValues.vue'
-import CollectionBrowse from './collection/CollectionBrowse.vue'
+import BrowseYear from './BrowseYear.vue'
 import CollectionModal from './CollectionModal.vue'
 
 export default {
@@ -51,7 +52,7 @@ export default {
     components: {
         'collection' : Collection,
         'collection-values' : CollectionValues,
-        'collection-browse' : CollectionBrowse,
+        'browse-year' : BrowseYear,
         'collection-modal' : CollectionModal,
     },
     methods: {

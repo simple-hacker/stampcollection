@@ -39,8 +39,9 @@ class IssueController extends Controller
         $issue = new Issue;
 
         $monarchs = Monarch::all();
+        $categories = IssueCategory::all();
 
-        return view('issue.create', compact('year', 'set_release_date', 'issue', 'monarchs'));
+        return view('issue.create', compact('year', 'set_release_date', 'issue', 'monarchs', 'categories'));
     }
 
     /**
