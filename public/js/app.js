@@ -1892,15 +1892,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 var VueScrollTo = __webpack_require__(/*! vue-scrollto */ "./node_modules/vue-scrollto/vue-scrollto.js");
 
-var options = {
-  container: '#years',
-  easing: 'ease-in',
-  offset: -60,
-  force: true,
-  cancelable: true,
-  x: false,
-  y: true
-};
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BrowseYear',
   data: function data() {
@@ -1933,7 +1924,19 @@ var options = {
       if (this.typeYear.toString().length === 4) {
         if (this.years.includes(this.typeYear)) {
           this.$emit('change-year', this.typeYear);
-          this.$scrollTo('#browse_' + this.typeYear, 200, options);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          this.$scrollTo('#browse_' + this.typeYear, 350, {
+            container: '#years',
+            easing: 'ease-in',
+            offset: -60,
+            force: true,
+            cancelable: true,
+            x: false,
+            y: true
+          });
         }
       }
     }

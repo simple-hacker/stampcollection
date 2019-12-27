@@ -52,17 +52,7 @@
 
 <script>
 
-    const VueScrollTo = require('vue-scrollto');
-
-    const options = {
-        container: '#years',
-        easing: 'ease-in',
-        offset: -60,
-        force: true,
-        cancelable: true,
-        x: false,
-        y: true
-    }
+var VueScrollTo = require('vue-scrollto');
 
 export default {
     name: 'BrowseYear',
@@ -97,7 +87,17 @@ export default {
                 if (this.years.includes(this.typeYear)) {
                     this.$emit('change-year', this.typeYear);
 
-                    this.$scrollTo('#browse_'+this.typeYear, 200, options)
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    this.$scrollTo('#browse_'+this.typeYear, 350, {
+                            container: '#years',
+                            easing: 'ease-in',
+                            offset: -60,
+                            force: true,
+                            cancelable: true,
+                            x: false,
+                            y: true
+                        });
                 }
             }
         },

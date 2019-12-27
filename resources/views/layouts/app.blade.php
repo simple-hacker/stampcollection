@@ -21,6 +21,7 @@
 </head>
 <body>
     <div id="app" class="flex flex-col min-h-screen {{ $theme }}">
+        <div id="top"></div>
         <nav class="flex items-center justify-between p-4 mb-1 bg-darker text-white shadow">
             <div class="text-3xl font-medium">
                 <a href="{{ url('/collection') }}">
