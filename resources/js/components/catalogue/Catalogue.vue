@@ -46,10 +46,10 @@
             :key="issue.id"
             class="flex flex-col mb-8 bg-white rounded shadow">
                 <a :href="issue.path">
-                    <div class="flex justify-between items-center relative px-4 py-2 bg-dark">
+                    <div class="flex justify-between items-center relative px-4 py-2 border border-darker bg-dark hover:bg-highlight hover:border-dark">
                         <div>
                             <h2 class="text-white text-2xl" v-text="issue.title"></h2>
-                            <small class="mb-3 text-white" v-if="issue.release_date" v-text="'Released on '+issue.release_date"></small>
+                            <small class="mb-3 text-white" v-if="issue.release_date" v-text="'Released on '+convertDate(issue.release_date)"></small>
                         </div>
                         <div
                             v-if="admin && issue.cgbs_issue" 
@@ -115,11 +115,13 @@
         methods: {
             reduceStamps(stamps) {
                 return stamps.slice(0, 5);
+            },
+            convertDate(date) {
+                date = new Date(date);
+                // Jesus fucking christ it's 2019 and you still have to format a date manually. PHP > JS
+                return date.toLocaleString('default', { month: 'long' }) + ' ' + date.getDate() + ', ' + date.getFullYear();
             }
         },
-        created() {
-            console.log(this.catalogue);
-        }
     }
 </script>
 

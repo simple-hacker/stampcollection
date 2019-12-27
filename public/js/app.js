@@ -3349,15 +3349,19 @@ __webpack_require__.r(__webpack_exports__);
     search: function search() {
       var _this = this;
 
-      axios.get('/search/' + this.query).then(function (response) {
-        _this.stamps = response.data.stamps || [];
-        _this.issues = response.data.issues || [];
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.query != null) {
+        axios.get('/search/' + this.query).then(function (response) {
+          _this.stamps = response.data.stamps || [];
+          _this.issues = response.data.issues || [];
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     submit: function submit() {
-      location = '/search/' + this.query;
+      if (this.query != null) {
+        location = '/search/' + this.query;
+      }
     }
   }
 });
@@ -3488,10 +3492,14 @@ var STAMPS_TO_SHOW = 5;
   methods: {
     reduceStamps: function reduceStamps(stamps) {
       return stamps.slice(0, 5);
+    },
+    convertDate: function convertDate(date) {
+      date = new Date(date); // Jesus fucking christ it's 2019 and you still have to format a date manually. PHP > JS
+
+      return date.toLocaleString('default', {
+        month: 'long'
+      }) + ' ' + date.getDate() + ', ' + date.getFullYear();
     }
-  },
-  created: function created() {
-    console.log(this.catalogue);
   }
 });
 
@@ -25575,7 +25583,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "flex justify-between items-center relative px-4 py-2 bg-dark"
+                    "flex justify-between items-center relative px-4 py-2 border border-darker bg-dark hover:bg-highlight hover:border-dark"
                 },
                 [
                   _c("div", [
@@ -25589,7 +25597,8 @@ var render = function() {
                           staticClass: "mb-3 text-white",
                           domProps: {
                             textContent: _vm._s(
-                              "Released on " + issue.release_date
+                              "Released on " +
+                                _vm.convertDate(issue.release_date)
                             )
                           }
                         })
@@ -25827,7 +25836,7 @@ var render = function() {
             "a",
             {
               staticClass:
-                "flex justify-between items-center px-4 py-2 bg-dark text-white mb-1",
+                "flex justify-between items-center px-4 py-2 text-white border border-darker bg-dark hover:bg-highlight hover:border-dark mb-1",
               attrs: { href: issue.path }
             },
             [

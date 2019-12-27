@@ -5,7 +5,7 @@
             :key="issue.id"
             class="mb-4 bg-white rounded shadow">
             <!-- Header and link -->
-            <a :href="issue.path" class="flex justify-between items-center px-4 py-2 bg-dark text-white mb-1">
+            <a :href="issue.path" class="flex justify-between items-center px-4 py-2 text-white border border-darker bg-dark hover:bg-highlight hover:border-dark mb-1">
                 <!-- Issue Title and Date -->
                 <div class="flex flex-col">
                     <h2 class="text-2xl">{{ issue.title }}</h2>

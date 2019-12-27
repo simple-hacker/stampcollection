@@ -94,17 +94,21 @@
         },
         methods: {
             search() {
-                axios.get('/search/'+this.query)
-                    .then(response => {
-                        this.stamps = response.data.stamps || [];
-                        this.issues = response.data.issues || [];
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
+                if (this.query != null) {
+                    axios.get('/search/'+this.query)
+                        .then(response => {
+                            this.stamps = response.data.stamps || [];
+                            this.issues = response.data.issues || [];
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
             },
             submit() {
-                location = '/search/'+this.query;
+                if (this.query != null) {
+                    location = '/search/'+this.query;
+                }
             }
         }
     }
