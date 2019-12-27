@@ -84,18 +84,19 @@
                     <div
                         v-for="stamp in reduceStamps(issue.stamps)"
                         :key="stamp.id"
-                        class="flex flex-col items-center justify-center mr-1 p-1 border">
+                        class="flex flex-col items-center justify-center mr-1 p-1 border w-1/6">
                         <img :src="stamp.image_src" :alt="stamp.title" class="h-20 mb-1">
-                        <p class="italic" v-if="stamp.sg_number" v-text="stamp.prefixedSgBumber"></p>
+                        <p class="italic" v-if="stamp.sg_number" v-text="stamp.prefixedSgNumber"></p>
                         <p class="italic" v-if="stamp.sg_illustration" v-text="stamp.sg_illustration"></p>
                         <p class="text-sm" v-text="stamp.title"></p>
                     </div>
-                    <div
+                    <a
                         v-if="(issue.stamps.length - stampsToShow) > 0"
-                        class="flex flex-col items-center justify-center mr-1 p-1 border"
+                        :href="issue.path"
+                        class="flex flex-col items-center justify-center mr-1 p-1 border w-1/6 hover:bg-light hover:border-highlight"
                     >
                         <p class="p-4 text-4xl" v-text="'+'+(issue.stamps.length - stampsToShow)"></p>
-                    </div>
+                    </a>
                 </div>
             </div>
     </div>
@@ -116,6 +117,9 @@
                 return stamps.slice(0, 5);
             }
         },
+        created() {
+            console.log(this.catalogue);
+        }
     }
 </script>
 

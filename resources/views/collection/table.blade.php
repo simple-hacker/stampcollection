@@ -23,7 +23,7 @@
 
     <table class="border border-collapse">
         <tr>
-            <th class="py-1 px-2 border">Issue Date</th>
+            <th class="py-1 px-2 border w-32">Issue Date</th>
             <th class="py-1 px-2 border">Issue Title</th>
             <th class="py-1 px-2 border">Stanley Gibbons</th>
             <th class="py-1 px-2 border">Face Value</th>
@@ -35,7 +35,7 @@
         @foreach ($stamps as $stamp)
             @foreach($stamp as $data)
             <tr>
-                <td class="py-1 px-2 border">{{ $data['stamp']['issue']['release_date'] }}</td>
+                <td class="py-1 px-2 border w-32"><strong>{{ date("Y", strtotime($data['stamp']['issue']['release_date'])) }}</strong> ({{ date("j M", strtotime($data['stamp']['issue']['release_date'])) }})</td>
                 <td class="py-1 px-2 border">{{ $data['stamp']['issue']['title'] }}</td>
                 <td class="py-1 px-2 border">{{ $data['stamp']['sg_number'] }}</td>
 

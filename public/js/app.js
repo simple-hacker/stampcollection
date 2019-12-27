@@ -3476,6 +3476,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var STAMPS_TO_SHOW = 5;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3488,6 +3489,9 @@ var STAMPS_TO_SHOW = 5;
     reduceStamps: function reduceStamps(stamps) {
       return stamps.slice(0, 5);
     }
+  },
+  created: function created() {
+    console.log(this.catalogue);
   }
 });
 
@@ -25726,7 +25730,7 @@ var render = function() {
                     {
                       key: stamp.id,
                       staticClass:
-                        "flex flex-col items-center justify-center mr-1 p-1 border"
+                        "flex flex-col items-center justify-center mr-1 p-1 border w-1/6"
                     },
                     [
                       _c("img", {
@@ -25738,7 +25742,7 @@ var render = function() {
                         ? _c("p", {
                             staticClass: "italic",
                             domProps: {
-                              textContent: _vm._s(stamp.prefixedSgBumber)
+                              textContent: _vm._s(stamp.prefixedSgNumber)
                             }
                           })
                         : _vm._e(),
@@ -25762,10 +25766,11 @@ var render = function() {
                 _vm._v(" "),
                 issue.stamps.length - _vm.stampsToShow > 0
                   ? _c(
-                      "div",
+                      "a",
                       {
                         staticClass:
-                          "flex flex-col items-center justify-center mr-1 p-1 border"
+                          "flex flex-col items-center justify-center mr-1 p-1 border w-1/6 hover:bg-light hover:border-highlight",
+                        attrs: { href: issue.path }
                       },
                       [
                         _c("p", {
