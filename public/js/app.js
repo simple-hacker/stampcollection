@@ -26795,7 +26795,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "flex flex-col flex-1 items-start mr-1 p-1 border"
+                        "flex flex-col flex-1 items-center justify-start mr-1 p-1 border"
                     },
                     [
                       _c("img", {
