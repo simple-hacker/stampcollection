@@ -26795,7 +26795,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "flex flex-col flex-1 items-center mr-1 p-1 border"
+                        "flex flex-col flex-1 items-start mr-1 p-1 border"
                     },
                     [
                       _c("img", {
@@ -26805,7 +26805,7 @@ var render = function() {
                       _vm._v(" "),
                       stamp.prefixedSgNumber
                         ? _c("p", {
-                            staticClass: "italic",
+                            staticClass: "italic w-full text-center",
                             domProps: {
                               innerHTML: _vm._s(stamp.prefixedSgNumber)
                             }
@@ -26814,7 +26814,7 @@ var render = function() {
                       _vm._v(" "),
                       stamp.sg_illustration
                         ? _c("p", {
-                            staticClass: "italic",
+                            staticClass: "italic w-full text-center",
                             domProps: {
                               innerHTML: _vm._s(stamp.sg_illustration)
                             }
@@ -26822,7 +26822,7 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _c("p", {
-                        staticClass: "text-sm flex-1",
+                        staticClass: "text-sm w-full text-center",
                         domProps: { innerHTML: _vm._s(stamp.title) }
                       }),
                       _vm._v(" "),

@@ -38,11 +38,11 @@
             <!-- Stamps -->
             <div class="flex flex-wrap items-start px-4 py-2">
                 <button v-for="stamp in issue.stamps" :key="stamp.id" @click.prevent="$modal.show('collection', {stamp: stamp})" class="flex min-w-1/6 max-w-1/5">
-                    <div class="flex flex-col flex-1 items-center mr-1 p-1 border">
+                    <div class="flex flex-col flex-1 items-start mr-1 p-1 border">
                         <img :src="stamp.image_src" :alt="stamp.title" class="h-20 mb-2">
-                        <p v-if="stamp.prefixedSgNumber" class="italic" v-html="stamp.prefixedSgNumber"></p>
-                        <p v-if="stamp.sg_illustration" class="italic" v-html="stamp.sg_illustration"></p>
-                        <p class="text-sm flex-1" v-html="stamp.title"></p>
+                        <p v-if="stamp.prefixedSgNumber" class="italic w-full text-center" v-html="stamp.prefixedSgNumber"></p>
+                        <p v-if="stamp.sg_illustration" class="italic w-full text-center" v-html="stamp.sg_illustration"></p>
+                        <p class="text-sm w-full text-center" v-html="stamp.title"></p>
                         <div class="flex flex-wrap justify-center border-t p-2">
                             <div v-for="data in collectedStamps[stamp.id]" :key="data.id">
                                 <div :title="data[0].grading.grading+'\r\n'+data[0].grading.description"
