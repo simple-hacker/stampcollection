@@ -153,9 +153,6 @@
 
                         this.stampsToAddErrors = {};
 
-                        // Maybe emit a updatedCollection to update the collection data behind the modal.
-                        // Especially on the /collection page.
-                        // Could update the total value of collection in background too.
                         this.$emit('updated-collection');
                     })
                     .catch(error => {

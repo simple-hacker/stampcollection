@@ -61,3 +61,5 @@ Route::post('/admin/monarchs', 'MonarchController@store')->middleware('auth', 'r
 Route::patch('/admin/monarchs', 'MonarchController@update')->middleware('auth', 'role:admin')->name('admin.monarchs.update');
 Route::delete('/admin/monarchs/{monarch}', 'MonarchController@destroy')->middleware('auth', 'role:admin')->name('admin.monarchs.delete');
 
+Route::get('/admin/stamps/{year?}', 'StampController@showMultiple')->middleware('auth', 'role:admin')->name('admin.stamps.index');
+Route::post('/admin/stamps', 'StampController@updateMultiple')->middleware('auth', 'role:admin')->name('admin.stamps.update');

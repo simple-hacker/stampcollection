@@ -38,6 +38,8 @@ Vue.component('collection-modal', require('./components/CollectionModal').defaul
 Vue.component('gradings', require('./components/Gradings.vue').default);
 Vue.component('issue-categories', require('./components/IssueCategories.vue').default);
 Vue.component('monarchs', require('./components/Monarchs.vue').default);
+Vue.component('browse-year', require('./components/BrowseYear.vue').default);
+Vue.component('stamp-edit-page', require('./components/StampEditPage.vue').default);
 
 
 /**

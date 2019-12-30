@@ -5,14 +5,12 @@
                 <browse-year
                     :years="years"
                     :showYear="showYear"
-                    :href="'/catalogue/'"
                     v-on:change-year="changeYear"
                 ></browse-year>
             </div>
             <div class="flex-1 ml-1">
                 <catalogue
                     :catalogue="catalogueData[showYear]"
-                    :admin="admin || false"
                     :year="showYear"
                 ></catalogue>
             </div>
@@ -22,10 +20,10 @@
 
 <script>
 
-import Catalogue from './catalogue/Catalogue.vue'
+import Catalogue from './admin/Catalogue.vue'
 
 export default {
-    name: 'CataloguePage',
+    name: 'StampEditPage',
     data() {
         return {
             showYear: this.year,

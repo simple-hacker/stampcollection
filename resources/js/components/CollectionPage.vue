@@ -36,7 +36,6 @@
 
 import Collection from './collection/Collection.vue'
 import CollectionValues from './collection/CollectionValues.vue'
-import BrowseYear from './BrowseYear.vue'
 import CollectionModal from './CollectionModal.vue'
 
 export default {
@@ -52,7 +51,6 @@ export default {
     components: {
         'collection' : Collection,
         'collection-values' : CollectionValues,
-        'browse-year' : BrowseYear,
         'collection-modal' : CollectionModal,
     },
     methods: {

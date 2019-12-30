@@ -164,7 +164,7 @@ class IssueController extends Controller
             'size' => 'nullable|min:1',
             'perforations' => 'nullable|min:1',
             'gum' => 'nullable|min:1',
-            'description' => 'nullable|min:3',
+            'description' => 'nullable|min:1',
         ]);
     }
 }

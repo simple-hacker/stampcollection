@@ -16,6 +16,10 @@ module.exports = {
         'highlight': 'var(--highlight-color)',
         'light' : 'var(--light-color)'
       },
+      width: {
+        '1/7' : '14.28%',
+        '2/7' : '28.56%',
+      },
       minWidth: {
         '1/8' : '12.5%',
         '1/7' : '14.28%',

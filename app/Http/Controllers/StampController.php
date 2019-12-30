@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Year;
 use App\Issue;
 use App\Stamp;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class StampController extends Controller
 {
@@ -176,11 +178,82 @@ class StampController extends Controller
             'title' => 'required|min:3|max:255',
             'sg_number' => 'nullable|alpha_num|min:1',
             'sg_illustration' => 'nullable|string|min:1',
-            'description' => 'nullable|min:3',
+            'description' => 'nullable|min:1',
             'face_value' => 'nullable|numeric|min:0',
             'mint_value' => 'nullable|numeric|min:0',
             'used_value' => 'nullable|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg'
         ]);
+    }
+
+    /**
+     * Show list of stamps for mass editing.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showMultiple($year = null)
+    {
+        if (!isset($year)) {
+            $year = date("Y");
+        }
+
+        $catalogue = Issue::orderBy('release_date', 'desc')
+                            ->with('stamps')
+                            ->get()
+                            ->keyBy('id')
+                            ->groupBy('year', true)
+                            ->sortByDesc('year');
+
+        $years = Year::orderBy('year', 'desc')->pluck('year');
+
+        return view('admin.stamps', compact('catalogue', 'years', 'year'));
+    }
+
+    /**
+     * Show list of stamps for mass editing.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function updateMultiple(Request $request)
+    {
+        $messages = [
+            '*.id.required' => 'Stamps shoudl have an id.',
+            '*.id.exists' => 'This stamp does not exist.',
+            '*.title.required' => 'Title is required.',
+            '*.title.min' => 'Min title length is 3 characters.',
+            '*.title.max' => 'Max title length is 255 characters.',
+            '*.sg_number.max' => 'Stanley Gibbons number only allows alphanumeric characters.',
+            '*.face_value.numeric' => 'Numeric values only.',
+            '*.mint_value.numeric' => 'Numeric values only.',
+            '*.used_value.numeric' => 'Numeric values only.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            '*.id' => 'required|exists:stamps,id',
+            '*.title' => 'required|min:3|max:255',
+            '*.sg_number' => 'nullable|alpha_num|min:1',
+            '*.sg_illustration' => 'nullable|string|min:1',
+            '*.face_value' => 'nullable|numeric|min:0',
+            '*.mint_value' => 'nullable|numeric|min:0',
+            '*.used_value' => 'nullable|numeric|min:0',
+        ], $messages);
+
+        if ($validator->validate()) {
+            foreach ($request->all() as $stamp) {
+                Stamp::findOrFail($stamp['id'])
+                        ->update([
+                            'title' => $stamp['title'],
+                            'sg_number' => $stamp['sg_number'],
+                            'sg_illustration' => $stamp['sg_illustration'],
+                            'face_value' => $stamp['face_value'],
+                            'mint_value' => $stamp['mint_value'],
+                            'used_value' => $stamp['used_value'],
+                        ]);
+            }
+
+            return response('Success', 200);
+        }
+
+        return response('Error', 400);
     }
 }

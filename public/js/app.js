@@ -1960,7 +1960,6 @@ var VueScrollTo = __webpack_require__(/*! vue-scrollto */ "./node_modules/vue-sc
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _catalogue_Catalogue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./catalogue/Catalogue.vue */ "./resources/js/components/catalogue/Catalogue.vue");
-/* harmony import */ var _BrowseYear_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrowseYear.vue */ "./resources/js/components/BrowseYear.vue");
 //
 //
 //
@@ -1983,7 +1982,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CataloguePage',
@@ -1996,8 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
   // props: ['catalogue', 'year', 'admin'],
   props: ['catalogue', 'year', 'years', 'admin'],
   components: {
-    'catalogue': _catalogue_Catalogue_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    'browse-year': _BrowseYear_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'catalogue': _catalogue_Catalogue_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     changeYear: function changeYear(year) {
@@ -2166,9 +2163,7 @@ var MODAL_WIDTH = 656;
         _this2.stampsToAdd = [{
           grading_id: null
         }];
-        _this2.stampsToAddErrors = {}; // Maybe emit a updatedCollection to update the collection data behind the modal.
-        // Especially on the /collection page.
-        // Could update the total value of collection in background too.
+        _this2.stampsToAddErrors = {};
 
         _this2.$emit('updated-collection');
       })["catch"](function (error) {
@@ -2208,8 +2203,7 @@ var MODAL_WIDTH = 656;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _collection_Collection_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./collection/Collection.vue */ "./resources/js/components/collection/Collection.vue");
 /* harmony import */ var _collection_CollectionValues_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./collection/CollectionValues.vue */ "./resources/js/components/collection/CollectionValues.vue");
-/* harmony import */ var _BrowseYear_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BrowseYear.vue */ "./resources/js/components/BrowseYear.vue");
-/* harmony import */ var _CollectionModal_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CollectionModal.vue */ "./resources/js/components/CollectionModal.vue");
+/* harmony import */ var _CollectionModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CollectionModal.vue */ "./resources/js/components/CollectionModal.vue");
 //
 //
 //
@@ -2244,7 +2238,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -2261,8 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     'collection': _collection_Collection_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     'collection-values': _collection_CollectionValues_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    'browse-year': _BrowseYear_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    'collection-modal': _CollectionModal_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    'collection-modal': _CollectionModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     changeYear: function changeYear(year) {
@@ -3367,6 +3359,232 @@ __webpack_require__.r(__webpack_exports__);
       if (this.query != null) {
         location = '/search/' + this.query;
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StampEditPage.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StampEditPage.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _admin_Catalogue_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin/Catalogue.vue */ "./resources/js/components/admin/Catalogue.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'StampEditPage',
+  data: function data() {
+    return {
+      showYear: this.year,
+      catalogueData: this.catalogue
+    };
+  },
+  // props: ['catalogue', 'year', 'admin'],
+  props: ['catalogue', 'year', 'years', 'admin'],
+  components: {
+    'catalogue': _admin_Catalogue_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    changeYear: function changeYear(year) {
+      this.showYear = year;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      showSavedMessage: false,
+      stampsToSave: {},
+      errors: {}
+    };
+  },
+  props: ['catalogue', 'year'],
+  methods: {
+    convertDate: function convertDate(date) {
+      date = new Date(date);
+      return date.getFullYear() + ' (' + date.getDate() + ' ' + date.toLocaleString('default', {
+        month: 'short'
+      }) + ')';
+    },
+    save: function save() {
+      var _this = this;
+
+      if (Object.keys(this.stampsToSave).length > 0) {
+        axios.post('/admin/stamps', this.stampsToSave).then(function (response) {
+          _this.showSavedMessage = true;
+          _this.stampsToSave = {};
+        })["catch"](function (error) {
+          console.log(error);
+          _this.errors = error.response.data.errors;
+
+          _this.$modal.show('dialog', {
+            title: 'Errors!',
+            text: "We have highlighted erros which you need to correct.",
+            buttons: [{
+              title: 'Okay',
+              "class": 'py-3 hover:bg-gray-200',
+              handler: function handler() {
+                _this.$modal.hide('dialog');
+              }
+            }]
+          });
+        });
+      }
+    },
+    addToStampsToSave: function addToStampsToSave(stamp) {
+      this.stampsToSave[stamp.id] = stamp;
     }
   }
 });
@@ -25378,6 +25596,562 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "flex" }, [
+      _c(
+        "div",
+        { staticClass: "mr-1 w-1/6" },
+        [
+          _c("browse-year", {
+            attrs: { years: _vm.years, showYear: _vm.showYear },
+            on: { "change-year": _vm.changeYear }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex-1 ml-1" },
+        [
+          _c("catalogue", {
+            attrs: {
+              catalogue: _vm.catalogueData[_vm.showYear],
+              year: _vm.showYear
+            }
+          })
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "bg-white rounded shadow p-4" },
+    [
+      _c("div", { staticClass: "flex-flex-col sticky top-0" }, [
+        _c(
+          "div",
+          { staticClass: "flex justify-between bg-darker p-4 items-center" },
+          [
+            _c("h1", { staticClass: "text-white text-3xl font-bold" }, [
+              _vm._v("Edit stamps for " + _vm._s(_vm.year))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex items-center" }, [
+              _vm.showSavedMessage
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "flex tems-center mr-5 italic text-green-300"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "20",
+                            height: "20",
+                            viewBox: "0 0 32 32"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: { d: "M27 4l-15 15-7-7-5 5 12 12 20-20z" }
+                          })
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                            Saved Changes\n                        "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("button", {
+                staticClass:
+                  "px-4 py-2 text-white text-2xl font-semibold bg-highlight border border-dark rounded shadow hover:bg-dark hover:text-white",
+                domProps: { textContent: _vm._s("Save Changes") },
+                on: { click: _vm.save }
+              })
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.catalogue, function(issue) {
+        return _c(
+          "div",
+          { key: issue.id, staticClass: "flex-col mb-2" },
+          [
+            _c("div", {
+              staticClass: "w-full bg-highlight text-white font-semibold p-3",
+              domProps: {
+                textContent: _vm._s(
+                  _vm.convertDate(issue.release_date) + " - " + issue.title
+                )
+              }
+            }),
+            _vm._v(" "),
+            _vm._l(issue.stamps, function(stamp, index) {
+              return _c(
+                "div",
+                {
+                  key: stamp.id,
+                  staticClass: "flex-col",
+                  class: index % 2 == 0 ? "bg-light" : ""
+                },
+                [
+                  _c("div", { staticClass: "flex" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-1/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.sg_number,
+                              expression: "stamp.sg_number"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".sg_number"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "text" },
+                          domProps: { value: stamp.sg_number },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stamp, "sg_number", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".sg_number"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors[stamp.id + ".sg_number"][0])
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-1/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.sg_illustration,
+                              expression: "stamp.sg_illustration"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".sg_illustration"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "text" },
+                          domProps: { value: stamp.sg_illustration },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                stamp,
+                                "sg_illustration",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".sg_illustration"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors[stamp.id + ".sg_illustration"][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-2/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.title,
+                              expression: "stamp.title"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".title"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "text" },
+                          domProps: { value: stamp.title },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stamp, "title", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".title"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors[stamp.id + ".title"][0])
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-1/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.face_value,
+                              expression: "stamp.face_value"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".face_value"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "number", min: "0", step: "0.1" },
+                          domProps: { value: stamp.face_value },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stamp, "face_value", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".face_value"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors[stamp.id + ".face_value"][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-1/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.mint_value,
+                              expression: "stamp.mint_value"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".mint_value"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "number", min: "0", step: "0.1" },
+                          domProps: { value: stamp.mint_value },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stamp, "mint_value", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".mint_value"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors[stamp.id + ".mint_value"][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex flex-col justify-start w-1/7 p-1 border"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: stamp.used_value,
+                              expression: "stamp.used_value"
+                            }
+                          ],
+                          staticClass: "p-1 bg-transparent rounded w-full",
+                          class: _vm.errors[stamp.id + ".used_value"]
+                            ? "border-2 border-red-500"
+                            : "border border-darker",
+                          attrs: { type: "number", min: "0", step: "0.1" },
+                          domProps: { value: stamp.used_value },
+                          on: {
+                            change: function($event) {
+                              return _vm.addToStampsToSave(stamp)
+                            },
+                            focus: function($event) {
+                              _vm.showSavedMessage = false
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(stamp, "used_value", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors[stamp.id + ".used_value"]
+                          ? _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "flex-1 p-2 italic text-xs font-bold text-red-500"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors[stamp.id + ".used_value"][0]
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex bg-dark text-white text-lg font-bold" },
+      [
+        _c(
+          "div",
+          { staticClass: "w-1/7 py-2 text-center border border-darker" },
+          [_vm._v("SG Number")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-1/7 py-2 text-center border border-darker" },
+          [_vm._v("SG Illustration")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-2/7 py-2 text-center border border-darker" },
+          [_vm._v("Title")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-1/7 py-2 text-center border border-darker" },
+          [_vm._v("Face Value")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-1/7 py-2 text-center border border-darker" },
+          [_vm._v("Mint Value")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "w-1/7 py-2 text-center border border-darker" },
+          [_vm._v("Used Value")]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/catalogue/Catalogue.vue?vue&type=template&id=42158aa8&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/catalogue/Catalogue.vue?vue&type=template&id=42158aa8& ***!
@@ -38997,6 +39771,8 @@ Vue.component('collection-modal', __webpack_require__(/*! ./components/Collectio
 Vue.component('gradings', __webpack_require__(/*! ./components/Gradings.vue */ "./resources/js/components/Gradings.vue")["default"]);
 Vue.component('issue-categories', __webpack_require__(/*! ./components/IssueCategories.vue */ "./resources/js/components/IssueCategories.vue")["default"]);
 Vue.component('monarchs', __webpack_require__(/*! ./components/Monarchs.vue */ "./resources/js/components/Monarchs.vue")["default"]);
+Vue.component('browse-year', __webpack_require__(/*! ./components/BrowseYear.vue */ "./resources/js/components/BrowseYear.vue")["default"]);
+Vue.component('stamp-edit-page', __webpack_require__(/*! ./components/StampEditPage.vue */ "./resources/js/components/StampEditPage.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -40155,6 +40931,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StampEditPage.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/StampEditPage.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StampEditPage.vue?vue&type=template&id=6f375b7e& */ "./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e&");
+/* harmony import */ var _StampEditPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StampEditPage.vue?vue&type=script&lang=js& */ "./resources/js/components/StampEditPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StampEditPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StampEditPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/StampEditPage.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/StampEditPage.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StampEditPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./StampEditPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StampEditPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StampEditPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./StampEditPage.vue?vue&type=template&id=6f375b7e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StampEditPage.vue?vue&type=template&id=6f375b7e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StampEditPage_vue_vue_type_template_id_6f375b7e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/Catalogue.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/admin/Catalogue.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Catalogue.vue?vue&type=template&id=1803758e& */ "./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e&");
+/* harmony import */ var _Catalogue_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Catalogue.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Catalogue_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/Catalogue.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Catalogue_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Catalogue.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/Catalogue.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Catalogue_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Catalogue.vue?vue&type=template&id=1803758e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/Catalogue.vue?vue&type=template&id=1803758e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Catalogue_vue_vue_type_template_id_1803758e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
