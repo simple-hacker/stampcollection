@@ -141,7 +141,7 @@
 
                             this.$modal.show('dialog', {
                                 title: 'Errors!',
-                                text: `We have highlighted erros which you need to correct.`,
+                                text: `Highlighted errors must be corrected.`,
                                 buttons: [
                                     {
                                         title: 'Okay',

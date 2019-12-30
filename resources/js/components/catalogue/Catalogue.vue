@@ -84,11 +84,11 @@
                     <div
                         v-for="stamp in reduceStamps(issue.stamps)"
                         :key="stamp.id"
-                        class="flex flex-col items-center justify-center mr-1 p-1 border w-1/6">
+                        class="flex flex-col items-center justify-start mr-1 p-2 border w-1/6">
                         <img :src="stamp.image_src" :alt="stamp.title" class="h-20 mb-1">
-                        <p class="italic" v-if="stamp.sg_number" v-text="stamp.prefixedSgNumber"></p>
-                        <p class="italic" v-if="stamp.sg_illustration" v-text="stamp.sg_illustration"></p>
-                        <p class="text-sm" v-text="stamp.title"></p>
+                        <p class="italic w-full text-center" v-if="stamp.sg_number" v-text="stamp.prefixedSgNumber"></p>
+                        <p class="italic w-full text-center" v-if="stamp.sg_illustration" v-text="stamp.sg_illustration"></p>
+                        <p class="text-sm w-full text-center" v-text="stamp.title"></p>
                     </div>
                     <a
                         v-if="(issue.stamps.length - stampsToShow) > 0"

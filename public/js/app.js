@@ -3572,7 +3572,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$modal.show('dialog', {
             title: 'Errors!',
-            text: "We have highlighted erros which you need to correct.",
+            text: "Highlighted errors must be corrected.",
             buttons: [{
               title: 'Okay',
               "class": 'py-3 hover:bg-gray-200',
@@ -26528,7 +26528,7 @@ var render = function() {
                     {
                       key: stamp.id,
                       staticClass:
-                        "flex flex-col items-center justify-center mr-1 p-1 border w-1/6"
+                        "flex flex-col items-center justify-start mr-1 p-2 border w-1/6"
                     },
                     [
                       _c("img", {
@@ -26538,7 +26538,7 @@ var render = function() {
                       _vm._v(" "),
                       stamp.sg_number
                         ? _c("p", {
-                            staticClass: "italic",
+                            staticClass: "italic w-full text-center",
                             domProps: {
                               textContent: _vm._s(stamp.prefixedSgNumber)
                             }
@@ -26547,7 +26547,7 @@ var render = function() {
                       _vm._v(" "),
                       stamp.sg_illustration
                         ? _c("p", {
-                            staticClass: "italic",
+                            staticClass: "italic w-full text-center",
                             domProps: {
                               textContent: _vm._s(stamp.sg_illustration)
                             }
@@ -26555,7 +26555,7 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _c("p", {
-                        staticClass: "text-sm",
+                        staticClass: "text-sm w-full text-center",
                         domProps: { textContent: _vm._s(stamp.title) }
                       })
                     ]
