@@ -78,33 +78,51 @@
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.title`]">{{ errors[`${stamp.id}.title`][0] }}</span>
                             </div>
                             <div class="flex flex-col justify-start w-1/7 p-1 border">
-                                <input  type="number" min="0" step="0.1"
-                                        class="p-1 bg-transparent rounded w-full"
-                                        :class="errors[`${stamp.id}.face_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                <div
+                                    class="flex items-center rounded"
+                                    :class="errors[`${stamp.id}.face_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                >
+                                    <span class="bg-gray-100 mr-1 py-1 px-3 rounded border-r border-darker">£</span>
+                                    <input 
+                                        type="number" min="0" step="0.01"
+                                        class="p-1 bg-transparent w-full"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.face_value"
-                                >
+                                    >
+                                </div>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.face_value`]">{{ errors[`${stamp.id}.face_value`][0] }}</span>
                             </div>
                             <div class="flex flex-col justify-start w-1/7 p-1 border">
-                                <input  type="number" min="0" step="0.1"
-                                        class="p-1 bg-transparent rounded w-full"
-                                        :class="errors[`${stamp.id}.mint_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                <div
+                                    class="flex items-center rounded"
+                                    :class="errors[`${stamp.id}.mint_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                >
+                                    <span class="bg-gray-100 mr-1 py-1 px-3 rounded border-r border-darker">£</span>
+                                    <input 
+                                        type="number" min="0" step="0.01"
+                                        class="p-1 bg-transparent w-full"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.mint_value"
-                                >
+                                    >
+                                </div>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.mint_value`]">{{ errors[`${stamp.id}.mint_value`][0] }}</span>
                             </div>
                             <div class="flex flex-col justify-start w-1/7 p-1 border">
-                                <input  type="number" min="0" step="0.1"
-                                        class="p-1 bg-transparent rounded w-full"
-                                        :class="errors[`${stamp.id}.used_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                <div
+                                    class="flex items-center rounded"
+                                    :class="errors[`${stamp.id}.used_value`] ? 'border-2 border-red-500' : 'border border-darker'"
+                                >
+                                    <span class="bg-gray-100 mr-1 py-1 px-3 rounded border-r border-darker">£</span>
+                                    <input 
+                                        type="number" min="0" step="0.01"
+                                        class="p-1 bg-transparent w-full"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.used_value"
-                                >
+                                    >
+                                </div>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.used_value`]">{{ errors[`${stamp.id}.used_value`][0] }}</span>
                             </div>
                         </div>

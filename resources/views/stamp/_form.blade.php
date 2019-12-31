@@ -38,7 +38,18 @@
             <label for="face_value" class="text-gray-500 font-bold p-4">Face Value</label>
         </div>
         <div class="flex flex-col w-2/3">
-            <input id="face_value" name="face_value" type="number" min="0" step="0.01" value="{{ old('face_value', $stamp->face_value) }}" placeholder="0.00" class="w-full p-2 rounded border shadow @error('face_value') border-red-500 @enderror">
+            <div
+                class="flex items-center shadow rounded @error('face_value') border-red-500 @enderror"
+
+            >
+                <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
+                <input 
+                    id="face_value" name="face_value" 
+                    type="number" min="0" step="0.01"
+                    value="{{ old('face_value', $stamp->face_value) }}" placeholder="0.00"
+                    class="p-1 bg-transparent w-full"
+                >
+            </div>
             @error('face_value')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror
@@ -49,7 +60,18 @@
             <label for="mint_value" class="text-gray-500 font-bold p-4">Mint Value</label>
         </div>
         <div class="flex flex-col w-2/3">
-            <input id="mint_value" name="mint_value" type="number" min="0" step="0.01" value="{{ old('mint_value', $stamp->mint_value) }}" placeholder="0.00" class="w-full p-2 rounded border shadow @error('mint_value') border-red-500 @enderror">
+            <div
+                class="flex items-center shadow rounded @error('mint_value') border-red-500 @enderror"
+
+            >
+                <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
+                <input 
+                    id="mint_value" name="mint_value" 
+                    type="number" min="0" step="0.01"
+                    value="{{ old('mint_value', $stamp->mint_value) }}" placeholder="0.00"
+                    class="p-1 bg-transparent w-full"
+                >
+            </div>
             @error('mint_value')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror
@@ -60,7 +82,18 @@
             <label for="used_value" class="text-gray-500 font-bold p-4">Used Value</label>
         </div>
         <div class="flex flex-col w-2/3">
-            <input id="used_value" name="used_value" type="number" min="0" step="0.01" value="{{ old('used_value', $stamp->used_value) }}" placeholder="0.00" class="w-full p-2 rounded border shadow @error('used_value') border-red-500 @enderror">
+            <div
+                class="flex items-center shadow rounded @error('used_value') border-red-500 @enderror"
+
+            >
+                <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
+                <input 
+                    id="used_value" name="used_value" 
+                    type="number" min="0" step="0.01"
+                    value="{{ old('used_value', $stamp->used_value) }}" placeholder="0.00"
+                    class="p-1 bg-transparent w-full"
+                >
+            </div>
             @error('used_value')
                 @component('components.error') {{ $message }} @endcomponent
             @enderror

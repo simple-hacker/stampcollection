@@ -16,6 +16,16 @@ Vue.use(VModal, {
     injectModalsContainer: true
   });
 
+import money from 'v-money';
+Vue.use(money, {
+          decimal: '.',
+          thousands: ',',
+          prefix: '£ ',
+          precision: 2,
+          masked: false
+        });
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
