@@ -193,10 +193,6 @@ class StampController extends Controller
      */
     public function showMultiple($year = null)
     {
-        if (!isset($year)) {
-            $year = date("Y");
-        }
-
         $catalogue = Issue::orderBy('release_date', 'desc')
                             ->with('stamps')
                             ->get()
@@ -205,6 +201,17 @@ class StampController extends Controller
                             ->sortByDesc('year');
 
         $years = Year::orderBy('year', 'desc')->pluck('year');
+
+        if (!isset($year)) {
+            // If not year in URL, then get the latest year we have entered.
+            $year = $years[0];
+        } else {
+            // If year is in URL, check if it's a valid year by seeing if it's in the array of years.
+            // dd($years);
+            if (!in_array($year, $years->toArray())) {
+                abort(404);
+            }
+        }
 
         return view('admin.stamps', compact('catalogue', 'years', 'year'));
     }

@@ -17,15 +17,6 @@ class CatalogueController extends Controller
      */
     public function index($year = null)
     {
-        if (!isset($year)) {
-            $year = date("Y");
-        }
-
-        // If the user changes the year in the URL to one that doesn't exist, abort.
-        if (!\DB::table('years')->where('year', $year)->exists()) {
-            abort(404);
-        }
-
         $catalogue = Issue::orderBy('release_date', 'desc')
                             ->with('stamps')
                             ->get()
@@ -34,6 +25,17 @@ class CatalogueController extends Controller
                             ->sortByDesc('year');
         
         $years = Year::orderBy('year', 'desc')->pluck('year');
+        
+        if (!isset($year)) {
+            // If not year in URL, then get the latest year we have entered.
+            $year = $years[0];
+        } else {
+            // If year is in URL, check if it's a valid year by seeing if it's in the array of years.
+            // dd($years);
+            if (!in_array($year, $years->toArray())) {
+                abort(404);
+            }
+        }
 
         $admin = auth()->user()->hasRole('admin');
 
