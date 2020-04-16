@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Year;
 use App\Issue;
 use Illuminate\Console\Command;
 use App\Http\Controllers\ScraperController;
@@ -52,7 +53,7 @@ class ImportIssueDaily extends Command
     {
         parent::__construct();
 
-        $this->year = date('Y');
+        $this->year = Year::firstOrCreate(['year' => date('Y')]);
         $this->scraper = new ScraperController();
     }
 
@@ -64,7 +65,7 @@ class ImportIssueDaily extends Command
     public function handle()
     {
         $this->issues = Issue::withTrashed()
-                            ->where('year', $this->year)
+                            ->where('year', $this->year->year)
                             ->whereNotNull('cgbs_issue')
                             ->pluck('cgbs_issue')
                             ->toArray();
@@ -72,7 +73,7 @@ class ImportIssueDaily extends Command
         $this->info('Checking for any new issues that we have not imported...');
         \Log::info('Daily issue import is running.');
 
-        $cgbs_issues = array_diff($this->scraper->cgbsIssuesByYear($this->year), $this->issues);
+        $cgbs_issues = array_diff($this->scraper->cgbsIssuesByYear($this->year->year), $this->issues);
 
         foreach($cgbs_issues as $cgbs_issue) {
             $this->scraper->issue($cgbs_issue);

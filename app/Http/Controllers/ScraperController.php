@@ -141,9 +141,13 @@ class ScraperController extends Controller
      *
      * @return mixed
      */
-    public function issuesByYear($year = 2019)
+    public function issuesByYear($year = null)
     {
-        // Default to 2019 if no year is given.
+        if ($year == null) {
+            $year = date('Y');
+        }
+
+        // Default to current year if no year is given.
         if ($year > 1800 && $year < 3000) {
             $url = $this->baseURI . '/explore/years/?year=' . $year;
             // Iterate over each stampset div and create Issue with basic information (cgbs_issue number and title)
