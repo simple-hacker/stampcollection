@@ -89,16 +89,6 @@ class Issue extends Model implements Searchable
     }
 
     /**
-    * Returns the number of stamps in this issue.
-    *
-    * @return integer
-    */
-    public function totalStamps()
-    {
-        return 4;
-    }
-
-    /**
     * Returns the search result for this model.
     *
     * @return \Spatie\Searchable\SearchResult

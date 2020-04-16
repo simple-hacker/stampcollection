@@ -11,27 +11,36 @@
                     <h2 class="text-2xl">{{ issue.title }}</h2>
                     <small v-if="issue.release_date != null" class="mt-1">Released {{ convertDate(issue.release_date) }}</small>
                 </div>
-                <!-- Issue Stamp Data -->
-                <div class="flex text-xl items-center">
-                    <div data-toggle="tooltip" :title="issue.stamps_count+ ' stamps in this issue'" class="flex items-center mr-5">
-                        <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
-                            <path d="M8 4v28l10-10 10 10v-28zM24 0h-20v28l2-2v-24h18z"></path>
+                <div class="flex">
+                    <!-- External URL page -->
+                    <a v-if="issue.url" :href="issue.url" target="_blank" class="border bg-white hover:bg-gray-200 text-dark rounded shadow px-4 py-2 mb-1 mr-5">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                            <path d="M13.757 19.868c-0.416 0-0.832-0.159-1.149-0.476-2.973-2.973-2.973-7.81 0-10.783l6-6c1.44-1.44 3.355-2.233 5.392-2.233s3.951 0.793 5.392 2.233c2.973 2.973 2.973 7.81 0 10.783l-2.743 2.743c-0.635 0.635-1.663 0.635-2.298 0s-0.635-1.663 0-2.298l2.743-2.743c1.706-1.706 1.706-4.481 0-6.187-0.826-0.826-1.925-1.281-3.094-1.281s-2.267 0.455-3.094 1.281l-6 6c-1.706 1.706-1.706 4.481 0 6.187 0.635 0.635 0.635 1.663 0 2.298-0.317 0.317-0.733 0.476-1.149 0.476z"></path>
+                            <path d="M8 31.625c-2.037 0-3.952-0.793-5.392-2.233-2.973-2.973-2.973-7.81 0-10.783l2.743-2.743c0.635-0.635 1.664-0.635 2.298 0s0.635 1.663 0 2.298l-2.743 2.743c-1.706 1.706-1.706 4.481 0 6.187 0.826 0.826 1.925 1.281 3.094 1.281s2.267-0.455 3.094-1.281l6-6c1.706-1.706 1.706-4.481 0-6.187-0.635-0.635-0.635-1.663 0-2.298s1.663-0.635 2.298 0c2.973 2.973 2.973 7.81 0 10.783l-6 6c-1.44 1.44-3.355 2.233-5.392 2.233z"></path>
                         </svg>
-                        <span>{{ issue.stamps_count }}</span>
-                    </div>
-                    <div data-toggle="tooltip" :title="issue.stamps.length+' stamps collected in this issue'" class="flex items-center mr-5">
-                        <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
-                            <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
-                        </svg>
-                        <span>{{ issue.stamps.length }}</span>
-                    </div>
-                    <div v-if="(issue.stamps_count - issue.stamps.length) > 0" data-toggle="tooltip" :title="(issue.stamps_count - issue.stamps.length)+' stamps missing from collection'" class="flex items-center">
-                        <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
-                            <path d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"></path>
-                            <path d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"></path>
-                            <path d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"></path>
-                        </svg>
-                        <span>{{ issue.stamps_count - issue.stamps.length }}</span>
+                    </a>
+                    <!-- Issue Stamp Data -->
+                    <div class="flex text-xl items-center">
+                        <div data-toggle="tooltip" :title="issue.stamps_count+ ' stamps in this issue'" class="flex items-center mr-5">
+                            <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                                <path d="M8 4v28l10-10 10 10v-28zM24 0h-20v28l2-2v-24h18z"></path>
+                            </svg>
+                            <span>{{ issue.stamps_count }}</span>
+                        </div>
+                        <div data-toggle="tooltip" :title="issue.stamps.length+' stamps collected in this issue'" class="flex items-center mr-5">
+                            <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                                <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                            </svg>
+                            <span>{{ issue.stamps.length }}</span>
+                        </div>
+                        <div v-if="(issue.stamps_count - issue.stamps.length) > 0" data-toggle="tooltip" :title="(issue.stamps_count - issue.stamps.length)+' stamps missing from collection'" class="flex items-center">
+                            <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                                <path d="M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"></path>
+                                <path d="M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"></path>
+                                <path d="M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"></path>
+                            </svg>
+                            <span>{{ issue.stamps_count - issue.stamps.length }}</span>
+                        </div>
                     </div>
                 </div>
             </a>

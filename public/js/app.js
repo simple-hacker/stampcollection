@@ -3723,6 +3723,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var STAMPS_TO_SHOW = 5;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3756,6 +3765,15 @@ var STAMPS_TO_SHOW = 5;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -26475,126 +26493,168 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _vm.admin && issue.cgbs_issue
-                    ? _c(
-                        "div",
-                        { staticClass: "flex flex-col items-end" },
-                        [
-                          _c("dropdown-menu", {
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "dropdown-toggle",
-                                  fn: function() {
-                                    return [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass:
-                                            "flex border bg-white hover:bg-gray-100 rounded shadow px-4 py-2 mb-1"
-                                        },
-                                        [
-                                          _c(
-                                            "svg",
-                                            {
-                                              staticClass: "fill-current",
-                                              attrs: {
-                                                xmlns:
-                                                  "http://www.w3.org/2000/svg",
-                                                width: "20",
-                                                height: "20",
-                                                viewBox: "0 0 32 32"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                attrs: {
-                                                  d:
-                                                    "M29.181 19.070c-1.679-2.908-0.669-6.634 2.255-8.328l-3.145-5.447c-0.898 0.527-1.943 0.829-3.058 0.829-3.361 0-6.085-2.742-6.085-6.125h-6.289c0.008 1.044-0.252 2.103-0.811 3.070-1.679 2.908-5.411 3.897-8.339 2.211l-3.144 5.447c0.905 0.515 1.689 1.268 2.246 2.234 1.676 2.903 0.672 6.623-2.241 8.319l3.145 5.447c0.895-0.522 1.935-0.82 3.044-0.82 3.35 0 6.067 2.725 6.084 6.092h6.289c-0.003-1.034 0.259-2.080 0.811-3.038 1.676-2.903 5.399-3.894 8.325-2.219l3.145-5.447c-0.899-0.515-1.678-1.266-2.232-2.226zM16 22.479c-3.578 0-6.479-2.901-6.479-6.479s2.901-6.479 6.479-6.479c3.578 0 6.479 2.901 6.479 6.479s-2.901 6.479-6.479 6.479z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  },
-                                  proxy: true
-                                },
-                                {
-                                  key: "dropdown-contents",
-                                  fn: function() {
-                                    return [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "flex flex-col items-stretch"
-                                        },
-                                        [
-                                          issue.cgbs_issue
-                                            ? _c(
-                                                "a",
-                                                {
-                                                  staticClass:
-                                                    "flex bg-blue-500 hover:bg-blue-600 text-white border rounded px-4 py-2",
-                                                  attrs: {
-                                                    href:
-                                                      "/scraper/issue/" +
-                                                      issue.cgbs_issue
-                                                  }
-                                                },
-                                                [
-                                                  _c(
-                                                    "svg",
-                                                    {
-                                                      staticClass:
-                                                        "fill-current mr-2",
-                                                      attrs: {
-                                                        xmlns:
-                                                          "http://www.w3.org/2000/svg",
-                                                        width: "20",
-                                                        height: "20",
-                                                        viewBox: "0 0 512 512"
-                                                      }
-                                                    },
-                                                    [
-                                                      _c("path", {
-                                                        attrs: {
-                                                          d:
-                                                            "M378.24,243.712l-96-80c-4.768-3.968-11.424-4.832-17.024-2.208C259.584,164.128,256,169.792,256,176v48H16\n                                            c-8.832,0-16,7.168-16,16v32c0,8.832,7.168,16,16,16h240v48c0,6.208,3.584,11.84,9.216,14.496c2.144,0.992,4.48,1.504,6.784,1.504\n                                            c3.68,0,7.328-1.248,10.24-3.712l96-80c3.68-3.04,5.76-7.552,5.76-12.288C384,251.264,381.92,246.752,378.24,243.712z"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("path", {
-                                                        attrs: {
-                                                          d:
-                                                            "M480,0H32C14.336,0,0,14.336,0,32v160h64V64h384v384H64V320H0v160c0,17.696,14.336,32,32,32h448c17.696,0,32-14.304,32-32\n                                            V32C512,14.336,497.696,0,480,0z"
-                                                        }
-                                                      })
-                                                    ]
-                                                  ),
-                                                  _vm._v(
-                                                    "\n                                        Import Issue\n                                    "
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e()
-                                        ]
-                                      )
-                                    ]
-                                  },
-                                  proxy: true
+                  _c("div", { staticClass: "flex" }, [
+                    issue.url
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "border bg-white hover:bg-gray-200 rounded shadow px-4 py-2 mb-1 mr-3",
+                            attrs: { href: issue.url, target: "_blank" }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "fill-current",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "20",
+                                  height: "20",
+                                  viewBox: "0 0 32 32"
                                 }
-                              ],
-                              null,
-                              true
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M13.757 19.868c-0.416 0-0.832-0.159-1.149-0.476-2.973-2.973-2.973-7.81 0-10.783l6-6c1.44-1.44 3.355-2.233 5.392-2.233s3.951 0.793 5.392 2.233c2.973 2.973 2.973 7.81 0 10.783l-2.743 2.743c-0.635 0.635-1.663 0.635-2.298 0s-0.635-1.663 0-2.298l2.743-2.743c1.706-1.706 1.706-4.481 0-6.187-0.826-0.826-1.925-1.281-3.094-1.281s-2.267 0.455-3.094 1.281l-6 6c-1.706 1.706-1.706 4.481 0 6.187 0.635 0.635 0.635 1.663 0 2.298-0.317 0.317-0.733 0.476-1.149 0.476z"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M8 31.625c-2.037 0-3.952-0.793-5.392-2.233-2.973-2.973-2.973-7.81 0-10.783l2.743-2.743c0.635-0.635 1.664-0.635 2.298 0s0.635 1.663 0 2.298l-2.743 2.743c-1.706 1.706-1.706 4.481 0 6.187 0.826 0.826 1.925 1.281 3.094 1.281s2.267-0.455 3.094-1.281l6-6c1.706-1.706 1.706-4.481 0-6.187-0.635-0.635-0.635-1.663 0-2.298s1.663-0.635 2.298 0c2.973 2.973 2.973 7.81 0 10.783l-6 6c-1.44 1.44-3.355 2.233-5.392 2.233z"
+                                  }
+                                })
+                              ]
                             )
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e()
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.admin && issue.cgbs_issue
+                      ? _c(
+                          "div",
+                          { staticClass: "flex flex-col items-end" },
+                          [
+                            _c("dropdown-menu", {
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "dropdown-toggle",
+                                    fn: function() {
+                                      return [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "flex border bg-white hover:bg-gray-200 rounded shadow px-4 py-2 mb-1"
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                staticClass: "fill-current",
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  width: "20",
+                                                  height: "20",
+                                                  viewBox: "0 0 32 32"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  attrs: {
+                                                    d:
+                                                      "M29.181 19.070c-1.679-2.908-0.669-6.634 2.255-8.328l-3.145-5.447c-0.898 0.527-1.943 0.829-3.058 0.829-3.361 0-6.085-2.742-6.085-6.125h-6.289c0.008 1.044-0.252 2.103-0.811 3.070-1.679 2.908-5.411 3.897-8.339 2.211l-3.144 5.447c0.905 0.515 1.689 1.268 2.246 2.234 1.676 2.903 0.672 6.623-2.241 8.319l3.145 5.447c0.895-0.522 1.935-0.82 3.044-0.82 3.35 0 6.067 2.725 6.084 6.092h6.289c-0.003-1.034 0.259-2.080 0.811-3.038 1.676-2.903 5.399-3.894 8.325-2.219l3.145-5.447c-0.899-0.515-1.678-1.266-2.232-2.226zM16 22.479c-3.578 0-6.479-2.901-6.479-6.479s2.901-6.479 6.479-6.479c3.578 0 6.479 2.901 6.479 6.479s-2.901 6.479-6.479 6.479z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  },
+                                  {
+                                    key: "dropdown-contents",
+                                    fn: function() {
+                                      return [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex flex-col items-stretch"
+                                          },
+                                          [
+                                            issue.cgbs_issue
+                                              ? _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "flex bg-blue-500 hover:bg-blue-600 text-white border rounded px-4 py-2",
+                                                    attrs: {
+                                                      href:
+                                                        "/scraper/issue/" +
+                                                        issue.cgbs_issue
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "svg",
+                                                      {
+                                                        staticClass:
+                                                          "fill-current mr-2",
+                                                        attrs: {
+                                                          xmlns:
+                                                            "http://www.w3.org/2000/svg",
+                                                          width: "20",
+                                                          height: "20",
+                                                          viewBox: "0 0 512 512"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          attrs: {
+                                                            d:
+                                                              "M378.24,243.712l-96-80c-4.768-3.968-11.424-4.832-17.024-2.208C259.584,164.128,256,169.792,256,176v48H16\n                                                c-8.832,0-16,7.168-16,16v32c0,8.832,7.168,16,16,16h240v48c0,6.208,3.584,11.84,9.216,14.496c2.144,0.992,4.48,1.504,6.784,1.504\n                                                c3.68,0,7.328-1.248,10.24-3.712l96-80c3.68-3.04,5.76-7.552,5.76-12.288C384,251.264,381.92,246.752,378.24,243.712z"
+                                                          }
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c("path", {
+                                                          attrs: {
+                                                            d:
+                                                              "M480,0H32C14.336,0,0,14.336,0,32v160h64V64h384v384H64V320H0v160c0,17.696,14.336,32,32,32h448c17.696,0,32-14.304,32-32\n                                                V32C512,14.336,497.696,0,480,0z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    ),
+                                                    _vm._v(
+                                                      "\n                                            Import Issue\n                                        "
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ],
+                                null,
+                                true
+                              )
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ])
                 ]
               )
             ]),
@@ -26725,93 +26785,20 @@ var render = function() {
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "flex text-xl items-center" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "flex items-center mr-5",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      title: issue.stamps_count + " stamps in this issue"
-                    }
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current mr-2",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          width: "20",
-                          height: "20",
-                          viewBox: "0 0 32 32"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M8 4v28l10-10 10 10v-28zM24 0h-20v28l2-2v-24h18z"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(issue.stamps_count))])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "flex items-center mr-5",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      title:
-                        issue.stamps.length + " stamps collected in this issue"
-                    }
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current mr-2",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          width: "20",
-                          height: "20",
-                          viewBox: "0 0 32 32"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: { d: "M27 4l-15 15-7-7-5 5 12 12 20-20z" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(issue.stamps.length))])
-                  ]
-                ),
-                _vm._v(" "),
-                issue.stamps_count - issue.stamps.length > 0
+              _c("div", { staticClass: "flex" }, [
+                issue.url
                   ? _c(
-                      "div",
+                      "a",
                       {
-                        staticClass: "flex items-center",
-                        attrs: {
-                          "data-toggle": "tooltip",
-                          title:
-                            issue.stamps_count -
-                            issue.stamps.length +
-                            " stamps missing from collection"
-                        }
+                        staticClass:
+                          "border bg-white hover:bg-gray-200 text-dark rounded shadow px-4 py-2 mb-1 mr-5",
+                        attrs: { href: issue.url, target: "_blank" }
                       },
                       [
                         _c(
                           "svg",
                           {
-                            staticClass: "fill-current mr-2",
+                            staticClass: "fill-current",
                             attrs: {
                               xmlns: "http://www.w3.org/2000/svg",
                               width: "20",
@@ -26823,34 +26810,150 @@ var render = function() {
                             _c("path", {
                               attrs: {
                                 d:
-                                  "M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
+                                  "M13.757 19.868c-0.416 0-0.832-0.159-1.149-0.476-2.973-2.973-2.973-7.81 0-10.783l6-6c1.44-1.44 3.355-2.233 5.392-2.233s3.951 0.793 5.392 2.233c2.973 2.973 2.973 7.81 0 10.783l-2.743 2.743c-0.635 0.635-1.663 0.635-2.298 0s-0.635-1.663 0-2.298l2.743-2.743c1.706-1.706 1.706-4.481 0-6.187-0.826-0.826-1.925-1.281-3.094-1.281s-2.267 0.455-3.094 1.281l-6 6c-1.706 1.706-1.706 4.481 0 6.187 0.635 0.635 0.635 1.663 0 2.298-0.317 0.317-0.733 0.476-1.149 0.476z"
                               }
                             }),
                             _vm._v(" "),
                             _c("path", {
                               attrs: {
                                 d:
-                                  "M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
+                                  "M8 31.625c-2.037 0-3.952-0.793-5.392-2.233-2.973-2.973-2.973-7.81 0-10.783l2.743-2.743c0.635-0.635 1.664-0.635 2.298 0s0.635 1.663 0 2.298l-2.743 2.743c-1.706 1.706-1.706 4.481 0 6.187 0.826 0.826 1.925 1.281 3.094 1.281s2.267-0.455 3.094-1.281l6-6c1.706-1.706 1.706-4.481 0-6.187-0.635-0.635-0.635-1.663 0-2.298s1.663-0.635 2.298 0c2.973 2.973 2.973 7.81 0 10.783l-6 6c-1.44 1.44-3.355 2.233-5.392 2.233z"
                               }
                             })
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(issue.stamps_count - issue.stamps.length)
-                          )
-                        ])
+                        )
                       ]
                     )
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex text-xl items-center" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "flex items-center mr-5",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        title: issue.stamps_count + " stamps in this issue"
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "20",
+                            height: "20",
+                            viewBox: "0 0 32 32"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M8 4v28l10-10 10 10v-28zM24 0h-20v28l2-2v-24h18z"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(issue.stamps_count))])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "flex items-center mr-5",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        title:
+                          issue.stamps.length +
+                          " stamps collected in this issue"
+                      }
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "20",
+                            height: "20",
+                            viewBox: "0 0 32 32"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: { d: "M27 4l-15 15-7-7-5 5 12 12 20-20z" }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(issue.stamps.length))])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  issue.stamps_count - issue.stamps.length > 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "flex items-center",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            title:
+                              issue.stamps_count -
+                              issue.stamps.length +
+                              " stamps missing from collection"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "fill-current mr-2",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                width: "20",
+                                height: "20",
+                                viewBox: "0 0 32 32"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(issue.stamps_count - issue.stamps.length)
+                            )
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
               ])
             ]
           ),

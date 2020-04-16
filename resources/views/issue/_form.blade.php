@@ -142,6 +142,17 @@
             @enderror
         </div>
     </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="url" class="text-gray-500 font-bold p-4">URL</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="url" name="url" type="url" value="{{ old('url', $issue->url) }}" placeholder="URL" class="w-full p-2 rounded border shadow @error('url') border-red-500 @enderror">
+            @error('url')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
     <div class="flex items-center justify-center mb-6">
         <button type="submit" class="shadow bg-darker hover:bg-dark focus:shadow-outline focus:outline-none text-white font-bold py-3 px-5 rounded">{{ $button_text }}</button>
         <a href="{{ url()->previous() }}" class="ml-2 border-2 border-dark bg-white hover:bg-light focus:shadow-outline focus:outline-none text-dark font-bold py-3 px-5 rounded">Cancel</a>
