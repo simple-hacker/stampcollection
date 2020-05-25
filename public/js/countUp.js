@@ -355,7 +355,7 @@ var CountUp = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/mystamps/node_modules/countup.js/dist/countUp.js */"./node_modules/countup.js/dist/countUp.js");
+module.exports = __webpack_require__(/*! /var/www/mystamps/node_modules/countup.js/dist/countUp.js */"./node_modules/countup.js/dist/countUp.js");
 
 
 /***/ })

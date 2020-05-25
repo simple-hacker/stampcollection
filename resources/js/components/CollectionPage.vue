@@ -2,8 +2,10 @@
     <div>
         <div class="mb-4">
             <collection-values
-                :collection-values="collectionValuesData"
+                :collection-values="collectionValues"
                 :gradings="gradings"
+                :stampsCount="stampsCount"
+                :collectedStamps="collectedStamps"
             ></collection-values>
         </div>
 
@@ -18,8 +20,8 @@
             </div>
             <div class="flex-1 ml-1">
                 <collection
-                    :issues="collectionData[showYear]"
-                    :collected-stamps="collectedStampsData"
+                    :issues="collection[showYear]"
+                    :collected-stamps="collectedStamps"
                     :gradings="gradings"
                 ></collection>
             </div>
@@ -42,12 +44,9 @@ export default {
     data() {
         return {
             showYear: this.year,
-            collectionData: this.collection,
-            collectedStampsData: this.collectedStamps,
-            collectionValuesData: this.collectionValues,
         }
     },
-    props: ['collection', 'collectedStamps', 'collectionValues', 'gradings', 'year'],
+    props: ['collection', 'collectedStamps', 'collectionValues', 'stampsCount', 'gradings', 'year'],
     components: {
         'collection' : Collection,
         'collection-values' : CollectionValues,

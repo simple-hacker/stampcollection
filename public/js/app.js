@@ -2238,19 +2238,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      showYear: this.year,
-      collectionData: this.collection,
-      collectedStampsData: this.collectedStamps,
-      collectionValuesData: this.collectionValues
+      showYear: this.year
     };
   },
-  props: ['collection', 'collectedStamps', 'collectionValues', 'gradings', 'year'],
+  props: ['collection', 'collectedStamps', 'collectionValues', 'stampsCount', 'gradings', 'year'],
   components: {
     'collection': _collection_Collection_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     'collection-values': _collection_CollectionValues_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3912,24 +3911,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionValues',
-  props: {
-    collectionValues: {
-      "default": function _default() {
-        return {};
-      }
-    },
-    gradings: {
-      "default": function _default() {
-        return {};
-      }
-    }
-  },
+  props: ['collectionValues', 'gradings', 'collectedStamps', 'stampsCount'],
   computed: {
     collectionTotal: function collectionTotal() {
       return (this.collectionValues.mint_total + this.collectionValues.used_total).toFixed(2);
+    },
+    collectedStampsCount: function collectedStampsCount() {
+      return Object.keys(this.collectedStamps).length;
     }
+  },
+  created: function created() {
+    console.log(this.collectedStamps);
   }
 });
 
@@ -23319,8 +23316,10 @@ var render = function() {
         [
           _c("collection-values", {
             attrs: {
-              "collection-values": _vm.collectionValuesData,
-              gradings: _vm.gradings
+              "collection-values": _vm.collectionValues,
+              gradings: _vm.gradings,
+              stampsCount: _vm.stampsCount,
+              collectedStamps: _vm.collectedStamps
             }
           })
         ],
@@ -23352,8 +23351,8 @@ var render = function() {
           [
             _c("collection", {
               attrs: {
-                issues: _vm.collectionData[_vm.showYear],
-                "collected-stamps": _vm.collectedStampsData,
+                issues: _vm.collection[_vm.showYear],
+                "collected-stamps": _vm.collectedStamps,
                 gradings: _vm.gradings
               }
             })
@@ -27075,7 +27074,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "bg-white rounded shadow" }, [
+  return _c("div", { staticClass: "flex flex-col bg-white rounded shadow" }, [
     _c(
       "div",
       {
@@ -27245,7 +27244,21 @@ var render = function() {
         }),
         0
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "text-2xl font-medium mb-3 text-center mt-2 mb-4" },
+      [
+        _vm._v(
+          "\n        You have collected " +
+            _vm._s(_vm.collectedStampsCount) +
+            " stamps out of " +
+            _vm._s(_vm.stampsCount) +
+            " stamps in the catalogue.\n    "
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -41493,8 +41506,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/mystamps/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/mystamps/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/mystamps/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/mystamps/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

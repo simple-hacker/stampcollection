@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded shadow">
+    <div class="flex flex-col bg-white rounded shadow">
         <div class="flex justify-between items-center mb-2 p-4 bg-darker text-white">
             <h1 class="text-4xl">My Collection</h1>
             <a href="/collection/print" class="p-4 hover:text-highlight" target="_blank">
@@ -47,28 +47,26 @@
                     </div>
             </div>
         </div>
+        <div class="text-2xl font-medium mb-3 text-center mt-2 mb-4">
+            You have collected {{ collectedStampsCount }} stamps out of {{ stampsCount}} stamps in the catalogue.
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: 'CollectionValues',
-    props: {
-        collectionValues: {
-            default() {
-                return {}
-            }
+    props: ['collectionValues', 'gradings', 'collectedStamps', 'stampsCount'],
+    computed: {
+        collectionTotal() {
+            return (this.collectionValues.mint_total + this.collectionValues.used_total).toFixed(2);
         },
-        gradings: {
-            default() {
-                return {}
-            }
+        collectedStampsCount() {
+            return Object.keys(this.collectedStamps).length;
         }
     },
-    computed: {
-        collectionTotal: function () {
-            return (this.collectionValues.mint_total + this.collectionValues.used_total).toFixed(2);
-        }
+    created() {
+        console.log(this.collectedStamps)
     }
 }
 </script>

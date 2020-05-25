@@ -18,21 +18,23 @@ class CollectionController extends Controller
      */
     public function index($year = null)
     {
-        
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
         
         // Obtain the Grading information.
         $gradings = Grading::all()->keyBy('abbreviation');
-        
+
+        // Get total count of Stamps in catalogue.
+        $stampsCount = Stamp::count();
+
         if ($year == null) {
             $year = $collection->keys()->first() ?? date("Y");
         }
 
         if (request()->wantsJson()) {
-            return compact('collection', 'collectedStamps', 'collectionValues', 'gradings', 'year');
+            return compact('collection', 'collectedStamps', 'collectionValues', 'stampsCount', 'gradings', 'year');
         }
 
-        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues', 'gradings', 'year'));
+        return view('collection.index', compact('collection', 'collectedStamps', 'collectionValues', 'stampsCount', 'gradings', 'year'));
     }
 
     /**
