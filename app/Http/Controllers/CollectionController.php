@@ -116,7 +116,7 @@ class CollectionController extends Controller
 
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
 
-        return view('collection.table', compact('collection', 'collectedStamps'));
+        return view('collection.table', compact('collectedStamps'));
     }
 
 
@@ -176,7 +176,7 @@ class CollectionController extends Controller
                 $collectionValues['mint_total'] += $mint_value;
             });
         }
-        if (isset($stampsByGradings['mint'])) {
+        if (isset($stampsByGradings['used'])) {
             $stampsByGradings['used']->each(function($grading, $key) use (&$collectionValues) {
                 $collectionValues['gradings'][$key] = $used_value = $grading->sum('stamp.used_value');
                 $collectionValues['used_total'] += $used_value;
