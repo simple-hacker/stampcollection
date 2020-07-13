@@ -3914,6 +3914,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CollectionValues',
   props: ['collectionValues', 'gradings', 'collectedStamps', 'stampsCount'],
@@ -27084,37 +27093,83 @@ var render = function() {
       [
         _c("h1", { staticClass: "text-4xl" }, [_vm._v("My Collection")]),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "p-4 hover:text-highlight",
-            attrs: { href: "/collection/print", target: "_blank" }
-          },
-          [
-            _c(
-              "svg",
-              {
-                staticClass: "fill-current",
-                attrs: {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  width: "35",
-                  height: "35",
-                  viewBox: "0 0 32 32"
-                }
-              },
-              [
-                _c("path", { attrs: { d: "M8 2h16v4h-16v-4z" } }),
-                _vm._v(" "),
-                _c("path", {
+        _c("div", { staticClass: "flex" }, [
+          _c(
+            "a",
+            {
+              staticClass: "p-4 hover:text-highlight mr-1",
+              attrs: { href: "/collection/print", target: "_blank" }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current",
                   attrs: {
-                    d:
-                      "M30 8h-28c-1.1 0-2 0.9-2 2v10c0 1.1 0.9 2 2 2h6v8h16v-8h6c1.1 0 2-0.9 2-2v-10c0-1.1-0.9-2-2-2zM4 14c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM22 28h-12v-10h12v10z"
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "35",
+                    height: "35",
+                    viewBox: "0 0 32 32"
                   }
-                })
-              ]
-            )
-          ]
-        )
+                },
+                [
+                  _c("path", { attrs: { d: "M8 2h16v4h-16v-4z" } }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M30 8h-28c-1.1 0-2 0.9-2 2v10c0 1.1 0.9 2 2 2h6v8h16v-8h6c1.1 0 2-0.9 2-2v-10c0-1.1-0.9-2-2-2zM4 14c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM22 28h-12v-10h12v10z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "p-4 hover:text-highlight",
+              attrs: { href: "/collection/missing", target: "_blank" }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current mr-2",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "35",
+                    height: "35",
+                    viewBox: "0 0 32 32"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        ])
       ]
     ),
     _vm._v(" "),

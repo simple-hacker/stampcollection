@@ -111,7 +111,6 @@ class CollectionController extends Controller
         return abort(401);
     }
 
-
     public function print()
     {
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
@@ -127,7 +126,6 @@ class CollectionController extends Controller
         
         return view('collection.missing', compact('missingStamps'));
     }
-
 
     protected function getCollection() {
         // Get all of the Collection model belonging to the auth user.
