@@ -112,11 +112,20 @@ class CollectionController extends Controller
     }
 
 
-    public function print() {
-
+    public function print()
+    {
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
 
         return view('collection.table', compact('collectedStamps'));
+    }
+
+    public function missing()
+    {
+        // Users distinct stamps in their collection
+        $stampIds = auth()->user()->collection->unique('stamp_id')->pluck('stamp_id');
+        $missingStamps = Stamp::whereNotIn('id', $stampIds)->get()->sortByDesc('issue.release_date');
+        
+        return view('collection.missing', compact('missingStamps'));
     }
 
 
