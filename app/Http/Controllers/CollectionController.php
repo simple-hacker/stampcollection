@@ -126,14 +126,18 @@ class CollectionController extends Controller
         $missingStamps = Stamp::whereNotIn('id', $stampIds)->get();
 
         $missingStamps = $missingStamps->sort(function ($a, $b) {
-            if ($a->issue->release_date === $b->issue->release_date) {
-                if ($a->issue->title === $b->issue->title) {
-                    // return $a->title > $b->title;
-                    return $a->id > $b->id;
+            if (isset($a->issue) && isset($b->issue)) {
+                if ($a->issue->release_date === $b->issue->release_date) {
+                    if ($a->issue->title === $b->issue->title) {
+                        // return $a->title > $b->title;
+                        return $a->id > $b->id;
+                    }
+                    return $a->issue->title < $b->issue->title;
                 }
-                return $a->issue->title < $b->issue->title;
+                return $a->issue->release_date < $b->issue->release_date;
             }
-            return $a->issue->release_date < $b->issue->release_date;
+
+            return 0;
         });
 
         return view('collection.missing', compact('missingStamps'));
