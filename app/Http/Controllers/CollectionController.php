@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use App\Stamp;
+use Validator;
 use App\Grading;
 use App\Collection;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Carbon;
 
 class CollectionController extends Controller
 {
@@ -122,10 +123,18 @@ class CollectionController extends Controller
     {
         // Users distinct stamps in their collection
         $stampIds = auth()->user()->collection->unique('stamp_id')->pluck('stamp_id');
-        // $missingStamps = Stamp::whereNotIn('id', $stampIds)->get()->sortByDesc('issue.release_date');
         $missingStamps = Stamp::whereNotIn('id', $stampIds)->get();
 
-        $missingStamps = $missingStamps->sortBy('id')->sortBy('issue.title')->sortByDesc('issue.release_date');
+        $missingStamps = $missingStamps->sort(function ($a, $b) {
+            if ($a->issue->release_date === $b->issue->release_date) {
+                if ($a->issue->title === $b->issue->title) {
+                    // return $a->title > $b->title;
+                    return $a->id > $b->id;
+                }
+                return $a->issue->title < $b->issue->title;
+            }
+            return $a->issue->release_date < $b->issue->release_date;
+        });
 
         return view('collection.missing', compact('missingStamps'));
     }
