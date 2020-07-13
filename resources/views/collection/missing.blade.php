@@ -24,10 +24,10 @@
     <table class="border border-collapse">
         <thead class="">
             <tr>
-                <th class="py-1 px-2 border w-32">Issue Date</th>
-                <th class="py-1 px-2 border">Issue Title</th>
-                <th class="py-1 px-2 border">Stanley Gibbons</th>
-                <th class="py-1 px-2 border">Stamp Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border w-32">Issue Date</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Issue Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stanley Gibbons</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stamp Title</th>
             </tr>
         </thead>
         <tbody>

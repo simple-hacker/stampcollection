@@ -22,16 +22,16 @@
 <body>
 
     <table class="border border-collapse">
-        <thead class="">
+        <thead class="sticky">
             <tr>
-                <th class="py-1 px-2 border w-32">Issue Date</th>
-                <th class="py-1 px-2 border">Issue Title</th>
-                <th class="py-1 px-2 border">Stanley Gibbons</th>
-                <th class="py-1 px-2 border">Face Value</th>
-                <th class="py-1 px-2 border">Stamp Title</th>
-                <th class="py-1 px-2 border">Grading</th>
-                <th class="py-1 px-2 border">Value</th>
-                <th class="py-1 px-2 border">Qty</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border w-32">Issue Date</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Issue Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stanley Gibbons</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Face Value</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stamp Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Grading</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Value</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Qty</th>
             </tr>
         </thead>
         <tbody>
