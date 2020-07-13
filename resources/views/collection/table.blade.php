@@ -45,7 +45,7 @@
                     @php
                         if ($stamp[0]['stamp']['issue_id'] != $currentIssueId) {
                             $issueCount += 1;
-                            $rowColour = ($issueCount % 2 == 0) ? 'bg-white' : 'bg-gray-400';
+                            $rowColour = ($issueCount % 2 == 0) ? 'bg-blue-100' : 'bg-blue-200';
                         }
                         $currentIssueId = $stamp[0]['stamp']['issue_id'];
                     @endphp
