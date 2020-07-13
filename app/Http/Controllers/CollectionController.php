@@ -122,8 +122,11 @@ class CollectionController extends Controller
     {
         // Users distinct stamps in their collection
         $stampIds = auth()->user()->collection->unique('stamp_id')->pluck('stamp_id');
-        $missingStamps = Stamp::whereNotIn('id', $stampIds)->get()->sortByDesc('issue.release_date');
-        
+        // $missingStamps = Stamp::whereNotIn('id', $stampIds)->get()->sortByDesc('issue.release_date');
+        $missingStamps = Stamp::whereNotIn('id', $stampIds)->get();
+
+        $missingStamps = $missingStamps->sortBy('id')->sortBy('issue.title')->sortByDesc('issue.release_date');
+
         return view('collection.missing', compact('missingStamps'));
     }
 
