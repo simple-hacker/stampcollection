@@ -178,7 +178,19 @@ class CollectionController extends Controller
         // This is to make it easier to display data.
         // As we loop through the user's collection by stamps, it then refers to this array for the number of gradings.
         // I think I could somehow merge this in the the mega collection above, but it's good enough for now.
-        $collectedStamps = $usersCollection->sortByDesc('stamp.issue.release_date')->groupBy(['stamp_id', 'grading_id']);
+        // $collectedStamps = $usersCollection->sortByDesc('stamp.issue.release_date')->groupBy(['stamp_id', 'grading_id']);
+
+        $collectedStamps = $usersCollection->sort(function ($a, $b) {
+            if ($a->stamp->issue->release_date === $b->stamp->issue->release_date) {
+                if ($a->stamp->issue->title === $b->stamp->issue->title) {
+                    // return $a->stamp->title > $b->stamp->title;
+                    return $a->stamp->sg_number > $b->stamp->sg_number;
+                }
+                return $a->stamp->issue->title < $b->stamp->issue->title;
+            }
+            return $a->stamp->issue->release_date < $b->stamp->issue->release_date;
+        })
+        ->groupBy(['stamp_id', 'grading_id']);
 
         // Organise the collection models by grading_id, then group by type (e.g. mint or used) and then further group by
         // abbreviation.  So we can get a total for all "mint" stamps which can they be further broken down values for each grading.
