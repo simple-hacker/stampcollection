@@ -184,6 +184,10 @@ class CollectionController extends Controller
             if ($a->stamp->issue->release_date === $b->stamp->issue->release_date) {
                 if ($a->stamp->issue->title === $b->stamp->issue->title) {
                     // return $a->stamp->title > $b->stamp->title;
+                    if ($a->stamp->sg_number === $b->stamp->sg_number) {
+                        // return $a->stamp->title > $b->stamp->title;
+                        return $a->stamp->grading_id > $b->stamp->grading_id;
+                    }
                     return $a->stamp->sg_number > $b->stamp->sg_number;
                 }
                 return $a->stamp->issue->title < $b->stamp->issue->title;
