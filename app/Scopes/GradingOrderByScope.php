@@ -17,11 +17,6 @@ class GradingOrderByScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->orderByRaw(
-            "CASE id
-                WHEN 9 THEN 5.5
-                ELSE id
-            END"
-        );
+        $builder->orderBy('display_order');
     }
 }
