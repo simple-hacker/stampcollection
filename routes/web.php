@@ -31,6 +31,7 @@ Route::post('/stamp/{stamp}', 'StampController@update')->middleware('auth', 'rol
 Route::delete('/stamp/{stamp}', 'StampController@destroy')->middleware('auth', 'role:admin')->name('stamp.delete');
 
 Route::get('/collection/print', 'CollectionController@print')->middleware('auth')->name('collection.print');
+Route::get('/collection/missing', 'CollectionController@missing')->middleware('auth')->name('collection.missing');
 Route::get('/collection/{year?}', 'CollectionController@index')->middleware('auth')->name('collection');
 Route::get('/collection/stamp/{stamp}', 'CollectionController@show')->middleware('auth')->name('collection.show');
 Route::post('/collection', 'CollectionController@store')->middleware('auth')->name('collection.add');

@@ -22,46 +22,60 @@
 <body>
 
     <table class="border border-collapse">
-        <thead class="">
+        <thead class="sticky">
             <tr>
-                <th class="py-1 px-2 border w-32">Issue Date</th>
-                <th class="py-1 px-2 border">Issue Title</th>
-                <th class="py-1 px-2 border">Stanley Gibbons</th>
-                <th class="py-1 px-2 border">Face Value</th>
-                <th class="py-1 px-2 border">Stamp Title</th>
-                <th class="py-1 px-2 border">Grading</th>
-                <th class="py-1 px-2 border">Value</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border w-32">Issue Date</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Issue Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stanley Gibbons</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Face Value</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Stamp Title</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Grading</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Value</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Qty</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $currentIssueId = 0;
+                $issueCount = 0;
+            @endphp
             @foreach ($collectedStamps as $stamp_id => $stamps)
                 @foreach ($stamps as $stamp)
-                    @foreach($stamp as $data)
-                    <tr>
-                        <td class="py-1 px-2 border w-32"><strong>{{ date("Y", strtotime($data['stamp']['issue']['release_date'])) }}</strong> ({{ date("j M", strtotime($data['stamp']['issue']['release_date'])) }})</td>
-                        <td class="py-1 px-2 border">{{ $data['stamp']['issue']['title'] }}</td>
-                        <td class="py-1 px-2 border">{{ $data['stamp']['sg_number'] }}</td>
+                    {{-- @foreach($stamp as $data) --}}
+                    @php
+                        if ($stamp[0]['stamp']['issue_id'] != $currentIssueId) {
+                            $issueCount += 1;
+                            $rowColour = ($issueCount % 2 == 0) ? 'bg-blue-100' : 'bg-blue-200';
+                        }
+                        $currentIssueId = $stamp[0]['stamp']['issue_id'];
+                    @endphp
+                    <tr class="{{ $rowColour }}">
+                        <td class="py-1 px-2 border w-32"><strong>{{ date("Y", strtotime($stamp[0]['stamp']['issue']['release_date'])) }}</strong> ({{ date("j M", strtotime($stamp[0]['stamp']['issue']['release_date'])) }})</td>
+                        <td class="py-1 px-2 border">{{ $stamp[0]['stamp']['issue']['title'] }}</td>
+                        <td class="py-1 px-2 border">{{ $stamp[0]['stamp']['sg_number'] }}</td>
 
-                        @if ($data['grading']['type'] == "mint")
-                            <td class="py-1 px-2 border">£{{ number_format($data['stamp']['face_value'], 2) }}</td>
-                        @elseif ($data['grading']['type'] == "used")
+                        @if ($stamp[0]['grading']['type'] == "mint")
+                            <td class="py-1 px-2 border">£{{ number_format($stamp[0]['stamp']['face_value'], 2) }}</td>
+                        @elseif ($stamp[0]['grading']['type'] == "used")
                             <td class="py-1 px-2 border">£0.00</td>
                         @else
                             <td class="py-1 px-2 border">£0.00</td>
                         @endif
 
-                        <td class="py-1 px-2 border">{{ $data['stamp']['title'] }}</td>
-                        <td class="py-1 px-2 border">{{ $data['grading']['grading'] }}</td>
+                        <td class="py-1 px-2 border">{{ $stamp[0]['stamp']['title'] }}</td>
+                        <td class="py-1 px-2 border">{{ $stamp[0]['grading']['grading'] }}</td>
 
-                        @if ($data['grading']['type'] == "mint")  
-                            <td class="py-1 px-2 border">£{{ number_format($data['stamp']['mint_value'], 2) }}</td>
-                        @elseif ($data['grading']['type'] == "used")
-                            <td class="py-1 px-2 border">£{{ number_format($data['stamp']['used_value'], 2) }}</td>
+                        @if ($stamp[0]['grading']['type'] == "mint")  
+                            <td class="py-1 px-2 border">£{{ number_format($stamp[0]['stamp']['mint_value'], 2) }}</td>
+                        @elseif ($stamp[0]['grading']['type'] == "used")
+                            <td class="py-1 px-2 border">£{{ number_format($stamp[0]['stamp']['used_value'], 2) }}</td>
                         @else
                             <td class="py-1 px-2 border">£0.00</td>
                         @endif
+
+                        <td class="py-1 px-2 border">{{ count($stamp) }}</td>
                     </tr>
-                    @endforeach
+                    {{-- @endforeach --}}
                 @endforeach
             @endforeach
         </tbody>

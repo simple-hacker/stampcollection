@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use App\Stamp;
+use Validator;
 use App\Grading;
 use App\Collection;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Carbon;
 
 class CollectionController extends Controller
 {
@@ -112,14 +113,36 @@ class CollectionController extends Controller
         return abort(401);
     }
 
-
-    public function print() {
-
+    public function print()
+    {
         list($collection, $collectedStamps, $collectionValues) = $this->getCollection();
 
-        return view('collection.table', compact('collection', 'collectedStamps'));
+        return view('collection.table', compact('collectedStamps'));
     }
 
+    public function missing()
+    {
+        // Users distinct stamps in their collection
+        $stampIds = auth()->user()->collection->unique('stamp_id')->pluck('stamp_id');
+        $missingStamps = Stamp::whereNotIn('id', $stampIds)->get();
+
+        $missingStamps = $missingStamps->sort(function ($a, $b) {
+            if (isset($a->issue) && isset($b->issue)) {
+                if ($a->issue->release_date === $b->issue->release_date) {
+                    if ($a->issue->title === $b->issue->title) {
+                        // return $a->title > $b->title;
+                        return $a->id > $b->id;
+                    }
+                    return $a->issue->title < $b->issue->title;
+                }
+                return $a->issue->release_date < $b->issue->release_date;
+            }
+
+            return 0;
+        });
+
+        return view('collection.missing', compact('missingStamps'));
+    }
 
     protected function getCollection() {
         // Get all of the Collection model belonging to the auth user.
@@ -156,7 +179,23 @@ class CollectionController extends Controller
         // This is to make it easier to display data.
         // As we loop through the user's collection by stamps, it then refers to this array for the number of gradings.
         // I think I could somehow merge this in the the mega collection above, but it's good enough for now.
-        $collectedStamps = $usersCollection->sortByDesc('stamp.issue.release_date')->groupBy(['stamp_id', 'grading.display_order']);
+        // $collectedStamps = $usersCollection->sortByDesc('stamp.issue.release_date')->groupBy(['stamp_id', 'grading_id']);
+
+        $collectedStamps = $usersCollection->sort(function ($a, $b) {
+            if ($a->stamp->issue->release_date === $b->stamp->issue->release_date) {
+                if ($a->stamp->issue->title === $b->stamp->issue->title) {
+                    // return $a->stamp->title > $b->stamp->title;
+                    if ($a->stamp->sg_number === $b->stamp->sg_number) {
+                        // return $a->stamp->title > $b->stamp->title;
+                        return $a->stamp->grading_id > $b->stamp->grading_id;
+                    }
+                    return $a->stamp->sg_number > $b->stamp->sg_number;
+                }
+                return $a->stamp->issue->title < $b->stamp->issue->title;
+            }
+            return $a->stamp->issue->release_date < $b->stamp->issue->release_date;
+        })
+        ->groupBy(['stamp_id', 'grading.display_order']);
 
         // Organise the collection models by grading_id, then group by type (e.g. mint or used) and then further group by
         // abbreviation.  So we can get a total for all "mint" stamps which can they be further broken down values for each grading.
@@ -177,7 +216,7 @@ class CollectionController extends Controller
                 $collectionValues['mint_total'] += $mint_value;
             });
         }
-        if (isset($stampsByGradings['mint'])) {
+        if (isset($stampsByGradings['used'])) {
             $stampsByGradings['used']->each(function($grading, $key) use (&$collectionValues) {
                 $collectionValues['gradings'][$key] = $used_value = $grading->sum('stamp.used_value');
                 $collectionValues['used_total'] += $used_value;
