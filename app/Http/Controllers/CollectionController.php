@@ -187,7 +187,7 @@ class CollectionController extends Controller
                     // return $a->stamp->title > $b->stamp->title;
                     if ($a->stamp->sg_number === $b->stamp->sg_number) {
                         // return $a->stamp->title > $b->stamp->title;
-                        return $a->stamp->grading_id > $b->stamp->grading_id;
+                        return $b->grading->display_order < $a->grading->display_order;
                     }
                     return $a->stamp->sg_number > $b->stamp->sg_number;
                 }
