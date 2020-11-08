@@ -56,7 +56,7 @@
                     </div>
             </div>
         </div>
-        <div class="text-2xl font-medium mb-3 text-center mt-2 mb-4">
+        <div class="text-2xl font-medium text-center mt-2 mb-4">
             You have collected {{ collectedStampsCount }} stamps out of {{ stampsCount}} stamps in the catalogue.
         </div>
     </div>
