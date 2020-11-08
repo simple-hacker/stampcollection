@@ -65,9 +65,6 @@ export default {
             return Object.keys(this.collectedStamps).length;
         }
     },
-    created() {
-        console.log(this.collectedStamps)
-    }
 }
 </script>
 

@@ -3924,9 +3924,6 @@ __webpack_require__.r(__webpack_exports__);
     collectedStampsCount: function collectedStampsCount() {
       return Object.keys(this.collectedStamps).length;
     }
-  },
-  created: function created() {
-    console.log(this.collectedStamps);
   }
 });
 

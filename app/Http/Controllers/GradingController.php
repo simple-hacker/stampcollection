@@ -9,7 +9,7 @@ use Validator;
 class GradingController extends Controller
 {
     public function index() {
-        $gradings = Grading::all()->keyBy('id');
+        $gradings = Grading::all();
         return view('admin.gradings', compact('gradings'));
     }
 
@@ -23,7 +23,7 @@ class GradingController extends Controller
                 $grading->save();
             }
 
-            return Grading::all()->keyBy('id');
+            return Grading::all();
         }
 
         return response()->json(['error' => 'error'], 401);
@@ -39,7 +39,7 @@ class GradingController extends Controller
                 $grading->update($attributes);
             }
 
-            return Grading::all()->keyBy('id');
+            return Grading::all();
         }
 
         return response()->json(['error' => 'error'], 401);
