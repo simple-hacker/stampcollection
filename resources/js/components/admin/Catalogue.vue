@@ -20,8 +20,8 @@
                         
                     </div>
                     <div class="flex bg-dark text-white text-lg font-bold">
-                        <div class="w-1/9 py-2 text-center border border-darker">SG Num</div>
-                        <div class="w-1/9 py-2 text-center border border-darker">SG Ill</div>
+                        <div class="w-1/9 py-2 text-center border border-darker">SG #</div>
+                        <div class="w-1/9 py-2 text-center border border-darker">SG ill.</div>
                         <div class="w-2/9 py-2 text-center border border-darker">Title</div>
                         <div class="w-2/9 py-2 text-center border border-darker">Description</div>
                         <div class="w-1/9 py-2 text-center border border-darker">Face Value</div>
