@@ -8,7 +8,7 @@ use App\Stamp;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class StampController extends Controller
 {
@@ -224,7 +224,7 @@ class StampController extends Controller
     public function updateMultiple(Request $request)
     {
         $messages = [
-            '*.id.required' => 'Stamps shoudl have an id.',
+            '*.id.required' => 'Stamps should have an id.',
             '*.id.exists' => 'This stamp does not exist.',
             '*.title.required' => 'Title is required.',
             '*.title.min' => 'Min title length is 3 characters.',
@@ -238,6 +238,7 @@ class StampController extends Controller
         $validator = Validator::make($request->all(), [
             '*.id' => 'required|exists:stamps,id',
             '*.title' => 'required|min:3|max:255',
+            '*.description' => 'nullable',
             '*.sg_number' => 'nullable|alpha_num|min:1',
             '*.sg_illustration' => 'nullable|string|min:1',
             '*.face_value' => 'nullable|numeric|min:0',
@@ -250,6 +251,7 @@ class StampController extends Controller
                 Stamp::findOrFail($stamp['id'])
                         ->update([
                             'title' => $stamp['title'],
+                            'description' => $stamp['description'],
                             'sg_number' => $stamp['sg_number'],
                             'sg_illustration' => $stamp['sg_illustration'],
                             'face_value' => $stamp['face_value'],
