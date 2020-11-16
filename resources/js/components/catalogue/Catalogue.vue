@@ -42,7 +42,7 @@
 
         <!-- Loop through issues in catalogue year -->
         <div
-            v-for="issue in catalogue"
+            v-for="issue in issuesArray"
             :key="issue.id"
             class="flex flex-col mb-8 bg-white rounded shadow">
                 <a :href="issue.path">
@@ -91,7 +91,7 @@
                 </a>
                 <div class="flex px-4 py-2">
                     <div
-                        v-for="stamp in reduceStamps(issue.stamps)"
+                        v-for="stamp in issue.stamps.slice(0, stampsToShow)"
                         :key="stamp.id"
                         class="flex flex-col items-center justify-start mr-1 p-2 border w-1/6">
                         <img :src="stamp.image_src" :alt="stamp.title" class="h-20 mb-1">
@@ -112,19 +112,22 @@
 </template>
 
 <script>
-    const STAMPS_TO_SHOW = 5;
 
     export default {
         data() {
             return {
-                stampsToShow: STAMPS_TO_SHOW
+                stampsToShow: 5,
             }
         },
         props: ['catalogue', 'admin', 'year'],
-        methods: {
-            reduceStamps(stamps) {
-                return stamps.slice(0, 5);
+        computed: {
+            issuesArray() {
+                return Object.values(this.catalogue).sort(function(issue1, issue2) {
+                    return issue1.release_date < issue2.release_date ? -1 : 0;
+                });
             },
+        },
+        methods: {
             convertDate(date) {
                 date = new Date(date);
                 // Jesus fucking christ it's 2019 and you still have to format a date manually. PHP > JS

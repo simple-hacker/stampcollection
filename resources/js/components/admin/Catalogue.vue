@@ -32,7 +32,7 @@
                 
 
                 <div
-                    v-for="issue in catalogue"
+                    v-for="issue in issuesArray"
                     :key="issue.id"
                     class="flex-col mb-2"
                 >
@@ -154,6 +154,13 @@
             }
         },
         props: ['catalogue', 'year'],
+        computed: {
+            issuesArray() {
+                return Object.values(this.catalogue).sort(function(issue1, issue2) {
+                    return issue1.release_date < issue2.release_date ? -1 : 0;
+                });
+            },
+        },
         methods: {
             convertDate(date) {
                 date = new Date(date);

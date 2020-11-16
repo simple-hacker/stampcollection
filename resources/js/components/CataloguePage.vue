@@ -11,7 +11,7 @@
             </div>
             <div class="flex-1 ml-1">
                 <catalogue
-                    :catalogue="catalogueData[showYear]"
+                    :catalogue="catalogue[showYear]"
                     :admin="admin || false"
                     :year="showYear"
                 ></catalogue>
@@ -29,11 +29,10 @@ export default {
     data() {
         return {
             showYear: this.year,
-            catalogueData: this.catalogue,
+            // catalogueData: this.catalogue,
         }
     },
-    // props: ['catalogue', 'year', 'admin'],
-    props: ['catalogue', 'year', 'years', 'admin'],
+    props: ['catalogue','year','years','admin'],
     components: {
         'catalogue' : Catalogue,
     },
