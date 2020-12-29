@@ -7,7 +7,7 @@
             <h1 class="text-4xl p-1 mb-1 text-center text-white">{{ $issue->title }}</h1>
             @isset ($issue->release_date)
                 <small class="mb-2 text-white text-center">Released {{ Carbon\Carbon::parse($issue->release_date)->toFormattedDateString() }}</small>
-            @endisset           
+            @endisset
             <div class="absolute top-5 right-5 flex">
                 @if($issue->url)
                     <a href="{{ $issue->url }}" target="_blank" class="border bg-white hover:bg-gray-200 rounded shadow px-4 py-2 mb-1 mr-3">
@@ -41,7 +41,7 @@
                                                         c3.68,0,7.328-1.248,10.24-3.712l96-80c3.68-3.04,5.76-7.552,5.76-12.288C384,251.264,381.92,246.752,378.24,243.712z"/>
                                                     <path d="M480,0H32C14.336,0,0,14.336,0,32v160h64V64h384v384H64V320H0v160c0,17.696,14.336,32,32,32h448c17.696,0,32-14.304,32-32
                                                         V32C512,14.336,497.696,0,480,0z"/>
-                                                </svg>    
+                                                </svg>
                                                 Reimport Issue
                                             </button>
                                         @else
@@ -161,7 +161,10 @@
                             <button @click.prevent="$modal.show('collection', {stamp: {{ $stamp}}})" class="mt-2 border rounded p-2 text-center w-full @if ($collection->contains($stamp)) bg-green-500 hover:bg-green-600 @else bg-red-500 hover:bg-red-600 @endif text-white">Manage Collection</button>
                         @endauth
                     </div>
-                    <p class="w-3/4">{!! nl2br(e($stamp->description)) !!}</p>
+                    <div class="w-3/4 flex flex-col">
+                        @if($stamp->class)<h4 class="text-lg font-semibold mb-4">{{ $stamp->class }}</h4>@endif
+                        <p>{!! nl2br(e($stamp->description)) !!}</p>
+                    </div>
                 </div>
             </div>
         @endforeach

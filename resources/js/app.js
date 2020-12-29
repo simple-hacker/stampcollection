@@ -36,6 +36,7 @@ Vue.component('collection-page', require('./components/CollectionPage.vue').defa
 Vue.component('catalogue-page', require('./components/CataloguePage.vue').default);
 Vue.component('collection-modal', require('./components/CollectionModal').default);
 Vue.component('gradings', require('./components/Gradings.vue').default);
+Vue.component('class-values', require('./components/ClassValues.vue').default);
 Vue.component('issue-categories', require('./components/IssueCategories.vue').default);
 Vue.component('monarchs', require('./components/Monarchs.vue').default);
 Vue.component('browse-year', require('./components/BrowseYear.vue').default);

@@ -56,7 +56,7 @@
                     v-text="'Save Changes'"
                     @click="updateGradings"
                     class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
-                >                
+                >
                 </button>
                 <span v-if="showUpdatedMessage" class="flex tems-center ml-3 italic text-green-700">
                     <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -71,7 +71,7 @@
             <div
                 v-for="(grading, index) in addGradings"
                 :key="index"
-                class="flex mb-1 items-start"
+                class="flex mb-1 items-center"
             >
                 <div class="flex flex-col">
                     <input
@@ -109,8 +109,7 @@
                 <div class="flex items-start p-2">
                     <button @click.prevent="addGradings.splice(index, 1)" class="ml-2">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                            <path d="M24 24.082v-1.649c2.203-1.241 4-4.337 4-7.432 0-4.971 0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h28c0-4.030-5.216-7.364-12-7.918z"></path>
-<path d="M10.225 24.854c1.728-1.13 3.877-1.989 6.243-2.513-0.47-0.556-0.897-1.176-1.265-1.844-0.95-1.726-1.453-3.627-1.453-5.497 0-2.689 0-5.228 0.956-7.305 0.928-2.016 2.598-3.265 4.976-3.734-0.529-2.39-1.936-3.961-5.682-3.961-6 0-6 4.029-6 9 0 3.096 1.797 6.191 4 7.432v1.649c-6.784 0.555-12 3.888-12 7.918h8.719c0.454-0.403 0.956-0.787 1.506-1.146z"></path>
+                            <path d="M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"></path>
                         </svg>
                     </button>
                 </div>
@@ -121,7 +120,7 @@
                         v-text="'Add Gradings'"
                         @click="storeGradings"
                         class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
-                    >                
+                    >
                     </button>
                     <span v-if="showAddedMessage" class="flex tems-center ml-3 italic text-green-700">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -136,7 +135,7 @@
                     </svg>
                     Another Row
                 </button>
-            </div>            
+            </div>
         </div>
     </div>
 </template>

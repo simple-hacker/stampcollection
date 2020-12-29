@@ -7,7 +7,9 @@ use App\Stamp;
 use Goutte\Client;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Jobs\ConvertClassToValue;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -18,7 +20,7 @@ class ScraperController extends Controller
 
     /**
      * Instantiates Gouette/Client scraper.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -83,10 +85,31 @@ class ScraperController extends Controller
 
         // Now save the stamps
         $crawler->filter('.stamp_entry')->each(function (Crawler $stamp, $i) use ($issue, $issue_hash, &$stamp_titles) {
+
             $img_url = $stamp->filter('img')->first()->extract(['src'])[0];
             $title = $stamp->filter('h3')->text();
-            $description = trim(str_replace($title, '', $stamp->text()));
-            $description = str_replace('<br>', '', $description);
+
+            $description = $stamp->text();
+
+            // Remove title from the start of the text including any left over whitespace
+            if (substr($description, 0, strlen($title)) == $title) {
+                $description = trim(substr($description, strlen($title)));
+            }
+
+            $class = null;
+
+            // Match stamp class (1st 2nd) or Price from the start of the description
+            $regex = "/^(£\d+\.\d{2,}|£\d+|\d+p|1st Large|2nd Large|1st|2nd|\d+s\d+d|\d+d|\d+½?d|\d*½d|\d+s\d+½?d|\d+s|\d+½?p)/i";
+            preg_match($regex, $description, $classMatch);
+
+            if (isset($classMatch[0])) {
+                $class = $classMatch[0];
+
+                // Remove class or price from the start of the text including any left over whitespace
+                if (substr($description, 0, strlen($class)) == $class) {
+                    $description = trim(substr($description, strlen($class)));
+                }
+            }
 
             // If scraper has no image then set both remote_image_url and image_url to null
             $remote_image_url = ($img_url !== '/images/noimage.jpg') ? $this->baseURI . $img_url : null;
@@ -107,6 +130,7 @@ class ScraperController extends Controller
             $attributes = [
                 'issue_id' => $issue->id,
                 'title' => $title,
+                'class' => $class,
                 'description' => $description,
                 'remote_image_url' => $remote_image_url,
                 'image' => ($remote_image_url !== null) ? $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg' : null,
@@ -129,6 +153,11 @@ class ScraperController extends Controller
                 }
             }
         });
+
+        // Convert the scraped class to an actual numerical face_value
+        Artisan::queue('stamps:value', [
+            'issue' => $issue->id,
+        ]);
 
         return redirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]))
                 ->withToastSuccess("Successfully imported {$issue->title}");
@@ -173,9 +202,9 @@ class ScraperController extends Controller
 
     /**
     * Returns a list of cgbs_issues from CollectGBStamps for today's year.
-    * 
+    *
     * @param $year
-    * @return 
+    * @return
     */
     public function cgbsIssuesByYear($year = null)
     {

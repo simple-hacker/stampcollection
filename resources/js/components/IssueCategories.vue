@@ -34,7 +34,7 @@
                         v-text="'Save Changes'"
                         @click="updateCategories"
                         class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
-                    >                
+                    >
                     </button>
                     <span v-if="showUpdatedMessage" class="flex tems-center ml-3 italic text-green-700">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -49,7 +49,7 @@
             <div
                 v-for="(category, index) in addCategories"
                 :key="index"
-                class="flex mb-1 items-start"
+                class="flex mb-1 items-center"
             >
                 <div class="flex flex-col w-full">
                     <input
@@ -76,7 +76,7 @@
                         v-text="'Add Categories'"
                         @click="storeCategories"
                         class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
-                    >                
+                    >
                     </button>
                     <span v-if="showAddedMessage" class="flex tems-center ml-3 italic text-green-700">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
@@ -91,7 +91,7 @@
                     </svg>
                     Another Row
                 </button>
-            </div>            
+            </div>
         </div>
     </div>
 </template>
