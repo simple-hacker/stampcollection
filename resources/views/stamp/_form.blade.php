@@ -2,17 +2,6 @@
     @csrf
     <div class="flex items-center mb-6">
         <div class="w-1/3">
-            <label for="title" class="text-gray-500 font-bold p-4">Title</label>
-        </div>
-        <div class="flex flex-col w-2/3">
-            <input id="title" name="title" type="text" value="{{ old('title', $stamp->title) }}" placeholder="Title" class="w-full p-2 rounded border shadow @error('title') border-red-500 @enderror" required>
-            @error('title')
-                @component('components.error') {{ $message }} @endcomponent
-            @enderror
-        </div>
-    </div>
-    <div class="flex items-center mb-6">
-        <div class="w-1/3">
             <label for="sg_number" class="text-gray-500 font-bold p-4">Stanley Gibbons Number</label>
         </div>
         <div class="flex flex-col w-2/3">
@@ -35,6 +24,28 @@
     </div>
     <div class="flex items-center mb-6">
         <div class="w-1/3">
+            <label for="denomination" class="text-gray-500 font-bold p-4">Denomination</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="denomination" name="denomination" type="text" value="{{ old('denomination', $stamp->denomination) }}" placeholder="Denomination e.g. 1st" class="w-full p-2 rounded border shadow @error('denomination') border-red-500 @enderror">
+            @error('denomination')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
+            <label for="title" class="text-gray-500 font-bold p-4">Title</label>
+        </div>
+        <div class="flex flex-col w-2/3">
+            <input id="title" name="title" type="text" value="{{ old('title', $stamp->title) }}" placeholder="Title" class="w-full p-2 rounded border shadow @error('title') border-red-500 @enderror" required>
+            @error('title')
+                @component('components.error') {{ $message }} @endcomponent
+            @enderror
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <div class="w-1/3">
             <label for="face_value" class="text-gray-500 font-bold p-4">Face Value</label>
         </div>
         <div class="flex flex-col w-2/3">
@@ -43,8 +54,8 @@
 
             >
                 <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
-                <input 
-                    id="face_value" name="face_value" 
+                <input
+                    id="face_value" name="face_value"
                     type="number" min="0" step="0.01"
                     value="{{ old('face_value', $stamp->face_value) }}" placeholder="0.00"
                     class="p-1 bg-transparent w-full"
@@ -65,8 +76,8 @@
 
             >
                 <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
-                <input 
-                    id="mint_value" name="mint_value" 
+                <input
+                    id="mint_value" name="mint_value"
                     type="number" min="0" step="0.01"
                     value="{{ old('mint_value', $stamp->mint_value) }}" placeholder="0.00"
                     class="p-1 bg-transparent w-full"
@@ -87,8 +98,8 @@
 
             >
                 <span class="bg-gray-100 mr-1 py-1 px-3 rounded">£</span>
-                <input 
-                    id="used_value" name="used_value" 
+                <input
+                    id="used_value" name="used_value"
                     type="number" min="0" step="0.01"
                     value="{{ old('used_value', $stamp->used_value) }}" placeholder="0.00"
                     class="p-1 bg-transparent w-full"

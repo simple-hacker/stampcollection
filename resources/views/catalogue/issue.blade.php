@@ -162,7 +162,7 @@
                         @endauth
                     </div>
                     <div class="w-3/4 flex flex-col">
-                        @if($stamp->class)<h4 class="text-lg font-semibold mb-4">{{ $stamp->class }}</h4>@endif
+                        @if($stamp->denomination)<h4 class="text-lg font-semibold mb-4">{{ $stamp->denomination }}</h4>@endif
                         <p>{!! nl2br(e($stamp->description)) !!}</p>
                     </div>
                 </div>

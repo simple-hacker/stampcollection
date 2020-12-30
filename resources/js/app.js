@@ -6,15 +6,31 @@
 
 require('./bootstrap');
 
+window.Vue = require('vue');
+
 // Vue-js-modal
 import VModal from 'vue-js-modal';
-
-window.Vue = require('vue');
 
 Vue.use(VModal, {
     dialog: true,
     injectModalsContainer: true
-  });
+});
+
+// vue-currency-input
+import VueCurrencyInput from 'vue-currency-input'
+
+const pluginOptions = {
+    /* see config reference */
+    globalOptions: {
+        currency: 'GBP',
+        locale: 'en-GB',
+        precision: 2,
+        allowNegative: false,
+        distractionFree: false,
+    }
+}
+Vue.use(VueCurrencyInput, pluginOptions)
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,7 +52,7 @@ Vue.component('collection-page', require('./components/CollectionPage.vue').defa
 Vue.component('catalogue-page', require('./components/CataloguePage.vue').default);
 Vue.component('collection-modal', require('./components/CollectionModal').default);
 Vue.component('gradings', require('./components/Gradings.vue').default);
-Vue.component('class-values', require('./components/ClassValues.vue').default);
+Vue.component('denominations', require('./components/Denominations.vue').default);
 Vue.component('issue-categories', require('./components/IssueCategories.vue').default);
 Vue.component('monarchs', require('./components/Monarchs.vue').default);
 Vue.component('browse-year', require('./components/BrowseYear.vue').default);

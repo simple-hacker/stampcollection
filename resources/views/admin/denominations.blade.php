@@ -8,9 +8,9 @@
         </div>
 
         <div class="flex-1 ml-1 bg-white rounded shadow p-4">
-            <class-values
-                :classes="{{ $classes }}"
-            ></class-values>
+            <denominations
+                :denominations="{{ $denominations }}"
+            ></denominations>
         </div>
     </div>
 @endsection

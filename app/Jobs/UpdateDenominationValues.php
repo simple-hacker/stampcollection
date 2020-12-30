@@ -3,14 +3,14 @@
 namespace App\Jobs;
 
 use App\Stamp;
-use App\StampClass;
+use App\Denomination;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class UpdateStampClassValues implements ShouldQueue
+class UpdateDenominationValues implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,10 +31,10 @@ class UpdateStampClassValues implements ShouldQueue
      */
     public function handle()
     {
-        $classes = StampClass::all();
+        $denomination = Denomination::all();
 
-        $classes->each(function($class) {
-            Stamp::where('class', '=', $class->class)->update(['face_value' => $class->value]);
+        $denomination->each(function($denomination) {
+            Stamp::where('denomination', '=', $denomination->denomination)->update(['face_value' => $denomination->value]);
         });
     }
 }

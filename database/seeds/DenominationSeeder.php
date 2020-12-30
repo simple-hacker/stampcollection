@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ClassSeeder extends Seeder
+class DenominationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,25 +12,25 @@ class ClassSeeder extends Seeder
      */
     public function run()
     {
-        $classes = [
+        $denominations = [
             [
-                'class' => '1st',
+                'denomination' => '1st',
                 'value' => 0.76,
             ],
             [
-                'class' => '2nd',
+                'denomination' => '2nd',
                 'value' => 0.65,
             ],
             [
-                'class' => '1st Large',
+                'denomination' => '1st Large',
                 'value' => 1.15,
             ],
             [
-                'class' => '2nd Large',
+                'denomination' => '2nd Large',
                 'value' => 0.88,
             ],
         ];
 
-        DB::table('classes')->insert($classes);
+        DB::table('denominations')->insert($denominations);
     }
 }

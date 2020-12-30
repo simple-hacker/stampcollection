@@ -96,18 +96,18 @@ class ScraperController extends Controller
                 $description = trim(substr($description, strlen($title)));
             }
 
-            $class = null;
+            $denomination = null;
 
             // Match stamp class (1st 2nd) or Price from the start of the description
             $regex = "/^(£\d+\.\d{2,}|£\d+|\d+p|1st Large|2nd Large|1st|2nd|\d+s\d+d|\d+d|\d+½?d|\d*½d|\d+s\d+½?d|\d+s|\d+½?p)/i";
-            preg_match($regex, $description, $classMatch);
+            preg_match($regex, $description, $denominationMatch);
 
-            if (isset($classMatch[0])) {
-                $class = $classMatch[0];
+            if (isset($denominationMatch[0])) {
+                $denomination = $denominationMatch[0];
 
                 // Remove class or price from the start of the text including any left over whitespace
-                if (substr($description, 0, strlen($class)) == $class) {
-                    $description = trim(substr($description, strlen($class)));
+                if (substr($description, 0, strlen($denomination)) == $denomination) {
+                    $description = trim(substr($description, strlen($denomination)));
                 }
             }
 
@@ -130,7 +130,7 @@ class ScraperController extends Controller
             $attributes = [
                 'issue_id' => $issue->id,
                 'title' => $title,
-                'class' => $class,
+                'denomination' => $denomination,
                 'description' => $description,
                 'remote_image_url' => $remote_image_url,
                 'image' => ($remote_image_url !== null) ? $issue_hash . '_' . Str::slug($issue->title) . '/' . $stamp_hash . '_' . Str::slug($title) . '.jpg' : null,

@@ -20,12 +20,12 @@ class StampController extends Controller
     public function index()
     {
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @param  \App\Issue  $issue
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function create(Issue $issue)
@@ -40,7 +40,7 @@ class StampController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Issue  $issue
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Issue $issue)
@@ -69,14 +69,14 @@ class StampController extends Controller
      */
     public function show(Stamp $stamp)
     {
-        
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Stamp  $stamp
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function edit(Issue $issue, Stamp $stamp)
@@ -89,7 +89,7 @@ class StampController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Stamp  $stamp
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Stamp $stamp)
@@ -114,7 +114,7 @@ class StampController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Stamp  $stamp
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Stamp $stamp)
@@ -137,12 +137,12 @@ class StampController extends Controller
 
     /**
      * Save the uploaded image to storage and return a string of the path.
-     *  
+     *
      * @param UploadedFile $image
      * @param \App\Issue $issue
      * @param \App\Stamp $stamp
      * @param string $title
-     * 
+     *
      * @return string
      */
     public function upload_image($image, $issue, $stamp = null, $title)
@@ -168,7 +168,7 @@ class StampController extends Controller
 
     /**
     * Validate the request for store and update.
-    * 
+    *
     * @param  \Illuminate\Http\Request  $request
     * @return array
     */
@@ -178,6 +178,7 @@ class StampController extends Controller
             'title' => 'required|min:3|max:255',
             'sg_number' => 'nullable|alpha_num|min:1',
             'sg_illustration' => 'nullable|string|min:1',
+            'denomination' => 'nullable|string|min:1',
             'description' => 'nullable|min:1',
             'face_value' => 'nullable|numeric|min:0',
             'mint_value' => 'nullable|numeric|min:0',
@@ -226,6 +227,7 @@ class StampController extends Controller
         $messages = [
             '*.id.required' => 'Stamps should have an id.',
             '*.id.exists' => 'This stamp does not exist.',
+            '*.denomination.required' => 'Denomination is required.',
             '*.title.required' => 'Title is required.',
             '*.title.min' => 'Min title length is 3 characters.',
             '*.title.max' => 'Max title length is 255 characters.',
@@ -237,8 +239,9 @@ class StampController extends Controller
 
         $validator = Validator::make($request->all(), [
             '*.id' => 'required|exists:stamps,id',
+            '*.denomination' => 'nullable|string',
             '*.title' => 'required|min:3|max:255',
-            '*.description' => 'nullable',
+            '*.description' => 'nullable|string',
             '*.sg_number' => 'nullable|alpha_num|min:1',
             '*.sg_illustration' => 'nullable|string|min:1',
             '*.face_value' => 'nullable|numeric|min:0',
@@ -250,6 +253,7 @@ class StampController extends Controller
             foreach ($request->all() as $stamp) {
                 Stamp::findOrFail($stamp['id'])
                         ->update([
+                            'denomination' => $stamp['denomination'],
                             'title' => $stamp['title'],
                             'description' => $stamp['description'],
                             'sg_number' => $stamp['sg_number'],

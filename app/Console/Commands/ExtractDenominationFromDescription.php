@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use App\Stamp;
 use Illuminate\Console\Command;
 
-class ExtractClassAndPriceFromDescription extends Command
+class ExtractDenominationFromDescription extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'stamps:class';
+    protected $signature = 'stamps:denomination';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Extract the class or price from the start of a stamps description';
+    protected $description = 'Extract the denomination from the start of a stamps description';
 
     /**
      * Create a new command instance.
@@ -47,7 +47,7 @@ class ExtractClassAndPriceFromDescription extends Command
         $bar->start();
 
         $stamps->each(function ($stamp) use ($bar) {
-            $this->extractClassFromDescription($stamp);
+            $this->extractDenominationFromDescription($stamp);
             $bar->advance();
         });
 
@@ -55,17 +55,17 @@ class ExtractClassAndPriceFromDescription extends Command
         $bar->finish();
     }
 
-    private function extractClassFromDescription($stamp)
+    private function extractDenominationFromDescription($stamp)
     {
         $regex = "/^(£\d+\.\d{2,}|£\d+|\d+p|1st Large|2nd Large|1st|2nd|\d+s\d+d|\d+d|\d+½?d|\d*½d|\d+s\d+½?d|\d+s|\d+½?p)/i";
-        preg_match($regex, trim($stamp->description), $class);
+        preg_match($regex, trim($stamp->description), $denomination);
 
-        if (isset($class[0])) {
-            $stamp->class = $class[0];
+        if (isset($denomination[0])) {
+            $stamp->denomination = $denomination[0];
 
             // Remove class or price from the start of the text including any left over whitespace
-            if (substr($stamp->description, 0, strlen($class[0])) == $class[0]) {
-                $stamp->description = trim(substr($stamp->description, strlen($class[0])));
+            if (substr($stamp->description, 0, strlen($denomination[0])) == $denomination[0]) {
+                $stamp->description = trim(substr($stamp->description, strlen($denomination[0])));
             }
 
             $stamp->save();

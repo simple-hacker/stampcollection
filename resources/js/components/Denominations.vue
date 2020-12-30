@@ -1,39 +1,35 @@
 <template>
     <div>
-        <h1 class="text-4xl w-full border-b mb-2">Edit Class Values</h1>
+        <h1 class="text-4xl w-full border-b mb-2">Edit Denomination Values</h1>
         <div class="mb-4">
             <transition-group name="slide">
                 <div
-                    v-for="stampclass in classes"
-                    :key="stampclass.id"
+                    v-for="denomination in denominations"
+                    :key="denomination.id"
                     class="flex mb-1 items-start"
                 >
                     <div class="flex flex-col">
                         <input
                             type="text"
-                            v-model="stampclass.class"
-                            v-text="stampclass.class"
-                            placeholder="Class"
+                            v-model="denomination.denomination"
+                            placeholder="Denomination"
                             class="p-2 m-1"
-                            :class="updateClassesErrors[`${stampclass.id}.class`] ? 'border-red-500 border-2' : 'border border-highlight'"
+                            :class="updateDenominationsErrors[`${denomination.id}.denomination`] ? 'border-red-500 border-2' : 'border border-highlight'"
                             disabled
                         >
-                        <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="updateClassesErrors[`${stampclass.id}.class`]">{{ updateClassesErrors[`${stampclass.id}.class`][0] }}</span>
+                        <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="updateDenominationsErrors[`${denomination.id}.denomination`]">{{ updateDenominationsErrors[`${denomination.id}.denomination`][0] }}</span>
                     </div>
                     <div class="flex flex-col">
-                        <input
-                            type="number"
-                            step=0.01
-                            v-model="stampclass.value"
-                            v-text="stampclass.value"
+                        <currency-input
+                            v-model="denomination.value"
                             placeholder="Value"
                             class="p-2 m-1"
-                            :class="updateClassesErrors[`${stampclass.id}.value`] ? 'border-red-500 border-2' : 'border border-highlight'"
-                        >
-                        <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="updateClassesErrors[`${stampclass.id}.value`]">{{ updateClassesErrors[`${stampclass.id}.value`][0] }}</span>
+                            :class="updateDenominationsErrors[`${denomination.id}.value`] ? 'border-red-500 border-2' : 'border border-highlight'"
+                        ></currency-input>
+                        <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="updateDenominationsErrors[`${denomination.id}.value`]">{{ updateDenominationsErrors[`${denomination.id}.value`][0] }}</span>
                     </div>
                     <!-- <div class="flex items-start p-1 ml-1">
-                        <button @click.prevent="removeClass(classes, stampclass.id)" class="border rounded p-2 text-center bg-red-500 hover:bg-red-700 text-white">
+                        <button @click.prevent="removeDenomination(denominations, denomination.id)" class="border rounded p-2 text-center bg-red-500 hover:bg-red-700 text-white">
                             <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M3,8v15c0,0.552,0.448,1,1,1h16c0.552,0,1-0.448,1-1V8H3z M9,19H7v-6h2V19z M13,19h-2v-6h2V19z M17,19h-2v-6 h2V19z"></path>
                                 <path d="M23,4h-6V1c0-0.552-0.447-1-1-1H8C7.447,0,7,0.448,7,1v3H1C0.447,4,0,4.448,0,5s0.447,1,1,1 h22c0.553,0,1-0.448,1-1S23.553,4,23,4z M9,2h6v2H9V2z"></path>
@@ -44,8 +40,8 @@
             </transition-group>
             <div class="flex items-center">
                 <button
-                    v-text="'Update classs values'"
-                    @click="updateClasses"
+                    v-text="'Update Denomination Values'"
+                    @click="updateDenominations"
                     class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
                 >
                 </button>
@@ -57,37 +53,34 @@
                 </span>
             </div>
         </div>
-        <h1 class="text-4xl w-full border-b mt-5 mb-2">Add Classes</h1>
+        <h1 class="text-4xl w-full border-b mt-5 mb-2">Add Denominations</h1>
         <div>
             <div
-                v-for="(addStampClass, index) in addClasses"
+                v-for="(addDenomination, index) in addDenominations"
                 :key="index"
                 class="flex mb-1 items-center"
             >
                 <div class="flex flex-col">
                     <input
                         type="text"
-                        v-model="addStampClass.class"
-                        v-text="addStampClass.class"
-                        placeholder="Class"
+                        v-model="addDenomination.denomination"
+                        placeholder="Denomination"
                         class="p-2 m-1"
-                        :class="addClassesErrors[`${index}.class`] ? 'border-red-500 border-2' : 'border border-highlight'"
+                        :class="addDenominationsErrors[`${index}.denomination`] ? 'border-red-500 border-2' : 'border border-highlight'"
                     >
-                    <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="addClassesErrors[`${index}.class`]">{{ addClassesErrors[`${index}.class`][0] }}</span>
+                    <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="addDenominationsErrors[`${index}.denomination`]">{{ addDenominationsErrors[`${index}.denomination`][0] }}</span>
                 </div>
                 <div class="flex flex-col">
-                    <input
-                        type="number"
-                        v-model="addStampClass.value"
-                        v-text="addStampClass.value"
+                    <currency-input
+                        v-model="addDenomination.value"
                         placeholder="Value"
                         class="p-2 m-1"
-                        :class="addClassesErrors[`${index}.value`] ? 'border-red-500 border-2' : 'border border-highlight'"
-                    >
-                    <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="addClassesErrors[`${index}.value`]">{{ addClassesErrors[`${index}.value`][0] }}</span>
+                        :class="addDenominationsErrors[`${index}.value`] ? 'border-red-500 border-2' : 'border border-highlight'"
+                    ></currency-input>
+                    <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="addDenominationsErrors[`${index}.value`]">{{ addDenominationsErrors[`${index}.value`][0] }}</span>
                 </div>
                 <div class="flex items-start p-2">
-                    <button @click.prevent="addClasses.splice(index, 1)" class="ml-2">
+                    <button @click.prevent="addDenominations.splice(index, 1)" class="ml-2">
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"></path>
                         </svg>
@@ -97,8 +90,8 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <button
-                        v-text="'Add Classes'"
-                        @click="storeClasses"
+                        v-text="'Add Denominations'"
+                        @click="storeDenominations"
                         class="mt-3 py-2 px-4 rounded text-center border border-darker bg-dark text-white text-xl hover:bg-highlight"
                     >
                     </button>
@@ -106,7 +99,7 @@
                         <svg class="fill-current mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 20c-5.523 0-10-4.477-10-10s4.477-10 10-10v0c5.523 0 10 4.477 10 10s-4.477 10-10 10v0zM10 18c4.418 0 8-3.582 8-8s-3.582-8-8-8v0c-4.418 0-8 3.582-8 8s3.582 8 8 8v0zM15 9v2h-10v-2h10z"></path>
                         </svg>
-                        Added Classes
+                        Added Denominations
                     </span>
                 </div>
                 <button @click.prevent="addRow()" class="flex border rounded p-2 text-center bg-green-500 hover:bg-green-600 text-white">
@@ -124,68 +117,68 @@
 export default {
     data() {
         return {
-            addClasses: [
+            addDenominations: [
                 {
-                    class: '',
+                    denomination: '',
                     value: 0.0,
                 },
             ],
             showUpdatedMessage: false,
             showAddedMessage: false,
-            updateClassesErrors: {},
-            addClassesErrors: {},
+            updateDenominationsErrors: {},
+            addDenominationsErrors: {},
         }
     },
-    props: ['classes'],
+    props: ['denominations'],
     methods: {
         addRow() {
-            this.addClasses.push({
-                    class: '',
+            this.addDenominations.push({
+                    denomination: '',
                     value: 0.0,
                 });
         },
-        storeClasses() {
-            console.log(this.addClasses)
+        storeDenominations() {
+            console.log(this.addDenominations)
 
-            axios.post('/admin/classes', {classes: this.addClasses})
+            axios.post('/admin/denominations', {denominations: this.addDenominations})
                 .then(response => {
-                    this.classes = response.data;
+                    this.denominations = response.data;
 
-                    this.addClasses = [{
-                        class: '',
+                    this.addDenominations = [{
+                        denomination: '',
                         value: 0.0,
                     }];
 
-                    this.addClassesErrors = {};
+                    this.addDenominationsErrors = {};
                     this.showAddedMessage = true;
                 })
                 .catch(error => {
                     // console.log(error);
-                    this.addClassesErrors = error.response.data.errors;
+                    this.addDenominationsErrors = error.response.data.errors;
                 });
         },
-        updateClasses() {
-            axios.post('/admin/classes', {
+        updateDenominations() {
+            axios.post('/admin/denominations', {
                     _method: 'patch',
-                    classes: this.classes
+                    denominations: this.denominations
                 })
                 .then(response => {
-                    this.updateClassesErrors = {};
+                    this.updateDenominationsErrors = {};
                     this.showUpdatedMessage = true;
                 })
                 .catch(error => {
                     console.log(error);
-                    this.updateClassesErrors = error.response.data.errors;
+                    this.updateDenominationsErrors = error.response.data.errors;
                 });
         },
-        removeClass(classes, index) {
-            if (confirm(`Are you sure you want to remove ${classes.class}?`)) {
-                axios.post('/admin/classes/'+classes.id, {
+        removeDenomination(denomination, index) {
+            if (confirm(`Are you sure you want to remove ${denomination.denomination}?`)) {
+                axios.post('/admin/denominations/'+denomination.id, {
                         _method: 'delete',
-                        classes: classes
+                        denomination: denomination
                     })
                     .then(response => {
-                        Vue.delete(this.classes, index);
+                        Vue.delete(this.denomination, index);
                     })
                     .catch(error => {
                         console.log(error);

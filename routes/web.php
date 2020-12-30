@@ -62,10 +62,10 @@ Route::post('/admin/monarchs', 'MonarchController@store')->middleware('auth', 'r
 Route::patch('/admin/monarchs', 'MonarchController@update')->middleware('auth', 'role:admin')->name('admin.monarchs.update');
 Route::delete('/admin/monarchs/{monarch}', 'MonarchController@destroy')->middleware('auth', 'role:admin')->name('admin.monarchs.delete');
 
-Route::get('/admin/classes', 'ClassesController@index')->middleware('auth', 'role:admin')->name('admin.classes.index');
-Route::post('/admin/classes', 'ClassesController@store')->middleware('auth', 'role:admin')->name('admin.classes.add');
-Route::patch('/admin/classes', 'ClassesController@update')->middleware('auth', 'role:admin')->name('admin.classes.update');
-Route::delete('/admin/classes/{class}', 'ClassesController@destroy')->middleware('auth', 'role:admin')->name('admin.classes.delete');
+Route::get('/admin/denominations', 'DenominationController@index')->middleware('auth', 'role:admin')->name('admin.denominations.index');
+Route::post('/admin/denominations', 'DenominationController@store')->middleware('auth', 'role:admin')->name('admin.denominations.add');
+Route::patch('/admin/denominations', 'DenominationController@update')->middleware('auth', 'role:admin')->name('admin.denominations.update');
+Route::delete('/admin/denominations/{denomination}', 'DenominationController@destroy')->middleware('auth', 'role:admin')->name('admin.denominations.delete');
 
 Route::get('/admin/stamps/{year?}', 'StampController@showMultiple')->middleware('auth', 'role:admin')->name('admin.stamps.index');
 Route::post('/admin/stamps', 'StampController@updateMultiple')->middleware('auth', 'role:admin')->name('admin.stamps.update');

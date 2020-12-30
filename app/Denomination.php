@@ -4,9 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StampClass extends Model
+class Denomination extends Model
 {
-    protected $table = 'classes';
-
     protected $guarded = [];
 }

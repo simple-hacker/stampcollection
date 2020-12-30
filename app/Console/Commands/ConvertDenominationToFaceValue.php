@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Denomination;
 use App\Stamp;
-use App\StampClass;
 use Illuminate\Console\Command;
 
-class ConvertClassToFaceValue extends Command
+class ConvertDenominationToFaceValue extends Command
 {
     /**
      * The name and signature of the console command.
@@ -20,7 +20,7 @@ class ConvertClassToFaceValue extends Command
      *
      * @var string
      */
-    protected $description = 'Convert the class to a numerical face value';
+    protected $description = 'Convert the denomination to a numerical face value';
 
     protected $values;
 
@@ -33,7 +33,7 @@ class ConvertClassToFaceValue extends Command
     {
         parent::__construct();
 
-        $this->values = StampClass::pluck('value', 'class');
+        $this->values = Denomination::pluck('value', 'denomination');
     }
 
     /**
@@ -52,7 +52,7 @@ class ConvertClassToFaceValue extends Command
         $bar->start();
 
         $stamps->each(function ($stamp) use ($bar) {
-            $this->convertClassToFaceValue($stamp);
+            $this->convertDenominationToFaceValue($stamp);
             $bar->advance();
         });
 
@@ -60,13 +60,13 @@ class ConvertClassToFaceValue extends Command
         $bar->finish();
     }
 
-    private function convertClassToFaceValue($stamp)
+    private function convertDenominationToFaceValue($stamp)
     {
-        if (! $stamp->class) {
+        if (! $stamp->denomination) {
             return;
         }
 
-        switch ($stamp->class) {
+        switch ($stamp->denomination) {
             case "1st":
                 $stamp->face_value = $this->values['1st'];
                 break;
@@ -79,10 +79,10 @@ class ConvertClassToFaceValue extends Command
             case "2nd Large":
                 $stamp->face_value = $this->values['2nd Large'];
                 break;
-            case (preg_match("/^£(\d+?([.]\d{1,2})?)/", $stamp->class, $matches) ? true : false):
+            case (preg_match("/^£(\d+?([.]\d{1,2})?)/", $stamp->denomination, $matches) ? true : false):
                 $stamp->face_value = (float) $matches[1];
                 break;
-            case (preg_match("/^(\d*)(½)?p$/", $stamp->class, $matches) ? true : false):
+            case (preg_match("/^(\d*)(½)?p$/", $stamp->denomination, $matches) ? true : false):
                 $stamp->face_value = (float) $matches[1] / 100;
                 break;
             default:

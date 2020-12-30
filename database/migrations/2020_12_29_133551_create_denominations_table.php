@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddClassFieldStampsTable extends Migration
+class CreateDenominationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddClassFieldStampsTable extends Migration
      */
     public function up()
     {
-        Schema::table('stamps', function (Blueprint $table) {
-            $table->string('class');
+        Schema::create('denominations', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('denomination');
+            $table->float('value');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddClassFieldStampsTable extends Migration
      */
     public function down()
     {
-        Schema::table('stamps', function (Blueprint $table) {
-            $table->dropColumn('class');
-        });
+        Schema::dropIfExists('denominations');
     }
 }
