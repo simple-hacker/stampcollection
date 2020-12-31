@@ -7,8 +7,6 @@ use App\Stamp;
 use Goutte\Client;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\Jobs\ConvertClassToValue;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\DomCrawler\Crawler;
@@ -98,14 +96,14 @@ class ScraperController extends Controller
 
             $denomination = null;
 
-            // Match stamp class (1st 2nd) or Price from the start of the description
+            // Match stamp denomination (1st 2nd) from the start of the description
             $regex = "/^(£\d+\.\d{2,}|£\d+|\d+p|1st Large|2nd Large|1st|2nd|\d+s\d+d|\d+d|\d+½?d|\d*½d|\d+s\d+½?d|\d+s|\d+½?p)/i";
             preg_match($regex, $description, $denominationMatch);
 
             if (isset($denominationMatch[0])) {
                 $denomination = $denominationMatch[0];
 
-                // Remove class or price from the start of the text including any left over whitespace
+                // Remove denomination from the start of the text including any left over whitespace
                 if (substr($description, 0, strlen($denomination)) == $denomination) {
                     $description = trim(substr($description, strlen($denomination)));
                 }
