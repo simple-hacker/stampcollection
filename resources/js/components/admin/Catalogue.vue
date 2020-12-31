@@ -20,14 +20,14 @@
 
                     </div>
                     <div class="flex bg-dark text-white text-lg font-bold">
-                        <div class="w-1/10 py-2 text-center border border-darker">SG #</div>
-                        <div class="w-1/10 py-2 text-center border border-darker">SG ill.</div>
-                        <div class="w-1/10 py-2 text-center border border-darker">Denomination</div>
-                        <div class="w-2/10 py-2 text-center border border-darker">Title</div>
-                        <div class="w-2/10 py-2 text-center border border-darker">Description</div>
-                        <div class="w-1/10 py-2 text-center border border-darker">Face Value</div>
-                        <div class="w-1/10 py-2 text-center border border-darker">Mint Value</div>
-                        <div class="w-1/10 py-2 text-center border border-darker">Used Value</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">SG #</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">SG ill.</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Denom.</div>
+                        <div class="w-3/12 py-2 text-center border border-darker">Title</div>
+                        <div class="w-3/12 py-2 text-center border border-darker">Description</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Face Value</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Mint Value</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Used Value</div>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                             :class="(index % 2 == 0) ? 'bg-light' : ''"
                         >
                         <div class="flex">
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <input  type="text"
                                         class="p-1 bg-transparent rounded w-full"
                                         :class="errors[`${stamp.id}.sg_number`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -59,7 +59,7 @@
                                 >
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.sg_number`]">{{ errors[`${stamp.id}.sg_number`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <input  type="text"
                                         class="p-1 bg-transparent rounded w-full"
                                         :class="errors[`${stamp.id}.sg_illustration`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -69,7 +69,7 @@
                                 >
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.sg_illustration`]">{{ errors[`${stamp.id}.sg_illustration`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <input  type="text"
                                         class="p-1 bg-transparent rounded w-full"
                                         :class="errors[`${stamp.id}.denomination`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -79,7 +79,7 @@
                                 >
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.denomination`]">{{ errors[`${stamp.id}.denomination`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-2/10 p-1 border">
+                            <div class="flex flex-col justify-start w-3/12 p-1 border">
                                 <input  type="text"
                                         class="p-1 bg-transparent rounded w-full"
                                         :class="errors[`${stamp.id}.title`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -89,7 +89,7 @@
                                 >
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.title`]">{{ errors[`${stamp.id}.title`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-2/10 p-1 border">
+                            <div class="flex flex-col justify-start w-3/12 p-1 border">
                                 <textarea
                                         type="text"
                                         rows="1"
@@ -101,7 +101,7 @@
                                 ></textarea>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.description`]">{{ errors[`${stamp.id}.description`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <div
                                     class="flex items-center rounded"
                                     :class="errors[`${stamp.id}.face_value`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -115,7 +115,7 @@
                                 </div>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.face_value`]">{{ errors[`${stamp.id}.face_value`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <div
                                     class="flex items-center rounded"
                                     :class="errors[`${stamp.id}.mint_value`] ? 'border-2 border-red-500' : 'border border-darker'"
@@ -129,7 +129,7 @@
                                 </div>
                                 <span class="flex-1 p-2 italic text-xs font-bold text-red-500" v-if="errors[`${stamp.id}.mint_value`]">{{ errors[`${stamp.id}.mint_value`][0] }}</span>
                             </div>
-                            <div class="flex flex-col justify-start w-1/10 p-1 border">
+                            <div class="flex flex-col justify-start w-1/12 p-1 border">
                                 <div
                                     class="flex items-center rounded"
                                     :class="errors[`${stamp.id}.used_value`] ? 'border-2 border-red-500' : 'border border-darker'"
