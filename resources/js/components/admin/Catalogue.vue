@@ -25,9 +25,9 @@
                         <div class="w-1/12 py-2 text-center border border-darker">Denom.</div>
                         <div class="w-3/12 py-2 text-center border border-darker">Title</div>
                         <div class="w-3/12 py-2 text-center border border-darker">Description</div>
-                        <div class="w-1/12 py-2 text-center border border-darker">Face Value</div>
-                        <div class="w-1/12 py-2 text-center border border-darker">Mint Value</div>
-                        <div class="w-1/12 py-2 text-center border border-darker">Used Value</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Face</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Mint</div>
+                        <div class="w-1/12 py-2 text-center border border-darker">Used</div>
                     </div>
                 </div>
 
@@ -107,7 +107,7 @@
                                     :class="errors[`${stamp.id}.face_value`] ? 'border-2 border-red-500' : 'border border-darker'"
                                 >
                                     <currency-input
-                                        class="p-1 bg-transparent w-full"
+                                        class="p-1 bg-transparent w-full text-right"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.face_value"
@@ -121,7 +121,7 @@
                                     :class="errors[`${stamp.id}.mint_value`] ? 'border-2 border-red-500' : 'border border-darker'"
                                 >
                                     <currency-input
-                                        class="p-1 bg-transparent w-full"
+                                        class="p-1 bg-transparent w-full text-right"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.mint_value"
@@ -135,7 +135,7 @@
                                     :class="errors[`${stamp.id}.used_value`] ? 'border-2 border-red-500' : 'border border-darker'"
                                 >
                                     <currency-input
-                                        class="p-1 bg-transparent w-full"
+                                        class="p-1 bg-transparent w-full text-right"
                                         @change="addToStampsToSave(stamp)"
                                         @focus="showSavedMessage = false"
                                         v-model="stamp.used_value"
