@@ -109,6 +109,10 @@ class ScraperController extends Controller
                 }
             }
 
+            // Remove "Image Preview by Royal Mail" from description
+            $description = preg_replace('/Image preview by Royal Mail/i', '', $description);
+            $description = trim($description);
+
             // If scraper has no image then set both remote_image_url and image_url to null
             $remote_image_url = ($img_url !== '/images/noimage.jpg') ? $this->baseURI . $img_url : null;
 
