@@ -26,7 +26,9 @@
             <tr>
                 <th class="sticky top-0 bg-white py-1 px-2 border w-32">Issue Date</th>
                 <th class="sticky top-0 bg-white py-1 px-2 border">Issue Title</th>
-                <th class="sticky top-0 bg-white py-1 px-2 border">Stanley Gibbons</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">SG Num</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">SG Ill.</th>
+                <th class="sticky top-0 bg-white py-1 px-2 border">Denom.</th>
                 <th class="sticky top-0 bg-white py-1 px-2 border">Stamp Title</th>
             </tr>
         </thead>
@@ -47,6 +49,8 @@
                         <td class="py-1 px-2 border w-32"><strong>{{ date("Y", strtotime($stamp['issue']['release_date'])) }}</strong> ({{ date("j M", strtotime($stamp['issue']['release_date'])) }})</td>
                         <td class="py-1 px-2 border">{{ $stamp['issue']['title'] }}</td>
                         <td class="py-1 px-2 border">{{ $stamp['sg_number'] }}</td>
+                        <td class="py-1 px-2 border">{{ $stamp['sg_illustration'] }}</td>
+                        <td class="py-1 px-2 border">{{ $stamp['denomination'] }}</td>
                         <td class="py-1 px-2 border">{{ $stamp['title'] }}</td>
                     </tr>
             @endforeach
