@@ -161,6 +161,11 @@ class ScraperController extends Controller
             'issue' => $issue->id,
         ]);
 
+        // Extract metadata from description
+        Artisan::queue('issues:metadata', [
+            'issue' => $issue->id,
+        ]);
+
         return redirect(route('catalogue.issue', ['issue' => $issue, 'slug' => $issue->slug]))
                 ->withToastSuccess("Successfully imported {$issue->title}");
     }
