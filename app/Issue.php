@@ -32,7 +32,10 @@ class Issue extends Model implements Searchable
      */
     public function stamps()
     {
-        return $this->hasMany('App\Stamp');
+        return $this->hasMany('App\Stamp')
+                    ->orderByRaw("CASE WHEN sg_number IS NULL THEN 0 ELSE 1 END DESC")
+                    ->orderBy('sg_number')
+                    ->orderBy('id');
     }
 
     /**
@@ -56,7 +59,7 @@ class Issue extends Model implements Searchable
     }
 
     /**
-    * A issue belongs to one Monarch 
+    * A issue belongs to one Monarch
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
@@ -66,7 +69,7 @@ class Issue extends Model implements Searchable
     }
 
     /**
-    * A issue belongs to one issue category 
+    * A issue belongs to one issue category
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
@@ -77,7 +80,7 @@ class Issue extends Model implements Searchable
 
     /**
      * Always convert the date to Y-m-d
-     * 
+     *
      * @param string $date
      * @return mixed
      */
